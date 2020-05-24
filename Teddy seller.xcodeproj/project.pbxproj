@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -62,7 +62,6 @@
 				C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */,
 				288F54939A5637B6C9AD61A9 /* Pods-Teddy seller.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -102,9 +101,9 @@
 		887BA3D1247A4C29009DCCE3 /* MainModule */ = {
 			isa = PBXGroup;
 			children = (
-				887BA3BF247A4A22009DCCE3 /* MainCollectionViewController.swift */,
-				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
-				887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */,
+				888CC0D8247A8126006E6930 /* Controller */,
+				888CC0D9247A8132006E6930 /* Model */,
+				888CC0DA247A813D006E6930 /* View */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";
@@ -115,6 +114,30 @@
 				887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		888CC0D8247A8126006E6930 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3BF247A4A22009DCCE3 /* MainCollectionViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		888CC0D9247A8132006E6930 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		888CC0DA247A813D006E6930 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

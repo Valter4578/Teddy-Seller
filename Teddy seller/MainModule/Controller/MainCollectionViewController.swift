@@ -9,6 +9,14 @@
 import UIKit
 
 class MainCollectionViewController: UICollectionViewController {
+    // MARK:- Views
+    var navigationBar: UINavigationBar = {
+        let navigationBar = UINavigationBar()
+        navigationBar.backgroundColor = .black
+        
+        return navigationBar
+    }()
+    
     // MARK:- Properties
     let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
@@ -17,13 +25,13 @@ class MainCollectionViewController: UICollectionViewController {
                                              right: 31.0)
     
     var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость"),
-                      MainCellModel(imageName: "Transport", text: "Транспорт"),
-                      MainCellModel(imageName: "Home", text: "Для дома"),
-                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса"),
-                      MainCellModel(imageName: "Work", text: "Работа"),
-                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи"),
-                      MainCellModel(imageName: "Teddy", text: "Электроника"),
-                      MainCellModel(imageName: "Teddy", text: "Услуги"),]
+                      MainCellModel(imageName: "Realty", text: "Транспорт"),
+                      MainCellModel(imageName: "Realty", text: "Для дома"),
+                      MainCellModel(imageName: "Realty", text: "Для бизнеса"),
+                      MainCellModel(imageName: "Realty", text: "Работа"),
+                      MainCellModel(imageName: "Realty", text: "Личные вещи"),
+                      MainCellModel(imageName: "Realty", text: "Электроника"),
+                      MainCellModel(imageName: "Realty", text: "Услуги"),]
 
     // MARK:- Properties
     override func viewDidLoad() {
@@ -33,7 +41,7 @@ class MainCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = .mainBlue
     }
     
-    
+    // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -49,6 +57,7 @@ class MainCollectionViewController: UICollectionViewController {
     }
 }
 
+// MARK:- CollectionViewDelegateFlowLayout
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (2 + 1)

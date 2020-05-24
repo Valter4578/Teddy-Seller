@@ -22,6 +22,7 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Helvetica", size: 16)
+        label.numberOfLines = 0
         return label
     }()
     // MARK:- Initializers
@@ -29,11 +30,12 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        print(frame.height)
-        print(frame.width)
         
-//        setupImageView()
-//        setupLabel()
+        print(frame.width)
+        print(frame.height)
+        
+        setupImageView()
+        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -45,23 +47,20 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         addSubview(iconImageView)
         
         iconImageView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(self).offset(17)
-            maker.right.equalTo(self).offset(-31)
-            maker.left.equalTo(self).offset(31)
-            maker.bottom.equalTo(self).offset(-47)
+            maker.centerY.equalTo(self).offset(-5)
+            maker.centerX.equalTo(self)
+            maker.height.equalTo(90)
+            maker.width.equalTo(90)
         }
-        
     }
     
     func setupLabel() {
         addSubview(textLabel)
         
         textLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(iconImageView.snp.bottom).offset(9)
-            maker.left.equalTo(self).offset(19)
-            maker.right.equalTo(self).offset(-18)
-            maker.bottom.equalTo(self).offset(-22)
+            maker.centerX.equalTo(self)
+            maker.top.equalTo(iconImageView.snp.bottom).offset(5)
+            maker.bottom.equalTo(self)
         }
     }
-
 }
