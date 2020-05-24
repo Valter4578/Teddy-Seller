@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewConllectionViewCell: UICollectionViewCell {
     // MARK:- Views
@@ -28,9 +29,11 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        
+        print(frame.height)
+        print(frame.width)
         
 //        setupImageView()
+//        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -41,16 +44,24 @@ class MainViewConllectionViewCell: UICollectionViewCell {
     func setupImageView() {
         addSubview(iconImageView)
         
-        NSLayoutConstraint.activate([
-
-        ])
+        iconImageView.snp.makeConstraints { (maker) in
+            maker.top.equalTo(self).offset(17)
+            maker.right.equalTo(self).offset(-31)
+            maker.left.equalTo(self).offset(31)
+            maker.bottom.equalTo(self).offset(-47)
+        }
+        
     }
     
     func setupLabel() {
         addSubview(textLabel)
         
-        NSLayoutConstraint.activate([
-        ])
+        textLabel.snp.makeConstraints { (maker) in
+            maker.top.equalTo(iconImageView.snp.bottom).offset(9)
+            maker.left.equalTo(self).offset(19)
+            maker.right.equalTo(self).offset(-18)
+            maker.bottom.equalTo(self).offset(-22)
+        }
     }
 
 }
