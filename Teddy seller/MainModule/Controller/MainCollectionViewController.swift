@@ -25,14 +25,14 @@ class MainCollectionViewController: UICollectionViewController {
                                              right: 31.0)
     
     var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость"),
-                      MainCellModel(imageName: "Realty", text: "Транспорт"),
-                      MainCellModel(imageName: "Realty", text: "Для дома"),
-                      MainCellModel(imageName: "Realty", text: "Для бизнеса"),
-                      MainCellModel(imageName: "Realty", text: "Работа"),
-                      MainCellModel(imageName: "Realty", text: "Личные вещи"),
-                      MainCellModel(imageName: "Realty", text: "Электроника"),
-                      MainCellModel(imageName: "Realty", text: "Услуги"),]
-
+                      MainCellModel(imageName: "Transport", text: "Транспорт"),
+                      MainCellModel(imageName: "Home", text: "Для дома"),
+                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса"),
+                      MainCellModel(imageName: "Work", text: "Работа"),
+                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи"),
+                      MainCellModel(imageName: "Teddy", text: "Электроника"),
+                      MainCellModel(imageName: "Teddy", text: "Услуги"),]
+    
     // MARK:- Properties
     override func viewDidLoad() {
         super.viewDidLoad()
