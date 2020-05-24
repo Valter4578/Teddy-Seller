@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainCollectionViewController: UICollectionViewController {
     // MARK:- Views
-    var navigationBar: UINavigationBar = {
-        let navigationBar = UINavigationBar()
-        navigationBar.backgroundColor = .black
-        
-        return navigationBar
+    var navigationButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        return button
     }()
-    
     // MARK:- Properties
+    var cityName = "Москва"
     let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
                                              left: 31.0,
@@ -33,12 +33,31 @@ class MainCollectionViewController: UICollectionViewController {
                       MainCellModel(imageName: "Teddy", text: "Электроника"),
                       MainCellModel(imageName: "Teddy", text: "Услуги"),]
     
-    // MARK:- Properties
+    // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.register(MainViewConllectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.backgroundColor = .mainBlue
+        
+        setupNavigationBar()
+    }
+    
+    // MARK:- Setups
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+
+        title = cityName
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
+        navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    // MARK:- Private functions
+    @objc func didTapNavigationBar() {
+        print(#function)
     }
     
     // MARK:- CollectionViewDatasource
