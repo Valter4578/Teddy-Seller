@@ -42,10 +42,7 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         addSubview(iconImageView)
         
         NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
-            iconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 35),
-            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 25),
-            iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 47)
+
         ])
     }
     
@@ -53,9 +50,6 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         addSubview(textLabel)
         
         NSLayoutConstraint.activate([
-            textLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 22),
-            textLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 9),
         ])
     }
 
