@@ -30,8 +30,7 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         backgroundColor = .white
         
         
-        setupImageView()
-        setupLabel()
+//        setupImageView()
     }
     
     required init?(coder: NSCoder) {
@@ -43,8 +42,10 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         addSubview(iconImageView)
         
         NSLayoutConstraint.activate([
-            iconImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -15),
+            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
+            iconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 35),
+            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 25),
+            iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 47)
         ])
     }
     
@@ -52,8 +53,7 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         addSubview(textLabel)
         
         NSLayoutConstraint.activate([
-            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 19),
-            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 18),
+            textLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 22),
             textLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 9),
         ])

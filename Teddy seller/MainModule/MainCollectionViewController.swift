@@ -11,6 +11,11 @@ import UIKit
 class MainCollectionViewController: UICollectionViewController {
     // MARK:- Properties
     let cellIdentifier = "MainCollectionViewCell"
+    private let sectionInsets = UIEdgeInsets(top: 24.0,
+                                             left: 31.0,
+                                             bottom: 33.0,
+                                             right: 31.0)
+    
     var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость"),
                       MainCellModel(imageName: "Transport", text: "Транспорт"),
                       MainCellModel(imageName: "Home", text: "Для дома"),
@@ -46,14 +51,18 @@ class MainCollectionViewController: UICollectionViewController {
 
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        let paddingSpace = sectionInsets.left * (2 + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / 2
+
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, insetForSectionAt: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 24, left: 31, bottom: 0, right: 0)
+        return sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt: Int) -> CGFloat {
-        return 50
+        return sectionInsets.left
     }
 }
