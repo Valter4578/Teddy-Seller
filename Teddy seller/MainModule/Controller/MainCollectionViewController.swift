@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import CoreLocation
 
 class MainCollectionViewController: UICollectionViewController {
     // MARK:- Views
@@ -33,13 +34,14 @@ class MainCollectionViewController: UICollectionViewController {
                       MainCellModel(imageName: "Teddy", text: "Электроника"),
                       MainCellModel(imageName: "Teddy", text: "Услуги"),]
     
+    let locationManager = CLLocationManager()
+
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(MainViewConllectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        collectionView.backgroundColor = .mainBlue
-        
+        setupLocationManager()
+        setupCollectionView()
         setupNavigationBar()
     }
     
@@ -55,11 +57,32 @@ class MainCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    private func setupCollectionView() {
+        collectionView.register(MainViewConllectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.backgroundColor = .mainBlue
+    }
+    
+    private func setupLocationManager() {
+        self.locationManager.requestAlwaysAuthorization()
+        
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
     // MARK:- Private functions
+    private func getCurrentLocation() {
+        
+    }
+    
+    // MARK:- Selectors
     @objc func didTapNavigationBar() {
         print(#function)
     }
-    
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
@@ -92,5 +115,13 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt: Int) -> CGFloat {
         return sectionInsets.left
+    }
+}
+
+// MARK:- CLLocationManagerDelegate
+extension MainCollectionViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print(cordinates)
     }
 }
