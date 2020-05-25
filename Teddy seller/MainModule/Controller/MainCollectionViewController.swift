@@ -40,9 +40,6 @@ class MainCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let authVC = AuthViewController()
-        present(authVC, animated: true, completion: nil)
-        
         setupLocationManager()
         setupCollectionView()
         setupNavigationBar()
@@ -123,5 +120,7 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
         guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         
         print(cordinates)
+        let geocoderService = GeodecoderService()
+        geocoderService.getCity()
     }
 }
