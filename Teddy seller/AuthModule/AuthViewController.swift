@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     // MARK:- Views
     var teddyImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,7 +39,7 @@ class AuthViewController: UIViewController {
     var nextButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .authNextBlue
-        button.titleLabel?.text = "Далее"
+        button.setTitle("Далее", for: .normal)
         button.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 36)
         button.titleLabel?.textColor = .authNextGray
         return button
@@ -52,13 +52,27 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .mainBlue
         print(view.frame.height)
         
-        
         setupNextButton()
         setupTeddyImageView()
         setupPhoneStackView()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name:UIResponder.keyboardWillHideNotification, object: nil);
+        }
+    
+    // MARK:- Selectors
+    @objc func keyboardWillShow(sender: Notification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y = -keyboardHeight // Move view 150 points upward
+        }
     }
     
+    @objc func keyboardWillHide(sender: Notification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+    }
+        
     // MARK:- Setups
     private func setupNextButton() {
         view.addSubview(nextButton)
@@ -78,6 +92,7 @@ class AuthViewController: UIViewController {
             maker.height.equalTo(200)
             maker.width.equalTo(200)
             maker.centerX.equalTo(view)
+            maker.top.equalTo(view).offset(20).priority(.high)
         }
     }
     
@@ -97,7 +112,9 @@ class AuthViewController: UIViewController {
             maker.top.equalTo(teddyImageView.snp.bottom).offset(100)
         }
     }
-        
-    
-}
 
+    // MARK:- Deinit
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
