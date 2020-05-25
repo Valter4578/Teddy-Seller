@@ -52,13 +52,20 @@ final class AuthViewController: UIViewController {
         view.backgroundColor = .mainBlue
         print(view.frame.height)
         
+        setupNotificationCenter()
+
         setupNextButton()
         setupTeddyImageView()
         setupPhoneStackView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name:UIResponder.keyboardWillHideNotification, object: nil);
-        }
+        hideKeyboardByTapAround()
+    }
+    
+    // MARK:- Private functions
+    private func hideKeyboardByTapAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAround))
+        view.addGestureRecognizer(tap)
+    }
     
     // MARK:- Selectors
     @objc func keyboardWillShow(sender: Notification) {
@@ -72,8 +79,17 @@ final class AuthViewController: UIViewController {
     @objc func keyboardWillHide(sender: Notification) {
         self.view.frame.origin.y = 0 // Move view to original position
     }
-        
+    
+    @objc func didTapAround() {
+        view.endEditing(true)
+    }
+    
     // MARK:- Setups
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func setupNextButton() {
         view.addSubview(nextButton)
         
@@ -112,6 +128,7 @@ final class AuthViewController: UIViewController {
             maker.top.equalTo(teddyImageView.snp.bottom).offset(100)
         }
     }
+    
 
     // MARK:- Deinit
     deinit {
