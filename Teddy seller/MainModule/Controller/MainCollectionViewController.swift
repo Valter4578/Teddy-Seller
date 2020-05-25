@@ -121,8 +121,7 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension MainCollectionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        let geodecoder = GeodecoderService()
-        geodecoder.getCurrentCity(longlat: Float(cordinates.longitude), latlong: Float(cordinates.latitude))
+        
         print(cordinates)
     }
 }

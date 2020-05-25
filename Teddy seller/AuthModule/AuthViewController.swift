@@ -22,6 +22,7 @@ final class AuthViewController: UIViewController {
         textField.layer.cornerRadius = 16
         textField.backgroundColor = .white
         textField.keyboardType = .numberPad
+        textField.font = UIFont(name: "Helvetica Neue", size: 24)
         
         textField.attributedPlaceholder = NSAttributedString(string: "+7", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderBlack, NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 24)])
         
@@ -45,6 +46,7 @@ final class AuthViewController: UIViewController {
         return button
     }()
     
+    var stackView: UIStackView!
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,12 +74,14 @@ final class AuthViewController: UIViewController {
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y = -keyboardHeight // Move view 150 points upward
+            self.view.frame.origin.y = -keyboardHeight
+            self.teddyImageView.alpha = 0
         }
     }
     
     @objc func keyboardWillHide(sender: Notification) {
         self.view.frame.origin.y = 0 // Move view to original position
+        self.teddyImageView.alpha = 1
     }
     
     @objc func didTapAround() {
@@ -113,7 +117,7 @@ final class AuthViewController: UIViewController {
     }
     
     private func setupPhoneStackView() {
-        let stackView = UIStackView(arrangedSubviews: [label, phoneTextField])
+        stackView = UIStackView(arrangedSubviews: [label, phoneTextField])
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         stackView.axis = .vertical
