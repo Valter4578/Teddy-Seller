@@ -21,6 +21,7 @@ class AuthViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 16
         textField.backgroundColor = .white
+        textField.keyboardType = .numberPad
         
         textField.attributedPlaceholder = NSAttributedString(string: "+7", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderBlack, NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 24)])
         
@@ -49,11 +50,13 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .mainBlue
+        print(view.frame.height)
+        
         
         setupNextButton()
         setupTeddyImageView()
-        setupLabel()
-        setupTextField()
+        setupPhoneStackView()
+        
     }
     
     // MARK:- Setups
@@ -61,6 +64,10 @@ class AuthViewController: UIViewController {
         view.addSubview(nextButton)
         
         nextButton.snp.makeConstraints { (maker) in
+            maker.bottom.equalTo(view)
+            maker.trailing.equalTo(view)
+            maker.leading.equalTo(view)
+            maker.height.equalTo(90)
         }
     }
     
@@ -68,22 +75,29 @@ class AuthViewController: UIViewController {
         view.addSubview(teddyImageView)
         
         teddyImageView.snp.makeConstraints { (maker) in
+            maker.height.equalTo(200)
+            maker.width.equalTo(200)
+            maker.centerX.equalTo(view)
+        }
+    }
+    
+    private func setupPhoneStackView() {
+        let stackView = UIStackView(arrangedSubviews: [label, phoneTextField])
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        
+        view.addSubview(stackView)
 
+        stackView.snp.makeConstraints { (maker) in
+            maker.trailing.equalTo(view).offset(-40)
+            maker.leading.equalTo(view).offset(40)
+            maker.height.equalTo(98)
+            maker.bottom.equalTo(nextButton.snp.top).offset(-150)
+            maker.top.equalTo(teddyImageView.snp.bottom).offset(100)
         }
     }
-    
-    private func setupLabel() {
-        view.addSubview(label)
         
-        label.snp.makeConstraints { (maker) in
-        }
-    }
     
-    private func setupTextField() {
-        view.addSubview(phoneTextField)
-        
-        phoneTextField.snp.makeConstraints { (maker) in
-        }
-    }
 }
 
