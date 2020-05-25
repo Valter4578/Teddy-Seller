@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PersonalItems.png",
+      "filename" : "Teddy.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Teddy@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Teddy@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

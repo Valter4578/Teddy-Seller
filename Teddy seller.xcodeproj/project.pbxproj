@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
+		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
 		887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */; };
 		887BA3BE247A4A22009DCCE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3BD247A4A22009DCCE3 /* SceneDelegate.swift */; };
 		887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3BF247A4A22009DCCE3 /* MainCollectionViewController.swift */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teddy_seller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		288F54939A5637B6C9AD61A9 /* Pods-Teddy seller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.release.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.release.xcconfig"; sourceTree = "<group>"; };
+		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
+		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		887BA3B8247A4A22009DCCE3 /* Teddy seller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Teddy seller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		887BA3BD247A4A22009DCCE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8867010A247B85B2002E2A8E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8867010D247B9674002E2A8E /* AuthModule */ = {
+			isa = PBXGroup;
+			children = (
+				8867010E247B96AE002E2A8E /* AuthViewController.swift */,
+			);
+			path = AuthModule;
+			sourceTree = "<group>";
+		};
+		88670110247BA01D002E2A8E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */,
+				887BA3BD247A4A22009DCCE3 /* SceneDelegate.swift */,
+				887BA3C1247A4A22009DCCE3 /* Main.storyboard */,
+				887BA3C4247A4A29009DCCE3 /* Assets.xcassets */,
+				887BA3C6247A4A29009DCCE3 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		887BA3AF247A4A22009DCCE3 = {
 			isa = PBXGroup;
 			children = (
@@ -87,12 +119,10 @@
 			isa = PBXGroup;
 			children = (
 				887BA3D2247A4C38009DCCE3 /* Extensions */,
-				887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */,
-				887BA3BD247A4A22009DCCE3 /* SceneDelegate.swift */,
+				8867010A247B85B2002E2A8E /* Services */,
+				88670110247BA01D002E2A8E /* SupportingFiles */,
+				8867010D247B9674002E2A8E /* AuthModule */,
 				887BA3D1247A4C29009DCCE3 /* MainModule */,
-				887BA3C1247A4A22009DCCE3 /* Main.storyboard */,
-				887BA3C4247A4A29009DCCE3 /* Assets.xcassets */,
-				887BA3C6247A4A29009DCCE3 /* LaunchScreen.storyboard */,
 				887BA3C9247A4A29009DCCE3 /* Info.plist */,
 			);
 			path = "Teddy seller";
@@ -256,8 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
+				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
 				887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
+				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,
 				887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */,
 				887BA3BE247A4A22009DCCE3 /* SceneDelegate.swift in Sources */,
 				887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */,
@@ -408,6 +440,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -415,7 +448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Pineapple.Teddy-seller";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -427,6 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,7 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Pineapple.Teddy-seller";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

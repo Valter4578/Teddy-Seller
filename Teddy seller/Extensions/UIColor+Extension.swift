@@ -19,4 +19,15 @@ extension UIColor {
         return setAsRgb(red: 96, green: 186, blue: 255)
     }
  
+    static var placeholderBlack: UIColor {
+        return setAsRgb(red: 56, green: 56, blue: 56)
+    }
+    
+    static var authNextBlue: UIColor {
+        return setAsRgb(red: 52, green: 52, blue: 94)
+    }
+    
+    static var authNextGray: UIColor {
+        return setAsRgb(red: 52, green: 52, blue: 94)
+    }
 }

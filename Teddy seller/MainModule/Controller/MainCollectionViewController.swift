@@ -40,6 +40,9 @@ class MainCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let authVC = AuthViewController()
+        present(authVC, animated: true, completion: nil)
+        
         setupLocationManager()
         setupCollectionView()
         setupNavigationBar()
@@ -73,16 +76,12 @@ class MainCollectionViewController: UICollectionViewController {
             locationManager.startUpdatingLocation()
         }
     }
-    
-    // MARK:- Private functions
-    private func getCurrentLocation() {
         
-    }
-    
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
         print(#function)
     }
+    
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
@@ -122,6 +121,8 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension MainCollectionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        let geodecoder = GeodecoderService()
+        geodecoder.getCurrentCity(longlat: Float(cordinates.longitude), latlong: Float(cordinates.latitude))
         print(cordinates)
     }
 }

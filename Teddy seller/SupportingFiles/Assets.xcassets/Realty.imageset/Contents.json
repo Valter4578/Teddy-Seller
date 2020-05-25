@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Teddy.png",
+      "filename" : "Realty.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Realty@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Realty@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
