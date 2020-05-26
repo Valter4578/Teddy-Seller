@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
 		887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teddy_seller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		288F54939A5637B6C9AD61A9 /* Pods-Teddy seller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.release.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.release.xcconfig"; sourceTree = "<group>"; };
+		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		887BA3B8247A4A22009DCCE3 /* Teddy seller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Teddy seller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
+				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
 				887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */,
+				8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
