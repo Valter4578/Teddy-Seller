@@ -15,19 +15,19 @@ extension UIColor {
     }
     
     // MARK:- Colors
-    static var mainBlue: UIColor {
+    static var mainBlue: UIColor { // #60BAFF
         return setAsRgb(red: 96, green: 186, blue: 255)
     }
  
-    static var placeholderBlack: UIColor {
+    static var placeholderBlack: UIColor { // #383838
         return setAsRgb(red: 56, green: 56, blue: 56)
     }
     
-    static var authNextBlue: UIColor {
+    static var authNextBlue: UIColor { // #34345E
         return setAsRgb(red: 52, green: 52, blue: 94)
     }
     
-    static var authNextGray: UIColor {
+    static var authNextGray: UIColor { // #D8D8D8
         return setAsRgb(red: 52, green: 52, blue: 94)
     }
 }
