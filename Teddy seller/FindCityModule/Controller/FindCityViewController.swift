@@ -35,6 +35,7 @@ final class FindCityViewController: UIViewController {
         super.viewDidLoad()
 
         setupSaveButton()
+        setupTableView()
     }
 
     // MARK:- Setups
@@ -53,16 +54,31 @@ final class FindCityViewController: UIViewController {
         citiesTableView.delegate = self
         citiesTableView.dataSource = self
         
-        citiesTableView.register(<#T##aClass: AnyClass?##AnyClass?#>, forHeaderFooterViewReuseIdentifier: <#T##String#>)
+        citiesTableView.register(FindCityHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        
+        citiesTableView.backgroundColor = .white
         
         view.addSubview(citiesTableView)
+        
+        citiesTableView.snp.makeConstraints { (maker) in
+            maker.bottom.equalTo(saveButton.snp.top)
+            maker.trailing.equalTo(view)
+            maker.leading.equalTo(view)
+            maker.top.equalTo(view)
+        }
     }
 }
 
 // MARK:- UITableViewDelegate
 extension FindCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
+        header.backgroundColor = .white
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 200
     }
 }
 

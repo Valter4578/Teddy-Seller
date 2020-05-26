@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SnapKit
 
-class FindCityHeader: UITableViewCell {
+class FindCityHeader: UITableViewHeaderFooterView {
     // MARK:- Views
     var cityTextField: UITextField = {
         let textField = UITextField()
@@ -22,14 +23,15 @@ class FindCityHeader: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: "Times", size: 22)
         label.textColor = .placeholderBlack
+        label.text = "Начните вводить название города"
         return label
     }()
     
     // MARK:- Initializers
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         
-        
+        setupStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +39,19 @@ class FindCityHeader: UITableViewCell {
     }
     
     // MARK:- Setups
-    private func setupTextField() {
+    private func setupStackView() {
+        let stackView = UIStackView(arrangedSubviews: [label, cityTextField])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
         
+        contentView.addSubview(stackView)
+        
+        stackView.snp.makeConstraints { (maker) in
+            maker.leading.equalTo(contentView).offset(20)
+            maker.trailing.equalTo(contentView).offset(-20)
+            maker.bottom.equalTo(contentView).offset(-20)
+            maker.top.equalTo(contentView).offset(15)
+        }
     }
 }

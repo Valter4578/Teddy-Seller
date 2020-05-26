@@ -76,8 +76,7 @@ class MainCollectionViewController: UICollectionViewController {
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
         let findCityViewController = FindCityViewController()
-        findCityViewController.modalPresentationStyle = .fullScreen
-        present(findCityViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(findCityViewController, animated: true )
     }
     
     // MARK:- CollectionViewDatasource
