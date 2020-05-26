@@ -9,13 +9,18 @@
 import UIKit
 import SnapKit
 
-final class FindCityViewController: UIViewController {
+class FindCityViewController: UIViewController {
     // MARK:- Private constants
     private let cellId = "FindCityViewControllerCell"
     private let headerId = "FindCityViewControllerHeader"
     
     // MARK:- Properties
     var foundedCities: [String] = []
+    var currentCity: String = "Москва" {
+        didSet {
+            title = currentCity
+        }
+    }
     
     // MARK:- Views
     var saveButton: UIButton = {
@@ -36,9 +41,64 @@ final class FindCityViewController: UIViewController {
 
         setupSaveButton()
         setupTableView()
+        setupNavigationBar()
+        setupNotificationCenter()
+        hideKeyboardByTapAround()
+        
+    }
+    
+    // MARK:- Private functions
+    private func hideKeyboardByTapAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAround))
+        view.addGestureRecognizer(tap)
+    }
+    
+    // MARK:- Selectors
+    @objc func didTapAround() {
+           view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(sender: Notification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.saveButton.snp.remakeConstraints { (maker) in
+                maker.leading.equalTo(view)
+                maker.trailing.equalTo(view)
+                maker.bottom.equalTo(view).offset(-keyboardHeight)
+                maker.height.equalTo(78)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(sender: Notification) {
+        saveButton.snp.remakeConstraints { (maker) in
+            maker.leading.equalTo(view)
+            maker.trailing.equalTo(view)
+            maker.bottom.equalTo(view)
+            maker.height.equalTo(78)
+        }
+    }
+    
+    @objc func didTapNavigationBar() {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK:- Setups
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
+        navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     private func setupSaveButton() {
         view.addSubview(saveButton)
         
@@ -78,7 +138,7 @@ extension FindCityViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+        return 120
     }
 }
 

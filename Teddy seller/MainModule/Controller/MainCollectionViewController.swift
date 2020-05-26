@@ -18,7 +18,13 @@ class MainCollectionViewController: UICollectionViewController {
         return button
     }()
     // MARK:- Properties
-    let cellIdentifier = "MainCollectionViewCell"
+    private var cityName: String = "Москва" {
+        didSet {
+            title = cityName
+        }
+    }
+    
+    private let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
                                              left: 31.0,
                                              bottom: 33.0,
@@ -49,7 +55,7 @@ class MainCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-
+        
         title = ""
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
@@ -76,7 +82,10 @@ class MainCollectionViewController: UICollectionViewController {
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
         let findCityViewController = FindCityViewController()
-        navigationController?.pushViewController(findCityViewController, animated: true )
+        findCityViewController.currentCity = cityName
+        let navigationController = UINavigationController(rootViewController: findCityViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     // MARK:- CollectionViewDatasource
@@ -122,7 +131,7 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
         print(cordinates)
         let geocoderService = GeodecoderService()
         geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
-            self.title = city
+            self.cityName = city
         }
     }
 }

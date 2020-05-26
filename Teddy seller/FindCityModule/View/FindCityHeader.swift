@@ -14,7 +14,7 @@ class FindCityHeader: UITableViewHeaderFooterView {
     var cityTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .authNextGray
-        textField.layer.cornerRadius = 24
+        textField.layer.cornerRadius = 12
         textField.font = UIFont(name: "Times", size: 22)
         return textField
     }()
@@ -31,6 +31,7 @@ class FindCityHeader: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
+        contentView.backgroundColor = .white
         setupStackView()
     }
     

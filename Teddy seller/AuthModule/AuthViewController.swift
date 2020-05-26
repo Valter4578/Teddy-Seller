@@ -133,7 +133,6 @@ final class AuthViewController: UIViewController {
         }
     }
     
-
     // MARK:- Deinit
     deinit {
         NotificationCenter.default.removeObserver(self)
