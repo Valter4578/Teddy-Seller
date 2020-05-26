@@ -18,7 +18,6 @@ class MainCollectionViewController: UICollectionViewController {
         return button
     }()
     // MARK:- Properties
-    var cityName = "Москва"
     let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
                                              left: 31.0,
@@ -51,7 +50,7 @@ class MainCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 
-        title = cityName
+        title = ""
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
@@ -121,6 +120,8 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
         
         print(cordinates)
         let geocoderService = GeodecoderService()
-        geocoderService.getCity()
+        geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
+            self.title = city
+        }
     }
 }
