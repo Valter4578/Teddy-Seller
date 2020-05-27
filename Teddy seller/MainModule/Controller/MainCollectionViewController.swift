@@ -83,6 +83,7 @@ class MainCollectionViewController: UICollectionViewController {
     @objc func didTapNavigationBar() {
         let findCityViewController = FindCityViewController()
         findCityViewController.currentCity = cityName
+        findCityViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: findCityViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
@@ -133,5 +134,12 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
         geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
             self.cityName = city
         }
+    }
+}
+
+extension MainCollectionViewController: FindCityViewControllerDelegate {
+    func setSelectedCity(cityName: String) {
+        print(#function)
+        self.cityName = cityName
     }
 }

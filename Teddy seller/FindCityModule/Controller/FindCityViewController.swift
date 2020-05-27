@@ -9,12 +9,18 @@
 import UIKit
 import SnapKit
 
+protocol FindCityViewControllerDelegate: class {
+    func setSelectedCity(cityName: String)
+}
+
 class FindCityViewController: UIViewController {
     // MARK:- Private constants
     private let cellId = "FindCityViewControllerCell"
     private let headerId = "FindCityViewControllerHeader"
     
     // MARK:- Properties
+    weak var delegate: FindCityViewControllerDelegate! 
+    
     var foundedCities: [String] = [] {
         didSet {
             self.citiesTableView.alpha = 1 
@@ -27,6 +33,8 @@ class FindCityViewController: UIViewController {
         }
     }
     var cityToFind: String = ""
+    var selectedCity: String = ""
+    
     
     // MARK:- Views
     var header: FindCityHeader!
@@ -36,11 +44,14 @@ class FindCityViewController: UIViewController {
         button.backgroundColor = .mainBlue
         button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(.placeholderBlack, for: .normal)
+        button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
         return button
     }()
     
     var citiesTableView: UITableView = {
         let tableView = UITableView()
+        tableView.allowsSelection = true
+        
         return tableView
     }()
     // MARK:- Lifecycle
@@ -64,6 +75,7 @@ class FindCityViewController: UIViewController {
     private func hideKeyboardByTapAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAround))
         view.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
     }
     
     // MARK:- Selectors
@@ -107,6 +119,11 @@ class FindCityViewController: UIViewController {
         }
     }
     
+    @objc func didTapSaveButton() {
+        delegate.setSelectedCity(cityName: selectedCity)
+        dismiss(animated: true)
+    }
+    
     // MARK:- Setups
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -120,6 +137,7 @@ class FindCityViewController: UIViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.cancelsTouchesInView = false
     }
     
     private func setupSaveButton() {
@@ -159,13 +177,20 @@ class FindCityViewController: UIViewController {
 extension FindCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
-        header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
+        header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .allEditingEvents)
         header.backgroundColor = .white
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
+        if !(foundedCities.isEmpty) {
+            selectedCity = foundedCities[indexPath.row]
+        }
     }
 }
 
