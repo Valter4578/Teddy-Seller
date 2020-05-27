@@ -21,6 +21,7 @@ class FindCityViewController: UIViewController {
             title = currentCity
         }
     }
+    var cityToFind: String = ""
     
     // MARK:- Views
     var saveButton: UIButton = {
@@ -44,6 +45,11 @@ class FindCityViewController: UIViewController {
         setupNavigationBar()
         setupNotificationCenter()
         hideKeyboardByTapAround()
+        
+        CityFinderService.getCities(city: cityToFind) { (cityName) in
+            self.foundedCities.append(cityName)
+            self.citiesTableView.reloadData()
+        }
         
     }
     
@@ -84,6 +90,10 @@ class FindCityViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @objc func editingDidEnd() {
+//        tableView.reloadData()
+    }
+    
     // MARK:- Setups
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -115,6 +125,7 @@ class FindCityViewController: UIViewController {
         citiesTableView.dataSource = self
         
         citiesTableView.register(FindCityHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        citiesTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
         citiesTableView.backgroundColor = .white
         

@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class CityFinderService {
-    static func getCities(city: String,indexPath: IndexPath, completionHandler: @escaping (String) -> Void) {
+    static func getCities(city: String, completionHandler: @escaping (String) -> Void) {
         let parametrs:[String:String] = [
             "access_token": "bb6d7c5ebb6d7c5ebb6d7c5e87bb1f49a9bbb6dbb6d7c5ee5a04e34761913fb77bdd90d",
             "v":"5.5",
@@ -25,8 +25,11 @@ class CityFinderService {
             .responseJSON { (response) in
                 guard let data = response.data else { return }
                 guard let json = try? JSON(data: data) else { return }
-                let items = json["response"]["items"][indexPath.row]["title"]
-                print(items)
+                
+                for i in 0...14 {
+                    let cityName = json["response"]["items"][i]["title"].stringValue
+                    completionHandler(cityName)
+                }
         }
     }
 }
