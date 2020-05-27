@@ -16,7 +16,6 @@ class FindCityHeader: UITableViewHeaderFooterView {
         textField.backgroundColor = .authNextGray
         textField.layer.cornerRadius = 12
         textField.font = UIFont(name: "Times", size: 22)
-        textField.addTarget(FindCityViewController(), action: #selector(FindCityViewController.editingDidEnd), for: .editingDidEnd)
         return textField
     }()
     

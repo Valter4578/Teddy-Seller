@@ -15,7 +15,12 @@ class FindCityViewController: UIViewController {
     private let headerId = "FindCityViewControllerHeader"
     
     // MARK:- Properties
-    var foundedCities: [String] = []
+    var foundedCities: [String] = [] {
+        didSet {
+            self.citiesTableView.alpha = 1 
+        }
+    }
+    
     var currentCity: String = "Москва" {
         didSet {
             title = currentCity
@@ -24,6 +29,8 @@ class FindCityViewController: UIViewController {
     var cityToFind: String = ""
     
     // MARK:- Views
+    var header: FindCityHeader!
+    
     var saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainBlue
@@ -88,10 +95,16 @@ class FindCityViewController: UIViewController {
     
     @objc func didTapNavigationBar() {
         dismiss(animated: true, completion: nil)
-    }
-
+    } 
+    
     @objc func editingDidEnd() {
-//        tableView.reloadData()
+        print(#function)
+        guard let text = header.cityTextField.text else { return }
+        foundedCities.removeAll()
+        CityFinderService.getCities(city: text) { (city) in
+            self.foundedCities.append(city)
+            self.citiesTableView.reloadData()
+        }
     }
     
     // MARK:- Setups
@@ -127,7 +140,9 @@ class FindCityViewController: UIViewController {
         citiesTableView.register(FindCityHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
         citiesTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
-        citiesTableView.backgroundColor = .white
+        if foundedCities.isEmpty {
+            self.citiesTableView.alpha = 0
+        }
         
         view.addSubview(citiesTableView)
         
@@ -143,7 +158,8 @@ class FindCityViewController: UIViewController {
 // MARK:- UITableViewDelegate
 extension FindCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
+        header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
+        header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
         header.backgroundColor = .white
         return header
     }
@@ -161,7 +177,9 @@ extension FindCityViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = foundedCities[indexPath.row]
+        if !(foundedCities.isEmpty) {
+            cell.textLabel?.text = foundedCities[indexPath.row]
+        }
         cell.backgroundColor = .authNextGray
         return cell
     }
