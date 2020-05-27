@@ -21,7 +21,7 @@ class FindCityViewController: UIViewController {
     // MARK:- Properties
     weak var delegate: FindCityViewControllerDelegate! 
     
-    var foundedCities: [String] = [] {
+    var foundedCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"] {
         didSet {
             self.citiesTableView.alpha = 1 
         }
@@ -63,12 +63,6 @@ class FindCityViewController: UIViewController {
         setupNavigationBar()
         setupNotificationCenter()
         hideKeyboardByTapAround()
-        
-        CityFinderService.getCities(city: cityToFind) { (cityName) in
-            self.foundedCities.append(cityName)
-            self.citiesTableView.reloadData()
-        }
-        
     }
     
     // MARK:- Private functions
