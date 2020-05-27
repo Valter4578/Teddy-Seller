@@ -14,6 +14,28 @@ extension UIColor {
         return UIColor(red: red/255, green: green/225, blue: blue/255, alpha: 1)
     }
     
+    static func setAsHex (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     // MARK:- Colors
     static var mainBlue: UIColor { // #60BAFF
         return setAsRgb(red: 96, green: 186, blue: 255)
@@ -28,6 +50,6 @@ extension UIColor {
     }
     
     static var authNextGray: UIColor { // #D8D8D8
-        return setAsRgb(red: 216, green: 216, blue: 216)
+        return setAsHex(hex: "#D8D8D8")
     }
 }
