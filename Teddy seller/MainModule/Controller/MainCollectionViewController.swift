@@ -18,6 +18,14 @@ class MainCollectionViewController: UICollectionViewController {
         return button
     }()
     // MARK:- Properties
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        get {
+            
+            return .lightContent
+        }
+    }
+
+    
     private var cityName: String = "Москва" {
         didSet {
             title = cityName
@@ -48,18 +56,31 @@ class MainCollectionViewController: UICollectionViewController {
         setupLocationManager()
         setupCollectionView()
         setupNavigationBar()
+        setupStatusBar()
     }
     
     // MARK:- Setups
     private func setupNavigationBar() {
         navigationController?.navigationBar.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.clipsToBounds = false
+        navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+
         
         title = ""
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func setupStatusBar() {
+        let customStatusBar =  UIView()
+        customStatusBar.frame = UIApplication.shared.statusBarFrame
+        customStatusBar.backgroundColor = .black
+        UIApplication.shared.keyWindow?.addSubview(customStatusBar)
     }
     
     private func setupCollectionView() {
