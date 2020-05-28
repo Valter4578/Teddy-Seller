@@ -60,9 +60,18 @@ class FindCityViewController: UIViewController {
 
         setupSaveButton()
         setupTableView()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         setupNavigationBar()
         setupNotificationCenter()
         hideKeyboardByTapAround()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK:- Private functions
@@ -167,7 +176,7 @@ class FindCityViewController: UIViewController {
             maker.bottom.equalTo(saveButton.snp.top)
             maker.trailing.equalTo(view)
             maker.leading.equalTo(view)
-            maker.top.equalTo(view)
+            maker.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

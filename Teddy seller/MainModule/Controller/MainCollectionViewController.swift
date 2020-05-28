@@ -53,19 +53,25 @@ class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         
-        setupStatusBar() 
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLocationManager()
         setupCollectionView()
         setupNavigationBar()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        setupStatusBar()
     }
     
     // MARK:- Setups
