@@ -25,17 +25,17 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         return label
     }()
+    
     // MARK:- Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
         
-        print(frame.width)
-        print(frame.height)
-        
         setupImageView()
+        print(#function + "after image view: width - \(frame.width) height - \(frame.width)")
         setupLabel()
+        print(#function + "after label: width - \(frame.width) height - \(frame.height)")
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +45,7 @@ class MainViewConllectionViewCell: UICollectionViewCell {
     // MARK:- Setups
     func setupImageView() {
         addSubview(iconImageView)
-        
+        print(#function + "width - \(frame.width) height - \(frame.height)")
         iconImageView.snp.makeConstraints { (maker) in
             maker.centerY.equalTo(self).offset(-5)
             maker.centerX.equalTo(self)
@@ -56,11 +56,11 @@ class MainViewConllectionViewCell: UICollectionViewCell {
     
     func setupLabel() {
         addSubview(textLabel)
-        
+        print(#function + "width - \(frame.width) height - \(frame.height)")
         textLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(self)
             maker.top.equalTo(iconImageView.snp.bottom).offset(5)
-            maker.bottom.equalTo(self)
+            
         }
     }
 }
