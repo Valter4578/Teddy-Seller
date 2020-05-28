@@ -50,6 +50,8 @@ class MainCollectionViewController: UICollectionViewController {
     
     // MARK:- Setups
     private func setupNavigationBar() {
+        setupStatusBar()
+        
         navigationController?.navigationBar.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
