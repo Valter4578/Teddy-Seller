@@ -20,11 +20,9 @@ class MainCollectionViewController: UICollectionViewController {
     // MARK:- Properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
-            
             return .lightContent
         }
     }
-
     
     private var cityName: String = "Москва" {
         didSet {
@@ -50,13 +48,24 @@ class MainCollectionViewController: UICollectionViewController {
     let locationManager = CLLocationManager()
 
     // MARK:- Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupStatusBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        setupStatusBar() 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLocationManager()
         setupCollectionView()
         setupNavigationBar()
-        setupStatusBar()
     }
     
     // MARK:- Setups
