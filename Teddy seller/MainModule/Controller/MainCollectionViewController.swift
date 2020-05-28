@@ -79,7 +79,7 @@ class MainCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 
         
-        title = ""
+        title = cityName
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
