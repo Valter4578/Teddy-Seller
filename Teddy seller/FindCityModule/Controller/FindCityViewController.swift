@@ -85,7 +85,7 @@ class FindCityViewController: UIViewController {
     }
     
     private func animateDissmis() {
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.view.alpha = 0
         }) { _ in
             self.view.removeFromSuperview()
