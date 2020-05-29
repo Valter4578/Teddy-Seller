@@ -137,7 +137,7 @@ class MainCollectionViewController: UICollectionViewController {
         findCityViewController.view.clipsToBounds = true
         findCityViewController.view.alpha = 0
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.findCityViewController.view.alpha = 1
         }) { _ in
             self.isFindCityPresented = true
@@ -145,7 +145,7 @@ class MainCollectionViewController: UICollectionViewController {
     }
     
     private func dissmisFindCity() {
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.7, animations: {
             self.findCityViewController.view.alpha = 0
         }) { _ in
             self.findCityViewController.view.removeFromSuperview()
