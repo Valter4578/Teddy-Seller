@@ -21,7 +21,8 @@ class FindCityViewController: UIViewController {
     // MARK:- Properties
     weak var delegate: FindCityViewControllerDelegate! 
     
-    var foundedCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"] {
+    var foundedCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"]
+    var standartCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"] {
         didSet {
             self.citiesTableView.alpha = 1 
         }
@@ -117,10 +118,14 @@ class FindCityViewController: UIViewController {
     @objc func editingDidEnd() {
         print(#function)
         guard let text = header.cityTextField.text else { return }
-        foundedCities.removeAll()
-        CityFinderService.getCities(city: text) { (city) in
-            self.foundedCities.append(city)
-            self.citiesTableView.reloadData()
+        if !text.isEmpty {
+            foundedCities.removeAll()
+            CityFinderService.getCities(city: text) { (city) in
+                self.foundedCities.append(city)
+                self.citiesTableView.reloadData()
+            }
+        } else {
+            self.foundedCities = self.standartCities
         }
     }
     
@@ -207,13 +212,15 @@ extension FindCityViewController: UITableViewDelegate {
 // MARK:- UITableViewDataSource
 extension FindCityViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foundedCities.count
+        return foundedCities.isEmpty ? standartCities.count : foundedCities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         if !(foundedCities.isEmpty) {
             cell.textLabel?.text = foundedCities[indexPath.row]
+        } else if foundedCities.isEmpty {
+            cell.textLabel?.text = standartCities[indexPath.row]
         }
         cell.backgroundColor = .authNextGray
         return cell
