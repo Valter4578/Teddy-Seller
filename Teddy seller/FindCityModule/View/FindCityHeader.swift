@@ -16,6 +16,9 @@ class FindCityHeader: UITableViewHeaderFooterView {
         textField.backgroundColor = .authNextGray
         textField.layer.cornerRadius = 12
         textField.font = UIFont(name: "Times", size: 22)
+       let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+       textField.leftView = paddingView
+       textField.leftViewMode = .always
         return textField
     }()
     
