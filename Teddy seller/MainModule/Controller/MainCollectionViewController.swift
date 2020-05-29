@@ -64,13 +64,14 @@ class MainCollectionViewController: UICollectionViewController {
         
         setupLocationManager()
         setupCollectionView()
-        setupNavigationBar()
+//        setupNavigationBar()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        setupNavigationBar()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -131,11 +132,13 @@ class MainCollectionViewController: UICollectionViewController {
     
     // MARK:- Private methods
     private func presentFindCity() {
+        view.addSubview(self.findCityViewController.view)
+        addChild(self.findCityViewController)
+        findCityViewController.view.clipsToBounds = true
+        findCityViewController.view.alpha = 0
+        
         UIView.animate(withDuration: 0.2, animations: {
-            self.view.addSubview(self.findCityViewController.view)
-            self.addChild(self.findCityViewController)
-            
-            self.findCityViewController.view.clipsToBounds = true
+            self.findCityViewController.view.alpha = 1
         }) { _ in
             self.isFindCityPresented = true
         }
@@ -143,10 +146,11 @@ class MainCollectionViewController: UICollectionViewController {
     
     private func dissmisFindCity() {
         UIView.animate(withDuration: 0.4, animations: {
+            self.findCityViewController.view.alpha = 0
+        }) { _ in
             self.findCityViewController.view.removeFromSuperview()
             self.findCityViewController.removeFromParent()
             self.findCityViewController.willMove(toParent: nil)
-        }) { _ in
             self.isFindCityPresented = false
         }
     }
