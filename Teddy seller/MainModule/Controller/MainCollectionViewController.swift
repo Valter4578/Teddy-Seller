@@ -37,7 +37,7 @@ class MainCollectionViewController: UICollectionViewController {
     
     private let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
-                                             left: 31.0,
+                                             left: 33.0,
                                              bottom: 33.0,
                                              right: 31.0)
     
@@ -165,16 +165,20 @@ class MainCollectionViewController: UICollectionViewController {
             cell.textLabel.text = categories[indexPath.item].text
             cell.iconImageView.image = UIImage(named: categories[indexPath.item].imageName)
             cell.layer.cornerRadius = 24
+        
             return cell
         }
         return UICollectionViewCell()
+    }
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 16.0
     }
 }
 
 // MARK:- CollectionViewDelegateFlowLayout
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (2 + 1)
+        let paddingSpace = sectionInsets.left * 3
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / 2
 
