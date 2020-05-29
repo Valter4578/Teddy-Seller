@@ -205,6 +205,7 @@ extension FindCityViewController: UITableViewDelegate {
         print(#function)
         if !(foundedCities.isEmpty) {
             selectedCity = foundedCities[indexPath.row]
+            header.cityTextField.text = selectedCity
         }
     }
 }
