@@ -15,7 +15,7 @@ class FindCityHeader: UITableViewHeaderFooterView {
         let textField = UITextField()
         textField.backgroundColor = .authNextGray
         textField.layer.cornerRadius = 12
-        textField.font = UIFont(name: "Times", size: 22)
+        textField.font = UIFont(name: "Helvetica", size: 22)
        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
        textField.leftView = paddingView
        textField.leftViewMode = .always
@@ -24,7 +24,7 @@ class FindCityHeader: UITableViewHeaderFooterView {
     
     var label: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Times", size: 22)
+        label.font = UIFont(name: "Helvetica", size: 22)
         label.textColor = .placeholderBlack
         label.text = "Начните вводить название города"
         return label
