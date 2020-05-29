@@ -57,10 +57,11 @@ class FindCityViewController: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.alpha = 0 
+            
         setupSaveButton()
         setupTableView()
-        navigationController?.setNavigationBarHidden(true, animated: false)
 
         setupNavigationBar()
         setupNotificationCenter()
@@ -71,7 +72,8 @@ class FindCityViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        navigationController?.navigationBar.alpha = 1
     }
     
     // MARK:- Private functions

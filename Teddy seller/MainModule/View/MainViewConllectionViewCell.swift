@@ -60,7 +60,6 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         textLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(self)
             maker.top.equalTo(iconImageView.snp.bottom).offset(5)
-            
         }
     }
 }
