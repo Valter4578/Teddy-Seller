@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import CoreLocation
 
+
 class MainCollectionViewController: UICollectionViewController {
     // MARK:- Views
     var navigationButton: UIButton = {
@@ -84,6 +85,7 @@ class MainCollectionViewController: UICollectionViewController {
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
 
+        
         
         title = cityName
         
