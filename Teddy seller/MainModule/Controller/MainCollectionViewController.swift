@@ -203,9 +203,10 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK:- FindCityViewControllerDelegate
 extension MainCollectionViewController: FindCityViewControllerDelegate {
     func setSelectedCity(cityName: String) {
-        print(#function)
+        isFindCityPresented = false 
         self.cityName = cityName
     }
 }

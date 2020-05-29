@@ -84,6 +84,16 @@ class FindCityViewController: UIViewController {
         tap.cancelsTouchesInView = false
     }
     
+    private func animateDissmis() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.alpha = 0
+        }) { _ in
+            self.view.removeFromSuperview()
+            self.removeFromParent()
+            self.willMove(toParent: nil)
+        }
+    }
+    
     // MARK:- Selectors
     @objc func didTapAround() {
            view.endEditing(true)
@@ -130,8 +140,9 @@ class FindCityViewController: UIViewController {
     }
     
     @objc func didTapSaveButton() {
+        
         delegate.setSelectedCity(cityName: selectedCity)
-        dismiss(animated: true)
+        animateDissmis()
     }
     
     // MARK:- Setups
