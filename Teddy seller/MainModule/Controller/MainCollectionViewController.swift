@@ -19,6 +19,10 @@ class MainCollectionViewController: UICollectionViewController {
         return button
     }()
     // MARK:- Properties
+    let findCityViewController = FindCityViewController()
+
+    var isFindCityPresented: Bool = false
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
             return .lightContent
@@ -119,12 +123,32 @@ class MainCollectionViewController: UICollectionViewController {
         
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
-        let findCityViewController = FindCityViewController()
         findCityViewController.currentCity = cityName
         findCityViewController.delegate = self
-        let navigationController = UINavigationController(rootViewController: findCityViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        
+        isFindCityPresented ? dissmisFindCity() : presentFindCity()
+    }
+    
+    // MARK:- Private methods
+    private func presentFindCity() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.addSubview(self.findCityViewController.view)
+            self.addChild(self.findCityViewController)
+            
+            self.findCityViewController.view.clipsToBounds = true
+        }) { _ in
+            self.isFindCityPresented = true
+        }
+    }
+    
+    private func dissmisFindCity() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.findCityViewController.view.removeFromSuperview()
+            self.findCityViewController.removeFromParent()
+            self.findCityViewController.willMove(toParent: nil)
+        }) { _ in
+            self.isFindCityPresented = false
+        }
     }
     
     // MARK:- CollectionViewDatasource
