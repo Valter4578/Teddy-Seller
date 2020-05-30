@@ -171,7 +171,7 @@ class MainCollectionViewController: UICollectionViewController {
         return UICollectionViewCell()
     }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16.0
+        return 24.0
     }
 }
 
