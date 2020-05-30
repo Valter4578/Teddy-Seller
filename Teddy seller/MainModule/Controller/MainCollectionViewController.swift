@@ -47,8 +47,8 @@ class MainCollectionViewController: UICollectionViewController {
                       MainCellModel(imageName: "Buiseness", text: "Для бизнеса"),
                       MainCellModel(imageName: "Work", text: "Работа"),
                       MainCellModel(imageName: "PersonalItems", text: "Личные вещи"),
-                      MainCellModel(imageName: "Teddy", text: "Электроника"),
-                      MainCellModel(imageName: "Teddy", text: "Услуги"),]
+                      MainCellModel(imageName: "Electronix", text: "Электроника"),
+                      MainCellModel(imageName: "Service", text: "Услуги"),]
     
     let locationManager = CLLocationManager()
 
