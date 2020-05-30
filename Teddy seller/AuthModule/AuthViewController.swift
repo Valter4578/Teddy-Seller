@@ -24,7 +24,7 @@ final class AuthViewController: UIViewController {
         textField.keyboardType = .numberPad
         textField.font = UIFont(name: "Helvetica Neue", size: 24)
         
-        textField.attributedPlaceholder = NSAttributedString(string: "+7", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderBlack, NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 24)])
+        //textField.attributedPlaceholder = NSAttributedString(string: "+7", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderBlack, NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 24)])
         
         return textField
     }()

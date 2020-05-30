@@ -165,7 +165,8 @@ class MainCollectionViewController: UICollectionViewController {
             cell.textLabel.text = categories[indexPath.item].text
             cell.iconImageView.image = UIImage(named: categories[indexPath.item].imageName)
             cell.layer.cornerRadius = 24
-        
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.borderGray.cgColor
             return cell
         }
         return UICollectionViewCell()

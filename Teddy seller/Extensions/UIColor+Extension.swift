@@ -52,4 +52,8 @@ extension UIColor {
     static var authNextGray: UIColor { // #D8D8D8
         return setAsHex(hex: "#D8D8D8")
     }
+    static var borderGray: UIColor { // #A1BDD4
+        return setAsRgb(red: 161, green: 189, blue: 212)
+    }
 }
+
