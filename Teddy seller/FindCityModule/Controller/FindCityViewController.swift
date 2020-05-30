@@ -136,6 +136,7 @@ class FindCityViewController: UIViewController {
             }
         } else {
             self.foundedCities = self.standartCities
+            self.citiesTableView.reloadData()
         }
     }
     
@@ -203,7 +204,7 @@ class FindCityViewController: UIViewController {
 extension FindCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
-        header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .allEditingEvents)
+        header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .editingChanged)
         header.backgroundColor = .white
         return header
     }
