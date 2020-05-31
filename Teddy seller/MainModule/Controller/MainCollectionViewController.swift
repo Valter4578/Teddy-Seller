@@ -14,6 +14,7 @@ final class MainCollectionViewController: UICollectionViewController {
     // MARK:- Views
     var arrowView: ArrowView = {
         let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        view.transform = CGAffineTransform(rotationAngle: .pi)
         return view
     }()
     
@@ -140,7 +141,7 @@ final class MainCollectionViewController: UICollectionViewController {
         
         UIView.animate(withDuration: 0.7, animations: {
             self.findCityViewController.view.alpha = 1
-            self.arrowView.transform = CGAffineTransform(rotationAngle: .pi)
+            self.arrowView.transform = CGAffineTransform(rotationAngle: 0)
         }) { _ in
             self.isFindCityPresented = true
         }
@@ -149,7 +150,7 @@ final class MainCollectionViewController: UICollectionViewController {
     private func dissmisFindCity() {
         UIView.animate(withDuration: 0.7, animations: {
             self.findCityViewController.view.alpha = 0
-            self.arrowView.transform = CGAffineTransform(rotationAngle: 0)
+            self.arrowView.transform = CGAffineTransform(rotationAngle: .pi)
         }) { _ in
             self.findCityViewController.view.removeFromSuperview()
             self.findCityViewController.removeFromParent()
@@ -213,6 +214,10 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
 
 // MARK:- FindCityViewControllerDelegate
 extension MainCollectionViewController: FindCityViewControllerDelegate {
+    func didDissmisBySave() {
+        arrowView.transform = CGAffineTransform(rotationAngle: .pi)
+    }
+    
     func setSelectedCity(cityName: String) {
         isFindCityPresented = false 
         self.cityName = cityName

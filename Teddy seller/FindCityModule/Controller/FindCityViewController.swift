@@ -11,6 +11,7 @@ import SnapKit
 
 protocol FindCityViewControllerDelegate: class {
     func setSelectedCity(cityName: String)
+    func didDissmisBySave()
 }
 
 class FindCityViewController: UIViewController {
@@ -96,7 +97,7 @@ class FindCityViewController: UIViewController {
     
     // MARK:- Selectors
     @objc func didTapAround() {
-           view.endEditing(true)
+        view.endEditing(true)
     }
     
     @objc func keyboardWillShow(sender: Notification) {
