@@ -11,8 +11,7 @@ import SnapKit
 import CoreLocation
 
 
-class MainCollectionViewController: UICollectionViewController {
-
+final class MainCollectionViewController: UICollectionViewController {
     // MARK:- Properties
     let findCityViewController = FindCityViewController()
 
@@ -52,6 +51,7 @@ class MainCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         
         setupStatusBar()
+        setupNavigationBar()
     }
         
     override func viewDidLoad() {
@@ -93,32 +93,6 @@ class MainCollectionViewController: UICollectionViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
         navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    func drawArrow(frame: CGRect = CGRect(x: 60, y: 76, width: 20, height: 20)) {
-            //// Bezier 2 Drawing
-        let bezier2Path = UIBezierPath()
-        UIColor.black.setStroke()
-        bezier2Path.lineWidth = 1
-        bezier2Path.stroke()
-
-
-        //// Bezier Drawing
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 70.5, y: 23.5))
-        bezierPath.addLine(to: CGPoint(x: frame.minX + 0.5, y: frame.minY + 19.5))
-        UIColor.black.setStroke()
-        bezierPath.lineWidth = 1
-        bezierPath.stroke()
-
-
-        //// Bezier 3 Drawing
-        let bezier3Path = UIBezierPath()
-        bezier3Path.move(to: CGPoint(x: 70.5, y: 23.5))
-        bezier3Path.addLine(to: CGPoint(x: frame.minX + 19.5, y: frame.minY + 19.5))
-        UIColor.black.setStroke()
-        bezier3Path.lineWidth = 1
-        bezier3Path.stroke()
     }
     
     private func setupStatusBar() {
