@@ -19,6 +19,7 @@
 		887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */; };
 		887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */; };
 		887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */; };
+		887CEE522483C58700A63293 /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887CEE512483C58700A63293 /* ArrowView.swift */; };
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
@@ -41,6 +42,7 @@
 		887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCellModel.swift; sourceTree = "<group>"; };
 		887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewConllectionViewCell.swift; sourceTree = "<group>"; };
+		887CEE512483C58700A63293 /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */,
+				887CEE512483C58700A63293 /* ArrowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,
+				887CEE522483C58700A63293 /* ArrowView.swift in Sources */,
 				887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */,
 				887BA3BE247A4A22009DCCE3 /* SceneDelegate.swift in Sources */,
 				887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */,
@@ -476,7 +480,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +500,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
