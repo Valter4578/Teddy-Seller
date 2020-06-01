@@ -31,4 +31,26 @@ class TeddyAPIService {
                 }
         }
     }
+    
+    func authorize(requestId: Int, code: Int,completionHandler: @escaping (String) -> Void) {
+        let parametrs: [String: Any] = [
+            "request_id": requestId,
+            "code": code
+        ]
+        
+        AF.request("http://194.9.71.20/authorize", method: .post, parameters: parametrs)
+            .validate()
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    guard let string = value as? Data,
+                          let json = try? JSON(data: string) else { return }
+                    
+                    let token = json["token"].stringValue
+                    completionHandler(token)
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
 }
