@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D577248640D3001FC653 /* Auth+Setups.swift */; };
+		8842D57C248641B5001FC653 /* Main+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57B248641B5001FC653 /* Main+Setup.swift */; };
+		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
+		8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58324864A53001FC653 /* AuthAlertBuilder.swift */; };
+		8842D58724864B1B001FC653 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58624864B1B001FC653 /* AuthError.swift */; };
+		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
 		887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3BB247A4A22009DCCE3 /* AppDelegate.swift */; };
@@ -18,12 +24,22 @@
 		887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */; };
 		887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */; };
 		887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */; };
+		887CEE522483C58700A63293 /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887CEE512483C58700A63293 /* ArrowView.swift */; };
+		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
+		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
+		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teddy_seller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		288F54939A5637B6C9AD61A9 /* Pods-Teddy seller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.release.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.release.xcconfig"; sourceTree = "<group>"; };
+		8842D577248640D3001FC653 /* Auth+Setups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auth+Setups.swift"; sourceTree = "<group>"; };
+		8842D57B248641B5001FC653 /* Main+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Setup.swift"; sourceTree = "<group>"; };
+		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
+		8842D58324864A53001FC653 /* AuthAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlertBuilder.swift; sourceTree = "<group>"; };
+		8842D58624864B1B001FC653 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		887BA3B8247A4A22009DCCE3 /* Teddy seller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Teddy seller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +53,10 @@
 		887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCellModel.swift; sourceTree = "<group>"; };
 		887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewConllectionViewCell.swift; sourceTree = "<group>"; };
+		887CEE512483C58700A63293 /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
+		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
+		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
+		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,18 +89,67 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		8867010A247B85B2002E2A8E /* Services */ = {
+		8842D57F248642A7001FC653 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */,
+				8842D57D24864280001FC653 /* MainView+Setup.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		8842D580248649BD001FC653 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58524864AF8001FC653 /* Model */,
+				88830D8E247CF3960034937F /* FindCityModule */,
+				8867010D247B9674002E2A8E /* AuthModule */,
+				887BA3D1247A4C29009DCCE3 /* MainModule */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		8842D581248649EA001FC653 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		8842D582248649FA001FC653 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8842D581248649EA001FC653 /* Builders */,
+				887BA3D2247A4C38009DCCE3 /* Extensions */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		8842D58524864AF8001FC653 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
+				8842D58624864B1B001FC653 /* AuthError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8867010A247B85B2002E2A8E /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
 				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
+				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
+				88D24CA724853D65005AED02 /* TeddyAPIService.swift */,
 			);
-			path = Services;
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		8867010D247B9674002E2A8E /* AuthModule */ = {
 			isa = PBXGroup;
 			children = (
 				8867010E247B96AE002E2A8E /* AuthViewController.swift */,
+				8842D577248640D3001FC653 /* Auth+Setups.swift */,
 			);
 			path = AuthModule;
 			sourceTree = "<group>";
@@ -118,12 +187,11 @@
 		887BA3BA247A4A22009DCCE3 /* Teddy seller */ = {
 			isa = PBXGroup;
 			children = (
-				887BA3D2247A4C38009DCCE3 /* Extensions */,
-				8867010A247B85B2002E2A8E /* Services */,
-				88670110247BA01D002E2A8E /* SupportingFiles */,
-				8867010D247B9674002E2A8E /* AuthModule */,
-				887BA3D1247A4C29009DCCE3 /* MainModule */,
+				8842D580248649BD001FC653 /* PresentationLayer */,
+				8867010A247B85B2002E2A8E /* ServiceLayer */,
+				8842D582248649FA001FC653 /* CoreLayer */,
 				887BA3C9247A4A29009DCCE3 /* Info.plist */,
+				88670110247BA01D002E2A8E /* SupportingFiles */,
 			);
 			path = "Teddy seller";
 			sourceTree = "<group>";
@@ -132,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				888CC0D8247A8126006E6930 /* Controller */,
-				888CC0D9247A8132006E6930 /* Model */,
 				888CC0DA247A813D006E6930 /* View */,
 			);
 			path = MainModule;
@@ -146,26 +213,45 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		888CC0D8247A8126006E6930 /* Controller */ = {
+		88830D8E247CF3960034937F /* FindCityModule */ = {
 			isa = PBXGroup;
 			children = (
-				887BA3BF247A4A22009DCCE3 /* MainCollectionViewController.swift */,
+				88830D93247D00830034937F /* Controller */,
+				88830D94247D008B0034937F /* View */,
+			);
+			path = FindCityModule;
+			sourceTree = "<group>";
+		};
+		88830D93247D00830034937F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				88830D8F247CF3D10034937F /* FindCityViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		888CC0D9247A8132006E6930 /* Model */ = {
+		88830D94247D008B0034937F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
+				88830D91247CFE6B0034937F /* FindCityHeader.swift */,
 			);
-			path = Model;
+			path = View;
+			sourceTree = "<group>";
+		};
+		888CC0D8247A8126006E6930 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3BF247A4A22009DCCE3 /* MainCollectionViewController.swift */,
+				8842D57B248641B5001FC653 /* Main+Setup.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		888CC0DA247A813D006E6930 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				887BA3D5247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift */,
+				8842D57F248642A7001FC653 /* MainView */,
+				887CEE512483C58700A63293 /* ArrowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,12 +373,22 @@
 			files = (
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
+				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
 				887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */,
+				8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
+				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
+				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
+				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,
+				887CEE522483C58700A63293 /* ArrowView.swift in Sources */,
+				8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */,
+				88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */,
+				8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */,
 				887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */,
 				887BA3BE247A4A22009DCCE3 /* SceneDelegate.swift in Sources */,
 				887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */,
+				8842D57C248641B5001FC653 /* Main+Setup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,12 +536,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Pineapple.Teddy-seller";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pineapple.mrvalter566;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -460,12 +556,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
 				INFOPLIST_FILE = "Teddy seller/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Pineapple.Teddy-seller";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pineapple.mrvalter566;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

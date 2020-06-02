@@ -25,14 +25,12 @@ class MainViewConllectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         return label
     }()
+    
     // MARK:- Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
-        
-        print(frame.width)
-        print(frame.height)
         
         setupImageView()
         setupLabel()
@@ -40,27 +38,5 @@ class MainViewConllectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK:- Setups
-    func setupImageView() {
-        addSubview(iconImageView)
-        
-        iconImageView.snp.makeConstraints { (maker) in
-            maker.centerY.equalTo(self).offset(-5)
-            maker.centerX.equalTo(self)
-            maker.height.equalTo(90)
-            maker.width.equalTo(90)
-        }
-    }
-    
-    func setupLabel() {
-        addSubview(textLabel)
-        
-        textLabel.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(self)
-            maker.top.equalTo(iconImageView.snp.bottom).offset(5)
-            maker.bottom.equalTo(self)
-        }
     }
 }
