@@ -66,8 +66,7 @@ final class MainCollectionViewController: UICollectionViewController {
         setupLocationManager()
         setupCollectionView()
         
-        let auth = AuthViewController()
-        present(auth, animated: true, completion: nil)
+        checkForToken()
         
     }
     
@@ -115,6 +114,21 @@ final class MainCollectionViewController: UICollectionViewController {
             self.findCityViewController.removeFromParent()
             self.findCityViewController.willMove(toParent: nil)
             self.isFindCityPresented = false
+        }
+    }
+    
+    private func checkForToken() {
+        let token = UserDefaults.standard.string(forKey: "token")
+        if token == "" {
+            let authViewController = AuthViewController()
+            authViewController.modalPresentationStyle = .fullScreen
+            present(authViewController, animated: true, completion: nil)
+        }
+        
+        if let _ = token {} else {
+            let authViewController = AuthViewController()
+            authViewController.modalPresentationStyle = .fullScreen
+            present(authViewController, animated: true, completion: nil)
         }
     }
     
