@@ -29,13 +29,13 @@ final class MainCollectionViewController: UICollectionViewController {
         }
     }
     
-    private var cityName: String = "Москва" {
+    var cityName: String = "Москва" {
         didSet {
             title = cityName
         }
     }
     
-    private let cellIdentifier = "MainCollectionViewCell"
+    let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
                                              left: 33.0,
                                              bottom: 33.0,
@@ -65,7 +65,9 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupLocationManager()
         setupCollectionView()
-//        setupNavigationBar()
+        
+        let auth = AuthViewController()
+        present(auth, animated: true, completion: nil)
         
     }
     
@@ -82,47 +84,6 @@ final class MainCollectionViewController: UICollectionViewController {
     }
     
     // MARK:- Setups
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = .black
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.clipsToBounds = false
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-    
-        let rightItem = UIBarButtonItem(customView: arrowView)
-        navigationItem.rightBarButtonItem = rightItem
-        
-        title = cityName
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapNavigationBar))
-        navigationController?.navigationBar.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    private func setupStatusBar() {
-        let customStatusBar =  UIView()
-        customStatusBar.frame = UIApplication.shared.statusBarFrame
-        customStatusBar.backgroundColor = .black
-        UIApplication.shared.keyWindow?.addSubview(customStatusBar)
-    }
-    
-    private func setupCollectionView() {
-        collectionView.register(MainViewConllectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        collectionView.backgroundColor = .mainBlue
-    }
-    
-    private func setupLocationManager() {
-        self.locationManager.requestAlwaysAuthorization()
-        
-        self.locationManager.requestWhenInUseAuthorization()
-
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-    }
         
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
