@@ -55,5 +55,13 @@ extension UIColor {
     static var borderGray: UIColor { // #A1BDD4
         return setAsRgb(red: 161, green: 189, blue: 212)
     }
+    
+    static var contactPurple: UIColor { // #591779
+        return setAsHex(hex: "#591779")
+    }
+    
+    static var priceGray: UIColor { // #591779
+        return setAsHex(hex: "#591779")
+    }
 }
 

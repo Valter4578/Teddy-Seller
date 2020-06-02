@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */; };
+		883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */; };
 		8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D577248640D3001FC653 /* Auth+Setups.swift */; };
 		8842D57C248641B5001FC653 /* Main+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57B248641B5001FC653 /* Main+Setup.swift */; };
 		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
@@ -30,12 +32,15 @@
 		88CEAC472486B19C00347CD9 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC462486B19B00347CD9 /* Categories.swift */; };
 		88CEAC4A2486B56400347CD9 /* CategoryFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
+		88EDD8772486B753000B4470 /* CategoryFeedCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Teddy_seller.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		288F54939A5637B6C9AD61A9 /* Pods-Teddy seller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.release.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.release.xcconfig"; sourceTree = "<group>"; };
+		883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryFeedCollectionViewController+Setup.swift"; sourceTree = "<group>"; };
+		883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		8842D577248640D3001FC653 /* Auth+Setups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auth+Setups.swift"; sourceTree = "<group>"; };
 		8842D57B248641B5001FC653 /* Main+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Setup.swift"; sourceTree = "<group>"; };
 		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
@@ -61,6 +66,7 @@
 		88CEAC462486B19B00347CD9 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
+		88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewHeader.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,9 +271,28 @@
 		88CEAC482486B54500347CD9 /* CategoryFeedModule */ = {
 			isa = PBXGroup;
 			children = (
-				88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */,
+				88EDD8752486B70B000B4470 /* View */,
+				88CEAC4B2486B5FA00347CD9 /* Controller */,
 			);
 			path = CategoryFeedModule;
+			sourceTree = "<group>";
+		};
+		88CEAC4B2486B5FA00347CD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */,
+				883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		88EDD8752486B70B000B4470 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */,
+				883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,11 +414,14 @@
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
 				88CEAC4A2486B56400347CD9 /* CategoryFeedCollectionViewController.swift in Sources */,
 				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
+				883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */,
+				88EDD8772486B753000B4470 /* CategoryFeedCollectionViewHeader.swift in Sources */,
 				887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */,
 				8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
 				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
+				883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				88CEAC472486B19C00347CD9 /* Categories.swift in Sources */,
 				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,
