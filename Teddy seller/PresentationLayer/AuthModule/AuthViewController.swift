@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import PhoneNumberKit
 
 enum AuthState {
     case phone
@@ -29,13 +30,19 @@ final class AuthViewController: UIViewController {
         return imageView
     }()
 
-    var phoneTextField: UITextField = {
-        let textField = UITextField()
+    var phoneTextField: PhoneNumberTextField = {
+        let textField = PhoneNumberTextField()
         textField.layer.cornerRadius = 16
         textField.backgroundColor = .white
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .phonePad
         textField.font = UIFont(name: "Helvetica Neue", size: 24)
         textField.textColor = .black
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        
+        textField.withPrefix = true
         return textField
     }()
     

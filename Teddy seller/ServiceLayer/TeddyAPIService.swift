@@ -16,8 +16,10 @@ class TeddyAPIService {
     
     // MARK:- Functions
     func phoneNumber(phoneNumber: String, completionHandler: @escaping (Result<String, AuthError>) -> Void) {
+        let trimmedString = phoneNumber.filter("0123456789".contains)
+        
         let parametrs: [String: String] = [
-            "number": phoneNumber
+            "number": trimmedString
         ]
         
         AF.request("\(url)/phoneNumber", method: .post, parameters: parametrs)
