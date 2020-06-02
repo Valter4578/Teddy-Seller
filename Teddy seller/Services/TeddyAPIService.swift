@@ -11,13 +11,15 @@ import Alamofire
 import SwiftyJSON
 
 class TeddyAPIService {
+    // MARK:- Constants
+    let url = "http://194.9.71.20"
     // MARK:- Functions
-    func phoneNumber(phoneNumber: String, completionHandler: @escaping (Int) -> Void) {
+    func phoneNumber(phoneNumber: String, completionHandler: @escaping (Result<Int, Error>) -> Void) {
         let parametrs: [String: String] = [
             "number": phoneNumber
         ]
         
-        AF.request("http://194.9.71.20/phoneNumber", method: .post, parameters: parametrs)
+        AF.request("\(url)/phoneNumber", method: .post, parameters: parametrs)
             .validate()
             .responseJSON { (response) in
                 switch response.result {
@@ -25,20 +27,20 @@ class TeddyAPIService {
                     guard let string = value as? Data,
                           let json = try? JSON(data: string) else { return }
                     let requestId = json["request_id"].intValue
-                    completionHandler(requestId)
+                    completionHandler(.success(requestId))
                 case .failure(let error):
-                    print(error)
+                    completionHandler(.failure(error))
                 }
         }
     }
     
-    func authorize(requestId: Int, code: Int,completionHandler: @escaping (String) -> Void) {
+    func authorize(requestId: Int, code: Int,completionHandler: @escaping (Result<String, Error>) -> Void) {
         let parametrs: [String: Any] = [
             "request_id": requestId,
             "code": code
         ]
         
-        AF.request("http://194.9.71.20/authorize", method: .post, parameters: parametrs)
+        AF.request("\(url)/authorize", method: .post, parameters: parametrs)
             .validate()
             .responseJSON { (response) in
                 switch response.result {
@@ -47,9 +49,10 @@ class TeddyAPIService {
                           let json = try? JSON(data: string) else { return }
                     
                     let token = json["token"].stringValue
-                    completionHandler(token)
+                    completionHandler(.success(token))
                 case .failure(let error):
                     print(error)
+                    completionHandler(.failure(error))
                 }
         }
     }
