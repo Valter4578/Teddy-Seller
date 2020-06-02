@@ -58,12 +58,12 @@ final class AuthViewController: UIViewController {
     }()
     
     var stackView: UIStackView!
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .mainBlue
-        
         
         setupNotificationCenter()
 
@@ -110,8 +110,23 @@ final class AuthViewController: UIViewController {
     
     @objc func didTapButton() {
         print(#function)
+        guard let phoneNumber = phoneTextField.text else { return }
+        
+        if phoneNumber.isEmpty {
+            let alertBuilder = AuthAlertBuilder(errorType: .phoneEmpty)
+            alertBuilder.configureAlert { (alertController) in
+                self.present(alertController, animated: true)
+            }
+            return
+        }
+        
+        let teddyService = TeddyAPIService()
         if currentState == .phone {
-            currentState = .code 
+            teddyService.phoneNumber(phoneNumber: phoneNumber) { (requestId) in
+                print(requestId)
+            }
+        
+            currentState = .code
         }
     }
     

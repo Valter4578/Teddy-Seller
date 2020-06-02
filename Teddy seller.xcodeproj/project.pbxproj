@@ -10,6 +10,8 @@
 		8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D577248640D3001FC653 /* Auth+Setups.swift */; };
 		8842D57C248641B5001FC653 /* Main+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57B248641B5001FC653 /* Main+Setup.swift */; };
 		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
+		8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58324864A53001FC653 /* AuthAlertBuilder.swift */; };
+		8842D58724864B1B001FC653 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58624864B1B001FC653 /* AuthError.swift */; };
 		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
@@ -35,6 +37,8 @@
 		8842D577248640D3001FC653 /* Auth+Setups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auth+Setups.swift"; sourceTree = "<group>"; };
 		8842D57B248641B5001FC653 /* Main+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Setup.swift"; sourceTree = "<group>"; };
 		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
+		8842D58324864A53001FC653 /* AuthAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlertBuilder.swift; sourceTree = "<group>"; };
+		8842D58624864B1B001FC653 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -94,14 +98,51 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
-		8867010A247B85B2002E2A8E /* Services */ = {
+		8842D580248649BD001FC653 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58524864AF8001FC653 /* Model */,
+				88830D8E247CF3960034937F /* FindCityModule */,
+				8867010D247B9674002E2A8E /* AuthModule */,
+				887BA3D1247A4C29009DCCE3 /* MainModule */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		8842D581248649EA001FC653 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		8842D582248649FA001FC653 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				8842D581248649EA001FC653 /* Builders */,
+				887BA3D2247A4C38009DCCE3 /* Extensions */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		8842D58524864AF8001FC653 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
+				8842D58624864B1B001FC653 /* AuthError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8867010A247B85B2002E2A8E /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
 				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
 				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
 				88D24CA724853D65005AED02 /* TeddyAPIService.swift */,
 			);
-			path = Services;
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		8867010D247B9674002E2A8E /* AuthModule */ = {
@@ -146,11 +187,9 @@
 		887BA3BA247A4A22009DCCE3 /* Teddy seller */ = {
 			isa = PBXGroup;
 			children = (
-				8867010A247B85B2002E2A8E /* Services */,
-				887BA3D2247A4C38009DCCE3 /* Extensions */,
-				88830D8E247CF3960034937F /* FindCityModule */,
-				8867010D247B9674002E2A8E /* AuthModule */,
-				887BA3D1247A4C29009DCCE3 /* MainModule */,
+				8842D580248649BD001FC653 /* PresentationLayer */,
+				8867010A247B85B2002E2A8E /* ServiceLayer */,
+				8842D582248649FA001FC653 /* CoreLayer */,
 				887BA3C9247A4A29009DCCE3 /* Info.plist */,
 				88670110247BA01D002E2A8E /* SupportingFiles */,
 			);
@@ -161,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				888CC0D8247A8126006E6930 /* Controller */,
-				888CC0D9247A8132006E6930 /* Model */,
 				888CC0DA247A813D006E6930 /* View */,
 			);
 			path = MainModule;
@@ -207,14 +245,6 @@
 				8842D57B248641B5001FC653 /* Main+Setup.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		888CC0D9247A8132006E6930 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		888CC0DA247A813D006E6930 /* View */ = {
@@ -343,9 +373,11 @@
 			files = (
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
+				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
 				887BA3C0247A4A22009DCCE3 /* MainCollectionViewController.swift in Sources */,
 				8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
+				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,

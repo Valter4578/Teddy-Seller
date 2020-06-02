@@ -30,6 +30,7 @@ class TeddyAPIService {
                     completionHandler(.success(requestId))
                 case .failure(let error):
                     completionHandler(.failure(error))
+                    return
                 }
         }
     }
