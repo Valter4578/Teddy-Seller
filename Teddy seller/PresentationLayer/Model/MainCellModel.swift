@@ -11,4 +11,5 @@ import Foundation
 struct MainCellModel {
     let imageName: String
     let text: String
+    let category: Categories 
 }

@@ -41,14 +41,14 @@ final class MainCollectionViewController: UICollectionViewController {
                                              bottom: 33.0,
                                              right: 31.0)
     
-    var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость"),
-                      MainCellModel(imageName: "Transport", text: "Транспорт"),
-                      MainCellModel(imageName: "Home", text: "Для дома"),
-                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса"),
-                      MainCellModel(imageName: "Work", text: "Работа"),
-                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи"),
-                      MainCellModel(imageName: "Electronix", text: "Электроника"),
-                      MainCellModel(imageName: "Service", text: "Услуги"),]
+    var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость", category: .realty),
+                      MainCellModel(imageName: "Transport", text: "Транспорт", category: .transport),
+                      MainCellModel(imageName: "Home", text: "Для дома", category: .home),
+                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса", category: .buisness),
+                      MainCellModel(imageName: "Work", text: "Работа", category: .work),
+                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи", category: .personalItems),
+                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
+                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
     
     let locationManager = CLLocationManager()
 
