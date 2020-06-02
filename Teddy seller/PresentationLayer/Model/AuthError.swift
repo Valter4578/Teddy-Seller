@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AuthError {
+enum AuthError: Error {
     case phoneEmpty
     case wrongPhone
     case banned

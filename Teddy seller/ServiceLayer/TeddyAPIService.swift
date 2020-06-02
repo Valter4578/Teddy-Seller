@@ -13,8 +13,9 @@ import SwiftyJSON
 class TeddyAPIService {
     // MARK:- Constants
     let url = "http://194.9.71.20"
+    
     // MARK:- Functions
-    func phoneNumber(phoneNumber: String, completionHandler: @escaping (Result<Int, Error>) -> Void) {
+    func phoneNumber(phoneNumber: String, completionHandler: @escaping (Result<String, AuthError>) -> Void) {
         let parametrs: [String: String] = [
             "number": phoneNumber
         ]
@@ -24,18 +25,21 @@ class TeddyAPIService {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-                    guard let string = value as? Data,
-                          let json = try? JSON(data: string) else { return }
-                    let requestId = json["request_id"].intValue
+                    print(value)
+                    let json = JSON(arrayLiteral: value)
+                    print(json)
+
+                    let requestId = json[0]["request_id"].stringValue
+    
                     completionHandler(.success(requestId))
                 case .failure(let error):
-                    completionHandler(.failure(error))
+                    print(error)
                     return
                 }
         }
     }
     
-    func authorize(requestId: Int, code: Int,completionHandler: @escaping (Result<String, Error>) -> Void) {
+    func authorize(requestId: String, code: Int,completionHandler: @escaping (Result<String, Error>) -> Void) {
         let parametrs: [String: Any] = [
             "request_id": requestId,
             "code": code
@@ -46,10 +50,8 @@ class TeddyAPIService {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-                    guard let string = value as? Data,
-                          let json = try? JSON(data: string) else { return }
-                    
-                    let token = json["token"].stringValue
+                    let json = JSON(arrayLiteral: value)
+                    let token = json[0]["token"].stringValue
                     completionHandler(.success(token))
                 case .failure(let error):
                     print(error)

@@ -35,7 +35,7 @@ final class AuthViewController: UIViewController {
         textField.backgroundColor = .white
         textField.keyboardType = .numberPad
         textField.font = UIFont(name: "Helvetica Neue", size: 24)
-        
+        textField.textColor = .black
         return textField
     }()
     
@@ -81,6 +81,7 @@ final class AuthViewController: UIViewController {
     }
     
     private func didChangeState() {
+        phoneTextField.text = ""
         switch currentState {
         case .phone:
             label.text = "Введите номер телефона"
@@ -121,13 +122,36 @@ final class AuthViewController: UIViewController {
         }
         
         let teddyService = TeddyAPIService()
-        if currentState == .phone {
-            teddyService.phoneNumber(phoneNumber: phoneNumber) { (requestId) in
-                print(requestId)
+    
+        switch currentState {
+        case .phone:
+            teddyService.phoneNumber(phoneNumber: phoneNumber) { (result) in
+                switch result {
+                case .success(let requestId):
+                    print(requestId)
+                    self.currentState = .code
+                    UserDefaults.standard.set(requestId, forKey: "requestId")
+                case .failure(let error):
+                    print(error)
+                    return
+                }
             }
-        
-            currentState = .code
+        case .code:
+            guard let requestId = UserDefaults.standard.string(forKey: "requestId") else { return }
+            guard let text = phoneTextField.text else { return }
+            guard let code = Int(text) else { return }
+            teddyService.authorize(requestId: requestId, code: code) { (result) in
+                switch result {
+                case .success(let token):
+                    UserDefaults.standard.set(token, forKey: "token")
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    print(error)
+                    return
+                }
+            }
         }
+    
     }
     
     // MARK:- Deinit
