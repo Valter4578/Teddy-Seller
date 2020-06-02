@@ -16,7 +16,11 @@ enum AuthState {
 
 final class AuthViewController: UIViewController {
     // MARK:- Properties
-    var currentState: AuthState!
+    var currentState: AuthState = .phone {
+        didSet {
+            didChangeState()
+        }
+    }
     
     // MARK:- Views
     var teddyImageView: UIImageView = {
@@ -76,6 +80,15 @@ final class AuthViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    private func didChangeState() {
+        switch currentState {
+        case .phone:
+            label.text = "Введите номер телефона"
+        case .code:
+            label.text = "Введите код"
+        }
+    }
+    
     // MARK:- Selectors
     @objc func keyboardWillShow(sender: Notification) {
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -97,7 +110,9 @@ final class AuthViewController: UIViewController {
     
     @objc func didTapButton() {
         print(#function)
-        currentState = .code
+        if currentState == .phone {
+            currentState = .code 
+        }
     }
     
     // MARK:- Deinit

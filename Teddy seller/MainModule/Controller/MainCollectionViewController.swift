@@ -82,9 +82,7 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
     }
-    
-    // MARK:- Setups
-        
+            
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
         findCityViewController.currentCity = cityName
