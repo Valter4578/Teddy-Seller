@@ -30,8 +30,8 @@ final class AuthViewController: UIViewController {
         return imageView
     }()
 
-    var phoneTextField: PhoneNumberTextField = {
-        let textField = PhoneNumberTextField()
+    var phoneTextField: UITextField = {
+        let textField = UITextField()
         textField.layer.cornerRadius = 16
         textField.backgroundColor = .white
         textField.keyboardType = .phonePad
@@ -42,7 +42,6 @@ final class AuthViewController: UIViewController {
         textField.leftView = paddingView
         textField.leftViewMode = .always
         
-        textField.withPrefix = true
         return textField
     }()
     

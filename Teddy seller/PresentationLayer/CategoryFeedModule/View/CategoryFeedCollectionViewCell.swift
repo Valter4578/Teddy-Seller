@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CategoryFeedCollectionViewCell: UICollectionViewCell {
     // MARK:- Views
@@ -40,4 +41,59 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK:- Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupProductNameLabel()
+        setupContactButton()
+        setupVideoContainer()
+        setupPriceLabel()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:- Setups
+    func setupProductNameLabel() {
+        addSubview(productName)
+        
+        productName.snp.makeConstraints { maker in
+            maker.top.equalTo(self).offset(10)
+            maker.centerX.equalTo(self)
+            maker.bottom.equalTo(videoContrainer.snp.top)
+        }
+    }
+    
+    func setupVideoContainer() {
+        addSubview(videoContrainer)
+        
+        videoContrainer.snp.makeConstraints { maker in
+            maker.leading.equalTo(self)
+            maker.trailing.equalTo(self)
+            maker.bottom.equalTo(contactButton.snp.top)
+        }
+    }
+    
+    func setupPriceLabel() {
+        addSubview(priceLabel)
+        
+        priceLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(contactButton.snp.top)
+            maker.bottom.equalTo(contactButton.snp.bottom)
+            maker.leading.equalTo(videoContrainer.snp.leading)
+            maker.trailing.equalTo(videoContrainer.snp.trailing)
+        }
+    }
+    
+    func setupContactButton() {
+        addSubview(contactButton)
+        
+        contactButton.snp.makeConstraints { maker in
+            maker.trailing.equalTo(self).offset(30)
+            maker.bottom.equalTo(self).offset(10)
+            maker.height.equalTo(40)
+            maker.width.equalTo(150)
+        }
+    }
 }

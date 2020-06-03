@@ -11,6 +11,6 @@ import UIKit
 extension CategoryFeedCollectionViewController {
     func setupCollectionView() {
         collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(CategoryFeedCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+//        collectionView.register(CategoryFeedCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     }
 }

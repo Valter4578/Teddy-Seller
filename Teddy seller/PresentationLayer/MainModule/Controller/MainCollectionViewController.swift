@@ -148,8 +148,17 @@ final class MainCollectionViewController: UICollectionViewController {
         }
         return UICollectionViewCell()
     }
+    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 24.0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let layout = UICollectionViewFlowLayout()
+        let categoryFeeedViewController = CategoryFeedCollectionViewController(collectionViewLayout: layout)
+        categoryFeeedViewController.category = categories[indexPath.item].category
+        
+        navigationController?.pushViewController(categoryFeeedViewController, animated: true)
     }
 }
 
