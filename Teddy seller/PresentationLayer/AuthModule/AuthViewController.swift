@@ -157,7 +157,6 @@ final class AuthViewController: UIViewController {
                 }
             }
         }
-    
     }
     
     // MARK:- Deinit

@@ -25,6 +25,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .priceGray
         label.font = UIFont(name: "Heltevica", size: 20)
+        label.contentMode = .center
         return label
     }()
     
@@ -37,6 +38,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
     lazy var productName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Heltevica Neue", size: 24)
+        label.contentMode = .center
         return label
     }()
     
@@ -44,10 +46,11 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .white
+        
         setupProductNameLabel()
         setupContactButton()
         setupVideoContainer()
-        setupPriceLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -58,42 +61,34 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
     func setupProductNameLabel() {
         addSubview(productName)
         
-        productName.snp.makeConstraints { maker in
-            maker.top.equalTo(self).offset(10)
-            maker.centerX.equalTo(self)
-            maker.bottom.equalTo(videoContrainer.snp.top)
-        }
-    }
-    
-    func setupVideoContainer() {
-        addSubview(videoContrainer)
-        
-        videoContrainer.snp.makeConstraints { maker in
-            maker.leading.equalTo(self)
-            maker.trailing.equalTo(self)
-            maker.bottom.equalTo(contactButton.snp.top)
-        }
-    }
-    
-    func setupPriceLabel() {
-        addSubview(priceLabel)
-        
-        priceLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(contactButton.snp.top)
-            maker.bottom.equalTo(contactButton.snp.bottom)
-            maker.leading.equalTo(videoContrainer.snp.leading)
-            maker.trailing.equalTo(videoContrainer.snp.trailing)
+        productName.snp.makeConstraints {
+            $0.leading.equalTo(self)
+            $0.trailing.equalTo(self)
+            $0.top.equalTo(self).offset(10)
+            
         }
     }
     
     func setupContactButton() {
         addSubview(contactButton)
         
-        contactButton.snp.makeConstraints { maker in
-            maker.trailing.equalTo(self).offset(30)
-            maker.bottom.equalTo(self).offset(10)
-            maker.height.equalTo(40)
-            maker.width.equalTo(150)
+        contactButton.snp.makeConstraints {
+            $0.width.equalTo(150)
+            $0.height.equalTo(40)
+            $0.trailing.equalTo(self).offset(-30)
+            $0.bottom.equalTo(self).offset(-10)
         }
     }
+    
+    func setupVideoContainer() {
+        addSubview(videoContrainer)
+        
+        videoContrainer.snp.makeConstraints {
+            $0.leading.equalTo(self)
+            $0.trailing.equalTo(self)
+            $0.bottom.equalTo(contactButton.snp.top).offset(-8)
+            $0.top.equalTo(productName.snp.bottom)
+        }
+    }
+    
 }
