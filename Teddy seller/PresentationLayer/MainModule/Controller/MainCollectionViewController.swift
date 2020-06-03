@@ -41,14 +41,14 @@ final class MainCollectionViewController: UICollectionViewController {
                                              bottom: 33.0,
                                              right: 31.0)
     
-    var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость", category: .realty),
-                      MainCellModel(imageName: "Transport", text: "Транспорт", category: .transport),
-                      MainCellModel(imageName: "Home", text: "Для дома", category: .home),
-                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса", category: .buisness),
-                      MainCellModel(imageName: "Work", text: "Работа", category: .work),
-                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи", category: .personalItems),
-                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
-                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
+//    var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость", category: .realty),
+//                      MainCellModel(imageName: "Transport", text: "Транспорт", category: .transport),
+//                      MainCellModel(imageName: "Home", text: "Для дома", category: .home),
+//                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса", category: .buisness),
+//                      MainCellModel(imageName: "Work", text: "Работа", category: .work),
+//                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи", category: .personalItems),
+//                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
+//                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
     
     let locationManager = CLLocationManager()
 
@@ -132,15 +132,29 @@ final class MainCollectionViewController: UICollectionViewController {
         }
     }
     
+//    private func getSubcategories(for indexPath: IndexPath) -> [String]? {
+////        switch categories[indexPath.row].category {
+////        case .electronics:
+////            return ["Мультимедиа", "Ноутбуки", "Телефоны", "Оргтехника", "Настольные ПК", "Планшеты", "Фототехника", "Другое"]
+////        case .transport:
+////            return ["Легковые", "Спецтехнкиа", "Грузовые", "Мотоциклы"]
+////        case .personalItems:
+////            return ["Одежда", "Детские товары", "Косметика"]
+////        default:
+////            return nil
+////        }
+//    }
+    
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories.count
+//        return categories.count
+        return 4
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MainViewConllectionViewCell {
-            cell.textLabel.text = categories[indexPath.item].text
-            cell.iconImageView.image = UIImage(named: categories[indexPath.item].imageName)
+//            cell.textLabel.text = categories[indexPath.item].text
+//            cell.iconImageView.image = UIImage(named: categories[indexPath.item].imageName)
             cell.layer.cornerRadius = 24
             cell.layer.borderWidth = 2
             cell.layer.borderColor = UIColor.borderGray.cgColor
@@ -156,7 +170,8 @@ final class MainCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
         let categoryFeeedViewController = CategoryFeedCollectionViewController(collectionViewLayout: layout)
-        categoryFeeedViewController.category = categories[indexPath.item].category
+//        categoryFeeedViewController.category = categories[indexPath.item].category
+//        categoryFeeedViewController.subcategories = getSubcategories(for: indexPath)
         
         navigationController?.pushViewController(categoryFeeedViewController, animated: true)
     }

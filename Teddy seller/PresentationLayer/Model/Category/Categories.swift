@@ -15,6 +15,7 @@ enum Categories {
     case personalItems
     case realty
     case service
-    case transport
+    case transport(Subcategory) 
     case work
 }
+
