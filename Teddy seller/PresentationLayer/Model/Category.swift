@@ -8,7 +8,7 @@
 import Foundation
 
 struct Category {
-    let imageName: String? 
+    let imageName: String?
     let title: String
-    let subcategories: [Category]
+    let subcategories: [Category]?
 }

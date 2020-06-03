@@ -50,6 +50,40 @@ final class MainCollectionViewController: UICollectionViewController {
 //                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
 //                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
     
+    var categories = [Category(imageName: "Realty", title: "Недвижимость",
+                               subcategories:
+                                [Category(imageName: nil, title: "Дома", subcategories:
+                                [Category(imageName: nil, title: "1-этажные", subcategories: nil),
+                                 Category(imageName: nil, title: "2-этажные", subcategories: nil),
+                                 Category(imageName: nil, title: "3-этажные", subcategories: nil),
+                                 Category(imageName: nil, title: "Многоэтажные", subcategories: nil)])]),
+                      Category(imageName: "Transport", title: "Автомобили", subcategories:
+                            [Category(imageName: nil, title: "Легковые", subcategories: nil),
+                             Category(imageName: nil, title: "Спецтехника", subcategories: nil),
+                             Category(imageName: nil, title: "Грузовые", subcategories: nil),
+                             Category(imageName: nil, title: "Мотоциклы", subcategories: nil)]),
+                      Category(imageName: "Home", title: "Для дома", subcategories: nil),
+                      Category(imageName: "Buiseness", title: "Для бизнеса", subcategories: nil),
+                      Category(imageName: "Work", title: "Работа", subcategories: nil),
+                      Category(imageName: "PersonalItems", title: "Личные вещи", subcategories:
+                        [Category(imageName: nil, title: "Одежда", subcategories:
+                            [Category(imageName: nil, title: "Куртки", subcategories: nil),
+                             Category(imageName: nil, title: "Рубашки", subcategories: nil),
+                             Category(imageName: nil, title: "Свитера", subcategories: nil),
+                             Category(imageName: nil, title: "Джинсы", subcategories: nil),
+                             Category(imageName: nil, title: "Футболки", subcategories: nil),
+                             Category(imageName: nil, title: "Другое", subcategories: nil)])]),
+                      Category(imageName: "Electronics", title: "Электроника", subcategories:
+                        [Category(imageName: nil, title: "Мультимедиа", subcategories: nil),
+                         Category(imageName: nil, title: "Ноутбуки", subcategories: nil),
+                         Category(imageName: nil, title: "Телефоны", subcategories: nil),
+                         Category(imageName: nil, title: "Оргтехника", subcategories: nil),
+                         Category(imageName: nil, title: "Настольные ПК", subcategories: nil),
+                         Category(imageName: nil, title: "Планшенты", subcategories: nil),
+                         Category(imageName: nil, title: "Фототехника", subcategories: nil), Category(imageName: nil, title: "Другое", subcategories: nil)]), Category(imageName: "Service", title: "Услуги", subcategories: nil)]
+    
+
+    
     let locationManager = CLLocationManager()
 
     // MARK:- Lifecycle
