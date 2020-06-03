@@ -25,7 +25,8 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .priceGray
         label.font = UIFont(name: "Heltevica", size: 20)
-        label.contentMode = .center
+        label.textColor = .priceGray
+        label.textAlignment = .center
         return label
     }()
     
@@ -38,7 +39,8 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
     lazy var productName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Heltevica Neue", size: 24)
-        label.contentMode = .center
+        label.textAlignment = .center
+        label.textColor = .productGray
         return label
     }()
     
@@ -51,6 +53,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         setupProductNameLabel()
         setupContactButton()
         setupVideoContainer()
+        setupPriceLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -88,6 +91,17 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contactButton.snp.top).offset(-8)
             $0.top.equalTo(productName.snp.bottom)
+        }
+    }
+    
+    func setupPriceLabel() {
+        addSubview(priceLabel)
+        
+        priceLabel.snp.makeConstraints {
+            $0.bottom.equalTo(contactButton.snp.bottom)
+            $0.top.equalTo(contactButton.snp.top)
+            $0.leading.equalTo(self).offset(20)
+            $0.trailing.equalTo(contactButton.snp.leading).offset(-20)
         }
     }
     

@@ -42,7 +42,7 @@ class CategoryFeedCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         cell.productName.text = products[indexPath.row].title
-        cell.priceLabel.text = "\(products[indexPath.row].price)"
+        cell.priceLabel.text = "\(products[indexPath.row].price)₽"
         
         return cell
     }

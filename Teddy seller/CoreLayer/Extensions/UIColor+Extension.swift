@@ -52,6 +52,7 @@ extension UIColor {
     static var authNextGray: UIColor { // #D8D8D8
         return setAsHex(hex: "#D8D8D8")
     }
+    
     static var borderGray: UIColor { // #A1BDD4
         return setAsRgb(red: 161, green: 189, blue: 212)
     }
@@ -60,8 +61,12 @@ extension UIColor {
         return setAsHex(hex: "#591779")
     }
     
-    static var priceGray: UIColor { // #591779
-        return setAsHex(hex: "#591779")
+    static var productGray: UIColor { // #2E2E2E
+        return setAsRgb(red: 46, green: 46, blue: 46)
+    }
+    
+    static var priceGray: UIColor { // #3A423B
+        return setAsRgb(red: 58, green: 66, blue: 59)
     }
 }
 
