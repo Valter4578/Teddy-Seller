@@ -181,14 +181,15 @@ final class MainCollectionViewController: UICollectionViewController {
     
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return categories.count
-        return 4
+        return categories.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MainViewConllectionViewCell {
-//            cell.textLabel.text = categories[indexPath.item].text
-//            cell.iconImageView.image = UIImage(named: categories[indexPath.item].imageName)
+            cell.textLabel.text = categories[indexPath.item].title
+            if let imageName = categories[indexPath.item].imageName {
+                cell.iconImageView.image = UIImage(named: imageName)
+            }
             cell.layer.cornerRadius = 24
             cell.layer.borderWidth = 2
             cell.layer.borderColor = UIColor.borderGray.cgColor
