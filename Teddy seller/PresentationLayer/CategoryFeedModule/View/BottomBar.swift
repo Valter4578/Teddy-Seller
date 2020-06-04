@@ -11,27 +11,53 @@ import SnapKit
 
 class BottomBar: UIView {
     // MARK:- Views
-    let plusContainer: UIView = {
+    let plusContainer: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.backgroundColor = .authNextGray
+        button.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
+        button.layer.borderWidth = 1
+        return button
+    }()
+    
+    let verticalLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .authNextGray
-        view.layer.cornerRadius = view.bounds.width/2
-        view.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
-        view.layer.borderWidth = 1
+        view.backgroundColor = .black
         return view
     }()
     
+    let horizontalLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
     
     // MARK:- Setups
     private func setupPlusContainer() {
         addSubview(plusContainer)
         
-        plusContainer.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
-        plusContainer.layer.borderWidth = 1
         plusContainer.snp.makeConstraints {
-            $0.centerX.equalTo(self)
-            $0.centerY.equalTo(self)
+            $0.center.equalTo(self)
             $0.width.equalTo(60)
             $0.height.equalTo(60)
+        }
+    }
+    
+    private func setupPlusLines() {
+        addSubview(verticalLineView)
+        
+        verticalLineView.snp.makeConstraints {
+            $0.center.equalTo(plusContainer.snp.center)
+            $0.height.equalTo(30)
+            $0.width.equalTo(1)
+        }
+        
+        addSubview(horizontalLineView)
+        
+        horizontalLineView.snp.makeConstraints {
+            $0.center.equalTo(plusContainer.snp.center)
+            $0.height.equalTo(1)
+            $0.width.equalTo(30)
         }
     }
     
@@ -42,9 +68,19 @@ class BottomBar: UIView {
         backgroundColor = .black
         
         setupPlusContainer()
+        setupPlusLines()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:- Overriden methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        plusContainer.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
+        plusContainer.layer.borderWidth = 1
+        plusContainer.layer.cornerRadius = plusContainer.bounds.width/2
     }
 }
