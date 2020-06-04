@@ -52,35 +52,43 @@ final class MainCollectionViewController: UICollectionViewController {
     
     var categories = [Category(imageName: "Realty", title: "Недвижимость",
                                subcategories:
-                                [Category(imageName: nil, title: "Дома", subcategories:
-                                [Category(imageName: nil, title: "1-этажные", subcategories: nil),
-                                 Category(imageName: nil, title: "2-этажные", subcategories: nil),
-                                 Category(imageName: nil, title: "3-этажные", subcategories: nil),
-                                 Category(imageName: nil, title: "Многоэтажные", subcategories: nil)])]),
+                                [Category(title: "Дома", subcategories:
+                                [Category(title: "1-этажные"),
+                                 Category(title: "2-этажные"),
+                                 Category(title: "3-этажные"),
+                                 Category(title: "Многоэтажные")]),
+                                 Category(title: "Комнаты"),
+                                 Category(title: "Квартиры", subcategories:
+                                    [Category(title: "1-комнатные"),
+                                     Category(title: "2-комнатные"),
+                                     Category(title: "3-комнтаные"),
+                                     Category(title: "Многокомнатные")]), Category(title: "Участки")]),
                       Category(imageName: "Transport", title: "Автомобили", subcategories:
-                            [Category(imageName: nil, title: "Легковые", subcategories: nil),
-                             Category(imageName: nil, title: "Спецтехника", subcategories: nil),
-                             Category(imageName: nil, title: "Грузовые", subcategories: nil),
-                             Category(imageName: nil, title: "Мотоциклы", subcategories: nil)]),
-                      Category(imageName: "Home", title: "Для дома", subcategories: nil),
-                      Category(imageName: "Buiseness", title: "Для бизнеса", subcategories: nil),
-                      Category(imageName: "Work", title: "Работа", subcategories: nil),
+                            [Category(title: "Легковые"),
+                             Category(title: "Спецтехника"),
+                             Category(title: "Грузовые"),
+                             Category(title: "Мотоциклы")]),
+                      Category(imageName: "Home", title: "Для дома"),
+                      Category(imageName: "Buiseness", title: "Для бизнеса"),
+                      Category(imageName: "Work", title: "Работа"),
                       Category(imageName: "PersonalItems", title: "Личные вещи", subcategories:
-                        [Category(imageName: nil, title: "Одежда", subcategories:
-                            [Category(imageName: nil, title: "Куртки", subcategories: nil),
-                             Category(imageName: nil, title: "Рубашки", subcategories: nil),
-                             Category(imageName: nil, title: "Свитера", subcategories: nil),
-                             Category(imageName: nil, title: "Джинсы", subcategories: nil),
-                             Category(imageName: nil, title: "Футболки", subcategories: nil),
-                             Category(imageName: nil, title: "Другое", subcategories: nil)])]),
+                        [Category(title: "Одежда", subcategories:
+                            [Category(title: "Куртки"),
+                             Category(title: "Рубашки"),
+                             Category(title: "Свитера"),
+                             Category(title: "Джинсы"),
+                             Category(title: "Футболки"),
+                             Category(title: "Другое")])]),
                       Category(imageName: "Electronics", title: "Электроника", subcategories:
-                        [Category(imageName: nil, title: "Мультимедиа", subcategories: nil),
-                         Category(imageName: nil, title: "Ноутбуки", subcategories: nil),
-                         Category(imageName: nil, title: "Телефоны", subcategories: nil),
-                         Category(imageName: nil, title: "Оргтехника", subcategories: nil),
-                         Category(imageName: nil, title: "Настольные ПК", subcategories: nil),
-                         Category(imageName: nil, title: "Планшенты", subcategories: nil),
-                         Category(imageName: nil, title: "Фототехника", subcategories: nil), Category(imageName: nil, title: "Другое", subcategories: nil)]), Category(imageName: "Service", title: "Услуги", subcategories: nil)]
+                        [Category(title: "Мультимедиа"),
+                         Category(title: "Ноутбуки"),
+                         Category(title: "Телефоны"),
+                         Category(title: "Оргтехника"),
+                         Category(title: "Настольные ПК"),
+                         Category(title: "Планшенты"),
+                         Category(title: "Фототехника"),
+                         Category(imageName: nil, title: "Другое")]),
+                      Category(imageName: "Service", title: "Услуги")]
     
 
     

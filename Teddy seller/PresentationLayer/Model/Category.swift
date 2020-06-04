@@ -11,4 +11,13 @@ struct Category {
     let imageName: String?
     let title: String
     let subcategories: [Category]?
+    
+    let products: [Product]?
+    
+    init(imageName: String? = nil, title: String, subcategories: [Category]? = nil, products: [Product]? = nil) {
+        self.title = title
+        self.imageName = imageName
+        self.subcategories = subcategories
+        self.products = products
+    }
 }
