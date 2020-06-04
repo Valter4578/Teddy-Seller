@@ -27,12 +27,27 @@ class CategoryFeedViewController: UIViewController {
         return collectionView
     }()
     
+    var arrowView: ArrowView = {
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        view.transform = CGAffineTransform(rotationAngle: -(.pi/2))
+        return view
+    }()
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
+        arrowView.addGestureRecognizer(gestureRecognizer)
+        
+        setupNavigationBar()
         setupBottomBar()
         setupCollectionView()
+    }
+    
+    // MARK:- Selectors
+    @objc func didTapBack() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

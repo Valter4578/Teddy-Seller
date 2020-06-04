@@ -37,4 +37,10 @@ extension CategoryFeedViewController {
             $0.height.equalTo(78)
         }
     }
+    
+    func setupNavigationBar() {
+        let leftBarItem = UIBarButtonItem(customView: arrowView)
+        navigationItem.leftBarButtonItem = leftBarItem
+        title = category?.title
+    }
 }
