@@ -199,7 +199,7 @@ final class MainCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
-        let categoryFeeedViewController = CategoryFeedCollectionViewController(collectionViewLayout: layout)
+        let categoryFeeedViewController = CategoryFeedViewController()
         categoryFeeedViewController.category = categories[indexPath.item]
         
         navigationController?.pushViewController(categoryFeeedViewController, animated: true)

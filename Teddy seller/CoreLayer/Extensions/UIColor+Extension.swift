@@ -68,5 +68,9 @@ extension UIColor {
     static var priceGray: UIColor { // #3A423B
         return setAsRgb(red: 58, green: 66, blue: 59)
     }
+    
+    static var plusContainerBorderGray: UIColor { // #979797
+        return setAsRgb(red: 151, green: 151, blue: 151)
+    }
 }
 

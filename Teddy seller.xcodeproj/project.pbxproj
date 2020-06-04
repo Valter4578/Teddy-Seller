@@ -15,6 +15,7 @@
 		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
 		8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58324864A53001FC653 /* AuthAlertBuilder.swift */; };
 		8842D58724864B1B001FC653 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58624864B1B001FC653 /* AuthError.swift */; };
+		88437B8A2488DF1A00E207ED /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88437B892488DF1A00E207ED /* BottomBar.swift */; };
 		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
@@ -31,7 +32,7 @@
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
 		88CEAC472486B19C00347CD9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC462486B19B00347CD9 /* Category.swift */; };
-		88CEAC4A2486B56400347CD9 /* CategoryFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */; };
+		88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
 		88EDD8772486B753000B4470 /* CategoryFeedCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
@@ -48,6 +49,7 @@
 		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
 		8842D58324864A53001FC653 /* AuthAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlertBuilder.swift; sourceTree = "<group>"; };
 		8842D58624864B1B001FC653 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		88437B892488DF1A00E207ED /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +68,7 @@
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
 		88CEAC462486B19B00347CD9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewController.swift; sourceTree = "<group>"; };
+		88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
 		88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewHeader.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
@@ -283,7 +285,7 @@
 		88CEAC4B2486B5FA00347CD9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				88CEAC492486B56400347CD9 /* CategoryFeedCollectionViewController.swift */,
+				88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */,
 				883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */,
 			);
 			path = Controller;
@@ -294,6 +296,7 @@
 			children = (
 				88EDD8762486B753000B4470 /* CategoryFeedCollectionViewHeader.swift */,
 				883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */,
+				88437B892488DF1A00E207ED /* BottomBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -414,8 +417,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
+				88437B8A2488DF1A00E207ED /* BottomBar.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
-				88CEAC4A2486B56400347CD9 /* CategoryFeedCollectionViewController.swift in Sources */,
+				88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */,
 				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
 				883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */,
 				88EDD8772486B753000B4470 /* CategoryFeedCollectionViewHeader.swift in Sources */,

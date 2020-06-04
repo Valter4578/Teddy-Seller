@@ -1,5 +1,5 @@
 //
-//  CategoryFeedCollectionViewController.swift
+//  CategoryFeedViewController.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 02.06.2020.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-class CategoryFeedCollectionViewController: UICollectionViewController {
+class CategoryFeedViewController: UIViewController {
     // MARK:- Private properties
     let cellId = "CategoryFeedCollectionViewControllerCellId"
     let headerId = "CategoryFeedCollectionViewHeaderId"
@@ -19,24 +18,35 @@ class CategoryFeedCollectionViewController: UICollectionViewController {
     
     // MARK:- Views
     var header: CategoryFeedCollectionViewHeader!
+    var bottomBar: BottomBar = BottomBar()
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = .mainBlue
+        return collectionView
+    }()
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupBottomBar()
         setupCollectionView()
-        collectionView.backgroundColor = .mainBlue
     }
+}
 
-    // MARK: UICollectionViewDataSource
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+// MARK: UICollectionViewDataSource
+extension CategoryFeedViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let products = category?.products else { return 0 }
         return products.count
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
-
+        
         if let product = category?.products?[indexPath.item] {
             cell.productName.text = product.title
             cell.priceLabel.text = "\(product.price)₽"
@@ -44,16 +54,9 @@ class CategoryFeedCollectionViewController: UICollectionViewController {
         
         return cell
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! CategoryFeedCollectionViewHeader
-//        
-//        return header
-//    }
-
 }
 
-extension CategoryFeedCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 38, height: 320)
     }
