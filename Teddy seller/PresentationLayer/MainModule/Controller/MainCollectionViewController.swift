@@ -50,9 +50,9 @@ final class MainCollectionViewController: UICollectionViewController {
 //                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
 //                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
     
-    var categories = [Category(imageName: "Realty", title: "Недвижимость",
+    var categories = [Category(imageName: "Realty", title: "Недвижимость", products: [Product(title: "Дом", price: 30000), Product(title: "Квартира ЛОФТ", price: 99999999)],
                                subcategories:
-                                [Category(title: "Дома", subcategories:
+                                [Category(title: "Дома",subcategories:
                                 [Category(title: "1-этажные"),
                                  Category(title: "2-этажные"),
                                  Category(title: "3-этажные"),
@@ -174,19 +174,6 @@ final class MainCollectionViewController: UICollectionViewController {
         }
     }
     
-//    private func getSubcategories(for indexPath: IndexPath) -> [String]? {
-////        switch categories[indexPath.row].category {
-////        case .electronics:
-////            return ["Мультимедиа", "Ноутбуки", "Телефоны", "Оргтехника", "Настольные ПК", "Планшеты", "Фототехника", "Другое"]
-////        case .transport:
-////            return ["Легковые", "Спецтехнкиа", "Грузовые", "Мотоциклы"]
-////        case .personalItems:
-////            return ["Одежда", "Детские товары", "Косметика"]
-////        default:
-////            return nil
-////        }
-//    }
-    
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
@@ -213,8 +200,7 @@ final class MainCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
         let categoryFeeedViewController = CategoryFeedCollectionViewController(collectionViewLayout: layout)
-//        categoryFeeedViewController.category = categories[indexPath.item].category
-//        categoryFeeedViewController.subcategories = getSubcategories(for: indexPath)
+        categoryFeeedViewController.category = categories[indexPath.item]
         
         navigationController?.pushViewController(categoryFeeedViewController, animated: true)
     }

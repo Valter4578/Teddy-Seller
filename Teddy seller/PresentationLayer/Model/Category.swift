@@ -14,10 +14,10 @@ struct Category {
     
     let products: [Product]?
     
-    init(imageName: String? = nil, title: String, subcategories: [Category]? = nil, products: [Product]? = nil) {
-        self.title = title
+    init(imageName: String? = nil, title: String, products: [Product]? = nil, subcategories: [Category]? = nil) {
         self.imageName = imageName
-        self.subcategories = subcategories
+        self.title = title
         self.products = products
+        self.subcategories = subcategories
     }
 }

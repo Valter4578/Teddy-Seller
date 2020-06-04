@@ -14,14 +14,9 @@ class CategoryFeedCollectionViewController: UICollectionViewController {
     let cellId = "CategoryFeedCollectionViewControllerCellId"
     let headerId = "CategoryFeedCollectionViewHeaderId"
     
-//    // Mock data 
-//    private let products: [Product] = [Product(title: "Mackbook", price: 90000, category: .electronics),
-//                               Product(title: "iPhone", price: 40000, category: .electronics),
-//                               Product(title: "Apple watch", price: 50000, category: .electronics)]
-//    
-//    // MARK:- Properties
-//    var category: Categories? 
-//    var subcategories: [String]? 
+    // MARK:- Properties
+    var category: Category?
+    
     // MARK:- Views
     var header: CategoryFeedCollectionViewHeader!
     // MARK:- Lifecycle
@@ -34,17 +29,18 @@ class CategoryFeedCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-//        return products.count
-        
-        return 3
+        guard let products = category?.products else { return 0 }
+        return products.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
-//        cell.productName.text = products[indexPath.row].title
-//        cell.priceLabel.text = "\(products[indexPath.row].price)₽"
+
+        if let product = category?.products?[indexPath.item] {
+            cell.productName.text = product.title
+            cell.priceLabel.text = "\(product.price)₽"
+        }
         
         return cell
     }
