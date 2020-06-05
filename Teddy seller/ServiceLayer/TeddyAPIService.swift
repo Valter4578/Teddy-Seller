@@ -31,9 +31,22 @@ class TeddyAPIService {
                     let json = JSON(arrayLiteral: value)
                     print(json)
 
-                    let requestId = json[0]["request_id"].stringValue
-    
-                    completionHandler(.success(requestId))
+                    let error = json[0]["error"].stringValue
+                    switch error {
+                    case "Can not connect to database":
+                        completionHandler(.failure(.databaseConnect))
+                    case "Phone number is not specified":
+                        completionHandler(.failure(.phoneEmpty))
+                    case "Wrong phone number":
+                        completionHandler(.failure(.wrongPhone))
+                    case "SMS error":
+                        completionHandler(.failure(.sms))
+                    case "User is banned":
+                        completionHandler(.failure(.banned))
+                    default:
+                        let requestId = json[0]["request_id"].stringValue
+                        completionHandler(.success(requestId))
+                    }
                 case .failure(let error):
                     print(error)
                     return

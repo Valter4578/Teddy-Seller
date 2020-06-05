@@ -131,6 +131,15 @@ final class AuthViewController: UIViewController {
     
         switch currentState {
         case .phone:
+            
+            if phoneNumber.count < 12 || phoneNumber.count > 14 {
+                let alertBuilder = AuthAlertBuilder(errorType: .wrongPhone)
+                alertBuilder.configureAlert { (alertController) in
+                    self.present(alertController, animated: true)
+                }
+                return
+            }
+            
             teddyService.phoneNumber(phoneNumber: phoneNumber) { (result) in
                 switch result {
                 case .success(let requestId):
@@ -143,6 +152,14 @@ final class AuthViewController: UIViewController {
                 }
             }
         case .code:
+             if phoneNumber.count != 6 {
+                let alertBuilder = AuthAlertBuilder(errorType: .wrongPhone)
+                alertBuilder.configureAlert { (alertController) in
+                    self.present(alertController, animated: true)
+                }
+                return
+            }
+            
             guard let requestId = UserDefaults.standard.string(forKey: "requestId") else { return }
             guard let text = phoneTextField.text else { return }
             guard let code = Int(text) else { return }
