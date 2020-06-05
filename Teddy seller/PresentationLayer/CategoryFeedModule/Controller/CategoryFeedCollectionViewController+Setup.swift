@@ -20,7 +20,6 @@ extension CategoryFeedViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
-//            $0.top.equalTo(header.collectionView.snp.bottom)
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             $0.bottom.equalTo(bottomBar.snp.top)
@@ -53,7 +52,8 @@ extension CategoryFeedViewController {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(collectionView.snp.top)//.offset(10)
+            $0.bottom.equalTo(collectionView.snp.top)
+            $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
         }
     }
 }

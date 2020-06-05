@@ -17,7 +17,7 @@ class CategoryFeedHeader: UICollectionViewController {
     
     // MARK:- Setups
     private func setupColectionView() {
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .mainBlue
         collectionView.register(CategoryFeedHeaderCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     }
     
@@ -29,7 +29,7 @@ class CategoryFeedHeader: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedHeaderCollectionViewCell
-        cell.layer.cornerRadius = 24
+        cell.layer.cornerRadius = 12
         cell.titleLabel.text = subcategories?[indexPath.item].title
         return cell
     }
@@ -43,5 +43,23 @@ class CategoryFeedHeader: UICollectionViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension CategoryFeedHeader: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 155, height: 35)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
     }
 }
