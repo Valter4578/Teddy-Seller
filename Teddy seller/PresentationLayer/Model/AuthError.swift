@@ -14,4 +14,8 @@ enum AuthError: Error {
     case banned
     case databaseConnect
     case sms
+    
+    case codeEmpty
+    case wrongCode
+    case requestExpired
 }

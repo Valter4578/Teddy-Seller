@@ -147,7 +147,10 @@ final class AuthViewController: UIViewController {
                     self.currentState = .code
                     UserDefaults.standard.set(requestId, forKey: "requestId")
                 case .failure(let error):
-                    print(error)
+                    let alertBuilder = AuthAlertBuilder(errorType: error)
+                    alertBuilder.configureAlert { (alertController) in
+                        self.present(alertController, animated: true)
+                    }
                     return
                 }
             }
@@ -170,6 +173,10 @@ final class AuthViewController: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 case .failure(let error):
                     print(error)
+                    let alertBuilder = AuthAlertBuilder(errorType: error)
+                    alertBuilder.configureAlert { (alertController) in
+                        self.present(alertController, animated: true)
+                    }
                     return
                 }
             }

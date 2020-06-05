@@ -29,6 +29,12 @@ class AuthAlertBuilder {
             alertController = UIAlertController(title: "Ошибка отправки SMS", message: "Попробуйте еще раз", preferredStyle: .alert)
         case .none:
             break
+        case .codeEmpty:
+            alertController = UIAlertController(title: "Код пуст", message: "Введите код", preferredStyle: .alert)
+        case .wrongCode:
+            alertController = UIAlertController(title: "Неправильный код", message: "Попробуйте ввести заново", preferredStyle: .alert)
+        case .requestExpired:
+            alertController = UIAlertController(title: "Срок ожидания просрочен", message: "Повторите попытку", preferredStyle: .alert)
         }
         
         guard let alert = alertController else { return }

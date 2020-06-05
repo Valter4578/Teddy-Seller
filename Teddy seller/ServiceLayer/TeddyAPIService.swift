@@ -54,7 +54,7 @@ class TeddyAPIService {
         }
     }
     
-    func authorize(requestId: String, code: Int,completionHandler: @escaping (Result<String, Error>) -> Void) {
+    func authorize(requestId: String, code: Int,completionHandler: @escaping (Result<String, AuthError>) -> Void) {
         let parametrs: [String: Any] = [
             "request_id": requestId,
             "code": code
@@ -66,11 +66,25 @@ class TeddyAPIService {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(arrayLiteral: value)
-                    let token = json[0]["token"].stringValue
-                    completionHandler(.success(token))
+                    
+                    let error = json[0]["error"]
+                    switch error {
+                    case "Can not connect to database":
+                        completionHandler(.failure(.databaseConnect))
+                    case "Request ID or Code is not specified":
+                        completionHandler(.failure(.codeEmpty))
+                    case "Wrong Request ID or Code":
+                        completionHandler(.failure(.wrongCode))
+                    case "Request ID expired":
+                        completionHandler(.failure(.requestExpired))
+                    default:
+                        let token = json[0]["token"].stringValue
+                        completionHandler(.success(token))
+                    }
+                    
                 case .failure(let error):
                     print(error)
-                    completionHandler(.failure(error))
+                    return
                 }
         }
     }
