@@ -69,7 +69,7 @@ final class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .mainBlue
+        view.addGradient(to: view.frame)
         
         setupNotificationCenter()
 

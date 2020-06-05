@@ -35,6 +35,7 @@
 		88CEAC472486B19C00347CD9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC462486B19B00347CD9 /* Category.swift */; };
 		88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
+		88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D358EC248A9EB800591129 /* UIView+Extension.swift */; };
 		88EDD8772486B753000B4470 /* CategoryFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDD8762486B753000B4470 /* CategoryFeedHeader.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		88CEAC462486B19B00347CD9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
+		88D358EC248A9EB800591129 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		88EDD8762486B753000B4470 /* CategoryFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedHeader.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				887BA3D3247A4C4F009DCCE3 /* UIColor+Extension.swift */,
+				88D358EC248A9EB800591129 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
 				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
+				88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */,
 				883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				88CEAC472486B19C00347CD9 /* Category.swift in Sources */,

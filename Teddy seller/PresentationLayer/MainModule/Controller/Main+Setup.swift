@@ -37,7 +37,8 @@ extension MainCollectionViewController {
     
     func setupCollectionView() {
         collectionView.register(MainViewConllectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        collectionView.backgroundColor = .mainBlue
+        collectionView.backgroundView = UIView()
+        collectionView.backgroundView?.addGradient(to: collectionView.frame)
     }
     
     func setupLocationManager() {
