@@ -14,7 +14,7 @@ extension UIView {
         gradient.frame = frame
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.colors = [UIColor.mainBlue.cgColor, UIColor.white.cgColor]
+        gradient.colors = [UIColor.gradientDarkBlue.cgColor, UIColor.gradientLightBlue.cgColor]
         layer.addSublayer(gradient)
     }
 }
