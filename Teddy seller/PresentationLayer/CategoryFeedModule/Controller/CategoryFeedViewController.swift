@@ -17,7 +17,11 @@ class CategoryFeedViewController: UIViewController {
     var category: Category?
     
     // MARK:- Views
-    var header: CategoryFeedCollectionViewHeader!
+    var header: CategoryFeedHeader = {
+        let layout = UICollectionViewFlowLayout()
+        let header = CategoryFeedHeader(collectionViewLayout: layout)
+        return header
+    }()
     var bottomBar: BottomBar = BottomBar()
     
     lazy var collectionView: UICollectionView = {
@@ -43,6 +47,7 @@ class CategoryFeedViewController: UIViewController {
         setupNavigationBar()
         setupBottomBar()
         setupCollectionView()
+        setupCategoryHeader()
     }
     
     // MARK:- Selectors

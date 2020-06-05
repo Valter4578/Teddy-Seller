@@ -20,7 +20,7 @@ extension CategoryFeedViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(view)
+//            $0.top.equalTo(header.collectionView.snp.bottom)
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             $0.bottom.equalTo(bottomBar.snp.top)
@@ -42,5 +42,18 @@ extension CategoryFeedViewController {
         let leftBarItem = UIBarButtonItem(customView: arrowView)
         navigationItem.leftBarButtonItem = leftBarItem
         title = category?.title
+    }
+    
+    func setupCategoryHeader() {
+        header.subcategories = category?.subcategories
+        
+        view.addSubview(header.collectionView)
+        
+        header.collectionView.snp.makeConstraints {
+            $0.leading.equalTo(view)
+            $0.trailing.equalTo(view)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(collectionView.snp.top)//.offset(10)
+        }
     }
 }
