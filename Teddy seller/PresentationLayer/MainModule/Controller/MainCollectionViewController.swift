@@ -100,6 +100,7 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
         setupNavigationBar()
+        checkForToken()
     }
         
     override func viewDidLoad() {
@@ -161,6 +162,11 @@ final class MainCollectionViewController: UICollectionViewController {
     
     private func checkForToken() {
         let token = UserDefaults.standard.string(forKey: "token")
+        print("------------------------------------------------")
+        print("------------------------------------------------")
+        print(token)
+        print("------------------------------------------------")
+        print("------------------------------------------------")
         if token == "" {
             let authViewController = AuthViewController()
             authViewController.modalPresentationStyle = .fullScreen

@@ -15,6 +15,7 @@ class CategoryFeedViewController: UIViewController {
     
     // MARK:- Properties
     var category: Category?
+    var products: [Product]?
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -41,6 +42,8 @@ class CategoryFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        products = category?.products
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
         arrowView.addGestureRecognizer(gestureRecognizer)
         
@@ -48,6 +51,21 @@ class CategoryFeedViewController: UIViewController {
         setupBottomBar()
         setupCollectionView()
         setupCategoryHeader()
+        
+        let teddyService = TeddyAPIService()
+        teddyService.getAds(for: "Cars") { (result) in
+            switch result {
+            case .success(let product):
+                print(product.title)
+                self.products?.append(product)
+                self.collectionView.reloadData()
+            case .failure(let error):
+                let adsAlertBuilder = AdsAlertBuilder(errorType: error)
+                adsAlertBuilder.configureAlert { alert in
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     // MARK:- Selectors
@@ -59,17 +77,17 @@ class CategoryFeedViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let products = category?.products else { return 0 }
-        return products.count
+        guard let prdcts = products else { return 0 }
+        return prdcts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        if let product = category?.products?[indexPath.item] {
+        if let product = products?[indexPath.item] {
             cell.productName.text = product.title
-            cell.priceLabel.text = "\(product.price)₽"
+            cell.priceLabel.text = String(product.price)
         }
         
         return cell

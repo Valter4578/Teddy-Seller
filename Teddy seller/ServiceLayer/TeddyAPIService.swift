@@ -88,4 +88,48 @@ class TeddyAPIService {
                 }
         }
     }
+    
+    func getAds(for subcategory: String, completionHandler: @escaping (Result<Product, AdsError>) -> ()) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+        
+        let parametrs: [String: String] = [
+            "token": token,
+            "subcategory": subcategory
+        ]
+        
+        AF.request("\(url)/getAdsForSubcategory", method: .post, parameters: parametrs)
+            .validate()
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    let json =  JSON(arrayLiteral: value)
+                    print(json)
+                    
+                    let error = json[0]["error"].stringValue
+                    switch error {
+                    case "Can not connect to database":
+                        completionHandler(.failure(.database))
+                    case "Token or subcategory is not specified":
+                        completionHandler(.failure(.dataNotSpecified))
+                    case "Wrong token":
+                        completionHandler(.failure(.wrongToken))
+                    case "Wrong subcategory":
+                        completionHandler(.failure(.wrongSubcategory))
+                    default:
+                        let allElements = json[0].arrayValue
+                        for i in 0...allElements.count {
+                            let title = json[0][i]["title"].stringValue
+                            let price = json[0][i]["price"].intValue
+                            
+                            let product = Product(title: title, price: price)
+                            completionHandler(.success(product))
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                    return
+
+                }
+        }
+    }
 }

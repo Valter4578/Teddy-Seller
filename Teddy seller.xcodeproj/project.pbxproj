@@ -32,6 +32,9 @@
 		8881D57D2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D57C2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift */; };
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
+		88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */; };
+		88C9296E248BE3EE002DE387 /* AdsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9296D248BE3EE002DE387 /* AdsError.swift */; };
+		88C92971248BEB60002DE387 /* AdsAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */; };
 		88CEAC472486B19C00347CD9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC462486B19B00347CD9 /* Category.swift */; };
 		88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
@@ -70,6 +73,9 @@
 		8881D57C2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
+		88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		88C9296D248BE3EE002DE387 /* AdsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsError.swift; sourceTree = "<group>"; };
+		88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsAlertBuilder.swift; sourceTree = "<group>"; };
 		88CEAC462486B19B00347CD9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */,
 				B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +100,7 @@
 		5E762BBAEFBDAD945F3035DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */,
 				1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */,
 			);
 			name = Frameworks;
@@ -132,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
+				88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -149,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				887BA3CF247A4B5E009DCCE3 /* MainCellModel.swift */,
-				8842D58624864B1B001FC653 /* AuthError.swift */,
+				88C9296F248BE522002DE387 /* Errors */,
 				88CEAC462486B19B00347CD9 /* Category.swift */,
 				881B0202248787BD000A61B8 /* Product.swift */,
 			);
@@ -285,6 +294,15 @@
 				887CEE512483C58700A63293 /* ArrowView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		88C9296F248BE522002DE387 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58624864B1B001FC653 /* AuthError.swift */,
+				88C9296D248BE3EE002DE387 /* AdsError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		88CEAC482486B54500347CD9 /* CategoryFeedModule */ = {
@@ -441,6 +459,7 @@
 				8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */,
 				887BA3BC247A4A22009DCCE3 /* AppDelegate.swift in Sources */,
 				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
+				88C9296E248BE3EE002DE387 /* AdsError.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
 				88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */,
 				883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */,
@@ -450,6 +469,7 @@
 				887CEE522483C58700A63293 /* ArrowView.swift in Sources */,
 				8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */,
 				881B0203248787BD000A61B8 /* Product.swift in Sources */,
+				88C92971248BEB60002DE387 /* AdsAlertBuilder.swift in Sources */,
 				88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */,
 				8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */,
 				887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */,
