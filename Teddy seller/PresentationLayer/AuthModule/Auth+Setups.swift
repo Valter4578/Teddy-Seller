@@ -32,7 +32,7 @@ extension AuthViewController {
             maker.height.equalTo(200)
             maker.width.equalTo(200)
             maker.centerX.equalTo(view)
-            maker.top.equalTo(view).offset(20).priority(.high)
+            maker.top.equalTo(view).offset(100)
         }
     }
     
@@ -48,7 +48,6 @@ extension AuthViewController {
             maker.trailing.equalTo(view).offset(-40)
             maker.leading.equalTo(view).offset(40)
             maker.height.equalTo(98)
-            maker.bottom.equalTo(nextButton.snp.top).offset(-150)
             maker.top.equalTo(teddyImageView.snp.bottom).offset(100)
         }
     }
