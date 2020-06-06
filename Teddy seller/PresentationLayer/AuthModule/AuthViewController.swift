@@ -37,7 +37,7 @@ final class AuthViewController: UIViewController {
         textField.keyboardType = .phonePad
         textField.font = UIFont(name: "Helvetica Neue", size: 24)
         textField.textColor = .black
-        
+        textField.text = "+7"
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         textField.leftView = paddingView
         textField.leftViewMode = .always
