@@ -32,7 +32,7 @@ extension AuthViewController {
             maker.height.equalTo(200)
             maker.width.equalTo(200)
             maker.centerX.equalTo(view)
-            maker.top.equalTo(view).offset(100)
+            maker.top.equalTo(view).offset(60)
         }
     }
     
