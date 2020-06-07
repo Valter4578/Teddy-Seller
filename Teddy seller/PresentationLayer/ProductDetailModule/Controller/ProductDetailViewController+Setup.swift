@@ -41,4 +41,15 @@ extension ProductDetailViewController {
         navigationItem.leftBarButtonItem = leftBarItem
         title = product?.title
     }
+    
+    func setupTextView() {
+        view.addSubview(descriptionTextView)
+        
+        descriptionTextView.snp.makeConstraints {
+            $0.leading.equalTo(view)
+            $0.trailing.equalTo(view)
+            $0.bottom.equalTo(contactButton.snp.top)
+            $0.top.equalTo(videoContainer.snp.bottom)
+        }
+    }
 }

@@ -24,10 +24,13 @@ class ProductDetailViewController: UIViewController {
         return view
     }()
     
-    let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-        return label
+    let descriptionTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        // test data 
+        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+        textView.font = UIFont(name: "Heltevica Neue", size: 24)
+        return textView
     }()
     
     var arrowView: ArrowView = {
@@ -48,7 +51,9 @@ class ProductDetailViewController: UIViewController {
         setupGestureRecognizer()
         setupVideoContainer()
         setupContactButton()
+        setupTextView()
         setupNavigationBar()
+        
     }
     
     // MARK:- Selectors
