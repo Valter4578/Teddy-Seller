@@ -108,7 +108,6 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupLocationManager()
         setupCollectionView()
-        
         checkForToken()
         
     }
@@ -137,11 +136,12 @@ final class MainCollectionViewController: UICollectionViewController {
     private func presentFindCity() {
         view.addSubview(self.findCityViewController.view)
         addChild(self.findCityViewController)
+        self.findCityViewController.view.frame.origin.y += view.frame.height
         findCityViewController.view.clipsToBounds = true
-        findCityViewController.view.alpha = 0
+
         
         UIView.animate(withDuration: 0.7, animations: {
-            self.findCityViewController.view.alpha = 1
+            self.findCityViewController.view.frame.origin.y = self.view.frame.origin.y
             self.arrowView.transform = CGAffineTransform(rotationAngle: 0)
         }) { _ in
             self.isFindCityPresented = true
@@ -150,7 +150,7 @@ final class MainCollectionViewController: UICollectionViewController {
     
     private func dissmisFindCity() {
         UIView.animate(withDuration: 0.7, animations: {
-            self.findCityViewController.view.alpha = 0
+            self.findCityViewController.view.frame.origin.y += self.view.frame.height
             self.arrowView.transform = CGAffineTransform(rotationAngle: .pi)
         }) { _ in
             self.findCityViewController.view.removeFromSuperview()

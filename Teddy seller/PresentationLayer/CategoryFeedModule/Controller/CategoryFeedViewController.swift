@@ -51,9 +51,18 @@ class CategoryFeedViewController: UIViewController {
         setupBottomBar()
         setupCollectionView()
         setupCategoryHeader()
-        
+        getProducts()
+    }
+    
+    // MARK:- Selectors
+    @objc func didTapBack() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK:- Private functions
+    private func getProducts() {
         let teddyService = TeddyAPIService()
-        teddyService.getAds(for: "Cars") { (result) in
+        teddyService.getAds(for: "Realty") { (result) in
             switch result {
             case .success(let product):
                 print(product.title)
@@ -66,11 +75,6 @@ class CategoryFeedViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    // MARK:- Selectors
-    @objc func didTapBack() {
-        navigationController?.popViewController(animated: true)
     }
 }
 
