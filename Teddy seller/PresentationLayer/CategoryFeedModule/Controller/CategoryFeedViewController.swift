@@ -23,6 +23,7 @@ class CategoryFeedViewController: UIViewController {
         let header = CategoryFeedHeader(collectionViewLayout: layout)
         return header
     }()
+    
     var bottomBar: BottomBar = BottomBar()
     
     lazy var collectionView: UICollectionView = {
@@ -78,6 +79,17 @@ class CategoryFeedViewController: UIViewController {
     }
 }
 
+// MARK:- UICollectionViewDelegate
+extension CategoryFeedViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = products?[indexPath.item]
+        
+        let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.product = product
+        navigationController?.pushViewController(productDetailViewController, animated: true)
+    }
+}
+
 // MARK: UICollectionViewDataSource
 extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -98,6 +110,7 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK:- UICollectionViewDelegateFlowLayout
 extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 38, height: 320)

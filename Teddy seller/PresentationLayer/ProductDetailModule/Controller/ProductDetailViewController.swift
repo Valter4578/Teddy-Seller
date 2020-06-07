@@ -30,13 +30,29 @@ class ProductDetailViewController: UIViewController {
         return label
     }()
     
+    var arrowView: ArrowView = {
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        view.transform = CGAffineTransform(rotationAngle: -(.pi/2))
+        return view
+    }()
+    
     // MARK:- Propeties
+    var product: Product?
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
+        setupGestureRecognizer()
         setupVideoContainer()
         setupContactButton()
+        setupNavigationBar()
+    }
+    
+    // MARK:- Selectors
+    @objc func dissmisProduct() {
+        navigationController?.popViewController(animated: true)
     }
 }
