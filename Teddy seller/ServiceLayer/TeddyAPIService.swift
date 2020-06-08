@@ -120,7 +120,7 @@ class TeddyAPIService {
                         for i in 0...allElements.count {
                             let title = json[0][i]["title"].stringValue
                             let price = json[0][i]["price"].intValue
-                            let phoneNumber = json[0][i]["phoneNumber"].intValue
+                            let phoneNumber = json[0][i]["author"]["username"].intValue
                             
                             let product = Product(title: title, price: price, phoneNumber: phoneNumber)
                             completionHandler(.success(product))

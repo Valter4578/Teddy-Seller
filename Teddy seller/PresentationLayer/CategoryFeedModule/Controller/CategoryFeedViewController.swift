@@ -122,7 +122,9 @@ class CategoryFeedViewController: UIViewController {
     
     // MARK:- Seletors
     @objc func presentCreate() {
-        print(#function)
+        let createProductController = CreateProductViewController()
+        createProductController.modalPresentationStyle = .fullScreen
+        present(createProductController, animated: true)
     }
 }
 

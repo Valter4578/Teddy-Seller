@@ -72,9 +72,11 @@ extension UIColor {
     static var plusContainerBorderGray: UIColor { // #979797
         return setAsRgb(red: 151, green: 151, blue: 151)
     }
+    
     static var gradientDarkBlue: UIColor { // #A1BDD4
-         return setAsRgb(red: 55, green: 49, blue: 183)
-     }
+        return setAsRgb(red: 55, green: 49, blue: 183)
+    }
+    
     static var gradientLightBlue: UIColor { // #A1BDD4
         return setAsRgb(red: 146, green: 182, blue: 216)
     }
