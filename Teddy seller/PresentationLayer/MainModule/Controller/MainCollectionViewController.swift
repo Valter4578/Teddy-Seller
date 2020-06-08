@@ -41,54 +41,45 @@ final class MainCollectionViewController: UICollectionViewController {
                                              bottom: 33.0,
                                              right: 31.0)
     
-//    var categories = [MainCellModel(imageName: "Realty", text: "Недвижимость", category: .realty),
-//                      MainCellModel(imageName: "Transport", text: "Транспорт", category: .transport),
-//                      MainCellModel(imageName: "Home", text: "Для дома", category: .home),
-//                      MainCellModel(imageName: "Buiseness", text: "Для бизнеса", category: .buisness),
-//                      MainCellModel(imageName: "Work", text: "Работа", category: .work),
-//                      MainCellModel(imageName: "PersonalItems", text: "Личные вещи", category: .personalItems),
-//                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
-//                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
-    
-    var categories = [Category(imageName: "Realty", title: "Недвижимость", products: [Product(title: "Дом", price: 30000, phoneNumber: 79137830046), Product(title: "Квартира ЛОФТ", price: 99999999, phoneNumber: 79137830046)],
+    var categories = [Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty", products: [Product(title: "Дом", price: 30000, phoneNumber: 79137830046), Product(title: "Квартира ЛОФТ", price: 99999999, phoneNumber: 79137830046)],
                                subcategories:
-                                [Category(title: "Дома",subcategories:
+                            [Category(title: "Дома",serverName: "Houses",subcategories:
                                 [Category(title: "1-этажные"),
                                  Category(title: "2-этажные"),
                                  Category(title: "3-этажные"),
                                  Category(title: "Многоэтажные")]),
-                                 Category(title: "Комнаты"),
-                                 Category(title: "Квартиры", subcategories:
+                             Category(title: "Комнаты", serverName: "Rooms"),
+                                 Category(title: "Квартиры",serverName: "Flats", subcategories:
                                     [Category(title: "1-комнатные"),
                                      Category(title: "2-комнатные"),
                                      Category(title: "3-комнтаные"),
-                                     Category(title: "Многокомнатные")]), Category(title: "Участки")]),
-                      Category(imageName: "Transport", title: "Автомобили", subcategories:
-                            [Category(title: "Легковые"),
-                             Category(title: "Спецтехника"),
-                             Category(title: "Грузовые"),
-                             Category(title: "Мотоциклы")]),
-                      Category(imageName: "Home", title: "Для дома"),
-                      Category(imageName: "Buiseness", title: "Для бизнеса"),
-                      Category(imageName: "Work", title: "Работа"),
-                      Category(imageName: "PersonalItems", title: "Личные вещи", subcategories:
-                        [Category(title: "Одежда", subcategories:
+                                     Category(title: "Многокомнатные")]), Category(title: "Участки", serverName: "Lands")]),
+                      Category(imageName: "Transport", title: "Автомобили",serverName: "Automobiles", subcategories:
+                        [Category(title: "Легковые", serverName: "Cars"),
+                         Category(title: "Спецтехника", serverName: "Machines"),
+                         Category(title: "Грузовые", serverName: "Trucks"),
+                         Category(title: "Мотоциклы", serverName: "Moto")]),
+                      Category(imageName: "Home", title: "Для дома", serverName: "ForHouse"),
+                      Category(imageName: "Buiseness", title: "Для бизнеса", serverName: "ForBusiness"),
+                      Category(imageName: "Work", title: "Работа", serverName: "Job", subcategories: [Category(title: "Вакансии", serverName: "Vacancies"), Category(title: "Резюме", serverName: "Resume")]),
+                      Category(imageName: "PersonalItems", title: "Личные вещи",serverName: "PersonalThings", subcategories:
+                        [Category(title: "Одежда", serverName: "Clothes", subcategories:
                             [Category(title: "Куртки"),
                              Category(title: "Рубашки"),
                              Category(title: "Свитера"),
                              Category(title: "Джинсы"),
                              Category(title: "Футболки"),
-                             Category(title: "Другое")])]),
-                      Category(imageName: "Electronics", title: "Электроника", subcategories:
-                        [Category(title: "Мультимедиа"),
-                         Category(title: "Ноутбуки"),
-                         Category(title: "Телефоны"),
-                         Category(title: "Оргтехника"),
-                         Category(title: "Настольные ПК"),
-                         Category(title: "Планшенты"),
-                         Category(title: "Фототехника"),
-                         Category(imageName: nil, title: "Другое")]),
-                      Category(imageName: "Service", title: "Услуги")]
+                             Category(title: "Другое")]), Category(title: "Обувь", serverName: "Shoes"), Category(title: "Детские товары", serverName: "ForChildren"), Category(title: "Аксессуары", serverName: "Accessories"), Category(title: "Косметика", serverName: "Cosmetics"), Category(title: "Книги", serverName: "Books")]),
+                      Category(imageName: "Electronics", title: "Электроника",serverName: "Electronix", subcategories:
+                        [Category(title: "Мультимедиа", serverName: "Multimedia"),
+                         Category(title: "Ноутбуки", serverName: "Laptops"),
+                         Category(title: "Телефоны", serverName: "Phones"),
+                         Category(title: "Оргтехника", serverName: "OfficeEquipment"),
+                         Category(title: "Настольные ПК", serverName: "PC"),
+                         Category(title: "Планшенты", serverName: "Pads"),
+                         Category(title: "Фототехника", serverName: "Photo"),
+                         Category(title: "Другое", serverName: "OtherElectronix")]),
+                      Category(imageName: "Service", title: "Услуги", serverName: "OtherElectronix")]
     
 
     

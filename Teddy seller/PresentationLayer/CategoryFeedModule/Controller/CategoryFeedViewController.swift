@@ -18,7 +18,11 @@ class CategoryFeedViewController: UIViewController {
     
     // MARK:- Properties
     var category: Category?
-    var products: [Product]?
+    var products: [Product]? = [] {
+        didSet {
+            print(products)
+        }
+    }
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -51,9 +55,7 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        products = category?.products
-        
+                
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
         arrowView.addGestureRecognizer(gestureRecognizer)
         
@@ -73,22 +75,25 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Private functions
     private func getProducts() {
         let teddyService = TeddyAPIService()
-        teddyService.getAds(for: "Realty") { (result) in
+        
+        guard let serverName = category?.serverName else { return }
+        
+        teddyService.getAds(for: serverName) { [weak self] (result) in
             switch result {
             case .success(let product):
                 print(product.title)
-                self.products?.append(product)
-                self.collectionView.reloadData()
+                self?.products?.append(product)
+                self?.collectionView.reloadData()
             case .failure(let error):
                 if error == .wrongToken {
                     let authController = AuthViewController()
                     authController.modalPresentationStyle = .fullScreen
-                    self.present(authController, animated: true)
+                    self?.present(authController, animated: true)
                 }
                 
                 let adsAlertBuilder = AdsAlertBuilder(errorType: error)
                 adsAlertBuilder.configureAlert { alert in
-                    self.present(alert, animated: true)
+                    self?.present(alert, animated: true)
                 }
             }
         }
