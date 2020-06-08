@@ -88,6 +88,7 @@ final class AuthViewController: UIViewController {
     
     private func didChangeState() {
         phoneTextField.text = ""
+        
         switch currentState {
         case .phone:
             label.text = "Введите номер телефона"

@@ -37,6 +37,20 @@ extension CategoryFeedViewController {
         }
     }
     
+    func setupTopBar() {
+        view.addSubview(topBar)
+        
+        topBar.leftButton.setTitle("Снять", for: .normal)
+        topBar.rightButton.setTitle("Купить", for: .normal)
+        
+        topBar.snp.makeConstraints {
+            $0.leading.equalTo(view)
+            $0.trailing.equalTo(view)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(50)
+        }
+    }
+    
     func setupNavigationBar() {
         let leftBarItem = UIBarButtonItem(customView: arrowView)
         navigationItem.leftBarButtonItem = leftBarItem
@@ -51,7 +65,7 @@ extension CategoryFeedViewController {
         header.collectionView.snp.makeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(topBar.snp.bottom)
             $0.bottom.equalTo(collectionView.snp.top)
             $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
         }

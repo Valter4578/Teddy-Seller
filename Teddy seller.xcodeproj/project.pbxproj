@@ -10,6 +10,7 @@
 		88062DB3248CCBE300BB47BC /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88062DB2248CCBE300BB47BC /* ProductDetailViewController.swift */; };
 		88062DB5248CCCC000BB47BC /* ProductDetailViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88062DB4248CCCC000BB47BC /* ProductDetailViewController+Setup.swift */; };
 		881B0203248787BD000A61B8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B0202248787BD000A61B8 /* Product.swift */; };
+		882BC066248E27EB0007B59C /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882BC065248E27EB0007B59C /* TopBar.swift */; };
 		883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */; };
 		883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */; };
 		8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D577248640D3001FC653 /* Auth+Setups.swift */; };
@@ -51,6 +52,7 @@
 		88062DB2248CCBE300BB47BC /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		88062DB4248CCCC000BB47BC /* ProductDetailViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductDetailViewController+Setup.swift"; sourceTree = "<group>"; };
 		881B0202248787BD000A61B8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		882BC065248E27EB0007B59C /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		883121D32486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryFeedCollectionViewController+Setup.swift"; sourceTree = "<group>"; };
 		883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		8842D577248640D3001FC653 /* Auth+Setups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auth+Setups.swift"; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				8881D57B248938FA00B44D7A /* CategoryHeader */,
 				883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */,
 				88437B892488DF1A00E207ED /* BottomBar.swift */,
+				882BC065248E27EB0007B59C /* TopBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
 				88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */,
 				883121D42486B9320096A4FE /* CategoryFeedCollectionViewController+Setup.swift in Sources */,
+				882BC066248E27EB0007B59C /* TopBar.swift in Sources */,
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				88CEAC472486B19C00347CD9 /* Category.swift in Sources */,
 				88062DB3248CCBE300BB47BC /* ProductDetailViewController.swift in Sources */,

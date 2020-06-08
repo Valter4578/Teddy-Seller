@@ -27,7 +27,13 @@ class CategoryFeedViewController: UIViewController {
         return header
     }()
     
-    var bottomBar: BottomBar = BottomBar()
+    var bottomBar: BottomBar = {
+        let bar = BottomBar()
+        bar.plusContainer.addTarget(self, action: #selector(presentCreate), for: .touchUpInside)
+        return bar
+    }()
+    
+    var topBar: TopBar = TopBar()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,6 +60,7 @@ class CategoryFeedViewController: UIViewController {
         setupNavigationBar()
         setupBottomBar()
         setupCollectionView()
+        setupTopBar()
         setupCategoryHeader()
         getProducts()
     }
@@ -85,6 +92,11 @@ class CategoryFeedViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK:- Seletors
+    @objc func presentCreate() {
+        print(#function)
     }
 }
 
