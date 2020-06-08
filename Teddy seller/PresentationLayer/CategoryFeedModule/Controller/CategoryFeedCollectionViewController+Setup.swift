@@ -37,14 +37,13 @@ extension CategoryFeedViewController {
         }
     }
     
-    func setupTopBar() {
-        
+    func setupTopBar(leftTitle: String, rightTitle: String) {
         topBar.delegate = self
         
         view.addSubview(topBar)
         
-        topBar.leftButton.setTitle("Снять", for: .normal)
-        topBar.rightButton.setTitle("Купить", for: .normal)
+        topBar.leftButton.setTitle(leftTitle, for: .normal)
+        topBar.rightButton.setTitle(rightTitle, for: .normal)
         
         topBar.snp.makeConstraints {
             $0.leading.equalTo(view)
@@ -68,7 +67,11 @@ extension CategoryFeedViewController {
         header.collectionView.snp.makeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
-            $0.top.equalTo(topBar.snp.bottom)
+            if needsToPresentTopBar {
+                $0.top.equalTo(topBar.snp.bottom)
+            } else {
+                $0.top.equalTo(view.safeAreaLayoutGuide)
+            }
             $0.bottom.equalTo(collectionView.snp.top)
             $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
         }

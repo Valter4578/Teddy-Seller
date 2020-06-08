@@ -17,6 +17,9 @@ class CategoryFeedViewController: UIViewController {
     private var selectedIndexPath: IndexPath?
     
     // MARK:- Properties
+    
+    var needsToPresentTopBar: Bool = false 
+    
     var category: Category?
     var products: [Product]? = [] {
         didSet {
@@ -62,7 +65,7 @@ class CategoryFeedViewController: UIViewController {
         setupNavigationBar()
         setupBottomBar()
         setupCollectionView()
-        setupTopBar()
+        configureTopBar()
         setupCategoryHeader()
         getProducts()
     }
@@ -96,6 +99,24 @@ class CategoryFeedViewController: UIViewController {
                     self?.present(alert, animated: true)
                 }
             }
+        }
+    }
+    
+    private func configureTopBar() {
+        switch category?.title {
+        case "Одежда":
+            setupTopBar(leftTitle: "Мужская", rightTitle: "Женская")
+            needsToPresentTopBar = true
+        case "Работа":
+            setupTopBar(leftTitle: "Вакансии", rightTitle: "Резюме")
+            needsToPresentTopBar = true
+        case "Недвижимость":
+            setupTopBar(leftTitle: "Снять", rightTitle: "Купить")
+            needsToPresentTopBar = true
+        case .none:
+            break
+        case .some(_):
+            break
         }
     }
     
