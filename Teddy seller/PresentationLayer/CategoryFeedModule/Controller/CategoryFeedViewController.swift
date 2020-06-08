@@ -73,6 +73,12 @@ class CategoryFeedViewController: UIViewController {
                 self.products?.append(product)
                 self.collectionView.reloadData()
             case .failure(let error):
+                if error == .wrongToken {
+                    let authController = AuthViewController()
+                    authController.modalPresentationStyle = .fullScreen
+                    self.present(authController, animated: true)
+                }
+                
                 let adsAlertBuilder = AdsAlertBuilder(errorType: error)
                 adsAlertBuilder.configureAlert { alert in
                     self.present(alert, animated: true)
