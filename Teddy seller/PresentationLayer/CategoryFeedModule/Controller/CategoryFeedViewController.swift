@@ -149,3 +149,9 @@ extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
         return 20
     }
 }
+
+extension CategoryFeedViewController: TopBarDelegate {
+    func passSelectedIndex(_ index: Int) {
+        print(index)
+    }
+}

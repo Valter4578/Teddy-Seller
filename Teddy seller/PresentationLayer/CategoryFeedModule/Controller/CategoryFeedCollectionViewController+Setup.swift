@@ -38,6 +38,9 @@ extension CategoryFeedViewController {
     }
     
     func setupTopBar() {
+        
+        topBar.delegate = self
+        
         view.addSubview(topBar)
         
         topBar.leftButton.setTitle("Снять", for: .normal)
