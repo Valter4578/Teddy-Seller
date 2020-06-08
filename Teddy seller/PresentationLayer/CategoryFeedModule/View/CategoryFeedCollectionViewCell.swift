@@ -10,6 +10,16 @@ import UIKit
 import SnapKit
 
 class CategoryFeedCollectionViewCell: UICollectionViewCell {
+    // MARK:- Properties
+    var product: Product? {
+        didSet {
+            if let product = product {
+                priceLabel.text = String(product.price)
+                productName.text = product.title
+            }
+        }
+    }
+    
     // MARK:- Views
     lazy var contactButton: UIButton = {
         let button = UIButton()
@@ -18,6 +28,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Heltevica", size: 18)
         button.layer.cornerRadius = 7
+        button.addTarget(self, action: #selector(didTapContact), for: .touchUpInside)
         return button
     }()
     
@@ -103,6 +114,12 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(self).offset(20)
             $0.trailing.equalTo(contactButton.snp.leading).offset(-20)
         }
+    }
+    
+    @objc func didTapContact() {
+        guard let phoneNumber = product?.phoneNumber,
+            let url = URL(string: "tel://\(phoneNumber)") else { return }
+        UIApplication.shared.open(url)
     }
     
 }

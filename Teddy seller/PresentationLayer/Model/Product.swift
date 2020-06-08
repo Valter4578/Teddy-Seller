@@ -11,5 +11,6 @@ import Foundation
 struct Product {
     let title: String
     let price: Int
-//    let category: Categories 
+    let phoneNumber: Int 
+//    let category: Categories
 }

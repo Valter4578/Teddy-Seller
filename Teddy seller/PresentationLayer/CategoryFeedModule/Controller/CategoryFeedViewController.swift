@@ -13,6 +13,9 @@ class CategoryFeedViewController: UIViewController {
     let cellId = "CategoryFeedCollectionViewControllerCellId"
     let headerId = "CategoryFeedCollectionViewHeaderId"
     
+    // To pass selected cell's index path to didTapContact
+    private var selectedIndexPath: IndexPath?
+    
     // MARK:- Properties
     var category: Category?
     var products: [Product]?
@@ -102,11 +105,15 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         cell.layer.cornerRadius = 20
         
         if let product = products?[indexPath.item] {
-            cell.productName.text = product.title
-            cell.priceLabel.text = String(product.price)
+            cell.product = product
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print(#function)
+        selectedIndexPath = indexPath
     }
 }
 

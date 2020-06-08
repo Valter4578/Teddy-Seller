@@ -50,7 +50,7 @@ final class MainCollectionViewController: UICollectionViewController {
 //                      MainCellModel(imageName: "Electronics", text: "Электроника", category: .electronics),
 //                      MainCellModel(imageName: "Service", text: "Услуги", category: .service),]
     
-    var categories = [Category(imageName: "Realty", title: "Недвижимость", products: [Product(title: "Дом", price: 30000), Product(title: "Квартира ЛОФТ", price: 99999999)],
+    var categories = [Category(imageName: "Realty", title: "Недвижимость", products: [Product(title: "Дом", price: 30000, phoneNumber: 79137830046), Product(title: "Квартира ЛОФТ", price: 99999999, phoneNumber: 79137830046)],
                                subcategories:
                                 [Category(title: "Дома",subcategories:
                                 [Category(title: "1-этажные"),

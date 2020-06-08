@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController {
         button.backgroundColor = .contactPurple
         button.setTitle("Cвязаться", for: .normal)
         button.titleLabel?.font = UIFont(name: "Heltevica Neue", size: 28)
+        button.addTarget(self, action: #selector(didTapContactButton), for: .touchUpInside)
         return button
     }()
     
@@ -28,8 +29,8 @@ class ProductDetailViewController: UIViewController {
         let textView = UITextView()
         textView.isEditable = false
         // test data 
-        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-        textView.font = UIFont(name: "Heltevica Neue", size: 24)
+        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
+        textView.font = UIFont(name: "Helvetica Neue", size: 24)
         return textView
     }()
     
@@ -59,5 +60,11 @@ class ProductDetailViewController: UIViewController {
     // MARK:- Selectors
     @objc func dissmisProduct() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func didTapContactButton() {
+        guard let phoneNumber = product?.phoneNumber,
+            let url = URL(string: "tel://\(phoneNumber)") else { return }
+        UIApplication.shared.open(url)
     }
 }
