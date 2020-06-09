@@ -54,7 +54,6 @@ class CreateProductViewController: UIViewController {
     
     // MARK:- Private functions
     private func configureScreen() {
-        
         cellTypes.forEach {
             switch $0 {
             case .video(let title):
@@ -94,9 +93,9 @@ class CreateProductViewController: UIViewController {
 extension CreateProductViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch cellTypes[indexPath.row] {
-        case .textField(_): return 125
-        case .video(_): return 300
-        case .textView(_): return 250
+        case .textField(_): return 88
+        case .video(_): return 225
+        case .textView(_): return 225
         }
     }
 }

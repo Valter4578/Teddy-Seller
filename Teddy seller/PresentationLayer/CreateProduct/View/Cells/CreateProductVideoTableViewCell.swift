@@ -27,7 +27,7 @@ class CreateProductVideoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = .blue
+        setupStackView() 
     }
     
     required init?(coder: NSCoder) {
@@ -35,21 +35,25 @@ class CreateProductVideoTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    func setupStackView() {
-        print(#function)
-        
-        let stackView = UIStackView(arrangedSubviews: [label, videoContainer])
+    func setupStackView() {        
+       let stackView = UIStackView(arrangedSubviews: [label, videoContainer])
+        stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.distribution = .fillEqually
         
         addSubview(stackView)
         
-        stackView.snp.makeConstraints { maker in
-            maker.leading.equalTo(20)
-            maker.trailing.equalTo(20)
-            maker.top.equalTo(self)
-            maker.bottom.equalTo(self)
+        videoContainer.snp.makeConstraints { maker in
+            maker.height.equalTo(185)
         }
+        
+        stackView.snp.makeConstraints { maker in
+            maker.leading.equalTo(self).offset(20)
+            maker.trailing.equalTo(self).offset(-20)
+            maker.top.equalTo(self).offset(10)
+            maker.bottom.equalTo(self).offset(-10)
+        }
+        
+        
     }
 }
