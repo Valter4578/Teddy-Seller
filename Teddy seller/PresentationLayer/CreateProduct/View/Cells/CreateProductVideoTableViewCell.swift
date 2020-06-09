@@ -14,6 +14,7 @@ class CreateProductVideoTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: "Heltevica Neue", size: 24)
         label.textAlignment = .left
+        label.text = "Lorem ispum"
         return label
     }()
     
@@ -27,7 +28,8 @@ class CreateProductVideoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupStackView() 
+        setupVideoContainer()
+        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,25 +37,24 @@ class CreateProductVideoTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    func setupStackView() {        
-       let stackView = UIStackView(arrangedSubviews: [label, videoContainer])
-        stackView.distribution = .fillProportionally
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        addSubview(stackView)
+    private func setupVideoContainer() {
+        addSubview(videoContainer)
         
         videoContainer.snp.makeConstraints { maker in
             maker.height.equalTo(185)
-        }
-        
-        stackView.snp.makeConstraints { maker in
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
-            maker.top.equalTo(self).offset(10)
-            maker.bottom.equalTo(self).offset(-10)
+            maker.bottom.equalTo(self).offset(-5)
         }
+    }
+    
+    private func setupLabel() {
+        addSubview(label)
         
-        
+        label.snp.makeConstraints { maker in
+            maker.leading.equalTo(self).offset(20)
+            maker.trailing.equalTo(self).offset(-20)
+            maker.bottom.equalTo(videoContainer.snp.top).offset(-10)
+        }
     }
 }

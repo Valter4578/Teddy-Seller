@@ -14,6 +14,7 @@ class CreateProductTextFieldTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: "Heltevica Neue", size: 24)
         label.textAlignment = .left
+        label.text = "Lorem ispum"
         return label
     }()
     
@@ -27,7 +28,8 @@ class CreateProductTextFieldTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
      
-        setupStackView()
+        setupTextField()
+        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,19 +37,24 @@ class CreateProductTextFieldTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    func setupStackView() {
-        let stackView = UIStackView(arrangedSubviews: [label, textField])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
+    private func setupTextField() {
+        addSubview(textField)
         
-        addSubview(stackView)
-        
-        stackView.snp.makeConstraints { maker in
+        textField.snp.makeConstraints { maker in
+            maker.height.equalTo(55)
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
-            maker.top.equalTo(self).offset(10)
             maker.bottom.equalTo(self).offset(-10)
+        }
+    }
+    
+    private func setupLabel() {
+        addSubview(label)
+        
+        label.snp.makeConstraints { maker in
+            maker.leading.equalTo(self).offset(20)
+            maker.trailing.equalTo(self).offset(-20)
+            maker.bottom.equalTo(textField.snp.top).offset(-10)
         }
     }
     

@@ -27,8 +27,9 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
     // MARK:- Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setupStackView()
+    
+        setupTextView()
+        setupLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -36,19 +37,24 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    private func setupStackView() {
-        let stackView = UIStackView(arrangedSubviews: [label, textView])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
+    private func setupTextView() {
+        addSubview(textView)
         
-        addSubview(stackView)
-        
-        stackView.snp.makeConstraints { maker in
+        textView.snp.makeConstraints { maker in
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
-            maker.top.equalTo(self).offset(10)
             maker.bottom.equalTo(self).offset(-10)
+            maker.height.equalTo(185)
+        }
+    }
+    
+    private func setupLabel() {
+        addSubview(label)
+        
+        label.snp.makeConstraints { maker in
+            maker.bottom.equalTo(textView.snp.top).offset(-10)
+            maker.leading.equalTo(self).offset(20)
+            maker.trailing.equalTo(self).offset(-20)
         }
     }
     

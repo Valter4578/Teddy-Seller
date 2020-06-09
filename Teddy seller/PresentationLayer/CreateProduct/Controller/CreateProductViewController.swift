@@ -93,9 +93,9 @@ class CreateProductViewController: UIViewController {
 extension CreateProductViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch cellTypes[indexPath.row] {
-        case .textField(_): return 88
-        case .video(_): return 225
-        case .textView(_): return 225
+        case .textField(_): return 105
+        case .video(_): return 235
+        case .textView(_): return 235
         }
     }
 }
