@@ -15,14 +15,15 @@ class CreateProductViewController: UIViewController {
     private let textViewCellId = "CreateProductViewControllerTextViewCell"
     
     // MARK:- Properties
+    let switcherValue: Int? = 0
     var cellTypes: [CreateProductCellType] = []
-    var category: Category?
-    
-    var cells: [UITableViewCell] = [] {
+    var category: Category? {
         didSet {
-            print(cells)
+            configureCellTypes()
         }
     }
+    
+    var cells: [UITableViewCell] = []
     
     // MARK:- Views
     var arrowView: ArrowView = {
@@ -45,7 +46,7 @@ class CreateProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        configureScreen() 
+        configureCells()
         
         setupAddButton()
         setupTableView() 
@@ -53,7 +54,7 @@ class CreateProductViewController: UIViewController {
     }
     
     // MARK:- Private functions
-    private func configureScreen() {
+    private func configureCells() {
         cellTypes.forEach {
             switch $0 {
             case .video(let title):
@@ -82,6 +83,32 @@ class CreateProductViewController: UIViewController {
 
                 tableView.reloadData()
             }
+        }
+    }
+
+    func configureCellTypes() {
+        switch category?.title {
+        case "Автомобили":
+            cellTypes = [.video("Видео"), .textField("Марка"), .textField("Модель"), .textField("Цена"), .textField("Год выпуска"), .textField("Пробег"), .textView("Описание")]
+        case "Электроника":
+            cellTypes = [.textField("Название товара"), .video("Видео"), .textField("Марка"), .textField("Модель"), .textField("Цена"), .textField("Год выпуска"), .textView("Описание")]
+        case "Комната":
+            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Площадь, м2")]
+        case "Участки":
+            cellTypes = [.textField("Название объявления "), .video("Видео"), .textField("Адрес"), .textField("Цена"),.textField("Площадь, м2")]
+        case "Квартира":
+            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Кол-во комнат"), .textField("Площадь, м2"), .textField("Материал стен")]
+        case "Дома":
+            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Этажей в доме"), .textField("Год постройки"), .textField("Площадь, м2"), .textField("Материал стен")]
+            
+        case "Работа":
+            if switcherValue == 0 {
+                cellTypes = [.textField("Название вакансии"), .video("Видео"), .textField("График"), .textField("Опыт работы"), .textField("Зарплата"), .textField("Описание")]
+            } else {
+                cellTypes = [.textField("Название резюме"), .video("Видео"), .textField("Желаемый график"), .textField("Опыт"), .textField("Ожидаемая зарплата"), .textView("Описание")]
+            }
+        default:
+            break
         }
     }
     
