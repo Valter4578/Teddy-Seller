@@ -83,6 +83,11 @@ class CreateProductViewController: UIViewController {
             }
         }
     }
+    
+    // MARK:- Selectors
+    @objc func dismissCreateProduct() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK:- UITableViewDelegate

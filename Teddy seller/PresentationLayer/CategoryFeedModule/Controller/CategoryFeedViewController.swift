@@ -124,6 +124,7 @@ class CategoryFeedViewController: UIViewController {
     @objc func presentCreate() {
         let createProductController = CreateProductViewController()
         createProductController.cellTypes = [.video("Видео"), .textField("Модель"), .textView("Описание"), .video("Видео"), .textField("Модель"), .textView("Описание"), .video("Видео"), .textField("Модель"), .textView("Описание")]
+        createProductController.category = category
         let navigationController = UINavigationController(rootViewController: createProductController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)

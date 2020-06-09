@@ -22,9 +22,22 @@ extension CreateProductViewController {
     }
     
     func setupNavigationBar() {
-        let leftBarItem = UIBarButtonItem(customView: arrowView)
-        navigationItem.leftBarButtonItem = leftBarItem
-        title = category?.title
+        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.clipsToBounds = false
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        let leftItem = UIBarButtonItem(customView: arrowView)
+        navigationItem.leftBarButtonItem = leftItem
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissCreateProduct))
+        arrowView.addGestureRecognizer(gestureRecognizer)
+        
+        guard let name = category?.title else { return }
+        title = "Добавить \(name)"
     }
     
     func setupTableView() {
