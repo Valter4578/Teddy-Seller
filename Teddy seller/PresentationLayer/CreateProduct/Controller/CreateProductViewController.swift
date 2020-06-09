@@ -62,6 +62,7 @@ class CreateProductViewController: UIViewController {
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 print(title)
                 cells.append(videoCell)
+                tableView.rowHeight = 300
                 tableView.reloadData()
                 
             case .textField(let title):
@@ -69,12 +70,15 @@ class CreateProductViewController: UIViewController {
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
                 print(title)
                 cells.append(textFieldCell)
+                tableView.rowHeight = 125
                 tableView.reloadData()
             case .textView(let title):
                 let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
                 tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
                 print(title)
                 cells.append(textViewCell)
+                tableView.rowHeight = 260
+
                 tableView.reloadData()
             }
         }
@@ -83,7 +87,13 @@ class CreateProductViewController: UIViewController {
 
 // MARK:- UITableViewDelegate
 extension CreateProductViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch cellTypes[indexPath.row] {
+        case .textField(_): return 125
+        case .video(_): return 300
+        case .textView(_): return 250
+        }
+    }
 }
 
 // MARK:- UITableViewDataSource
