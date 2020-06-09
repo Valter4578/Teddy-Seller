@@ -44,6 +44,8 @@ extension CreateProductViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.separatorColor = .clear
+        
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { maker in

@@ -58,14 +58,15 @@ class CreateProductViewController: UIViewController {
             switch $0 {
             case .video(let title):
                 let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
+                videoCell.label.text = title
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
-                print(title)
                 cells.append(videoCell)
                 tableView.rowHeight = 300
                 tableView.reloadData()
                 
             case .textField(let title):
                 let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
+                textFieldCell.label.text = title
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
                 print(title)
                 cells.append(textFieldCell)
@@ -73,6 +74,7 @@ class CreateProductViewController: UIViewController {
                 tableView.reloadData()
             case .textView(let title):
                 let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
+                textViewCell.label.text = title
                 tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
                 print(title)
                 cells.append(textViewCell)
