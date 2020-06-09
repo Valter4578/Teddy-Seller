@@ -9,10 +9,16 @@
 import UIKit
 
 class CreateProductViewController: UIViewController {
+    // MARK:- Private properties
+    private let videoCellId = "CreateProductViewControllerVideoCell"
+    private let textFieldCellId = "CreateProductViewControllerTextFieldCell"
+    private let textViewCellId = "CreateProductViewControllerTextViewCell"
+    
     // MARK:- Properties
+    var cellTypes: [CreateProductCellType] = []
     var category: Category?
     
-    var cells: [UITableViewCell]? {
+    var cells: [UITableViewCell] = [] {
         didSet {
             print(cells)
         }
@@ -39,6 +45,8 @@ class CreateProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        configureScreen() 
+        
         setupAddButton()
         setupTableView() 
         setupNavigationBar()
@@ -46,11 +54,29 @@ class CreateProductViewController: UIViewController {
     
     // MARK:- Private functions
     private func configureScreen() {
-        switch category?.title {
-        case <#pattern#>:
-            <#code#>
-        default:
-            <#code#>
+        
+        cellTypes.forEach {
+            switch $0 {
+            case .video(let title):
+                let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
+                tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
+                print(title)
+                cells.append(videoCell)
+                tableView.reloadData()
+                
+            case .textField(let title):
+                let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
+                tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
+                print(title)
+                cells.append(textFieldCell)
+                tableView.reloadData()
+            case .textView(let title):
+                let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
+                tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
+                print(title)
+                cells.append(textViewCell)
+                tableView.reloadData()
+            }
         }
     }
 }
@@ -63,10 +89,10 @@ extension CreateProductViewController: UITableViewDelegate {
 // MARK:- UITableViewDataSource
 extension CreateProductViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells?.count ?? 0
+        return cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cells?[indexPath.item] ?? UITableViewCell()
+        return cells[indexPath.item]
     }
 }

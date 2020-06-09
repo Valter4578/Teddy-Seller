@@ -17,12 +17,14 @@ extension CreateProductViewController {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             $0.bottom.equalTo(view)
-            $0.top.equalTo(78)
+            $0.height.equalTo(78)
         }
     }
     
     func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: arrowView)
+        let leftBarItem = UIBarButtonItem(customView: arrowView)
+        navigationItem.leftBarButtonItem = leftBarItem
+        title = category?.title
     }
     
     func setupTableView() {
