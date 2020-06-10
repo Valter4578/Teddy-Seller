@@ -41,6 +41,5 @@ class AdsAlertBuilder {
     init(errorType: AdsError) {
         self.errorType = errorType
     }
-    
 }
 

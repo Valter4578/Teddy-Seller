@@ -167,7 +167,7 @@ class TeddyAPIService {
                     default:
                         let id = json[0]["id"].intValue
                         print(id)
-                        completionHandler(.success(id)))
+                        completionHandler(.success(id))
                     }
                 case .failure(let error):
                     print(error)

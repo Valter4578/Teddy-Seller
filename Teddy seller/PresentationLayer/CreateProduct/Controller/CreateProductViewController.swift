@@ -52,9 +52,16 @@ class CreateProductViewController: UIViewController {
         setupAddButton()
         setupTableView() 
         setupNavigationBar()
+        setupNotificationCenter()
+        hideKeyboardByTapAround()
     }
     
     // MARK:- Private functions
+    private func hideKeyboardByTapAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAround))
+        view.addGestureRecognizer(tap)
+    }
+    
     private func configureCells() {
         cellTypes.forEach {
             switch $0 {
@@ -121,20 +128,42 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapAddButton() {
+        var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
             if let videoCell = cells[i] as? CreateProductVideoTableViewCell {
                 print("\(videoCell.serverName) -- \(videoCell.label.text)")
             }
             
             if let textViewCell = cells[i] as? CreateProductTextViewTableViewCell {
-                print("\(textViewCell.serverName) -- \(textViewCell.label.text)")
+                print("\(textViewCell.serverName) -- \(textViewCell.textView.text)")
+                guard let serverName = textViewCell.serverName else { return }
+                jsonParametrs.updateValue(textViewCell.textView.text, forKey: serverName)
             }
             
             if let textFieldCell = cells[i] as? CreateProductTextFieldTableViewCell {
-                print("\(textFieldCell.serverName) -- \(textFieldCell.label.text)")
+                print("\(textFieldCell.serverName) -- \(textFieldCell.textField.text)")
+                guard let serverName = textFieldCell.serverName else { continue }
+                jsonParametrs.updateValue(textFieldCell.textField.text, forKey: serverName)
             }
         }
+        JSONBuilder.createJSON(parametrs: jsonParametrs)
 //        dismiss(animated: true)
+    }
+    
+    @objc func keyboardWillShow(sender: Notification) {
+          if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+              let keyboardRectangle = keyboardFrame.cgRectValue
+              let keyboardHeight = keyboardRectangle.height
+              self.view.frame.origin.y = -keyboardHeight
+          }
+      }
+      
+      @objc func keyboardWillHide(sender: Notification) {
+          self.view.frame.origin.y = 0 // Move view to original position
+      }
+    
+    @objc func didTapAround() {
+        view.endEditing(true)
     }
 }
 

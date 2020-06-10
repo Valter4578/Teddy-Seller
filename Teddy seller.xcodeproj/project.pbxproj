@@ -49,6 +49,8 @@
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
 		88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D358EC248A9EB800591129 /* UIView+Extension.swift */; };
 		88EA9CFA2490EC000010A62E /* AddAdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CF92490EC000010A62E /* AddAdError.swift */; };
+		88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */; };
+		88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */; };
 		88EDD8772486B753000B4470 /* CategoryFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EDD8762486B753000B4470 /* CategoryFeedHeader.swift */; };
 		B557B94001160DD560AE1C91 /* Pods_Teddy_seller.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DF609ADA841472DDCBB03 /* Pods_Teddy_seller.framework */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
 		88D358EC248A9EB800591129 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		88EA9CF92490EC000010A62E /* AddAdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdError.swift; sourceTree = "<group>"; };
+		88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdAlertBuilder.swift; sourceTree = "<group>"; };
+		88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONBuilder.swift; sourceTree = "<group>"; };
 		88EDD8762486B753000B4470 /* CategoryFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedHeader.swift; sourceTree = "<group>"; };
 		C12F9AABB3D7FEEF43272273 /* Pods-Teddy seller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teddy seller.debug.xcconfig"; path = "Target Support Files/Pods-Teddy seller/Pods-Teddy seller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +229,8 @@
 			children = (
 				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
 				88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */,
+				88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */,
+				88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */,
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
 				88B0CF00248F6C580078812D /* CreateProductCellType.swift in Sources */,
 				882BC069248E87BF0007B59C /* CreateProductViewController.swift in Sources */,
@@ -565,6 +572,7 @@
 				8842D578248640D3001FC653 /* Auth+Setups.swift in Sources */,
 				881B0203248787BD000A61B8 /* Product.swift in Sources */,
 				88C92971248BEB60002DE387 /* AdsAlertBuilder.swift in Sources */,
+				88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */,
 				88062DB5248CCCC000BB47BC /* ProductDetailViewController+Setup.swift in Sources */,
 				88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */,
 				8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */,
