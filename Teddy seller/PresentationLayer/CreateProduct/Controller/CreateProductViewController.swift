@@ -146,8 +146,28 @@ class CreateProductViewController: UIViewController {
                 jsonParametrs.updateValue(textFieldCell.textField.text, forKey: serverName)
             }
         }
-        JSONBuilder.createJSON(parametrs: jsonParametrs)
-//        dismiss(animated: true)
+        
+        if category?.title == "Автомобили" {
+            let productTitle = "\(jsonParametrs["mark"]) \(jsonParametrs["model"])"
+            jsonParametrs.updateValue(productTitle, forKey: "title")
+        }
+        
+        jsonParametrs.updateValue(category?.serverName, forKey: "subcategory")
+        
+        let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
+        let teddyService = TeddyAPIService()
+        teddyService.addProduct(json: json) { result in
+            switch result {
+            case .success(let id):
+                print(id)
+                dismiss(animated: true)
+            case .failure(let error):
+                let alertBuilder = AddAdAlertBuilder(errorType: error)
+                alertBuilder.configureAlert { alert in
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     @objc func keyboardWillShow(sender: Notification) {

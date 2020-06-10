@@ -11,8 +11,8 @@ import Foundation
 class JSONBuilder {
     static func createJSON(parametrs: [String: Any]) -> String {
         guard let jsonData = try? JSONSerialization.data(withJSONObject: parametrs) else { return "" }
-        let string = String(data: jsonData, encoding: .utf8)
+        guard let string = String(data: jsonData, encoding: .utf8) else { return "" }
         print(string)
-        return string ?? ""
+        return string
     }
 }
