@@ -160,7 +160,7 @@ class CreateProductViewController: UIViewController {
             switch result {
             case .success(let id):
                 print(id)
-                dismiss(animated: true)
+                self.dismiss(animated: true)
             case .failure(let error):
                 let alertBuilder = AddAdAlertBuilder(errorType: error)
                 alertBuilder.configureAlert { alert in
