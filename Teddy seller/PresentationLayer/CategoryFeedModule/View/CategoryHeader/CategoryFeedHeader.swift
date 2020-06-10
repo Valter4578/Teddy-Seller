@@ -9,11 +9,18 @@
 import UIKit
 import SnapKit
 
+protocol CategoryFeedHeaderDelegate: class {
+    func passSelectedCategory(_ category: Category)
+}
+
 class CategoryFeedHeader: UICollectionViewController {
     // MARK:- Private properties
     let cellId = "CategoryFeedHeaderCell"
     // MARK:- Properties
+    weak var delegate: CategoryFeedHeaderDelegate!
+    
     var subcategories: [Category]?
+    var selectedCategory: Category?
     
     // MARK:- Setups
     private func setupColectionView() {
@@ -32,6 +39,13 @@ class CategoryFeedHeader: UICollectionViewController {
         cell.layer.cornerRadius = 12
         cell.titleLabel.text = subcategories?[indexPath.item].title
         return cell
+    }
+    
+    // MARK:- Delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(subcategories?[indexPath.item])
+        guard let selectedSubcategory = subcategories?[indexPath.item] else { return }
+        delegate.passSelectedCategory(selectedSubcategory)
     }
     
     // MARK:- Inits

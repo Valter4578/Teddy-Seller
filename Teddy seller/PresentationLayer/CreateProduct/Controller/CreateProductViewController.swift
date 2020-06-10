@@ -15,7 +15,7 @@ class CreateProductViewController: UIViewController {
     private let textViewCellId = "CreateProductViewControllerTextViewCell"
     
     // MARK:- Properties
-    let switcherValue: Int? = 0
+    var switcherValue: Int?
     var cellTypes: [CreateProductCellType] = []
     var category: Category? {
         didSet {
@@ -100,10 +100,9 @@ class CreateProductViewController: UIViewController {
             cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Кол-во комнат"), .textField("Площадь, м2"), .textField("Материал стен")]
         case "Дома":
             cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Этажей в доме"), .textField("Год постройки"), .textField("Площадь, м2"), .textField("Материал стен")]
-            
         case "Работа":
             if switcherValue == 0 {
-                cellTypes = [.textField("Название вакансии"), .video("Видео"), .textField("График"), .textField("Опыт работы"), .textField("Зарплата"), .textField("Описание")]
+                cellTypes = [.textField("Название вакансии"), .video("Видео"), .textField("График"), .textField("Опыт работы"), .textField("Зарплата"), .textView("Описание")]
             } else {
                 cellTypes = [.textField("Название резюме"), .video("Видео"), .textField("Желаемый график"), .textField("Опыт"), .textField("Ожидаемая зарплата"), .textView("Описание")]
             }

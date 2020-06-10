@@ -60,6 +60,8 @@ extension CategoryFeedViewController {
     }
     
     func setupCategoryHeader() {
+        header.delegate = self 
+        
         header.subcategories = category?.subcategories
         
         view.addSubview(header.collectionView)

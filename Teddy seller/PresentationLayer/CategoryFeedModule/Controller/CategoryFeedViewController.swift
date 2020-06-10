@@ -17,10 +17,14 @@ class CategoryFeedViewController: UIViewController {
     private var selectedIndexPath: IndexPath?
     
     // MARK:- Properties
-    
+    var switcherIndex: Int?
     var needsToPresentTopBar: Bool = false 
     
-    var category: Category?
+    var category: Category? {
+        didSet {
+            getProducts()
+        }
+    }
     var products: [Product]? = [] {
         didSet {
             print(products)
@@ -123,7 +127,7 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Seletors
     @objc func presentCreate() {
         let createProductController = CreateProductViewController()
-        createProductController.cellTypes = [.video("Видео"), .textField("Модель"), .textView("Описание"), .video("Видео"), .textField("Модель"), .textView("Описание"), .video("Видео"), .textField("Модель"), .textView("Описание")]
+        createProductController.switcherValue = switcherIndex
         createProductController.category = category
         let navigationController = UINavigationController(rootViewController: createProductController)
         navigationController.modalPresentationStyle = .fullScreen
@@ -181,8 +185,16 @@ extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK:- TopBarDelegate
 extension CategoryFeedViewController: TopBarDelegate {
     func passSelectedIndex(_ index: Int) {
-        print(index)
+        switcherIndex = index
+    }
+}
+
+// MARK:- CategoryFeedHeaderDelegate
+extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
+    func passSelectedCategory(_ category: Category) {
+        self.category = category
     }
 }

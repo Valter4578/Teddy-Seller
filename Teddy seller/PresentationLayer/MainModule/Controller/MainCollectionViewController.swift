@@ -61,7 +61,7 @@ final class MainCollectionViewController: UICollectionViewController {
                          Category(title: "Мотоциклы", serverName: "Moto")]),
                       Category(imageName: "Home", title: "Для дома", serverName: "ForHouse"),
                       Category(imageName: "Buiseness", title: "Для бизнеса", serverName: "ForBusiness"),
-                      Category(imageName: "Work", title: "Работа", serverName: "Job", subcategories: [Category(title: "Вакансии", serverName: "Vacancies"), Category(title: "Резюме", serverName: "Resume")]),
+                      Category(imageName: "Work", title: "Работа", serverName: "Job"),
                       Category(imageName: "PersonalItems", title: "Личные вещи",serverName: "PersonalThings", subcategories:
                         [Category(title: "Одежда", serverName: "Clothes", subcategories:
                             [Category(title: "Куртки"),
