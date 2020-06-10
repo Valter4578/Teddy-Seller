@@ -133,4 +133,46 @@ class TeddyAPIService {
                 }
         }
     }
+    
+    func addProduct(json: String, completionHandler: @escaping (Result<Int, AddAdsError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+
+        let parametrs: [String: String] = [
+            "token": token,
+            "ad": json
+        ]
+        
+        AF.request("\(url)/addAd", method: .post, parameters: parametrs)
+            .validate()
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(arrayLiteral: value)
+                    let error = json[0]["error"].stringValue
+                    switch error {
+                    case "Can not connect to database":
+                        completionHandler(.failure(.database))
+                    case "Token or ad is not specified":
+                        completionHandler(.failure(.tokenOrAdNotSpecified))
+                    case "Wrong token":
+                        completionHandler(.failure(.wrongToken))
+                    case "There is no subcategory, title or price field in ad":
+                        completionHandler(.failure(.requiredFieldsNotSpecified))
+                    case "Empty title or price":
+                        completionHandler(.failure(.titleOrPriseIsEmpty))
+                    case "Wrong subcategory":
+                        completionHandler(.failure(.wrongCategory))
+                    case "Wrong file type":
+                        completionHandler(.failure(.wrongFile))
+                    default:
+                        let id = json[0]["id"].intValue
+                        print(id)
+                        completionHandler(.success(id)))
+                    }
+                case .failure(let error):
+                    print(error)
+                    return
+                }
+        }
+    }
 }

@@ -9,6 +9,9 @@
 import UIKit
 
 class CreateProductTextViewTableViewCell: UITableViewCell {
+    // MARK:- Properties
+    var serverName: String? 
+    
     // MARK:- Views
     let label: UILabel = {
         let label = UILabel()

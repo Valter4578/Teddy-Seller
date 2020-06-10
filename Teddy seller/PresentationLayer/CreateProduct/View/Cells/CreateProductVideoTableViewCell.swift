@@ -9,6 +9,9 @@
 import UIKit
 
 class CreateProductVideoTableViewCell: UITableViewCell {
+    // MARK:- Properties
+    var serverName: String? 
+    
     // MARK:- Views
     let label: UILabel = {
         let label = UILabel()

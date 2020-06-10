@@ -32,11 +32,12 @@ class CreateProductViewController: UIViewController {
         return view
     }()
     
-    var addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainBlue
         button.setTitle("Добавить", for: .normal)
         button.setTitleColor(.placeholderBlack, for: .normal)
+        button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         return button
     }()
     
@@ -60,6 +61,7 @@ class CreateProductViewController: UIViewController {
             case .video(let title, let serverName):
                 let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
                 videoCell.label.text = title
+                videoCell.serverName = serverName
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)
                 tableView.rowHeight = 300
@@ -68,6 +70,7 @@ class CreateProductViewController: UIViewController {
             case .textField(let title, let serverName):
                 let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
                 textFieldCell.label.text = title
+                textFieldCell.serverName = serverName
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
                 print(title)
                 cells.append(textFieldCell)
@@ -76,6 +79,7 @@ class CreateProductViewController: UIViewController {
             case .textView(let title, let serverName):
                 let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
                 textViewCell.label.text = title
+                textViewCell.serverName = serverName
                 tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
                 print(title)
                 cells.append(textViewCell)
@@ -114,6 +118,23 @@ class CreateProductViewController: UIViewController {
     // MARK:- Selectors
     @objc func dismissCreateProduct() {
         dismiss(animated: true)
+    }
+    
+    @objc func didTapAddButton() {
+        for i in 0...cells.count - 1 {
+            if let videoCell = cells[i] as? CreateProductVideoTableViewCell {
+                print("\(videoCell.serverName) -- \(videoCell.label.text)")
+            }
+            
+            if let textViewCell = cells[i] as? CreateProductTextViewTableViewCell {
+                print("\(textViewCell.serverName) -- \(textViewCell.label.text)")
+            }
+            
+            if let textFieldCell = cells[i] as? CreateProductTextFieldTableViewCell {
+                print("\(textFieldCell.serverName) -- \(textFieldCell.label.text)")
+            }
+        }
+//        dismiss(animated: true)
     }
 }
 
