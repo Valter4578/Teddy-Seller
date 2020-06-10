@@ -52,8 +52,8 @@ class CreateProductViewController: UIViewController {
         setupAddButton()
         setupTableView() 
         setupNavigationBar()
-        setupNotificationCenter()
-        hideKeyboardByTapAround()
+//        setupNotificationCenter()
+//        hideKeyboardByTapAround()
     }
     
     // MARK:- Private functions
@@ -148,7 +148,10 @@ class CreateProductViewController: UIViewController {
         }
         
         if category?.title == "Автомобили" {
-            let productTitle = "\(jsonParametrs["mark"]) \(jsonParametrs["model"])"
+            guard let mark = jsonParametrs["mark"],
+                let model = jsonParametrs["model"]
+                else { return }
+            let productTitle = "\(mark) \(model)"
             jsonParametrs.updateValue(productTitle, forKey: "title")
         }
         
