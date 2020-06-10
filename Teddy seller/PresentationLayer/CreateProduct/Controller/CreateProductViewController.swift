@@ -57,7 +57,7 @@ class CreateProductViewController: UIViewController {
     private func configureCells() {
         cellTypes.forEach {
             switch $0 {
-            case .video(let title):
+            case .video(let title, let serverName):
                 let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
                 videoCell.label.text = title
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
@@ -65,7 +65,7 @@ class CreateProductViewController: UIViewController {
                 tableView.rowHeight = 300
                 tableView.reloadData()
                 
-            case .textField(let title):
+            case .textField(let title, let serverName):
                 let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
                 textFieldCell.label.text = title
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
@@ -73,7 +73,7 @@ class CreateProductViewController: UIViewController {
                 cells.append(textFieldCell)
                 tableView.rowHeight = 125
                 tableView.reloadData()
-            case .textView(let title):
+            case .textView(let title, let serverName):
                 let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
                 textViewCell.label.text = title
                 tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
@@ -89,22 +89,22 @@ class CreateProductViewController: UIViewController {
     func configureCellTypes() {
         switch category?.title {
         case "Автомобили":
-            cellTypes = [.video("Видео"), .textField("Марка"), .textField("Модель"), .textField("Цена"), .textField("Год выпуска"), .textField("Пробег"), .textView("Описание")]
+            cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark"), .textField(title: "Модель", serverName: "model"), .textField(title: "Цена", serverName: "price"), .textField(title: "Год выпуска", serverName: "year"), .textField(title: "Пробег", serverName: "mileage"), .textView(title: "Описание", serverName: "description")]
         case "Электроника":
-            cellTypes = [.textField("Название товара"), .video("Видео"), .textField("Марка"), .textField("Модель"), .textField("Цена"), .textField("Год выпуска"), .textView("Описание")]
+            cellTypes = [.textField(title: "Название товара", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark"), .textField(title: "Модель", serverName: "model"), .textField(title: "Цена", serverName: "price"), .textField(title: "Год выпуска", serverName: "year"), .textView(title: "Описание", serverName: "description")]
         case "Комната":
-            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Площадь, м2")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Площадь, м2", serverName: "square")]
         case "Участки":
-            cellTypes = [.textField("Название объявления "), .video("Видео"), .textField("Адрес"), .textField("Цена"),.textField("Площадь, м2")]
+            cellTypes = [.textField(title: "Название объявления ", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"),.textField(title: "Площадь, м2", serverName: "square")]
         case "Квартира":
-            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Кол-во комнат"), .textField("Площадь, м2"), .textField("Материал стен")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Кол-во комнат", serverName: "rooms"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material")]
         case "Дома":
-            cellTypes = [.textField("Название объявления"), .video("Видео"), .textView("Адрес"), .textField("Цена"), .textField("Этажей в доме"), .textField("Год постройки"), .textField("Площадь, м2"), .textField("Материал стен")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Этажей в доме", serverName: "floors"), .textField(title: "Год постройки", serverName: "year"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material   ")]
         case "Работа":
             if switcherValue == 0 {
-                cellTypes = [.textField("Название вакансии"), .video("Видео"), .textField("График"), .textField("Опыт работы"), .textField("Зарплата"), .textView("Описание")]
+                cellTypes = [.textField(title: "Название вакансии", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule"), .textField(title:"Опыт работы", serverName: "expierenceYears"), .textField(title:"Зарплата", serverName: "price"), .textView(title:"Описание", serverName: "description")]
             } else {
-                cellTypes = [.textField("Название резюме"), .video("Видео"), .textField("Желаемый график"), .textField("Опыт"), .textField("Ожидаемая зарплата"), .textView("Описание")]
+                cellTypes = [.textField(title: "Название резюме", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Желаемый график", serverName: "schedule"), .textField(title: "Опыт", serverName: "expierenceYears"), .textField(title: "Ожидаемая зарплата", serverName: "price"), .textView(title: "Описание", serverName: "description")]
             }
         default:
             break

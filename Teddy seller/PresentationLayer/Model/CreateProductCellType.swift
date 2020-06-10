@@ -9,7 +9,7 @@
 import Foundation
 
 enum CreateProductCellType {
-    case video(String)
-    case textField(String)
-    case textView(String)
+    case video(title: String, serverName: String)
+    case textField(title: String, serverName: String)
+    case textView(title: String, serverName: String)
 }
