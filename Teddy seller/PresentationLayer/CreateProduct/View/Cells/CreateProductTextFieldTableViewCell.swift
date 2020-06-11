@@ -24,6 +24,10 @@ class CreateProductTextFieldTableViewCell: UITableViewCell {
     let textField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .authNextGray
+        textField.font = UIFont(name: "Heltevica Neue", size: 28)
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
         return textField
     }()
     

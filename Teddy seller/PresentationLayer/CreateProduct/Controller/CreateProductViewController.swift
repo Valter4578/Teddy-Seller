@@ -148,8 +148,8 @@ class CreateProductViewController: UIViewController {
         }
         
         if category?.title == "Автомобили" {
-            guard let mark = jsonParametrs["mark"],
-                let model = jsonParametrs["model"]
+            guard let mark = jsonParametrs["mark"] as? String,
+                let model = jsonParametrs["model"] as? String
                 else { return }
             let productTitle = "\(mark) \(model)"
             jsonParametrs.updateValue(productTitle, forKey: "title")

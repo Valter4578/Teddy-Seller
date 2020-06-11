@@ -10,12 +10,12 @@ import UIKit
 
 class CreateProductTextViewTableViewCell: UITableViewCell {
     // MARK:- Properties
-    var serverName: String? 
+    var serverName: String?
     
     // MARK:- Views
     let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Heltevica Neue", size: 24)
+        label.font = UIFont(name: "Heltevica Neue", size: 28)
         label.textAlignment = .left
         label.text = "Lorem ispum"
         return label
@@ -24,6 +24,8 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
     let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .authNextGray
+        textView.font = UIFont(name: "Heltevica Neue", size: 22)
+        textView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 5, right: 10)
         return textView
     }()
     

@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import IQKeyboardManagerSwift
 
 enum AuthState {
     case phone
@@ -72,13 +72,19 @@ final class AuthViewController: UIViewController {
         view.addGradient(to: view.frame)
         
         setupNotificationCenter()
-
         setupNextButton()
         setupTeddyImageView()
         setupPhoneStackView()
         
         hideKeyboardByTapAround()
+        disableKeybordManager()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
+    }
+    
     
     // MARK:- Private functions
     private func hideKeyboardByTapAround() {
@@ -95,6 +101,11 @@ final class AuthViewController: UIViewController {
         case .code:
             label.text = "Введите код"
         }
+    }
+    
+    private func disableKeybordManager() {
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = false
     }
     
     // MARK:- Selectors
