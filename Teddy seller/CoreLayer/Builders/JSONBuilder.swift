@@ -15,4 +15,9 @@ class JSONBuilder {
         print(string)
         return string
     }
+    
+    static func createDictionary(data: Data) -> [String: Any]? {
+        return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    }
+    
 }

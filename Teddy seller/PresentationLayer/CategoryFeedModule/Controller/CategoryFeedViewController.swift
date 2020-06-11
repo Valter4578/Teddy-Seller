@@ -22,14 +22,11 @@ class CategoryFeedViewController: UIViewController {
     
     var category: Category? {
         didSet {
+            title = category?.title
             getProducts()
         }
     }
-    var products: [Product]? = [] {
-        didSet {
-            print(products)
-        }
-    }
+    var products: [Product]? = []
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -83,9 +80,9 @@ class CategoryFeedViewController: UIViewController {
     private func getProducts() {
         let teddyService = TeddyAPIService()
         
-        guard let serverName = category?.serverName else { return }
+        guard let currentCategory = category else { return }
         
-        teddyService.getAds(for: serverName) { [weak self] (result) in
+        teddyService.getAds(for: currentCategory) { [weak self] (result) in
             switch result {
             case .success(let product):
                 print(product.title)

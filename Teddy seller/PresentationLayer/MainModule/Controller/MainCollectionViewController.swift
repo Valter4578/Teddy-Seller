@@ -41,7 +41,7 @@ final class MainCollectionViewController: UICollectionViewController {
                                              bottom: 33.0,
                                              right: 31.0)
     
-    var categories = [Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty", products: [Product(title: "Дом", price: 30000, phoneNumber: 79137830046), Product(title: "Квартира ЛОФТ", price: 99999999, phoneNumber: 79137830046)],
+    var categories = [Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty",
                                subcategories:
                             [Category(title: "Дома",serverName: "Houses",subcategories:
                                 [Category(title: "1-этажные"),

@@ -89,12 +89,13 @@ class TeddyAPIService {
         }
     }
     
-    func getAds(for subcategory: String, completionHandler: @escaping (Result<Product, AdsError>) -> ()) {
+    func getAds(for subcategory: Category, completionHandler: @escaping (Result<Product, AdsError>) -> ()) {
         guard let token = UserDefaults.standard.string(forKey: "token") else { return }
         
+        guard let serverName = subcategory.serverName else { return }
         let parametrs: [String: String] = [
             "token": token,
-            "subcategory": subcategory
+            "subcategory": serverName
         ]
         
         AF.request("\(url)/getAdsForSubcategory", method: .post, parameters: parametrs)
@@ -117,15 +118,20 @@ class TeddyAPIService {
                         completionHandler(.failure(.wrongSubcategory))
                     default:
                         let allElements = json[0].arrayValue
-                        for i in 0...allElements.count {
+                        for i in 0...allElements.count - 1 {
                             let title = json[0][i]["title"].stringValue
                             let price = json[0][i]["price"].intValue
                             let phoneNumber = json[0][i]["author"]["username"].intValue
+                            let category = json[0][i]["subcategory"].stringValue
                             
-                            let product = Product(title: title, price: price, phoneNumber: phoneNumber)
-                            completionHandler(.success(product))
+                            guard let products = value as? [Any] else { return }
+                            if let productDictionary = products[i] as? [String: Any] {
+                                let product = Product(title: title, price: price, phoneNumber: phoneNumber, category: Category(title: category), dictionary: productDictionary)
+                                completionHandler(.success(product))
+                            }
                         }
                     }
+                    
                 case .failure(let error):
                     print(error)
                     return

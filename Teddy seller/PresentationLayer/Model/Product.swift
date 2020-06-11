@@ -12,5 +12,6 @@ struct Product {
     let title: String
     let price: Int
     let phoneNumber: Int 
-//    let category: Categories
+    let category: Category
+    let dictionary: [String: Any]
 }
