@@ -13,7 +13,7 @@ class CategoryFeedHeaderCollectionViewCell: UICollectionViewCell {
     // MARK:- Views
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Times", size: 16)
+        label.font = UIFont(name: "Helvetica", size: 16)
         label.textColor = .productGray
         return label
     }()
