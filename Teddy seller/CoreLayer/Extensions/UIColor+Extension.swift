@@ -38,7 +38,7 @@ extension UIColor {
     
     // MARK:- Colors
     static var mainBlue: UIColor { // #60BAFF
-        return setAsRgb(red: 96, green: 186, blue: 255)
+        return setAsRgb(red: 109, green: 127, blue: 202)
     }
  
     static var placeholderBlack: UIColor { // #383838
