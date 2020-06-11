@@ -23,6 +23,7 @@
 		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
 		8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58324864A53001FC653 /* AuthAlertBuilder.swift */; };
 		8842D58724864B1B001FC653 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58624864B1B001FC653 /* AuthError.swift */; };
+		8850B7F124928F0700227B7C /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850B7F024928F0600227B7C /* PlayerView.swift */; };
 		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
@@ -74,6 +75,7 @@
 		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
 		8842D58324864A53001FC653 /* AuthAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlertBuilder.swift; sourceTree = "<group>"; };
 		8842D58624864B1B001FC653 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		8850B7F024928F0600227B7C /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		8842D582248649FA001FC653 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				8850B7EF24928EF100227B7C /* Views */,
 				8842D581248649EA001FC653 /* Builders */,
 				887BA3D2247A4C38009DCCE3 /* Extensions */,
 			);
@@ -254,6 +257,14 @@
 				88B0CEFF248F6C580078812D /* CreateProductCellType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8850B7EF24928EF100227B7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8850B7F024928F0600227B7C /* PlayerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8867010A247B85B2002E2A8E /* ServiceLayer */ = {
@@ -549,6 +560,7 @@
 				882BC071248F5F830007B59C /* TopBar.swift in Sources */,
 				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
 				883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */,
+				8850B7F124928F0700227B7C /* PlayerView.swift in Sources */,
 				88EDD8772486B753000B4470 /* CategoryFeedHeader.swift in Sources */,
 				882BC076248F633E0007B59C /* CreateProductVideoTableViewCell.swift in Sources */,
 				882BC073248F5FA30007B59C /* BottomBar.swift in Sources */,

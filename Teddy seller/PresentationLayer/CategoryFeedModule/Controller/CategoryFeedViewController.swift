@@ -68,7 +68,6 @@ class CategoryFeedViewController: UIViewController {
         setupCollectionView()
         configureTopBar()
         setupCategoryHeader()
-        getProducts()
     }
     
     // MARK:- Selectors
@@ -153,6 +152,7 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
+        
         
         if let product = products?[indexPath.item] {
             cell.product = product

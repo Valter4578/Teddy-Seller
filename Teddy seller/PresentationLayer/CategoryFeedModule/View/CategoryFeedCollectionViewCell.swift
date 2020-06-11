@@ -9,13 +9,17 @@
 import UIKit
 import SnapKit
 
-class CategoryFeedCollectionViewCell: UICollectionViewCell {
+final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     // MARK:- Properties
     var product: Product? {
         didSet {
             if let product = product {
                 priceLabel.text = String(product.price)
                 productName.text = product.title
+                guard let stringUrl = product.dictionary["video"] as? String,
+                    let videoUrl = URL(string: stringUrl) else { return }
+                videoContrainer.setPlayerURL(url: videoUrl)
+                videoContrainer.player.play()
             }
         }
     }
@@ -41,11 +45,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var videoContrainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
+    lazy var videoContrainer: PlayerView = PlayerView()
     
     lazy var productName: UILabel = {
         let label = UILabel()
@@ -83,7 +83,7 @@ class CategoryFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupContactButton() {
+    func setupContactButton() { 
         addSubview(contactButton)
         
         contactButton.snp.makeConstraints {
