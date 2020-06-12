@@ -79,6 +79,8 @@ class CategoryFeedViewController: UIViewController {
     
     // MARK:- Private functions
     private func getProducts() {
+        products = []
+        
         let teddyService = TeddyAPIService()
         
         guard let currentCategory = category else { return }
