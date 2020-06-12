@@ -51,7 +51,7 @@ class CategoryFeedViewController: UIViewController {
     }()
     
     var arrowView: ArrowView = {
-        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         view.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         return view
     }()

@@ -27,7 +27,7 @@ class CreateProductViewController: UIViewController {
     
     // MARK:- Views
     var arrowView: ArrowView = {
-        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         view.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         return view
     }()
@@ -36,7 +36,8 @@ class CreateProductViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .mainBlue
         button.setTitle("Добавить", for: .normal)
-        button.setTitleColor(.placeholderBlack, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name:"Helvetica Neue", size: 24)
         button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         return button
     }()
