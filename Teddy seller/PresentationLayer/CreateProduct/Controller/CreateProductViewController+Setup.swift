@@ -46,6 +46,8 @@ extension CreateProductViewController {
         
         tableView.separatorColor = .clear
         
+        tableView.allowsSelection = false
+        
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { maker in
