@@ -13,7 +13,7 @@ import CoreLocation
 final class MainCollectionViewController: UICollectionViewController {
     // MARK:- Views
     var arrowView: ArrowView = {
-        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         view.transform = CGAffineTransform(rotationAngle: .pi)
         return view
     }()
@@ -48,12 +48,14 @@ final class MainCollectionViewController: UICollectionViewController {
                                  Category(title: "2-этажные"),
                                  Category(title: "3-этажные"),
                                  Category(title: "Многоэтажные")]),
+                             Category(title: "Квартиры",serverName: "Flats", subcategories:
+                             [Category(title: "1-комнатные"),
+                              Category(title: "2-комнатные"),
+                              Category(title: "3-комнтаные"),
+                              Category(title: "Многокомнатные")]),
                              Category(title: "Комнаты", serverName: "Rooms"),
-                                 Category(title: "Квартиры",serverName: "Flats", subcategories:
-                                    [Category(title: "1-комнатные"),
-                                     Category(title: "2-комнатные"),
-                                     Category(title: "3-комнтаные"),
-                                     Category(title: "Многокомнатные")]), Category(title: "Участки", serverName: "Lands")]),
+                            Category(title: "Участки", serverName: "Lands")]),
+                      
                       Category(imageName: "Transport", title: "Автомобили",serverName: "Automobiles", subcategories:
                         [Category(title: "Легковые", serverName: "Cars"),
                          Category(title: "Спецтехника", serverName: "Machines"),
