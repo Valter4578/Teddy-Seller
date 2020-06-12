@@ -24,6 +24,8 @@ class CategoryFeedViewController: UIViewController {
         didSet {
             title = category?.title
             getProducts()
+            header.subcategories = category?.subcategories
+            header.collectionView.reloadData()
         }
     }
     var products: [Product]? = []
@@ -152,7 +154,6 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
-        
         
         if let product = products?[indexPath.item] {
             cell.product = product
