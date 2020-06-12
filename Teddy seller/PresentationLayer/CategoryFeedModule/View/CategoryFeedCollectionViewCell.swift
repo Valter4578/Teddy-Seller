@@ -42,6 +42,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         label.font = UIFont(name: "Heltevica", size: 20)
         label.textColor = .priceGray
         label.textAlignment = .center
+        label.numberOfLines = 0 
         return label
     }()
     
