@@ -14,6 +14,8 @@ class CreateProductViewController: UIViewController {
     private let textFieldCellId = "CreateProductViewControllerTextFieldCell"
     private let textViewCellId = "CreateProductViewControllerTextViewCell"
     
+    private let materials = ["деревянный", "кирпичный", "блочный", "панельный"]
+    
     // MARK:- Properties
     var switcherValue: Int?
     var cellTypes: [CreateProductCellType] = []
@@ -44,6 +46,8 @@ class CreateProductViewController: UIViewController {
     
     var tableView: UITableView = UITableView()
     
+    var materialsPickerView: UIPickerView? 
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +57,7 @@ class CreateProductViewController: UIViewController {
         setupAddButton()
         setupTableView() 
         setupNavigationBar()
-//        setupNotificationCenter()
-//        hideKeyboardByTapAround()
+        setupPickerView()
     }
     
     // MARK:- Private functions
@@ -111,7 +114,7 @@ class CreateProductViewController: UIViewController {
         case "Квартира":
             cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Кол-во комнат", serverName: "rooms"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material")]
         case "Дома":
-            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Этажей в доме", serverName: "floors"), .textField(title: "Год постройки", serverName: "year"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material   ")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Этажей в доме", serverName: "floors"), .textField(title: "Год постройки", serverName: "year"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material")]
         case "Работа":
             if switcherValue == 0 {
                 cellTypes = [.textField(title: "Название вакансии", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule"), .textField(title:"Опыт работы", serverName: "expierenceYears"), .textField(title:"Зарплата", serverName: "price"), .textView(title:"Описание", serverName: "description")]
@@ -210,5 +213,29 @@ extension CreateProductViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.item]
+    }
+}
+
+// MARK:- UIPickerViewDelegate
+extension CreateProductViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let indexOfCell = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material")),
+            let materialCell = cells[indexOfCell] as? CreateProductTextFieldTableViewCell else { return }
+        materialCell.textField.text = materials[row]
+    }
+}
+
+// MARK:- UIPickerViewDataSource
+extension CreateProductViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return materials.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return materials[row]
     }
 }

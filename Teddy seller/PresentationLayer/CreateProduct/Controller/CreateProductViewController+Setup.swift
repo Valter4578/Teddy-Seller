@@ -62,4 +62,18 @@ extension CreateProductViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    func setupPickerView() {
+        
+        if let index = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material")) {
+            materialsPickerView = UIPickerView()
+            
+            materialsPickerView?.delegate = self
+            materialsPickerView?.dataSource = self
+            
+            guard let materialCell = cells[index] as? CreateProductTextFieldTableViewCell else { return }
+            materialCell.textField.inputView = materialsPickerView
+            materialsPickerView?.clipsToBounds = true 
+        }
+    }
 }
