@@ -49,6 +49,7 @@
 		88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
 		88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D358EC248A9EB800591129 /* UIView+Extension.swift */; };
+		88D6F0172493B2FB00F6D93D /* DictionaryTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */; };
 		88EA9CFA2490EC000010A62E /* AddAdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CF92490EC000010A62E /* AddAdError.swift */; };
 		88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */; };
 		88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */; };
@@ -103,6 +104,7 @@
 		88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
 		88D358EC248A9EB800591129 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTranslator.swift; sourceTree = "<group>"; };
 		88EA9CF92490EC000010A62E /* AddAdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdError.swift; sourceTree = "<group>"; };
 		88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdAlertBuilder.swift; sourceTree = "<group>"; };
 		88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONBuilder.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				8850B7EF24928EF100227B7C /* Views */,
 				8842D581248649EA001FC653 /* Builders */,
 				887BA3D2247A4C38009DCCE3 /* Extensions */,
+				88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */,
 				882BC071248F5F830007B59C /* TopBar.swift in Sources */,
 				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
+				88D6F0172493B2FB00F6D93D /* DictionaryTranslator.swift in Sources */,
 				883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */,
 				8850B7F124928F0700227B7C /* PlayerView.swift in Sources */,
 				88EDD8772486B753000B4470 /* CategoryFeedHeader.swift in Sources */,
