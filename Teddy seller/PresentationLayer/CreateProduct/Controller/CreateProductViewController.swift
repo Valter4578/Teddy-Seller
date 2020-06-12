@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CreateProductDelegate: class {
+    func didAddNewProduct()
+}
+
 class CreateProductViewController: UIViewController {
     // MARK:- Private properties
     private let videoCellId = "CreateProductViewControllerVideoCell"
@@ -17,6 +21,8 @@ class CreateProductViewController: UIViewController {
     private let materials = ["деревянный", "кирпичный", "блочный", "панельный"]
     
     // MARK:- Properties
+    weak var delegate: CreateProductDelegate!
+    
     var switcherValue: Int?
     var cellTypes: [CreateProductCellType] = []
     var category: Category? {
@@ -167,6 +173,7 @@ class CreateProductViewController: UIViewController {
             switch result {
             case .success(let id):
                 print(id)
+                self.delegate.didAddNewProduct()
                 self.dismiss(animated: true)
             case .failure(let error):
                 let alertBuilder = AddAdAlertBuilder(errorType: error)

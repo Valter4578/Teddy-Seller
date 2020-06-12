@@ -128,7 +128,7 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
-    private func configureBottomBar() {
+    private func configureBottomBar() { 
         if category?.subcategories == nil {
             needsToPresentBottomBar = true
         }
@@ -137,6 +137,7 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Seletors
     @objc func presentCreate() {
         let createProductController = CreateProductViewController()
+        createProductController.delegate = self
         createProductController.switcherValue = switcherIndex
         createProductController.category = category
         let navigationController = UINavigationController(rootViewController: createProductController)
@@ -214,5 +215,12 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
             maker.trailing.equalTo(view)
             maker.bottom.equalTo(bottomBar.snp.top)
         }
+    }
+}
+
+// MARK:- CreateProductDelegate
+extension CategoryFeedViewController: CreateProductDelegate {
+    func didAddNewProduct() {
+        getProducts()
     }
 }
