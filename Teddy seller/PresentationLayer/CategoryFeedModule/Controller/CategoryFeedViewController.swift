@@ -16,9 +16,11 @@ class CategoryFeedViewController: UIViewController {
     // To pass selected cell's index path to didTapContact
     private var selectedIndexPath: IndexPath?
     
+    
     // MARK:- Properties
     var switcherIndex: Int?
     var needsToPresentTopBar: Bool = false 
+    var needsToPresentBottomBar: Bool = false
     
     var category: Category? {
         didSet {
@@ -53,7 +55,7 @@ class CategoryFeedViewController: UIViewController {
     }()
     
     var arrowView: ArrowView = {
-        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         view.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         return view
     }()
@@ -66,7 +68,9 @@ class CategoryFeedViewController: UIViewController {
         arrowView.addGestureRecognizer(gestureRecognizer)
         
         setupNavigationBar()
-        setupBottomBar()
+        
+        configureBottomBar()
+        if needsToPresentBottomBar { setupBottomBar() }
         setupCollectionView()
         configureTopBar()
         setupCategoryHeader()
@@ -121,6 +125,12 @@ class CategoryFeedViewController: UIViewController {
             break
         case .some(_):
             break
+        }
+    }
+    
+    private func configureBottomBar() {
+        if category?.subcategories == nil {
+            needsToPresentBottomBar = true
         }
     }
     
@@ -195,6 +205,14 @@ extension CategoryFeedViewController: TopBarDelegate {
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
+        needsToPresentBottomBar = true
+        setupBottomBar()
         self.category = category
+        
+        collectionView.snp.remakeConstraints { (maker) in
+            maker.leading.equalTo(view)
+            maker.trailing.equalTo(view)
+            maker.bottom.equalTo(bottomBar.snp.top)
+        }
     }
 }

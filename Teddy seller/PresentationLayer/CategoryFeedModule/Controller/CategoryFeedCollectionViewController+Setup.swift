@@ -22,7 +22,11 @@ extension CategoryFeedViewController {
         collectionView.snp.makeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
-            $0.bottom.equalTo(bottomBar.snp.top)
+            if needsToPresentBottomBar {
+                $0.bottom.equalTo(bottomBar.snp.top)
+            } else {
+                $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            }
         }
     }
     
