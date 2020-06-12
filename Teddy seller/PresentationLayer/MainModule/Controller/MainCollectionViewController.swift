@@ -129,7 +129,6 @@ final class MainCollectionViewController: UICollectionViewController {
         addChild(self.findCityViewController)
         self.findCityViewController.view.frame.origin.y += view.frame.height
         findCityViewController.view.clipsToBounds = true
-
         
         UIView.animate(withDuration: 0.7, animations: {
             self.findCityViewController.view.frame.origin.y = self.view.frame.origin.y
@@ -146,7 +145,6 @@ final class MainCollectionViewController: UICollectionViewController {
         }) { _ in
             self.findCityViewController.view.removeFromSuperview()
             self.findCityViewController.removeFromParent()
-            self.findCityViewController.willMove(toParent: nil)
             self.isFindCityPresented = false
         }
     }
@@ -253,6 +251,7 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
 // MARK:- FindCityViewControllerDelegate
 extension MainCollectionViewController: FindCityViewControllerDelegate {
     func didDissmisBySave() {
+        dissmisFindCity()
         arrowView.transform = CGAffineTransform(rotationAngle: .pi)
     }
     

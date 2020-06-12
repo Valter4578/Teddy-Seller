@@ -12,6 +12,7 @@ import SnapKit
 protocol FindCityViewControllerDelegate: class {
     func setSelectedCity(cityName: String)
     func didDissmisBySave()
+    
 }
 
 class FindCityViewController: UIViewController {
@@ -34,6 +35,7 @@ class FindCityViewController: UIViewController {
             title = currentCity
         }
     }
+    
     var cityToFind: String = ""
     var selectedCity: String = ""
     
@@ -90,9 +92,11 @@ class FindCityViewController: UIViewController {
         UIView.animate(withDuration: 0.7, animations: {
             self.view.alpha = 0
         }) { _ in
+            self.delegate.didDissmisBySave()
             self.view.removeFromSuperview()
             self.removeFromParent()
             self.willMove(toParent: nil)
+            
         }
     }
     
@@ -143,9 +147,15 @@ class FindCityViewController: UIViewController {
     }
     
     @objc func didTapSaveButton() {
-        
-        delegate.setSelectedCity(cityName: selectedCity)
-        animateDissmis()
+        if selectedCity == "" {
+            let alertController = UIAlertController(title: "Город не выбран", message: "Выберите город", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+        } else {
+            delegate.setSelectedCity(cityName: selectedCity)
+            delegate.didDissmisBySave()
+        }
     }
     
     // MARK:- Setups

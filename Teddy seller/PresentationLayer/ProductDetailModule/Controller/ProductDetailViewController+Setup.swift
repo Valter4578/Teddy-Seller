@@ -46,8 +46,8 @@ extension ProductDetailViewController {
         view.addSubview(descriptionTextView)
         
         descriptionTextView.snp.makeConstraints {
-            $0.leading.equalTo(view)
-            $0.trailing.equalTo(view)
+            $0.leading.equalTo(view).offset(10)
+            $0.trailing.equalTo(view).offset(10)
             $0.bottom.equalTo(contactButton.snp.top)
             $0.top.equalTo(videoContainer.snp.bottom)
         }
