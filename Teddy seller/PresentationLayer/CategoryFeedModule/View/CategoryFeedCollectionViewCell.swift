@@ -14,7 +14,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     var product: Product? {
         didSet {
             if let product = product {
-                priceLabel.text = String(product.price)
+                priceLabel.text = "Цена " + String(product.price) + " ₽"
                 productName.text = product.title
                 guard let stringUrl = product.dictionary["video"] as? String,
                     let videoUrl = URL(string: stringUrl) else { return }

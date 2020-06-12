@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController {
+final class ProductDetailViewController: UIViewController {
     // MARK:- Views
     let contactButton: UIButton = {
         let button = UIButton()
@@ -19,17 +19,11 @@ class ProductDetailViewController: UIViewController {
         return button
     }()
     
-    let videoContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
+    let videoContainer: PlayerView = PlayerView() 
     
     let descriptionTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        // test data 
-        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ex soleat habemus usu, te nec eligendi deserunt vituperata. Nam tempor utamur gubergren no. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dolorem sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
         textView.font = UIFont(name: "Helvetica Neue", size: 24)
         return textView
     }()
@@ -41,7 +35,11 @@ class ProductDetailViewController: UIViewController {
     }()
     
     // MARK:- Propeties
-    var product: Product?
+    var product: Product? {
+        didSet {
+            configureScreen()
+        }
+    }
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -55,6 +53,34 @@ class ProductDetailViewController: UIViewController {
         setupTextView()
         setupNavigationBar()
         
+        configureScreen()
+    }
+    
+    // MARK:- Private methods
+    private func configureScreen() {
+        configurePlayer()
+        
+        let textViewAttributedString = NSMutableAttributedString()
+        product?.dictionary.forEach({ key, value in
+            guard let valueString = value as? String else { return }
+            
+            if valueString == "subcategory" { return }
+            if valueString == "id" { return }
+            
+            guard let keyName = DictionaryTranslator.getName(from: key) else { return }
+            
+            textViewAttributedString.append(NSAttributedString(string: keyName + ":", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 24)]))
+            textViewAttributedString.append(NSAttributedString(string: valueString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)]))
+        })
+        
+        descriptionTextView.attributedText = textViewAttributedString
+    }
+    
+    private func configurePlayer() {
+        guard let stringUrl = product?.dictionary["video"] as? String,
+            let videoUrl = URL(string: stringUrl) else { return }
+        videoContainer.setPlayerURL(url: videoUrl)
+        videoContainer.player.play()
     }
     
     // MARK:- Selectors

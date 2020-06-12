@@ -153,11 +153,26 @@ final class MainCollectionViewController: UICollectionViewController {
     
     private func checkForToken() {
         let token = UserDefaults.standard.string(forKey: "token")
-        print("------------------------------------------------")
+        
         print("------------------------------------------------")
         print(token)
         print("------------------------------------------------")
-        print("------------------------------------------------")
+        
+        let teddyService = TeddyAPIService()
+        let mockCategory = Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty")
+        teddyService.getAds(for: mockCategory) { (result) in
+            switch result {
+            case .failure(let error):
+                if error == .wrongToken {
+                    let authViewController = AuthViewController()
+                    authViewController.modalPresentationStyle = .fullScreen
+                    self.present(authViewController, animated: true, completion: nil)
+                }
+            case .success(_):
+                print("Success")
+            }
+        }
+        
         if token == "" {
             let authViewController = AuthViewController()
             authViewController.modalPresentationStyle = .fullScreen
