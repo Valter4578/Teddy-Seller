@@ -118,18 +118,22 @@ class TeddyAPIService {
                         completionHandler(.failure(.wrongSubcategory))
                     default:
                         let allElements = json[0].arrayValue
-                        for i in 0...allElements.count - 1 {
-                            let title = json[0][i]["title"].stringValue
-                            let price = json[0][i]["price"].intValue
-                            let phoneNumber = json[0][i]["author"]["username"].intValue
-                            let category = json[0][i]["subcategory"].stringValue
-                            
-                            guard let products = value as? [Any] else { return }
-                            if let productDictionary = products[i] as? [String: Any] {
-                                let product = Product(title: title, price: price, phoneNumber: phoneNumber, category: Category(title: category), dictionary: productDictionary)
-                                completionHandler(.success(product))
+                        
+                        if allElements.count != 0 {                        
+                            for i in 0...allElements.count - 1 {
+                                let title = json[0][i]["title"].stringValue
+                                let price = json[0][i]["price"].intValue
+                                let phoneNumber = json[0][i]["author"]["username"].intValue
+                                let category = json[0][i]["subcategory"].stringValue
+                                
+                                guard let products = value as? [Any] else { return }
+                                if let productDictionary = products[i] as? [String: Any] {
+                                    let product = Product(title: title, price: price, phoneNumber: phoneNumber, category: Category(title: category), dictionary: productDictionary)
+                                    completionHandler(.success(product))
+                                }
                             }
                         }
+                        
                     }
                     
                 case .failure(let error):
