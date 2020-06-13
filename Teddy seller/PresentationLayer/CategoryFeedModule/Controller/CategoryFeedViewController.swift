@@ -26,8 +26,13 @@ class CategoryFeedViewController: UIViewController {
         didSet {
             title = category?.title
             getProducts()
-            header.subcategories = category?.subcategories
-            header.collectionView.reloadData()
+            if let subcategories = category?.subcategories {
+                header.subcategories = subcategories
+                header.collectionView.reloadData()
+            } else {
+                header.subcategories = nil
+                header.collectionView.reloadData()
+            }
         }
     }
     var products: [Product]? = []
@@ -128,7 +133,7 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
-    private func configureBottomBar() { 
+    private func configureBottomBar() {
         if category?.subcategories == nil {
             needsToPresentBottomBar = true
         }
@@ -149,11 +154,12 @@ class CategoryFeedViewController: UIViewController {
 // MARK:- UICollectionViewDelegate
 extension CategoryFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let product = products?[indexPath.item]
+        if let product = products?[indexPath.item] {
+            let productDetailViewController = ProductDetailViewController()
+            productDetailViewController.product = product
+            navigationController?.pushViewController(productDetailViewController, animated: true)
+        }
         
-        let productDetailViewController = ProductDetailViewController()
-        productDetailViewController.product = product
-        navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
 
@@ -168,8 +174,10 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        if let product = products?[indexPath.item] {
-            cell.product = product
+        if products?.count != 0 {
+            if let product = products?[indexPath.item] {
+                cell.product = product
+            }
         }
         
         return cell
