@@ -9,18 +9,26 @@
 import UIKit
 import SnapKit
 
+protocol AddressDelegate: class {
+    func passAddress(address: String)
+}
+
 class AddressViewController: UIViewController {
     // MARK:- Private properties
     private let cellId = "AddressViewControllerCell"
     private let fieldTitles = ["Регион", "Населённый пункт", "Район", "Улица", "Дом"]
     
     // MARK:- Properties
+    weak var delegate: AddressDelegate!
+    
     var cells: [UITableViewCell] = []
     
     // MARK:- Views
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 125
+        tableView.rowHeight = 100
+        tableView.separatorColor = .clear
+        tableView.allowsSelection = false
         return tableView
     }()
     
@@ -52,12 +60,20 @@ class AddressViewController: UIViewController {
             cells.append(textFieldCell)
             tableView.reloadData()
         }
-        
     }
     
     // MARK:- Selectors
     @objc func didTapSaveButton() {
-        print(#function)
+        var fullAddress = ""
+        for cell in cells {
+            guard let textFieldCell = cell as? CreateProductTextFieldTableViewCell,
+                let text = textFieldCell.textField.text else { return }
+            
+            fullAddress += text + " "
+        }
+        
+        delegate.passAddress(address: fullAddress)
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK:- Setups
@@ -85,7 +101,6 @@ class AddressViewController: UIViewController {
             maker.height.equalTo(78)
         }
     }
-    
 }
 
 extension AddressViewController: UITableViewDelegate {

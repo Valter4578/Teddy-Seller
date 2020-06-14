@@ -217,12 +217,10 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapAddressTextView() {
-        print(#function)
-        
         let addressController = AddressViewController()
+        addressController.delegate = self
         navigationController?.pushViewController(addressController, animated: true)
     }
-    
 }
 
 // MARK:- UITableViewDelegate
@@ -268,5 +266,15 @@ extension CreateProductViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return materials[row]
+    }
+}
+
+// MARK:- AddressDelegate
+extension CreateProductViewController: AddressDelegate {
+    func passAddress(address: String) {
+        if let index = cellTypes.firstIndex(of: .textView(title: "Адрес", serverName: "address")) {
+            guard let addressCell = cells[index] as? CreateProductTextViewTableViewCell else { return }
+            addressCell.textView.text = address
+        }
     }
 }
