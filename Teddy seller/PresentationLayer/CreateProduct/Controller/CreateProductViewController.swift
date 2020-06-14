@@ -182,7 +182,7 @@ extension CreateProductViewController: UITableViewDataSource {
 // MARK:- UIPickerViewDelegate
 extension CreateProductViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let indexOfCell = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material")),
+        guard let indexOfCell = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)),
             let materialCell = cells[indexOfCell] as? CreateProductTextFieldTableViewCell else { return }
         materialCell.textField.text = materials[row]
     }

@@ -25,10 +25,15 @@ extension CreateProductViewController {
                 tableView.rowHeight = 300
                 tableView.reloadData()
                 
-            case .textField(let title, let serverName):
+            case .textField(let title, let serverName, let needsOnlyNumbers):
                 let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
                 textFieldCell.label.text = title
                 textFieldCell.serverName = serverName
+                
+                if needsOnlyNumbers {
+                    textFieldCell.textField.keyboardType = .numberPad
+                }
+                
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
                 cells.append(textFieldCell)
                 tableView.rowHeight = 125
@@ -57,22 +62,23 @@ extension CreateProductViewController {
     func configureCellTypes() {
         switch category?.title {
         case "Автомобили":
-            cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark"), .textField(title: "Модель", serverName: "model"), .textField(title: "Цена", serverName: "price"), .textField(title: "Год выпуска", serverName: "year"), .textField(title: "Пробег", serverName: "mileage"), .textView(title: "Описание", serverName: "description")]
+            cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textField(title: "Пробег", serverName: "mileage", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description")]
         case "Электроника":
-            cellTypes = [.textField(title: "Название товара", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark"), .textField(title: "Модель", serverName: "model"), .textField(title: "Цена", serverName: "price"), .textField(title: "Год выпуска", serverName: "year"), .textView(title: "Описание", serverName: "description")]
+            cellTypes = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description")]
         case "Комната":
-            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Площадь, м2", serverName: "square")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true)]
         case "Участки":
-            cellTypes = [.textField(title: "Название объявления ", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"),.textField(title: "Площадь, м2", serverName: "square")]
+            cellTypes = [.textField(title: "Название объявления ", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"),
+                         .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true),.textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true)]
         case "Квартира":
-            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Кол-во комнат", serverName: "rooms"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Кол-во комнат", serverName: "rooms", needsOnlyNumbers: false), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)]
         case "Дома":
-            cellTypes = [.textField(title: "Название объявления", serverName: "title"), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price"), .textField(title: "Этажей в доме", serverName: "floors"), .textField(title: "Год постройки", serverName: "year"), .textField(title: "Площадь, м2", serverName: "square"), .textField(title: "Материал стен", serverName: "material")]
+            cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Этажей в доме", serverName: "floors", needsOnlyNumbers: true), .textField(title: "Год постройки", serverName: "year", needsOnlyNumbers: true), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)]
         case "Работа":
             if switcherValue == 0 {
-                cellTypes = [.textField(title: "Название вакансии", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule"), .textField(title:"Опыт работы", serverName: "expierenceYears"), .textField(title:"Зарплата", serverName: "price"), .textView(title:"Описание", serverName: "description")]
+                cellTypes = [.textField(title: "Название вакансии", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule", needsOnlyNumbers: true), .textField(title:"Опыт работы", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title:"Зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title:"Описание", serverName: "description")]
             } else {
-                cellTypes = [.textField(title: "Название резюме", serverName: "title"), .video(title: "Видео", serverName: "video"), .textField(title: "Желаемый график", serverName: "schedule"), .textField(title: "Опыт", serverName: "expierenceYears"), .textField(title: "Ожидаемая зарплата", serverName: "price"), .textView(title: "Описание", serverName: "description")]
+                cellTypes = [.textField(title: "Название резюме", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Желаемый график", serverName: "schedule", needsOnlyNumbers: true), .textField(title: "Опыт", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title: "Ожидаемая зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description")]
             }
         default:
             break

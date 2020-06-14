@@ -65,7 +65,7 @@ extension CreateProductViewController {
     
     func setupPickerView() {
         
-        if let index = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material")) {
+        if let index = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)) {
             materialsPickerView = UIPickerView()
             
             materialsPickerView?.delegate = self
