@@ -50,6 +50,7 @@
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
 		88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D358EC248A9EB800591129 /* UIView+Extension.swift */; };
 		88D6F0172493B2FB00F6D93D /* DictionaryTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */; };
+		88D6F01B2494C7AD00F6D93D /* VideoPlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */; };
 		88EA9CFA2490EC000010A62E /* AddAdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CF92490EC000010A62E /* AddAdError.swift */; };
 		88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */; };
 		88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */; };
@@ -105,6 +106,7 @@
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
 		88D358EC248A9EB800591129 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTranslator.swift; sourceTree = "<group>"; };
+		88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlusView.swift; sourceTree = "<group>"; };
 		88EA9CF92490EC000010A62E /* AddAdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdError.swift; sourceTree = "<group>"; };
 		88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdAlertBuilder.swift; sourceTree = "<group>"; };
 		88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONBuilder.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				882BC074248F63120007B59C /* Cells */,
+				88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */,
 				882BC06B248E88B50007B59C /* CreateProductViewController+Setup.swift in Sources */,
 				88CEAC472486B19C00347CD9 /* Category.swift in Sources */,
+				88D6F01B2494C7AD00F6D93D /* VideoPlusView.swift in Sources */,
 				88062DB3248CCBE300BB47BC /* ProductDetailViewController.swift in Sources */,
 				8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */,
 				887CEE522483C58700A63293 /* ArrowView.swift in Sources */,

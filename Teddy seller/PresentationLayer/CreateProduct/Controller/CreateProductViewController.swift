@@ -79,6 +79,10 @@ class CreateProductViewController: UIViewController {
                 let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
                 videoCell.label.text = title
                 videoCell.serverName = serverName
+                
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnVideoContainer))
+                videoCell.videoContainer.addGestureRecognizer(gestureRecognizer)
+                
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)
                 tableView.rowHeight = 300
@@ -198,6 +202,11 @@ class CreateProductViewController: UIViewController {
     
     @objc func didTapAround() {
         view.endEditing(true)
+    }
+    
+    @objc func didTapOnVideoContainer() {
+        print(#function)
+        // функционал добавления видео добавлю позднее 
     }
 }
 

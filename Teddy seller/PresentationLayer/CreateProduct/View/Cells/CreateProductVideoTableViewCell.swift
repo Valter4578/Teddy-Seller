@@ -21,11 +21,7 @@ class CreateProductVideoTableViewCell: UITableViewCell {
         return label
     }()
     
-    let videoContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
+    let videoContainer = VideoPlusView()
     
     // MARK:- Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
