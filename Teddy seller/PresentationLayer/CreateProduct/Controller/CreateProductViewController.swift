@@ -93,7 +93,6 @@ class CreateProductViewController: UIViewController {
                 textFieldCell.label.text = title
                 textFieldCell.serverName = serverName
                 tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
-                print(title)
                 cells.append(textFieldCell)
                 tableView.rowHeight = 125
                 tableView.reloadData()
@@ -102,7 +101,14 @@ class CreateProductViewController: UIViewController {
                 textViewCell.label.text = title
                 textViewCell.serverName = serverName
                 tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
-                print(title)
+                
+                if title == "Адрес" {
+                    textViewCell.textView.isEditable = false
+                    
+                    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAddressTextView))
+                    textViewCell.textView.addGestureRecognizer(gestureRecognizer)
+                }
+                
                 cells.append(textViewCell)
                 tableView.rowHeight = 260
 
@@ -189,17 +195,18 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(sender: Notification) {
-          if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-              let keyboardRectangle = keyboardFrame.cgRectValue
-              let keyboardHeight = keyboardRectangle.height
-              self.view.frame.origin.y = -keyboardHeight
-          }
-      }
-      
-      @objc func keyboardWillHide(sender: Notification) {
-          self.view.frame.origin.y = 0 // Move view to original position
-      }
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
     
+    @objc func keyboardWillHide(sender: Notification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+    }
+    
+    /// Hide keyboard by tap everywhere on screen
     @objc func didTapAround() {
         view.endEditing(true)
     }
@@ -208,6 +215,14 @@ class CreateProductViewController: UIViewController {
         print(#function)
         // функционал добавления видео добавлю позднее 
     }
+    
+    @objc func didTapAddressTextView() {
+        print(#function)
+        
+        let addressController = AddressViewController()
+        navigationController?.pushViewController(addressController, animated: true)
+    }
+    
 }
 
 // MARK:- UITableViewDelegate
