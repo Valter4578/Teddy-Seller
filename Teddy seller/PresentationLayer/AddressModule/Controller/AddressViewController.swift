@@ -45,10 +45,13 @@ class AddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Адрес"
+        
         configureScreen()
         
         setupSaveButton()
         setupTableView()
+        setupNavigationBar()
     }
     
     // MARK:- Private functions
@@ -78,7 +81,6 @@ class AddressViewController: UIViewController {
     
     // MARK:- Setups
     private func setupTableView() {
-        tableView.delegate = self
         tableView.dataSource = self
         
         view.addSubview(tableView)
@@ -101,12 +103,13 @@ class AddressViewController: UIViewController {
             maker.height.equalTo(78)
         }
     }
-}
-
-extension AddressViewController: UITableViewDelegate {
     
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .white
+    }
 }
 
+// MARK:- UITableViewDataSource
 extension AddressViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
