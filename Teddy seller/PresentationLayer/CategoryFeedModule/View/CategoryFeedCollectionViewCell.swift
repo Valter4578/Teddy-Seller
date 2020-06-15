@@ -14,6 +14,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     var product: Product? {
         didSet {
             if let product = product {
+                priceLabel.font  = UIFont(name: "Helvetica Neue", size: 15.0)
                 priceLabel.text = "Цена: " + String(product.price) + " ₽"
                 productName.text = product.title
                 guard let stringUrl = product.dictionary["video"] as? String,
