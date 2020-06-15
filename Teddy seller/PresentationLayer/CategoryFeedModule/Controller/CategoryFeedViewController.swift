@@ -236,6 +236,8 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
         needsToPresentBottomBar = true
         setupBottomBar()
         self.currentCategory = category
+       
+        setupCategoryHeader()
         
         collectionView.snp.remakeConstraints { (maker) in
             maker.leading.equalTo(view)

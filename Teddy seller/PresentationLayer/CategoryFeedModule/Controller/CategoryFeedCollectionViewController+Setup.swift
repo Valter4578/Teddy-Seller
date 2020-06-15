@@ -68,7 +68,8 @@ extension CategoryFeedViewController {
         header.delegate = self
         
         header.subcategories = currentCategory?.subcategories
-        
+        print(currentCategory?.title as Any)
+       
         view.addSubview(header.collectionView)
         
         header.collectionView.snp.makeConstraints {
@@ -80,6 +81,10 @@ extension CategoryFeedViewController {
                 $0.top.equalTo(view.safeAreaLayoutGuide)
             }
             $0.bottom.equalTo(collectionView.snp.top)
+            guard (currentCategory?.subcategories?.count ?? 0) > 0 else {
+                      $0.height.equalTo(10)
+                      return
+                   }
             $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
         }
     }
