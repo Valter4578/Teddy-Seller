@@ -69,8 +69,8 @@ final class ProductDetailViewController: UIViewController {
             
             guard let keyName = DictionaryTranslator.getName(from: key) else { return }
             
-            textViewAttributedString.append(NSAttributedString(string: keyName + ": ", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 24)]))
-            textViewAttributedString.append(NSAttributedString(string: valueString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)]))
+            textViewAttributedString.append(NSAttributedString(string: keyName + ": ", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 20)]))
+            textViewAttributedString.append(NSAttributedString(string: valueString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]))
         })
         
         descriptionTextView.attributedText = textViewAttributedString

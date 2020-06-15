@@ -36,8 +36,9 @@ class AddressViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .mainBlue
         button.setTitle("Сохранить", for: .normal)
-        button.setTitleColor(.placeholderBlack, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        button.titleLabel?.font = UIFont(name:"Helvetica Neue", size: 24)
         return button
     }()
     

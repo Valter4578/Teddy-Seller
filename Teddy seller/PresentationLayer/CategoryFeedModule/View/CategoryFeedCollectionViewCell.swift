@@ -30,7 +30,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         button.backgroundColor = .contactPurple
         button.setTitle("Связаться", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Heltevica Neue", size: 18)
+        button.titleLabel?.font = UIFont(name: "Heltevica Neue", size: 24)
         button.layer.cornerRadius = 7
         button.addTarget(self, action: #selector(didTapContact), for: .touchUpInside)
         return button
