@@ -14,7 +14,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     var product: Product? {
         didSet {
             if let product = product {
-                priceLabel.font  = UIFont(name: "Helvetica Neue", size: 15.0)
+                priceLabel.font  = UIFont(name: "Helvetica Neue", size: 16.0)
                 priceLabel.text = "Цена: " + String(product.price) + " ₽"
                 productName.text = product.title
                 guard let stringUrl = product.dictionary["video"] as? String,
@@ -42,8 +42,8 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         label.textColor = .priceGray
         label.font = UIFont(name: "Heltevica", size: 20)
         label.textColor = .priceGray
-        label.textAlignment = .center
-        label.numberOfLines = 0 
+        label.textAlignment = .natural
+        label.numberOfLines = 1
         return label
     }()
     
@@ -89,9 +89,9 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         addSubview(contactButton)
         
         contactButton.snp.makeConstraints {
-            $0.width.equalTo(150)
+            $0.width.equalTo(130)
             $0.height.equalTo(40)
-            $0.trailing.equalTo(self).offset(-30)
+            $0.trailing.equalTo(self).offset(-25)
             $0.bottom.equalTo(self).offset(-10)
         }
     }
@@ -103,7 +103,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(self)
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contactButton.snp.top).offset(-8)
-            $0.top.equalTo(productName.snp.bottom)
+            $0.top.equalTo(productName.snp.bottom).offset(8)
         }
     }
     
@@ -114,7 +114,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
             $0.bottom.equalTo(contactButton.snp.bottom)
             $0.top.equalTo(contactButton.snp.top)
             $0.leading.equalTo(self).offset(20)
-            $0.trailing.equalTo(contactButton.snp.leading).offset(-20)
+           $0.trailing.equalTo(contactButton.snp.leading).offset(-20)
         }
     }
     
