@@ -22,11 +22,18 @@ class CategoryFeedViewController: UIViewController {
     var needsToPresentTopBar: Bool = false 
     var needsToPresentBottomBar: Bool = false
     
-    var category: Category? {
+    var lastCategory: Category? = nil
+    var selectedCategory: Category? {
         didSet {
-            title = category?.title
+            currentCategory = selectedCategory
+        }
+    }
+    
+    var currentCategory: Category? {
+        didSet {
+            title = currentCategory?.title
             getProducts()
-            if let subcategories = category?.subcategories {
+            if let subcategories = currentCategory?.subcategories {
                 header.subcategories = subcategories
                 header.collectionView.reloadData()
             } else {
@@ -83,7 +90,17 @@ class CategoryFeedViewController: UIViewController {
     
     // MARK:- Selectors
     @objc func didTapBack() {
-        navigationController?.popViewController(animated: true)
+        if lastCategory == nil {
+            navigationController?.popViewController(animated: true)
+        } else {
+            if currentCategory == lastCategory {
+                lastCategory = selectedCategory
+            }
+            currentCategory = lastCategory
+            if currentCategory?.isParent ?? true {
+                lastCategory = nil
+            }
+        }
     }
     
     // MARK:- Private functions
@@ -92,7 +109,7 @@ class CategoryFeedViewController: UIViewController {
         
         let teddyService = TeddyAPIService()
         
-        guard let currentCategory = category else { return }
+        guard let currentCategory = currentCategory else { return }
         
         teddyService.getAds(for: currentCategory) { [weak self] (result) in
             switch result {
@@ -116,7 +133,7 @@ class CategoryFeedViewController: UIViewController {
     }
     
     private func configureTopBar() {
-        switch category?.title {
+        switch currentCategory?.title {
         case "Одежда":
             setupTopBar(leftTitle: "Мужская", rightTitle: "Женская")
             needsToPresentTopBar = true
@@ -134,7 +151,7 @@ class CategoryFeedViewController: UIViewController {
     }
     
     private func configureBottomBar() {
-        if category?.subcategories == nil {
+        if currentCategory?.subcategories == nil {
             needsToPresentBottomBar = true
         }
     }
@@ -144,7 +161,7 @@ class CategoryFeedViewController: UIViewController {
         let createProductController = CreateProductViewController()
         createProductController.delegate = self
         createProductController.switcherValue = switcherIndex
-        createProductController.category = category
+        createProductController.category = currentCategory
         let navigationController = UINavigationController(rootViewController: createProductController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -214,9 +231,11 @@ extension CategoryFeedViewController: TopBarDelegate {
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
+        self.lastCategory = currentCategory
+        
         needsToPresentBottomBar = true
         setupBottomBar()
-        self.category = category
+        self.currentCategory = category
         
         collectionView.snp.remakeConstraints { (maker) in
             maker.leading.equalTo(view)

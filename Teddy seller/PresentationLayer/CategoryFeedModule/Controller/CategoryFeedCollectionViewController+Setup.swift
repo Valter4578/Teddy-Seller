@@ -60,13 +60,13 @@ extension CategoryFeedViewController {
     func setupNavigationBar() {
         let leftBarItem = UIBarButtonItem(customView: arrowView)
         navigationItem.leftBarButtonItem = leftBarItem
-        title = category?.title
+        title = currentCategory?.title
     }
     
     func setupCategoryHeader() {
         header.delegate = self 
         
-        header.subcategories = category?.subcategories
+        header.subcategories = currentCategory?.subcategories
         
         view.addSubview(header.collectionView)
         

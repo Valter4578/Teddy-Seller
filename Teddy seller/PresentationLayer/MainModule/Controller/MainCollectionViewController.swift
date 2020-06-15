@@ -41,7 +41,7 @@ final class MainCollectionViewController: UICollectionViewController {
                                              bottom: 33.0,
                                              right: 31.0)
     
-    var categories = [Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty",
+    var categories = [Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty", isParent: true,
                                subcategories:
                             [Category(title: "Дома",serverName: "Houses",subcategories:
                                 [Category(title: "1-этажные"),
@@ -56,15 +56,15 @@ final class MainCollectionViewController: UICollectionViewController {
                              Category(title: "Комнаты", serverName: "Rooms"),
                             Category(title: "Участки", serverName: "Lands")]),
                       
-                      Category(imageName: "Transport", title: "Автомобили",serverName: "Automobiles", subcategories:
+                      Category(imageName: "Transport", title: "Автомобили",serverName: "Automobiles", isParent: true, subcategories:
                         [Category(title: "Легковые", serverName: "Cars"),
                          Category(title: "Спецтехника", serverName: "Machines"),
                          Category(title: "Грузовые", serverName: "Trucks"),
                          Category(title: "Мотоциклы", serverName: "Moto")]),
-                      Category(imageName: "Home", title: "Для дома", serverName: "ForHouse"),
-                      Category(imageName: "Buiseness", title: "Для бизнеса", serverName: "ForBusiness"),
-                      Category(imageName: "Work", title: "Работа", serverName: "Job"),
-                      Category(imageName: "PersonalItems", title: "Личные вещи",serverName: "PersonalThings", subcategories:
+                      Category(imageName: "Home", title: "Для дома", serverName: "ForHouse", isParent: true),
+                      Category(imageName: "Buiseness", title: "Для бизнеса", serverName: "ForBusiness", isParent: true),
+                      Category(imageName: "Work", title: "Работа", serverName: "Job", isParent: true),
+                      Category(imageName: "PersonalItems", title: "Личные вещи",serverName: "PersonalThings", isParent: true, subcategories:
                         [Category(title: "Одежда", serverName: "Clothes", subcategories:
                             [Category(title: "Куртки"),
                              Category(title: "Рубашки"),
@@ -72,7 +72,7 @@ final class MainCollectionViewController: UICollectionViewController {
                              Category(title: "Джинсы"),
                              Category(title: "Футболки"),
                              Category(title: "Другое")]), Category(title: "Обувь", serverName: "Shoes"), Category(title: "Детские товары", serverName: "ForChildren"), Category(title: "Аксессуары", serverName: "Accessories"), Category(title: "Косметика", serverName: "Cosmetics"), Category(title: "Книги", serverName: "Books")]),
-                      Category(imageName: "Electronics", title: "Электроника",serverName: "Electronix", subcategories:
+                      Category(imageName: "Electronics", title: "Электроника",serverName: "Electronix", isParent: true, subcategories:
                         [Category(title: "Мультимедиа", serverName: "Multimedia"),
                          Category(title: "Ноутбуки", serverName: "Laptops"),
                          Category(title: "Телефоны", serverName: "Phones"),
@@ -81,7 +81,7 @@ final class MainCollectionViewController: UICollectionViewController {
                          Category(title: "Планшенты", serverName: "Pads"),
                          Category(title: "Фототехника", serverName: "Photo"),
                          Category(title: "Другое", serverName: "OtherElectronix")]),
-                      Category(imageName: "Service", title: "Услуги", serverName: "OtherElectronix")]
+                      Category(imageName: "Service", title: "Услуги", serverName: "OtherElectronix", isParent: true)]
     
 
     
@@ -212,7 +212,7 @@ final class MainCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
         let categoryFeeedViewController = CategoryFeedViewController()
-        categoryFeeedViewController.category = categories[indexPath.item]
+        categoryFeeedViewController.selectedCategory = categories[indexPath.item]
         
         navigationController?.pushViewController(categoryFeeedViewController, animated: true)
     }
