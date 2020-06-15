@@ -42,6 +42,7 @@
 		8881D57D2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D57C2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift */; };
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
+		8896A9AB2497D79200CA5712 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8896A9AA2497D79200CA5712 /* RangeSlider.swift */; };
 		88B0CF00248F6C580078812D /* CreateProductCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CEFF248F6C580078812D /* CreateProductCellType.swift */; };
 		88B0CF02248F71810078812D /* CreateProductTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CF01248F71810078812D /* CreateProductTextFieldTableViewCell.swift */; };
 		88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */; };
@@ -100,6 +101,7 @@
 		8881D57C2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
+		8896A9AA2497D79200CA5712 /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		88B0CEFF248F6C580078812D /* CreateProductCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductCellType.swift; sourceTree = "<group>"; };
 		88B0CF01248F71810078812D /* CreateProductTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				8850B7F024928F0600227B7C /* PlayerView.swift */,
+				8896A9AA2497D79200CA5712 /* RangeSlider.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				88B0CF00248F6C580078812D /* CreateProductCellType.swift in Sources */,
 				880180CC249689AD00E39408 /* CreateProductViewController+Configure.swift in Sources */,
 				882BC069248E87BF0007B59C /* CreateProductViewController.swift in Sources */,
+				8896A9AB2497D79200CA5712 /* RangeSlider.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
 				88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */,
 				882BC071248F5F830007B59C /* TopBar.swift in Sources */,
