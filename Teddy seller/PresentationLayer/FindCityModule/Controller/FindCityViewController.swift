@@ -9,10 +9,14 @@
 import UIKit
 import SnapKit
 
+enum FindCityControllerState {
+    case fromMain
+    case fromCreateProduct
+}
+
 protocol FindCityViewControllerDelegate: class {
     func setSelectedCity(cityName: String)
     func didDissmisBySave()
-    
 }
 
 class FindCityViewController: UIViewController {
@@ -22,6 +26,8 @@ class FindCityViewController: UIViewController {
     
     // MARK:- Properties
     weak var delegate: FindCityViewControllerDelegate! 
+    
+    var state: FindCityControllerState?
     
     var foundedCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"]
     var standartCities: [String] = ["Москва", "Санкт-Петербург", "Волгоград", "Владивосток", "Воронеж", "Екатеринбург", "Казань", "Калининград", "Краснодар", "Красноярск", "Красноярск", "Нижний Новгород", "Новосибирск", "Омск", "Пермь", "Ростов-на-Дону"] {
@@ -76,7 +82,6 @@ class FindCityViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         
         navigationController?.navigationBar.alpha = 1
     }

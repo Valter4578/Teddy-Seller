@@ -52,7 +52,9 @@ class CreateProductViewController: UIViewController {
     
     var tableView: UITableView = UITableView()
     
-    var materialsPickerView: UIPickerView? 
+    var materialsPickerView: UIPickerView?
+    
+    let findCityViewController = FindCityViewController()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -155,6 +157,18 @@ class CreateProductViewController: UIViewController {
         addressController.delegate = self
         navigationController?.pushViewController(addressController, animated: true)
     }
+    
+    @objc func presentFindCity() {
+        findCityViewController.delegate = self
+        view.addSubview(findCityViewController.view)
+        addChild(findCityViewController)
+        findCityViewController.view.frame.origin.y += view.frame.height
+        findCityViewController.view.clipsToBounds = true
+        
+        UIView.animate(withDuration: 0.7) {
+            self.findCityViewController.view.frame.origin.y = self.view.frame.origin.y
+        }
+    }
 }
 
 // MARK:- UITableViewDelegate
@@ -209,6 +223,25 @@ extension CreateProductViewController: AddressDelegate {
         if let index = cellTypes.firstIndex(of: .textView(title: "Адрес", serverName: "address")) {
             guard let addressCell = cells[index] as? CreateProductTextViewTableViewCell else { return }
             addressCell.textView.text = address
+        }
+    }
+}
+
+// MARK:- FindCityViewControllerDelegate
+extension CreateProductViewController: FindCityViewControllerDelegate {
+    func setSelectedCity(cityName: String) {
+        if let indexOfCityCell = cellTypes.firstIndex(of: .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)) {
+            guard let cityCell = cells[indexOfCityCell] as? CreateProductTextFieldTableViewCell else { return }
+            cityCell.textField.text = cityName
+        }
+    }
+    
+    func didDissmisBySave() {
+        UIView.animate(withDuration: 0.7, animations: {
+            self.findCityViewController.view.frame.origin.y += self.view.frame.height
+        }) { _ in
+            self.findCityViewController.view.removeFromSuperview()
+            self.findCityViewController.removeFromParent()
         }
     }
 }

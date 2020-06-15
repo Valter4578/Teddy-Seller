@@ -32,6 +32,7 @@ final class MainCollectionViewController: UICollectionViewController {
     var cityName: String = "Москва" {
         didSet {
             title = cityName
+            UserDefaults.standard.set(cityName, forKey: "city")
         }
     }
     
