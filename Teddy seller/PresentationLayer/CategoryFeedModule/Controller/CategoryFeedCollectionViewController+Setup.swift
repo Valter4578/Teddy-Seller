@@ -16,6 +16,7 @@ extension CategoryFeedViewController {
         
         collectionView.backgroundColor = .mainBlue
         collectionView.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
         
         view.addSubview(collectionView)
         
@@ -64,7 +65,7 @@ extension CategoryFeedViewController {
     }
     
     func setupCategoryHeader() {
-        header.delegate = self 
+        header.delegate = self
         
         header.subcategories = currentCategory?.subcategories
         
