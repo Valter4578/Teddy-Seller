@@ -100,6 +100,8 @@ class CategoryFeedViewController: UIViewController {
             if currentCategory?.isParent ?? true {
                 lastCategory = nil
             }
+            setupCategoryHeader()
+            self.collectionView.reloadData()
         }
     }
     
