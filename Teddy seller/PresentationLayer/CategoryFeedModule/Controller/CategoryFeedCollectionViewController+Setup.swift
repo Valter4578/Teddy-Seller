@@ -71,21 +71,23 @@ extension CategoryFeedViewController {
         print(currentCategory?.title as Any)
        
         view.addSubview(header.collectionView)
+       header.collectionView.snp.remakeConstraints {
+           $0.leading.equalTo(view)
+           $0.trailing.equalTo(view)
+           if needsToPresentTopBar {
+               $0.top.equalTo(topBar.snp.bottom)
+           } else {
+               $0.top.equalTo(view.safeAreaLayoutGuide)
+           }
+           $0.bottom.equalTo(collectionView.snp.top)
+
+           if (currentCategory?.subcategories?.count ?? 0) > 0 {
+               $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
+           } else {
+               $0.height.equalTo(10)
+           }
+        header.collectionView.layoutIfNeeded()
+       }
         
-        header.collectionView.snp.makeConstraints {
-            $0.leading.equalTo(view)
-            $0.trailing.equalTo(view)
-            if needsToPresentTopBar {
-                $0.top.equalTo(topBar.snp.bottom)
-            } else {
-                $0.top.equalTo(view.safeAreaLayoutGuide)
-            }
-            $0.bottom.equalTo(collectionView.snp.top)
-            guard (currentCategory?.subcategories?.count ?? 0) > 0 else {
-                      $0.height.equalTo(10)
-                      return
-                   }
-            $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
-        }
     }
 }
