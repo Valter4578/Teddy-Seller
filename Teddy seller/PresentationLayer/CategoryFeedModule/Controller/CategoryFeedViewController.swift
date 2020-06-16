@@ -20,7 +20,11 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Properties
     var switcherIndex: Int?
     var needsToPresentTopBar: Bool = false 
-    var needsToPresentBottomBar: Bool = false
+    var needsToPresentBottomBar: Bool = false {
+        didSet {
+            setupCollectionViewConstraints()
+        }
+    }
     
     var lastCategory: Category? = nil
     var selectedCategory: Category? {
@@ -42,6 +46,7 @@ class CategoryFeedViewController: UIViewController {
             }
         }
     }
+    
     var products: [Product]? = []
     
     // MARK:- Views
@@ -99,7 +104,9 @@ class CategoryFeedViewController: UIViewController {
             currentCategory = lastCategory
             if currentCategory?.isParent ?? true {
                 lastCategory = nil
+                needsToPresentBottomBar = false
             }
+            
             setupCategoryHeader()
             self.collectionView.reloadData()
         }
@@ -235,8 +242,9 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
         self.lastCategory = currentCategory
         
-        needsToPresentBottomBar = true
         setupBottomBar()
+        needsToPresentBottomBar = true
+        
         self.currentCategory = category
        
         setupCategoryHeader()

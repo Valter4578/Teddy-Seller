@@ -10,14 +10,7 @@ import UIKit
 import SnapKit
 
 extension CategoryFeedViewController {
-    func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.backgroundColor = .mainBlue
-        collectionView.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
-        
+    func setupCollectionViewConstraints() {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
@@ -29,6 +22,17 @@ extension CategoryFeedViewController {
                 $0.bottom.equalTo(view.safeAreaLayoutGuide)
             }
         }
+    }
+    
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.backgroundColor = .mainBlue
+        collectionView.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
+        
+        setupCollectionViewConstraints()
     }
     
     func setupBottomBar() {
@@ -66,6 +70,7 @@ extension CategoryFeedViewController {
     
     func setupCategoryHeader() {
         header.delegate = self
+
         
         header.subcategories = currentCategory?.subcategories
         
