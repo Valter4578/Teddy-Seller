@@ -47,7 +47,7 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
-    var products: [Product]? = []
+    var products: [Product] = []
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -64,12 +64,7 @@ class CategoryFeedViewController: UIViewController {
     
     var topBar: TopBar = TopBar()
     
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = .mainBlue
-        return collectionView
-    }()
+    var collectionView: UICollectionView?
     
     var arrowView: ArrowView = {
         let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -108,13 +103,14 @@ class CategoryFeedViewController: UIViewController {
             }
             
             setupCategoryHeader()
-            self.collectionView.reloadData()
+            self.collectionView?.reloadData()
         }
     }
     
     // MARK:- Private functions
     private func getProducts() {
         products = []
+        collectionView?.reloadData()
         
         let teddyService = TeddyAPIService()
         
@@ -124,8 +120,8 @@ class CategoryFeedViewController: UIViewController {
             switch result {
             case .success(let product):
                 print(product.title)
-                self?.products?.append(product)
-                self?.collectionView.reloadData()
+                self?.products.append(product)
+                self?.collectionView?.reloadData()
             case .failure(let error):
                 if error == .wrongToken {
                     let authController = AuthViewController()
@@ -180,30 +176,25 @@ class CategoryFeedViewController: UIViewController {
 // MARK:- UICollectionViewDelegate
 extension CategoryFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let product = products?[indexPath.item] {
-            let productDetailViewController = ProductDetailViewController()
-            productDetailViewController.product = product
-            navigationController?.pushViewController(productDetailViewController, animated: true)
-        }
         
+        let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.product = products[indexPath.item]
+        navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
 
 // MARK: UICollectionViewDataSource
 extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let prdcts = products else { return 0 }
-        return prdcts.count
+        return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        if products?.count != 0 {
-            if let product = products?[indexPath.item] {
-                cell.product = product
-            }
+        if products.count != 0 {
+            cell.product = products[indexPath.row]
         }
         
         return cell
@@ -249,7 +240,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
        
         setupCategoryHeader()
         
-        collectionView.snp.remakeConstraints { (maker) in
+        collectionView?.snp.remakeConstraints { (maker) in
             maker.leading.equalTo(view)
             maker.trailing.equalTo(view)
             maker.bottom.equalTo(bottomBar.snp.top)

@@ -11,9 +11,9 @@ import SnapKit
 
 extension CategoryFeedViewController {
     func setupCollectionViewConstraints() {
-        view.addSubview(collectionView)
+        view.addSubview(collectionView!)
         
-        collectionView.snp.makeConstraints {
+        collectionView!.snp.makeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             if needsToPresentBottomBar {
@@ -25,12 +25,16 @@ extension CategoryFeedViewController {
     }
     
     func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        let layout = UICollectionViewFlowLayout()
         
-        collectionView.backgroundColor = .mainBlue
-        collectionView.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        
+        collectionView?.backgroundColor = .mainBlue
+        collectionView?.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
         
         setupCollectionViewConstraints()
     }
@@ -83,7 +87,7 @@ extension CategoryFeedViewController {
             } else {
                 $0.top.equalTo(view.safeAreaLayoutGuide)
             }
-            $0.bottom.equalTo(collectionView.snp.top)
+            $0.bottom.equalTo(collectionView?.snp.top as! ConstraintRelatableTarget)
             
             if (currentCategory?.subcategories?.count ?? 0) > 0 {
                 $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
