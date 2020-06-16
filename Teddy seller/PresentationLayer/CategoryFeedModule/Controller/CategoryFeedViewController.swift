@@ -22,7 +22,9 @@ class CategoryFeedViewController: UIViewController {
     var needsToPresentTopBar: Bool = false 
     var needsToPresentBottomBar: Bool = false {
         didSet {
-            setupCollectionViewConstraints()
+            if let _ = collectionView {
+                setupCollectionViewConstraints()
+            }
         }
     }
     

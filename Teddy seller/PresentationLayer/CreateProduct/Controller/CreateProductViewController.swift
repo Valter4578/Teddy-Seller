@@ -25,6 +25,8 @@ class CreateProductViewController: UIViewController {
     
     var switcherValue: Int?
     var cellTypes: [CreateProductCellType] = []
+    let defaultCellTypes: [CreateProductCellType] = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
+    
     var category: Category? {
         didSet {
             configureCellTypes()

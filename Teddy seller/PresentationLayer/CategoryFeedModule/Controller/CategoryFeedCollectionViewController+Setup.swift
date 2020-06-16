@@ -94,7 +94,6 @@ extension CategoryFeedViewController {
             } else {
                 $0.height.equalTo(10)
             }
-            
             header.collectionView.layoutIfNeeded()
         }
         

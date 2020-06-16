@@ -9,6 +9,7 @@
 import UIKit
 
 extension CreateProductViewController {
+    // MARK:- Functions
     func configureCells() {
         cellTypes.forEach {
             switch $0 {
@@ -70,10 +71,13 @@ extension CreateProductViewController {
     
     func configureCellTypes() {
         switch category?.title {
-        case "Автомобили":
+            // Автомобили
+        case "Легковые", "Спецтехника", "Грузовые", "Мотоциклы":
             cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textField(title: "Пробег", serverName: "mileage", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
+            // Электроника
         case "Электроника":
             cellTypes = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
+            // Недвижимость
         case "Комната":
             cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true)]
         case "Участки":
@@ -83,6 +87,7 @@ extension CreateProductViewController {
             cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Кол-во комнат", serverName: "rooms", needsOnlyNumbers: false), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)]
         case "Дома":
             cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Этажей в доме", serverName: "floors", needsOnlyNumbers: true), .textField(title: "Год постройки", serverName: "year", needsOnlyNumbers: true), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)]
+            // Работа
         case "Работа":
             if switcherValue == 0 {
                 cellTypes = [.textField(title: "Название вакансии", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule", needsOnlyNumbers: true), .textField(title:"Опыт работы", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title:"Зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title:"Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
@@ -90,7 +95,7 @@ extension CreateProductViewController {
                 cellTypes = [.textField(title: "Название резюме", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Желаемый график", serverName: "schedule", needsOnlyNumbers: true), .textField(title: "Опыт", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title: "Ожидаемая зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
             }
         default:
-            break
+            cellTypes = defaultCellTypes
         }
     }
 }
