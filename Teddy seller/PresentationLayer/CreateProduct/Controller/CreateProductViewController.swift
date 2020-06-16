@@ -151,7 +151,23 @@ class CreateProductViewController: UIViewController {
     
     @objc func didTapOnVideoContainer() {
         print(#function)
-        // функционал добавления видео добавлю позднее 
+        let alertController = UIAlertController(title: nil, message: "Выберите опцию", preferredStyle: .actionSheet)
+        
+        let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { _ in
+            print("Gallery")
+        }
+        
+        let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { _ in
+            print("Video")
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+    
+        alertController.addAction(galleryAction)
+        alertController.addAction(cameraAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
     
     @objc func didTapAddressTextView() {
