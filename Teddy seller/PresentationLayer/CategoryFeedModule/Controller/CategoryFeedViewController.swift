@@ -239,7 +239,6 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
         self.currentCategory = category
        
         setupCategoryHeader()
-        self.collectionView.reloadData()
         
         collectionView?.snp.remakeConstraints { (maker) in
             maker.leading.equalTo(view)
