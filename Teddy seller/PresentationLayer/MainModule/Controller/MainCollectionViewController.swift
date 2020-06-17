@@ -122,6 +122,7 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
     }
+    
                 
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
