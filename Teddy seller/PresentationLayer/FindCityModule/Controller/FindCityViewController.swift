@@ -252,9 +252,7 @@ extension FindCityViewController: UITableViewDelegate {
         
         let modelName = UIDevice.modelName
         
-        if isSe ?? true {
-            header.cityTextField.autocorrectionType = .no
-        }
+        header.cityTextField.autocorrectionType = .no
         
         return header
     }

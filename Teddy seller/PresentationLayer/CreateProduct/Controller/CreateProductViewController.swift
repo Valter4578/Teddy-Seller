@@ -43,6 +43,7 @@ class CreateProductViewController: UIViewController {
     var cells: [UITableViewCell] = []
     
     var videoSelectedFrom: VideoSelectedFrom?
+
     
     // MARK:- Views
     var arrowView: ArrowView = {
