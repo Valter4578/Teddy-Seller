@@ -44,6 +44,7 @@ class CreateProductViewController: UIViewController {
     
     var videoSelectedFrom: VideoSelectedFrom?
 
+    var isVideoSelected: Bool = false
     
     // MARK:- Views
     var arrowView: ArrowView = {
@@ -111,6 +112,15 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapAddButton() {
+        
+        if !isVideoSelected {
+            let alertController = UIAlertController(title: "Видео не выбрано", message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel)
+            alertController.addAction(action)
+            present(alertController, animated: true, completion: nil)
+            return 
+        }
+        
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
             if let videoCell = cells[i] as? CreateProductVideoTableViewCell {
@@ -167,12 +177,14 @@ class CreateProductViewController: UIViewController {
         let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.videoSelectedFrom = .gallery
+            strongSelf.isVideoSelected = true
             VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .savedPhotosAlbum)
         }
         
         let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.videoSelectedFrom = .camera
+            strongSelf.isVideoSelected = true
             VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .camera)
         }
         
@@ -206,7 +218,7 @@ class CreateProductViewController: UIViewController {
     @objc func didCaptureVideo(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
         let title = (error == nil) ? "Успешно" : "Ошибка"
         let message = (error == nil) ? "Видео сохранено" : "Не удалось сохранить видео"
-        
+                
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -334,6 +346,5 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
 
 // MARK:- UINavigationControllerDelegate 
 extension CreateProductViewController: UINavigationControllerDelegate {
-    
 }
 
