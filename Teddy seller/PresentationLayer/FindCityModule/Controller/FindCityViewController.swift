@@ -25,6 +25,8 @@ class FindCityViewController: UIViewController {
     private let cellId = "FindCityViewControllerCell"
     private let headerId = "FindCityViewControllerHeader"
     
+    private var isSe: Bool?
+    
     // MARK:- Properties
     weak var delegate: FindCityViewControllerDelegate! 
     
@@ -70,6 +72,8 @@ class FindCityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkForSe()
+        
         navigationController?.navigationBar.alpha = 0 
             
         setupSaveButton()
@@ -81,6 +85,7 @@ class FindCityViewController: UIViewController {
         
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
+
     }
     
     
@@ -114,6 +119,15 @@ class FindCityViewController: UIViewController {
         }
     }
     
+    private func checkForSe() {
+        let modelName = UIDevice.modelName
+        
+        if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
+            isSe = true
+        }
+    }
+    
+    
     // MARK:- Selectors
     @objc func didTapAround() {
         view.endEditing(true)
@@ -123,11 +137,13 @@ class FindCityViewController: UIViewController {
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.saveButton.snp.remakeConstraints { (maker) in
-                maker.leading.equalTo(view)
-                maker.trailing.equalTo(view)
-                maker.bottom.equalTo(view).offset(-keyboardHeight)
-                maker.height.equalTo(78)
+            if !(isSe ?? true) {
+                self.saveButton.snp.remakeConstraints { (maker) in
+                    maker.leading.equalTo(view)
+                    maker.trailing.equalTo(view)
+                    maker.bottom.equalTo(view).offset(-keyboardHeight)
+                    maker.height.equalTo(78)
+                }
             }
         }
     }
@@ -231,6 +247,13 @@ extension FindCityViewController: UITableViewDelegate {
         header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! FindCityHeader
         header.cityTextField.addTarget(self, action: #selector(editingDidEnd), for: .editingChanged)
         header.backgroundColor = .white
+        
+        let modelName = UIDevice.modelName
+        
+        if isSe ?? true {
+            header.cityTextField.autocorrectionType = .no
+        }
+        
         return header
     }
     
