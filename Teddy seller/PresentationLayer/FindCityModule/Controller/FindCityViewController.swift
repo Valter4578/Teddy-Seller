@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import IQKeyboardManagerSwift
 
 enum FindCityControllerState {
     case fromMain
@@ -77,6 +78,9 @@ class FindCityViewController: UIViewController {
         setupNavigationBar()
         setupNotificationCenter()
         hideKeyboardByTapAround()
+        
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = false
     }
     
     
@@ -84,6 +88,11 @@ class FindCityViewController: UIViewController {
         super.viewDidAppear(animated)
         
         navigationController?.navigationBar.alpha = 1
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
     }
     
     // MARK:- Private functions
