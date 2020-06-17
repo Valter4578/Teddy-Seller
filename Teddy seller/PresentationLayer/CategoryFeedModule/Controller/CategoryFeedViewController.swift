@@ -16,6 +16,11 @@ class CategoryFeedViewController: UIViewController {
     // To pass selected cell's index path to didTapContact
     private var selectedIndexPath: IndexPath?
     
+    private var isSe: Bool? {
+        didSet {
+            header.isSe = isSe
+        }
+    }
     
     // MARK:- Properties
     var switcherIndex: Int?
@@ -78,6 +83,8 @@ class CategoryFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        checkForSe() 
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
         arrowView.addGestureRecognizer(gestureRecognizer)
         
@@ -160,6 +167,16 @@ class CategoryFeedViewController: UIViewController {
     private func configureBottomBar() {
         if currentCategory?.subcategories == nil {
             needsToPresentBottomBar = true
+        }
+    }
+    
+    private func checkForSe() {
+        let modelName = UIDevice.modelName
+        
+        if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
+            isSe = true
+        } else {
+            isSe = false
         }
     }
     

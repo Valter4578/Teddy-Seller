@@ -124,6 +124,8 @@ class FindCityViewController: UIViewController {
         
         if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
             isSe = true
+        } else {
+            isSe = false
         }
     }
     

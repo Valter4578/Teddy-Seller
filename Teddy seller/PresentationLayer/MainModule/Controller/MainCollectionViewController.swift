@@ -103,6 +103,8 @@ final class MainCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkForSe()
+        
         setupLocationManager()
         setupCollectionView()
         checkForToken()
@@ -195,6 +197,8 @@ final class MainCollectionViewController: UICollectionViewController {
         
         if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
             isSe = true
+        } else {
+            isSe = false
         }
     }
     

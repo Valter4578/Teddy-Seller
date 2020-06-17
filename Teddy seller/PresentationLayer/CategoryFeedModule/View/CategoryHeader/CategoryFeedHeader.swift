@@ -22,6 +22,8 @@ class CategoryFeedHeader: UICollectionViewController {
     var subcategories: [Category]?
     var selectedCategory: Category?
     
+    var isSe: Bool?
+    
     // MARK:- Setups
     private func setupColectionView() {
         collectionView.backgroundColor = .mainBlue
@@ -62,11 +64,11 @@ class CategoryFeedHeader: UICollectionViewController {
 
 extension CategoryFeedHeader: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 155, height: 35)
+        return isSe ?? true ? CGSize(width: 130, height: 30) : CGSize(width: 155, height: 35)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return isSe ?? true ? 5 : 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -74,6 +76,6 @@ extension CategoryFeedHeader: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        return isSe ?? true ? UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10) : UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
 }

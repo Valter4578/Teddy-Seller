@@ -74,7 +74,6 @@ extension CategoryFeedViewController {
     
     func setupCategoryHeader() {
         header.delegate = self
-
         
         header.subcategories = currentCategory?.subcategories
         
