@@ -18,6 +18,9 @@ final class MainCollectionViewController: UICollectionViewController {
         return view
     }()
     
+    // MARK:- Private properties
+    private var isSe: Bool?
+    
     // MARK:- Properties
     let findCityViewController = FindCityViewController()
 
@@ -187,6 +190,14 @@ final class MainCollectionViewController: UICollectionViewController {
         }
     }
     
+    private func checkForSe() {
+        let modelName = UIDevice.modelName
+        
+        if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
+            isSe = true
+        }
+    }
+    
     // MARK:- CollectionViewDatasource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
@@ -222,7 +233,7 @@ final class MainCollectionViewController: UICollectionViewController {
 // MARK:- CollectionViewDelegateFlowLayout
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * 3
+        let paddingSpace = isSe ?? true ? 20 * 3 : sectionInsets.left * 3
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / 2
 
@@ -230,11 +241,11 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, insetForSectionAt: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return isSe ?? true ? UIEdgeInsets(top: 24.0, left: 20, bottom: 24.0, right: 20): sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt: Int) -> CGFloat {
-        return sectionInsets.left
+        return isSe ?? true ? 15 : sectionInsets.left
     }
 }
 
