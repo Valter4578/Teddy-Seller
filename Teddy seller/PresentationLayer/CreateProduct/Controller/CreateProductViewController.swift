@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import MobileCoreServices
 
 protocol CreateProductDelegate: class {
     func didAddNewProduct()
@@ -57,6 +59,8 @@ class CreateProductViewController: UIViewController {
     var materialsPickerView: UIPickerView?
     
     let findCityViewController = FindCityViewController()
+    
+    let playerView = PlayerView()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -150,11 +154,11 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapOnVideoContainer() {
-        print(#function)
         let alertController = UIAlertController(title: nil, message: "Выберите опцию", preferredStyle: .actionSheet)
         
-        let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { _ in
-            print("Gallery")
+        let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .savedPhotosAlbum)
         }
         
         let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { _ in
@@ -263,3 +267,31 @@ extension CreateProductViewController: FindCityViewControllerDelegate {
         }
     }
 }
+
+// MARK:- UIImagePickerControllerDelegate
+extension CreateProductViewController: UIImagePickerControllerDelegate {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
+            mediaType == (kUTTypeMovie as String),
+            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { return }
+        
+        dismiss(animated: true) {
+            self.playerView.setPlayerURL(url: url)
+            self.playerView.alpha = 1
+            self.playerView.layer.cornerRadius = 24
+            self.playerView.playerLayer.cornerRadius = 24
+            self.playerView.player.play()
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK:- UINavigationControllerDelegate 
+extension CreateProductViewController: UINavigationControllerDelegate {
+    
+}
+

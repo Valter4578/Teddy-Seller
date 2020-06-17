@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension CreateProductViewController {
     // MARK:- Functions
@@ -20,6 +21,15 @@ extension CreateProductViewController {
                 
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnVideoContainer))
                 videoCell.videoContainer.addGestureRecognizer(gestureRecognizer)
+                
+                playerView.alpha = 1
+                videoCell.videoContainer.addSubview(playerView)
+                
+                playerView.snp.makeConstraints { maker in
+                    maker.size.equalTo(videoCell.videoContainer)
+                    maker.center.equalTo(videoCell.videoContainer)
+                }
+                playerView.clipsToBounds = true 
                 
                 tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)

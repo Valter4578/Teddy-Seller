@@ -23,7 +23,6 @@ class GeodecoderService {
             guard let data = response.data else { return }
             guard let json = try? JSON(data: data) else { return }
             let adress = json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["description"].stringValue
-            print(adress)
             completionHandler(adress.replacingOccurrences(of: ", Россия", with: ""))
         }
     }

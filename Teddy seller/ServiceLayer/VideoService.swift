@@ -1,5 +1,5 @@
 //
-//  VideoHelper.swift
+//  VideoService.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 16.06.2020.
@@ -10,9 +10,9 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 
-class VideoHelper {
+class VideoService {
     
-    static func startMediaBrowser(delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate, sourceType: UIImagePickerController.SourceType) {
+    static func startVideoBrowsing(delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate, sourceType: UIImagePickerController.SourceType) {
         guard UIImagePickerController.isSourceTypeAvailable(sourceType) else { return }
         
         let mediaUI = UIImagePickerController()
@@ -21,6 +21,7 @@ class VideoHelper {
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
         delegate.present(mediaUI, animated: true, completion: nil)
+        print(mediaUI.delegate)
     }
     
     static func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {

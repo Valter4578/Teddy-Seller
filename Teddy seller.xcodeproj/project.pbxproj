@@ -25,7 +25,7 @@
 		8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D57D24864280001FC653 /* MainView+Setup.swift */; };
 		8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58324864A53001FC653 /* AuthAlertBuilder.swift */; };
 		8842D58724864B1B001FC653 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8842D58624864B1B001FC653 /* AuthError.swift */; };
-		884F19732498DDEA0085F413 /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884F19722498DDEA0085F413 /* VideoHelper.swift */; };
+		884F19732498DDEA0085F413 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884F19722498DDEA0085F413 /* VideoService.swift */; };
 		8850B7F124928F0700227B7C /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850B7F024928F0600227B7C /* PlayerView.swift */; };
 		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
@@ -82,7 +82,7 @@
 		8842D57D24864280001FC653 /* MainView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Setup.swift"; sourceTree = "<group>"; };
 		8842D58324864A53001FC653 /* AuthAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlertBuilder.swift; sourceTree = "<group>"; };
 		8842D58624864B1B001FC653 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
-		884F19722498DDEA0085F413 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
+		884F19722498DDEA0085F413 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		8850B7F024928F0600227B7C /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
 				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
 				88D24CA724853D65005AED02 /* TeddyAPIService.swift */,
-				884F19722498DDEA0085F413 /* VideoHelper.swift */,
+				884F19722498DDEA0085F413 /* VideoService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -590,7 +590,7 @@
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
 				88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */,
 				882BC071248F5F830007B59C /* TopBar.swift in Sources */,
-				884F19732498DDEA0085F413 /* VideoHelper.swift in Sources */,
+				884F19732498DDEA0085F413 /* VideoService.swift in Sources */,
 				8842D58424864A53001FC653 /* AuthAlertBuilder.swift in Sources */,
 				88D6F0172493B2FB00F6D93D /* DictionaryTranslator.swift in Sources */,
 				883121D62486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift in Sources */,

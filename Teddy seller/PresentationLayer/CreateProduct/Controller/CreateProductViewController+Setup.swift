@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import AVFoundation 
 
 extension CreateProductViewController {
     func setupAddButton() {

@@ -117,7 +117,7 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
     }
-            
+                
     // MARK:- Selectors
     @objc func didTapNavigationBar() {
         findCityViewController.currentCity = cityName
@@ -243,7 +243,6 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         
-        print(cordinates)
         let geocoderService = GeodecoderService()
         geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
             self.cityName = city
