@@ -14,6 +14,11 @@ protocol CreateProductDelegate: class {
     func didAddNewProduct()
 }
 
+enum VideoSelectedFrom {
+    case camera
+    case gallery
+}
+
 class CreateProductViewController: UIViewController {
     // MARK:- Private properties
     let videoCellId = "CreateProductViewControllerVideoCell"
@@ -36,6 +41,8 @@ class CreateProductViewController: UIViewController {
     }
     
     var cells: [UITableViewCell] = []
+    
+    var videoSelectedFrom: VideoSelectedFrom?
     
     // MARK:- Views
     var arrowView: ArrowView = {
@@ -158,11 +165,14 @@ class CreateProductViewController: UIViewController {
         
         let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
+            strongSelf.videoSelectedFrom = .gallery
             VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .savedPhotosAlbum)
         }
         
-        let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { _ in
-            print("Video")
+        let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.videoSelectedFrom = .camera
+            VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .camera)
         }
         
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
@@ -191,7 +201,17 @@ class CreateProductViewController: UIViewController {
             self.findCityViewController.view.frame.origin.y = self.view.frame.origin.y
         }
     }
+    
+    @objc func didCaptureVideo(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
+        let title = (error == nil) ? "Успешно" : "Ошибка"
+        let message = (error == nil) ? "Видео сохранено" : "Не удалось сохранить видео"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
+
 
 // MARK:- UITableViewDelegate
 extension CreateProductViewController: UITableViewDelegate {
@@ -275,12 +295,33 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
             mediaType == (kUTTypeMovie as String),
             let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { return }
         
-        dismiss(animated: true) {
-            self.playerView.setPlayerURL(url: url)
-            self.playerView.alpha = 1
-            self.playerView.layer.cornerRadius = 24
-            self.playerView.playerLayer.cornerRadius = 24
-            self.playerView.player.play()
+        switch videoSelectedFrom {
+        case .camera:
+            guard UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path) else { return }
+            UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(didCaptureVideo(_:didFinishSavingWithError:contextInfo:)), nil)
+            
+            dismiss(animated: true) {
+                self.playerView.setPlayerURL(url: url)
+                self.playerView.alpha = 1
+                self.playerView.layer.cornerRadius = 24
+                self.playerView.playerLayer.cornerRadius = 24
+                self.playerView.player.play()
+            }
+        case .gallery:
+            dismiss(animated: true) {
+                self.playerView.setPlayerURL(url: url)
+                self.playerView.alpha = 1
+                self.playerView.layer.cornerRadius = 24
+                self.playerView.playerLayer.cornerRadius = 24
+                self.playerView.player.play()
+            }
+        case .none:
+            dismiss(animated: true) {
+                let alertController = UIAlertController(title: "Ошибка", message: "Не удалось выбрать видео", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
