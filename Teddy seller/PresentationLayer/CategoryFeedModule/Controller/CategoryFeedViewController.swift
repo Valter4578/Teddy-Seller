@@ -212,14 +212,11 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        if products.count != 0 {
-            cell.product = products[indexPath.row]
-            if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-                
-                cell.videoContrainer.setPlayerURL(url: videoUrl)
-                cell.videoContrainer.player.play()
-                
-            }
+        cell.product = products[indexPath.row]
+        
+        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            cell.videoContrainer.setPlayerURL(url: videoUrl)
+            cell.videoContrainer.player.play()
         }
         
         return cell
