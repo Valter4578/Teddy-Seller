@@ -17,10 +17,6 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
                 priceLabel.font  = UIFont(name: "Helvetica Neue", size: 16.0)
                 priceLabel.text = "Цена: " + String(product.price) + " ₽"
                 productName.text = product.title
-                guard let stringUrl = product.dictionary["video"] as? String,
-                    let videoUrl = URL(string: stringUrl) else { return }
-                videoContrainer.setPlayerURL(url: videoUrl)
-                videoContrainer.player.play()
             }
         }
     }
