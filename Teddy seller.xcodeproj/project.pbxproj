@@ -302,9 +302,7 @@
 		8867010A247B85B2002E2A8E /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
-				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
-				88D24CA724853D65005AED02 /* TeddyAPIService.swift */,
+				88F68931249B3DA80088B33F /* Network */,
 				884F19722498DDEA0085F413 /* VideoService.swift */,
 			);
 			path = ServiceLayer;
@@ -468,6 +466,16 @@
 				883121D52486B9CC0096A4FE /* CategoryFeedCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		88F68931249B3DA80088B33F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8867010B247B85E4002E2A8E /* GeodecoderService.swift */,
+				8859AD23247D7814006B6C29 /* CityFinderService.swift */,
+				88D24CA724853D65005AED02 /* TeddyAPIService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
