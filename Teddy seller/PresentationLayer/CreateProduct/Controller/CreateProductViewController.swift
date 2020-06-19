@@ -237,6 +237,13 @@ class CreateProductViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(rangeSlider.lowerValue)
+        print(rangeSlider.upperValue)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    }
 }
 
 

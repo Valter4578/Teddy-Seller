@@ -79,6 +79,9 @@ extension CreateProductViewController {
                 let sliderCell = CreateProductSliderCell(style: .default, reuseIdentifier: sliderCellId)
                 sliderCell.label.text = title
                 sliderCell.serverName = serverName
+                
+                sliderCell.slider.addTarget(self, action: #selector(rangeSliderValueChanged(_:)), for: .valueChanged)
+                
                 tableView.register(CreateProductSliderCell.self, forCellReuseIdentifier: sliderCellId)
                 
                 cells.append(sliderCell)

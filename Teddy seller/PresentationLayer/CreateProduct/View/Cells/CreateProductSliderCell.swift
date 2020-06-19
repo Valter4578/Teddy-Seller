@@ -49,14 +49,12 @@ final class CreateProductSliderCell: UITableViewCell {
     
     private func setupSlider() {
         addSubview(slider)
-        
-        slider.backgroundColor = .purple
-        
+                
         slider.snp.makeConstraints {
             $0.leading.equalTo(self).offset(20)
             $0.trailing.equalTo(self).offset(-20)
             $0.height.equalTo(20)
-            $0.bottom.equalTo(self).offset(10)
+            $0.bottom.equalTo(self).offset(-10)
         }
     }
 }
