@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import MobileCoreServices
+import IQKeyboardManagerSwift
 
 protocol CreateProductDelegate: class {
     func didAddNewProduct()
@@ -46,6 +47,10 @@ class CreateProductViewController: UIViewController {
 
     var isVideoSelected: Bool = false
     
+    // top bar in category feed
+    var switcherServerName: String?
+    var selectedIndex: Int? 
+    
     // MARK:- Views
     var arrowView: ArrowView = {
         let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -81,6 +86,9 @@ class CreateProductViewController: UIViewController {
         setupTableView() 
         setupNavigationBar()
         setupPickerView()
+        
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
     }
     
     // MARK:- Private functions
@@ -149,6 +157,11 @@ class CreateProductViewController: UIViewController {
         }
         
         jsonParametrs.updateValue(category?.serverName, forKey: "subcategory")
+        
+        if let serverName = switcherServerName, serverName != "", let index = switcherValue {
+            let stringIndex = String(index)
+            jsonParametrs.updateValue(stringIndex, forKey: serverName)
+        }
         
         let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
         addProduct(json: json)

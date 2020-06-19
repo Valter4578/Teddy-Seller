@@ -127,6 +127,18 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
+    @objc func presentCreate() {
+        let createProductController = CreateProductViewController()
+        createProductController.delegate = self
+        createProductController.switcherValue = switcherIndex
+        createProductController.category = currentCategory
+        createProductController.switcherServerName = topBarServerName
+        createProductController.switcherValue = switcherIndex
+        let navigationController = UINavigationController(rootViewController: createProductController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    
     // MARK:- Private functions
     private func getProducts() {
         products = []
@@ -209,17 +221,6 @@ class CategoryFeedViewController: UIViewController {
         } else {
             isSe = false
         }
-    }
-    
-    // MARK:- Seletors
-    @objc func presentCreate() {
-        let createProductController = CreateProductViewController()
-        createProductController.delegate = self
-        createProductController.switcherValue = switcherIndex
-        createProductController.category = currentCategory
-        let navigationController = UINavigationController(rootViewController: createProductController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
     }
 }
 
