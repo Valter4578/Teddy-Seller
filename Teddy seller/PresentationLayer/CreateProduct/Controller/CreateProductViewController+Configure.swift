@@ -75,6 +75,16 @@ extension CreateProductViewController {
                 tableView.rowHeight = 260
                 
                 tableView.reloadData()
+            case .slider(let title, let serverName):
+                let sliderCell = CreateProductSliderCell(style: .default, reuseIdentifier: sliderCellId)
+                sliderCell.label.text = title
+                sliderCell.serverName = serverName
+                tableView.register(CreateProductSliderCell.self, forCellReuseIdentifier: sliderCellId)
+                
+                cells.append(sliderCell)
+                tableView.rowHeight = 60
+                
+                tableView.reloadData()
             }
         }
     }
@@ -83,7 +93,7 @@ extension CreateProductViewController {
         switch category?.title {
             // Автомобили
         case "Легковые", "Спецтехника", "Грузовые", "Мотоциклы":
-            cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textField(title: "Пробег", serverName: "mileage", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
+            cellTypes = [.video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textField(title: "Пробег", serverName: "mileage", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false), .slider(title: "test", serverName: "test")]
             // Электроника
         case "Электроника":
             cellTypes = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Марка", serverName: "mark", needsOnlyNumbers: false), .textField(title: "Модель", serverName: "model", needsOnlyNumbers: false), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Год выпуска", serverName: "year", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]

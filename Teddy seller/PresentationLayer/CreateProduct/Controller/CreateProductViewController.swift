@@ -25,6 +25,7 @@ class CreateProductViewController: UIViewController {
     let videoCellId = "CreateProductViewControllerVideoCell"
     let textFieldCellId = "CreateProductViewControllerTextFieldCell"
     let textViewCellId = "CreateProductViewControllerTextViewCell"
+    let sliderCellId = "CreateProductViewControllerSliderCell"
     
     private let materials = ["деревянный", "кирпичный", "блочный", "панельный"]
     
@@ -246,6 +247,7 @@ extension CreateProductViewController: UITableViewDelegate {
         case .textField(_): return 105
         case .video(_): return 235
         case .textView(_): return 235
+        case .slider(_): return 67
         }
     }
 }

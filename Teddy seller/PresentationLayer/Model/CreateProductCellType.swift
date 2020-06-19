@@ -12,4 +12,5 @@ enum CreateProductCellType: Equatable {
     case video(title: String, serverName: String)
     case textField(title: String, serverName: String, needsOnlyNumbers: Bool)
     case textView(title: String, serverName: String)
+    case slider(title: String, serverName: String)
 }
