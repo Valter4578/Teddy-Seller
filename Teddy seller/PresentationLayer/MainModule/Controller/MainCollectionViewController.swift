@@ -39,6 +39,8 @@ final class MainCollectionViewController: UICollectionViewController {
         }
     }
     
+    var isCityNameSetted = false
+    
     let cellIdentifier = "MainCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 24.0,
                                              left: 33.0,
@@ -257,11 +259,15 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
 // MARK:- CLLocationManagerDelegate
 extension MainCollectionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard !isCityNameSetted else { return }
+        
         guard let cordinates: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         
         let geocoderService = GeodecoderService()
         geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
             self.cityName = city
+            self.isCityNameSetted = true 
         }
     }
 }

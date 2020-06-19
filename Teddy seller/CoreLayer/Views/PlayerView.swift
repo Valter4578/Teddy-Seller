@@ -17,6 +17,7 @@ class PlayerView: UIView {
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
         player = AVPlayer(playerItem: playerItem)
+        player.automaticallyWaitsToMinimizeStalling = true 
         
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill
