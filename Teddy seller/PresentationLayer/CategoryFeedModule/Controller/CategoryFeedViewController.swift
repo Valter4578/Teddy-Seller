@@ -23,7 +23,11 @@ class CategoryFeedViewController: UIViewController {
     }
     
     // MARK:- Properties
-    var switcherIndex: Int?
+    var switcherIndex: Int? = 0 {
+        didSet {
+            getProducts()
+        }
+    }
     var needsToPresentTopBar: Bool = false 
     var needsToPresentBottomBar: Bool = false {
         didSet {
@@ -43,6 +47,7 @@ class CategoryFeedViewController: UIViewController {
     
     var currentCategory: Category? {
         didSet {
+            configureTopBar()
             title = currentCategory?.title
             getProducts()
             if let subcategories = currentCategory?.subcategories {
@@ -100,7 +105,6 @@ class CategoryFeedViewController: UIViewController {
         configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
         setupCollectionView()
-        configureTopBar()
         setupCategoryHeader()
     }
     
@@ -138,8 +142,8 @@ class CategoryFeedViewController: UIViewController {
         ]
         
         if let serverName = topBarServerName, serverName != "", let index = switcherIndex {
-            guard let stringIndex = index as? String else { return }
-            searchJsonParametrs.updateValue(index, forKey: serverName)
+            let stringIndex = String(index)
+            searchJsonParametrs.updateValue(stringIndex, forKey: serverName)
         }
         
         var json = JSONBuilder.createJSON(parametrs: searchJsonParametrs)
@@ -168,6 +172,7 @@ class CategoryFeedViewController: UIViewController {
     private func configureTopBar() {
         switch currentCategory?.title {
         case "Одежда":
+             
             leftTopBarTitle = "Мужская"
             rightTopBarTitle = "Женская"
             setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
