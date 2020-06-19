@@ -14,7 +14,7 @@ class CityFinderService {
     static func getCities(city: String, completionHandler: @escaping (String) -> Void) {
         let parametrs:[String:String] = [
             "access_token": "bb6d7c5ebb6d7c5ebb6d7c5e87bb1f49a9bbb6dbb6d7c5ee5a04e34761913fb77bdd90d",
-            "v":"5.5",
+            "v":"5.110",
             "need_all":"0",
             "count":"15",
             "q":city,

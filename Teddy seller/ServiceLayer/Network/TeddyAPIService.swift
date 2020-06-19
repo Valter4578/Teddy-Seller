@@ -89,13 +89,14 @@ class TeddyAPIService {
         }
     }
     
-    func getAds(for subcategory: Category, completionHandler: @escaping (Result<Product, AdsError>) -> ()) {
+    func getAds(for subcategory: Category, searchJson: String, completionHandler: @escaping (Result<Product, AdsError>) -> ()) {
         guard let token = UserDefaults.standard.string(forKey: "token") else { return }
         
         guard let serverName = subcategory.serverName else { return }
         let parametrs: [String: String] = [
             "token": token,
-            "subcategory": serverName
+            "subcategory": serverName,
+            "search": searchJson
         ]
         
         AF.request("\(url)/getAdsForSubcategory", method: .post, parameters: parametrs)

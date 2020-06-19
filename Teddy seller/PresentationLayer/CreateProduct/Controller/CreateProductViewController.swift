@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import AVKit
+import MobileCoreServices
+import IQKeyboardManagerSwift
 
 protocol CreateProductDelegate: class {
     func didAddNewProduct()
+}
+
+enum VideoSelectedFrom {
+    case camera
+    case gallery
 }
 
 class CreateProductViewController: UIViewController {
@@ -25,6 +33,8 @@ class CreateProductViewController: UIViewController {
     
     var switcherValue: Int?
     var cellTypes: [CreateProductCellType] = []
+    let defaultCellTypes: [CreateProductCellType] = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
+    
     var category: Category? {
         didSet {
             configureCellTypes()
@@ -32,6 +42,14 @@ class CreateProductViewController: UIViewController {
     }
     
     var cells: [UITableViewCell] = []
+    
+    var videoSelectedFrom: VideoSelectedFrom?
+
+    var isVideoSelected: Bool = false
+    
+    // top bar in category feed
+    var switcherServerName: String?
+    var selectedIndex: Int? 
     
     // MARK:- Views
     var arrowView: ArrowView = {
@@ -56,6 +74,8 @@ class CreateProductViewController: UIViewController {
     
     let findCityViewController = FindCityViewController()
     
+    let playerView = PlayerView()
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +86,9 @@ class CreateProductViewController: UIViewController {
         setupTableView() 
         setupNavigationBar()
         setupPickerView()
+        
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
     }
     
     // MARK:- Private functions
@@ -97,6 +120,15 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapAddButton() {
+        
+        if !isVideoSelected {
+            let alertController = UIAlertController(title: "Видео не выбрано", message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel)
+            alertController.addAction(action)
+            present(alertController, animated: true, completion: nil)
+            return 
+        }
+        
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
             if let videoCell = cells[i] as? CreateProductVideoTableViewCell {
@@ -126,6 +158,11 @@ class CreateProductViewController: UIViewController {
         
         jsonParametrs.updateValue(category?.serverName, forKey: "subcategory")
         
+        if let serverName = switcherServerName, serverName != "", let index = switcherValue {
+            let stringIndex = String(index)
+            jsonParametrs.updateValue(stringIndex, forKey: serverName)
+        }
+        
         let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
         addProduct(json: json)
     }
@@ -148,8 +185,29 @@ class CreateProductViewController: UIViewController {
     }
     
     @objc func didTapOnVideoContainer() {
-        print(#function)
-        // функционал добавления видео добавлю позднее 
+        let alertController = UIAlertController(title: nil, message: "Выберите опцию", preferredStyle: .actionSheet)
+        
+        let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.videoSelectedFrom = .gallery
+            strongSelf.isVideoSelected = true
+            VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .savedPhotosAlbum)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Снять видео", style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.videoSelectedFrom = .camera
+            strongSelf.isVideoSelected = true
+            VideoService.startVideoBrowsing(delegate: strongSelf, sourceType: .camera)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+    
+        alertController.addAction(galleryAction)
+        alertController.addAction(cameraAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
     
     @objc func didTapAddressTextView() {
@@ -169,7 +227,17 @@ class CreateProductViewController: UIViewController {
             self.findCityViewController.view.frame.origin.y = self.view.frame.origin.y
         }
     }
+    
+    @objc func didCaptureVideo(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
+        let title = (error == nil) ? "Успешно" : "Ошибка"
+        let message = (error == nil) ? "Видео сохранено" : "Не удалось сохранить видео"
+                
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
+
 
 // MARK:- UITableViewDelegate
 extension CreateProductViewController: UITableViewDelegate {
@@ -245,3 +313,51 @@ extension CreateProductViewController: FindCityViewControllerDelegate {
         }
     }
 }
+
+// MARK:- UIImagePickerControllerDelegate
+extension CreateProductViewController: UIImagePickerControllerDelegate {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
+            mediaType == (kUTTypeMovie as String),
+            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { return }
+        
+        switch videoSelectedFrom {
+        case .camera:
+            guard UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path) else { return }
+            UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(didCaptureVideo(_:didFinishSavingWithError:contextInfo:)), nil)
+            
+            dismiss(animated: true) {
+                self.playerView.setPlayerURL(url: url)
+                self.playerView.alpha = 1
+                self.playerView.layer.cornerRadius = 24
+                self.playerView.playerLayer.cornerRadius = 24
+                self.playerView.player.play()
+            }
+        case .gallery:
+            dismiss(animated: true) {
+                self.playerView.setPlayerURL(url: url)
+                self.playerView.alpha = 1
+                self.playerView.layer.cornerRadius = 24
+                self.playerView.playerLayer.cornerRadius = 24
+                self.playerView.player.play()
+            }
+        case .none:
+            dismiss(animated: true) {
+                let alertController = UIAlertController(title: "Ошибка", message: "Не удалось выбрать видео", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK:- UINavigationControllerDelegate 
+extension CreateProductViewController: UINavigationControllerDelegate {
+}
+

@@ -78,6 +78,8 @@ final class AuthViewController: UIViewController {
         
         hideKeyboardByTapAround()
         disableKeybordManager()
+        
+        optimizeForSe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,6 +108,14 @@ final class AuthViewController: UIViewController {
     private func disableKeybordManager() {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
+    }
+    
+    private func optimizeForSe() {
+        let modelName = UIDevice.modelName
+        
+        if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
+            label.font = UIFont(name: "Helvetica Neue", size: 20)
+        }
     }
     
     // MARK:- Selectors

@@ -26,8 +26,8 @@ class VideoPlusView: UIView {
     // MARK:- Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .lightGray
+        self.layer.cornerRadius = 24
+        backgroundColor = .authNextGray
         
         setupPlus()
     }
@@ -38,6 +38,7 @@ class VideoPlusView: UIView {
     
     // MARK:- Setups
     private func setupPlus() {
+       
         addSubview(horizontalLineView)
         
         horizontalLineView.snp.makeConstraints { maker in

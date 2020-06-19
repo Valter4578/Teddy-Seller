@@ -14,8 +14,10 @@ class PlayerView: UIView {
     var playerLayer: AVPlayerLayer!
     
     func setPlayerURL(url: URL) {
-        player = AVPlayer(url: url)
-        player.allowsExternalPlayback = true
+        let asset = AVAsset(url: url)
+        let playerItem = AVPlayerItem(asset: asset)
+        player = AVPlayer(playerItem: playerItem)
+        player.automaticallyWaitsToMinimizeStalling = true 
         
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill

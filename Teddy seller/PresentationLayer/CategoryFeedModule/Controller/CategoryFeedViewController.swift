@@ -16,12 +16,28 @@ class CategoryFeedViewController: UIViewController {
     // To pass selected cell's index path to didTapContact
     private var selectedIndexPath: IndexPath?
     
+    private var isSe: Bool? {
+        didSet {
+            header.isSe = isSe
+        }
+    }
     
     // MARK:- Properties
-    var switcherIndex: Int?
+    var switcherIndex: Int? = 0 {
+        didSet {
+            getProducts()
+        }
+    }
     var needsToPresentTopBar: Bool = false 
-    var needsToPresentBottomBar: Bool = false
+    var needsToPresentBottomBar: Bool = false {
+        didSet {
+            if let _ = collectionView {
+                setupCollectionViewConstraints()
+            }
+        }
+    }
     
+    // сategories
     var lastCategory: Category? = nil
     var selectedCategory: Category? {
         didSet {
@@ -31,6 +47,7 @@ class CategoryFeedViewController: UIViewController {
     
     var currentCategory: Category? {
         didSet {
+            configureTopBar()
             title = currentCategory?.title
             getProducts()
             if let subcategories = currentCategory?.subcategories {
@@ -42,7 +59,14 @@ class CategoryFeedViewController: UIViewController {
             }
         }
     }
-    var products: [Product]? = []
+    
+    
+    var products: [Product] = []
+    
+    // top bar
+    var leftTopBarTitle: String?
+    var rightTopBarTitle: String?
+    var topBarServerName: String? // last property for search json in /addAd methods
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -59,12 +83,7 @@ class CategoryFeedViewController: UIViewController {
     
     var topBar: TopBar = TopBar()
     
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = .mainBlue
-        return collectionView
-    }()
+    var collectionView: UICollectionView?
     
     var arrowView: ArrowView = {
         let view = ArrowView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
@@ -76,6 +95,8 @@ class CategoryFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        checkForSe() 
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
         arrowView.addGestureRecognizer(gestureRecognizer)
         
@@ -84,7 +105,6 @@ class CategoryFeedViewController: UIViewController {
         configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
         setupCollectionView()
-        configureTopBar()
         setupCategoryHeader()
     }
     
@@ -99,24 +119,53 @@ class CategoryFeedViewController: UIViewController {
             currentCategory = lastCategory
             if currentCategory?.isParent ?? true {
                 lastCategory = nil
+                needsToPresentBottomBar = false
             }
+            
+            setupCategoryHeader()
+            self.collectionView?.reloadData()
         }
+    }
+    
+    @objc func presentCreate() {
+        let createProductController = CreateProductViewController()
+        createProductController.delegate = self
+        createProductController.switcherValue = switcherIndex
+        createProductController.category = currentCategory
+        createProductController.switcherServerName = topBarServerName
+        createProductController.switcherValue = switcherIndex
+        let navigationController = UINavigationController(rootViewController: createProductController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
     
     // MARK:- Private functions
     private func getProducts() {
         products = []
+        collectionView?.reloadData()
         
         let teddyService = TeddyAPIService()
         
         guard let currentCategory = currentCategory else { return }
         
-        teddyService.getAds(for: currentCategory) { [weak self] (result) in
+        guard let userCity = UserDefaults.standard.string(forKey: "userCity") else { return }
+        var searchJsonParametrs: [String: Any] = [
+            "city": userCity
+        ]
+        
+        if let serverName = topBarServerName, serverName != "", let index = switcherIndex {
+            let stringIndex = String(index)
+            searchJsonParametrs.updateValue(stringIndex, forKey: serverName)
+        }
+        
+        var json = JSONBuilder.createJSON(parametrs: searchJsonParametrs)
+        
+        teddyService.getAds(for: currentCategory, searchJson: json) { [weak self] (result) in
             switch result {
             case .success(let product):
                 print(product.title)
-                self?.products?.append(product)
-                self?.collectionView.reloadData()
+                self?.products.append(product)
+                self?.collectionView?.reloadData()
             case .failure(let error):
                 if error == .wrongToken {
                     let authController = AuthViewController()
@@ -135,13 +184,21 @@ class CategoryFeedViewController: UIViewController {
     private func configureTopBar() {
         switch currentCategory?.title {
         case "Одежда":
-            setupTopBar(leftTitle: "Мужская", rightTitle: "Женская")
+             
+            leftTopBarTitle = "Мужская"
+            rightTopBarTitle = "Женская"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Работа":
-            setupTopBar(leftTitle: "Вакансии", rightTitle: "Резюме")
+            leftTopBarTitle = "Вакансии"
+            rightTopBarTitle = "Резюме"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Недвижимость":
-            setupTopBar(leftTitle: "Снять", rightTitle: "Купить")
+            topBarServerName = "rentOrBuy"
+            leftTopBarTitle = "Снять"
+            rightTopBarTitle = "Купить"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case .none:
             break
@@ -156,45 +213,42 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
-    // MARK:- Seletors
-    @objc func presentCreate() {
-        let createProductController = CreateProductViewController()
-        createProductController.delegate = self
-        createProductController.switcherValue = switcherIndex
-        createProductController.category = currentCategory
-        let navigationController = UINavigationController(rootViewController: createProductController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+    private func checkForSe() {
+        let modelName = UIDevice.modelName
+        
+        if modelName == "iPhone SE" || modelName == "Simulator iPhone SE" {
+            isSe = true
+        } else {
+            isSe = false
+        }
     }
 }
 
 // MARK:- UICollectionViewDelegate
 extension CategoryFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let product = products?[indexPath.item] {
-            let productDetailViewController = ProductDetailViewController()
-            productDetailViewController.product = product
-            navigationController?.pushViewController(productDetailViewController, animated: true)
-        }
         
+        let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.product = products[indexPath.item]
+        navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
 
 // MARK: UICollectionViewDataSource
 extension CategoryFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let prdcts = products else { return 0 }
-        return prdcts.count
+        return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        if products?.count != 0 {
-            if let product = products?[indexPath.item] {
-                cell.product = product
-            }
+        cell.product = products[indexPath.row]
+        
+        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            cell.videoContrainer.setPlayerURL(url: videoUrl)
+            cell.videoContrainer.player.play()
         }
         
         return cell
@@ -233,11 +287,14 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
         self.lastCategory = currentCategory
         
-        needsToPresentBottomBar = true
         setupBottomBar()
-        self.currentCategory = category
+        needsToPresentBottomBar = true
         
-        collectionView.snp.remakeConstraints { (maker) in
+        self.currentCategory = category
+       
+        setupCategoryHeader()
+        
+        collectionView?.snp.remakeConstraints { (maker) in
             maker.leading.equalTo(view)
             maker.trailing.equalTo(view)
             maker.bottom.equalTo(bottomBar.snp.top)

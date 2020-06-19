@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Teddy seller запрашивает разрешение на сохранение видео в галлерею</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Teddy seller запрашивает разрешение на использование микрофона</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Teddy seller запрашивает разрешение на использование камеры</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
