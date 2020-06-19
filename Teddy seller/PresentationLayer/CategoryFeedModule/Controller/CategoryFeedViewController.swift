@@ -33,6 +33,7 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
+    // сategories
     var lastCategory: Category? = nil
     var selectedCategory: Category? {
         didSet {
@@ -54,7 +55,13 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
+    
     var products: [Product] = []
+    
+    // top bar
+    var leftTopBarTitle: String?
+    var rightTopBarTitle: String?
+    var topBarServerName: String? // last property for search json in /addAd methods
     
     // MARK:- Views
     var header: CategoryFeedHeader = {
@@ -125,7 +132,19 @@ class CategoryFeedViewController: UIViewController {
         
         guard let currentCategory = currentCategory else { return }
         
-        teddyService.getAds(for: currentCategory) { [weak self] (result) in
+        guard let userCity = UserDefaults.standard.string(forKey: "userCity") else { return }
+        var searchJsonParametrs: [String: Any] = [
+            "city": userCity
+        ]
+        
+        if let serverName = topBarServerName, serverName != "", let index = switcherIndex {
+            guard let stringIndex = index as? String else { return }
+            searchJsonParametrs.updateValue(index, forKey: serverName)
+        }
+        
+        var json = JSONBuilder.createJSON(parametrs: searchJsonParametrs)
+        
+        teddyService.getAds(for: currentCategory, searchJson: json) { [weak self] (result) in
             switch result {
             case .success(let product):
                 print(product.title)
@@ -149,13 +168,20 @@ class CategoryFeedViewController: UIViewController {
     private func configureTopBar() {
         switch currentCategory?.title {
         case "Одежда":
-            setupTopBar(leftTitle: "Мужская", rightTitle: "Женская")
+            leftTopBarTitle = "Мужская"
+            rightTopBarTitle = "Женская"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Работа":
-            setupTopBar(leftTitle: "Вакансии", rightTitle: "Резюме")
+            leftTopBarTitle = "Вакансии"
+            rightTopBarTitle = "Резюме"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Недвижимость":
-            setupTopBar(leftTitle: "Снять", rightTitle: "Купить")
+            topBarServerName = "rentOrBuy"
+            leftTopBarTitle = "Снять"
+            rightTopBarTitle = "Купить"
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case .none:
             break

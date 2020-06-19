@@ -169,7 +169,14 @@ final class MainCollectionViewController: UICollectionViewController {
         
         let teddyService = TeddyAPIService()
         let mockCategory = Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty")
-        teddyService.getAds(for: mockCategory) { (result) in
+        
+        let searchJsonParametrs: [String: Any] = [
+            "city": "Москва",
+            "rentOrBuy": "1",
+        ]
+        
+        let searchJson = JSONBuilder.createJSON(parametrs: searchJsonParametrs)
+        teddyService.getAds(for: mockCategory, searchJson: searchJson) { (result) in
             switch result {
             case .failure(let error):
                 if error == .wrongToken {
@@ -267,7 +274,8 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
         let geocoderService = GeodecoderService()
         geocoderService.getCity(latitude: cordinates.latitude, longitude: cordinates.longitude) { (city) in
             self.cityName = city
-            self.isCityNameSetted = true 
+            self.isCityNameSetted = true
+            UserDefaults.standard.set(self.cityName, forKey: "userCity")
         }
     }
 }
