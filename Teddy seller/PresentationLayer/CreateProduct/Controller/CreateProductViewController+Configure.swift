@@ -15,7 +15,7 @@ extension CreateProductViewController {
         cellTypes.forEach {
             switch $0 {
             case .video(let title, let serverName):
-                let videoCell = CreateProductVideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
+                let videoCell = VideoTableViewCell(style: .default, reuseIdentifier: videoCellId)
                 videoCell.label.text = title
                 videoCell.serverName = serverName
                 
@@ -31,13 +31,13 @@ extension CreateProductViewController {
                 }
                 playerView.clipsToBounds = true 
                 
-                tableView.register(CreateProductVideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
+                tableView.register(VideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)
                 tableView.rowHeight = 300
                 tableView.reloadData()
                 
             case .textField(let title, let serverName, let needsOnlyNumbers):
-                let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
+                let textFieldCell = TextFieldTableViewCell(style: .default, reuseIdentifier: textFieldCellId)
                 textFieldCell.label.text = title
                 textFieldCell.serverName = serverName
                 
@@ -54,15 +54,15 @@ extension CreateProductViewController {
                     textFieldCell.contentView.addGestureRecognizer(gestureRecognizer)
                 }
                 
-                tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
+                tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: textFieldCellId)
                 cells.append(textFieldCell)
                 tableView.rowHeight = 125
                 tableView.reloadData()
             case .textView(let title, let serverName):
-                let textViewCell = CreateProductTextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
+                let textViewCell = TextViewTableViewCell(style: .default, reuseIdentifier: textViewCellId)
                 textViewCell.label.text = title
                 textViewCell.serverName = serverName
-                tableView.register(CreateProductTextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
+                tableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: textViewCellId)
                 
                 if title == "Адрес" {
                     textViewCell.textView.isEditable = false
@@ -76,13 +76,13 @@ extension CreateProductViewController {
                 
                 tableView.reloadData()
             case .slider(let title, let serverName):
-                let sliderCell = CreateProductSliderCell(style: .default, reuseIdentifier: sliderCellId)
+                let sliderCell = SliderTableViewCell(style: .default, reuseIdentifier: sliderCellId)
                 sliderCell.label.text = title
                 sliderCell.serverName = serverName
                 
                 sliderCell.slider.addTarget(self, action: #selector(rangeSliderValueChanged(_:)), for: .valueChanged)
                 
-                tableView.register(CreateProductSliderCell.self, forCellReuseIdentifier: sliderCellId)
+                tableView.register(SliderTableViewCell.self, forCellReuseIdentifier: sliderCellId)
                 
                 cells.append(sliderCell)
                 tableView.rowHeight = 60

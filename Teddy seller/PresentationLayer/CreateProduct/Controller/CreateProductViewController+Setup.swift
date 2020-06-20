@@ -72,7 +72,7 @@ extension CreateProductViewController {
             materialsPickerView?.delegate = self
             materialsPickerView?.dataSource = self
             
-            guard let materialCell = cells[index] as? CreateProductTextFieldTableViewCell else { return }
+            guard let materialCell = cells[index] as? TextFieldTableViewCell else { return }
             materialCell.textField.inputView = materialsPickerView
             materialsPickerView?.clipsToBounds = true 
         }

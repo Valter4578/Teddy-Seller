@@ -1,5 +1,5 @@
 //
-//  CreateProductVideoTableViewCell.swift
+//  TextViewTableViewCell.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 09.06.2020.
@@ -8,26 +8,32 @@
 
 import UIKit
 
-class CreateProductVideoTableViewCell: UITableViewCell {
+final class TextViewTableViewCell: UITableViewCell {
     // MARK:- Properties
-    var serverName: String? 
+    var serverName: String?
     
     // MARK:- Views
     let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Heltevica Neue", size: 24)
+        label.font = UIFont(name: "Heltevica Neue", size: 28)
         label.textAlignment = .left
         label.text = "Lorem ispum"
         return label
     }()
     
-    let videoContainer = VideoPlusView()
+    let textView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .authNextGray
+        textView.font = UIFont(name: "Heltevica Neue", size: 22)
+        textView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 5, right: 10)
+        return textView
+    }()
     
     // MARK:- Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setupVideoContainer()
+    
+        setupTextView()
         setupLabel()
     }
     
@@ -36,14 +42,14 @@ class CreateProductVideoTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    private func setupVideoContainer() {
-        addSubview(videoContainer)
+    private func setupTextView() {
+        addSubview(textView)
         
-        videoContainer.snp.makeConstraints { maker in
-            maker.height.equalTo(185)
+        textView.snp.makeConstraints { maker in
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
-            maker.bottom.equalTo(self).offset(-5)
+            maker.bottom.equalTo(self).offset(-10)
+            maker.height.equalTo(185)
         }
     }
     
@@ -51,9 +57,17 @@ class CreateProductVideoTableViewCell: UITableViewCell {
         addSubview(label)
         
         label.snp.makeConstraints { maker in
+            maker.bottom.equalTo(textView.snp.top).offset(-10)
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
-            maker.bottom.equalTo(videoContainer.snp.top).offset(-10)
         }
+    }
+    
+    // MARK:- Overriden methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textView.layer.cornerRadius = 24
+        textView.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
     }
 }

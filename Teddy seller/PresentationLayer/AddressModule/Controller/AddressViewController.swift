@@ -58,9 +58,9 @@ class AddressViewController: UIViewController {
     // MARK:- Private functions
     private func configureScreen() {
         for title in fieldTitles {
-            let textFieldCell = CreateProductTextFieldTableViewCell(style: .default, reuseIdentifier: cellId)
+            let textFieldCell = TextFieldTableViewCell(style: .default, reuseIdentifier: cellId)
             textFieldCell.label.text = title
-            tableView.register(CreateProductTextFieldTableViewCell.self, forCellReuseIdentifier: cellId)
+            tableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: cellId)
             cells.append(textFieldCell)
             tableView.reloadData()
         }
@@ -70,7 +70,7 @@ class AddressViewController: UIViewController {
     @objc func didTapSaveButton() {
         var fullAddress = ""
         for cell in cells {
-            guard let textFieldCell = cell as? CreateProductTextFieldTableViewCell,
+            guard let textFieldCell = cell as? TextFieldTableViewCell,
                 let text = textFieldCell.textField.text else { return }
             
             fullAddress += text + " "

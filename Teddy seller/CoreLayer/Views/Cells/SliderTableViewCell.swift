@@ -1,5 +1,5 @@
 //
-//  CreateProductSliderCell.swift
+//  SliderTableViewCell.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 19.06.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-final class CreateProductSliderCell: UITableViewCell {
+final class SliderTableViewCell: UITableViewCell {
     // MARK:- Properties
     var serverName: String?
     

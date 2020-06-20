@@ -1,5 +1,5 @@
 //
-//  CreateProductTextViewTableViewCell.swift
+//  TextFieldTableViewCell.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 09.06.2020.
@@ -8,32 +8,34 @@
 
 import UIKit
 
-class CreateProductTextViewTableViewCell: UITableViewCell {
+final class TextFieldTableViewCell: UITableViewCell {
     // MARK:- Properties
     var serverName: String?
     
     // MARK:- Views
     let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Heltevica Neue", size: 28)
+        label.font = UIFont(name: "Heltevica Neue", size: 24)
         label.textAlignment = .left
         label.text = "Lorem ispum"
         return label
     }()
     
-    let textView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .authNextGray
-        textView.font = UIFont(name: "Heltevica Neue", size: 22)
-        textView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 5, right: 10)
-        return textView
+    let textField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .authNextGray
+        textField.font = UIFont(name: "Heltevica Neue", size: 28)
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        return textField
     }()
     
     // MARK:- Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-        setupTextView()
+     
+        setupTextField()
         setupLabel()
     }
     
@@ -42,14 +44,14 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
     }
     
     // MARK:- Setups
-    private func setupTextView() {
-        addSubview(textView)
+    private func setupTextField() {
+        addSubview(textField)
         
-        textView.snp.makeConstraints { maker in
+        textField.snp.makeConstraints { maker in
+            maker.height.equalTo(55)
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
             maker.bottom.equalTo(self).offset(-10)
-            maker.height.equalTo(185)
         }
     }
     
@@ -57,9 +59,9 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
         addSubview(label)
         
         label.snp.makeConstraints { maker in
-            maker.bottom.equalTo(textView.snp.top).offset(-10)
             maker.leading.equalTo(self).offset(20)
             maker.trailing.equalTo(self).offset(-20)
+            maker.bottom.equalTo(textField.snp.top).offset(-10)
         }
     }
     
@@ -67,7 +69,7 @@ class CreateProductTextViewTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        textView.layer.cornerRadius = 24
-        textView.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
+        textField.layer.cornerRadius = 24
+        textField.layer.borderColor = UIColor.plusContainerBorderGray.cgColor
     }
 }

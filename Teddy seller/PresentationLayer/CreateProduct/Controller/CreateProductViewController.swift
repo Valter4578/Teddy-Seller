@@ -132,17 +132,17 @@ class CreateProductViewController: UIViewController {
         
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
-            if let videoCell = cells[i] as? CreateProductVideoTableViewCell {
+            if let videoCell = cells[i] as? VideoTableViewCell {
                 print("\(videoCell.serverName) -- \(videoCell.label.text)")
             }
             
-            if let textViewCell = cells[i] as? CreateProductTextViewTableViewCell {
+            if let textViewCell = cells[i] as? TextViewTableViewCell {
                 print("\(textViewCell.serverName) -- \(textViewCell.textView.text)")
                 guard let serverName = textViewCell.serverName else { return }
                 jsonParametrs.updateValue(textViewCell.textView.text, forKey: serverName)
             }
             
-            if let textFieldCell = cells[i] as? CreateProductTextFieldTableViewCell {
+            if let textFieldCell = cells[i] as? TextFieldTableViewCell {
                 print("\(textFieldCell.serverName) -- \(textFieldCell.textField.text)")
                 guard let serverName = textFieldCell.serverName else { continue }
                 jsonParametrs.updateValue(textFieldCell.textField.text, forKey: serverName)
@@ -274,7 +274,7 @@ extension CreateProductViewController: UITableViewDataSource {
 extension CreateProductViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let indexOfCell = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)),
-            let materialCell = cells[indexOfCell] as? CreateProductTextFieldTableViewCell else { return }
+            let materialCell = cells[indexOfCell] as? TextFieldTableViewCell else { return }
         materialCell.textField.text = materials[row]
     }
 }
@@ -298,7 +298,7 @@ extension CreateProductViewController: UIPickerViewDataSource {
 extension CreateProductViewController: AddressDelegate {
     func passAddress(address: String) {
         if let index = cellTypes.firstIndex(of: .textView(title: "Адрес", serverName: "address")) {
-            guard let addressCell = cells[index] as? CreateProductTextViewTableViewCell else { return }
+            guard let addressCell = cells[index] as? TextViewTableViewCell else { return }
             addressCell.textView.text = address
         }
     }
@@ -308,7 +308,7 @@ extension CreateProductViewController: AddressDelegate {
 extension CreateProductViewController: FindCityViewControllerDelegate {
     func setSelectedCity(cityName: String) {
         if let indexOfCityCell = cellTypes.firstIndex(of: .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)) {
-            guard let cityCell = cells[indexOfCityCell] as? CreateProductTextFieldTableViewCell else { return }
+            guard let cityCell = cells[indexOfCityCell] as? TextFieldTableViewCell else { return }
             cityCell.textField.text = cityName
         }
     }
