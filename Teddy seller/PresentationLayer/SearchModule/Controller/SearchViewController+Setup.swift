@@ -34,4 +34,17 @@ extension SearchViewController {
             maker.height.equalTo(78)
         }
     }
+    
+    func setupPickerView() {
+        if let index = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)) {
+            materialsPickerView = UIPickerView()
+            
+            materialsPickerView?.delegate = self
+            materialsPickerView?.dataSource = self
+            
+            guard let materialCell = cells[index] as? TextFieldTableViewCell else { return }
+            materialCell.textField.inputView = materialsPickerView
+            materialsPickerView?.clipsToBounds = true
+        }
+    }
 }

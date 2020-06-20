@@ -47,7 +47,7 @@
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
 		888DADB0249A2791008DC15F /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888DADAF249A2791008DC15F /* UIDevice+Extension.swift */; };
-		88B0CF00248F6C580078812D /* CreateProductCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CEFF248F6C580078812D /* CreateProductCellType.swift */; };
+		88B0CF00248F6C580078812D /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CEFF248F6C580078812D /* CellType.swift */; };
 		88B0CF02248F71810078812D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CF01248F71810078812D /* TextFieldTableViewCell.swift */; };
 		88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */; };
 		88C9296E248BE3EE002DE387 /* AdsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9296D248BE3EE002DE387 /* AdsError.swift */; };
@@ -60,6 +60,7 @@
 		88D6F01B2494C7AD00F6D93D /* VideoPlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */; };
 		88DB0EB8249E02800008BB71 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB0EB7249E02800008BB71 /* SearchViewController.swift */; };
 		88DB0EBA249E03EF0008BB71 /* SearchViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB0EB9249E03EF0008BB71 /* SearchViewController+Setup.swift */; };
+		88DB0EBD249E09EB0008BB71 /* SearchViewController+Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB0EBC249E09EB0008BB71 /* SearchViewController+Configure.swift */; };
 		88EA9CFA2490EC000010A62E /* AddAdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CF92490EC000010A62E /* AddAdError.swift */; };
 		88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */; };
 		88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */; };
@@ -112,7 +113,7 @@
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
 		888DADAF249A2791008DC15F /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
-		88B0CEFF248F6C580078812D /* CreateProductCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductCellType.swift; sourceTree = "<group>"; };
+		88B0CEFF248F6C580078812D /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		88B0CF01248F71810078812D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		88C9296D248BE3EE002DE387 /* AdsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsError.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 		88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlusView.swift; sourceTree = "<group>"; };
 		88DB0EB7249E02800008BB71 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		88DB0EB9249E03EF0008BB71 /* SearchViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Setup.swift"; sourceTree = "<group>"; };
+		88DB0EBC249E09EB0008BB71 /* SearchViewController+Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Configure.swift"; sourceTree = "<group>"; };
 		88EA9CF92490EC000010A62E /* AddAdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdError.swift; sourceTree = "<group>"; };
 		88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdAlertBuilder.swift; sourceTree = "<group>"; };
 		88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONBuilder.swift; sourceTree = "<group>"; };
@@ -218,7 +220,6 @@
 		882BC06D248F5E9A0007B59C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				882BC074248F63120007B59C /* Cells */,
 				88D6F01A2494C7AD00F6D93D /* VideoPlusView.swift */,
 			);
 			path = View;
@@ -231,13 +232,6 @@
 				882BC072248F5FA30007B59C /* BottomBar.swift */,
 			);
 			path = Bars;
-			sourceTree = "<group>";
-		};
-		882BC074248F63120007B59C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		8842D57F248642A7001FC653 /* MainView */ = {
@@ -294,7 +288,7 @@
 				88C9296F248BE522002DE387 /* Errors */,
 				88CEAC462486B19B00347CD9 /* Category.swift */,
 				881B0202248787BD000A61B8 /* Product.swift */,
-				88B0CEFF248F6C580078812D /* CreateProductCellType.swift */,
+				88B0CEFF248F6C580078812D /* CellType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -490,6 +484,7 @@
 			children = (
 				88DB0EB7249E02800008BB71 /* SearchViewController.swift */,
 				88DB0EB9249E03EF0008BB71 /* SearchViewController+Setup.swift */,
+				88DB0EBC249E09EB0008BB71 /* SearchViewController+Configure.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -642,7 +637,7 @@
 			files = (
 				88EA9CFE2490F1EC0010A62E /* JSONBuilder.swift in Sources */,
 				887BA3D0247A4B5E009DCCE3 /* MainCellModel.swift in Sources */,
-				88B0CF00248F6C580078812D /* CreateProductCellType.swift in Sources */,
+				88B0CF00248F6C580078812D /* CellType.swift in Sources */,
 				880180CC249689AD00E39408 /* CreateProductViewController+Configure.swift in Sources */,
 				882BC069248E87BF0007B59C /* CreateProductViewController.swift in Sources */,
 				8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */,
@@ -667,6 +662,7 @@
 				88B0CF02248F71810078812D /* TextFieldTableViewCell.swift in Sources */,
 				8821FB8A248F73B200BCDE05 /* TextViewTableViewCell.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,
+				88DB0EBD249E09EB0008BB71 /* SearchViewController+Configure.swift in Sources */,
 				888DADB0249A2791008DC15F /* UIDevice+Extension.swift in Sources */,
 				88EA9CFA2490EC000010A62E /* AddAdError.swift in Sources */,
 				88D358ED248A9EB800591129 /* UIView+Extension.swift in Sources */,
