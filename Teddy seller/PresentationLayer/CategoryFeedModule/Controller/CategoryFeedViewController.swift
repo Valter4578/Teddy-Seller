@@ -144,6 +144,7 @@ class CategoryFeedViewController: UIViewController {
         searchViewController.category = selectedCategory
                 
         navigationController?.pushViewController(searchViewController, animated: true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
     // MARK:- Private functions

@@ -44,7 +44,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = .white
-        navigationItem.backBarButtonItem?.title = ""
+
         
         setupFindButton()
         configureCells()
@@ -66,6 +66,10 @@ class SearchViewController: UIViewController {
     
     @objc func didTapBack() {
         dismiss(animated: true)
+    }
+    
+    @objc func didTapBackItem() {
+        print(#function)
     }
 }
 
