@@ -43,6 +43,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationController()
+        
         setupFindButton()
         configureCells()
         setupTableView()

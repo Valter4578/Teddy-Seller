@@ -143,7 +143,9 @@ class CategoryFeedViewController: UIViewController {
         let searchViewController = SearchViewController()
         searchViewController.category = selectedCategory
         
-        navigationController?.pushViewController(searchViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: searchViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
     
     // MARK:- Private functions

@@ -14,6 +14,10 @@ extension SearchViewController {
         tableView.delegate = self
         tableView.dataSource = self 
         
+        tableView.separatorColor = .clear
+        
+        tableView.allowsSelection = false
+        
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints {
@@ -46,5 +50,16 @@ extension SearchViewController {
             materialCell.textField.inputView = materialsPickerView
             materialsPickerView?.clipsToBounds = true
         }
+    }
+    
+    func setupNavigationController() {
+        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.clipsToBounds = false
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
     }
 }
