@@ -12,7 +12,7 @@ import SnapKit
 extension SearchViewController {
     func setupTableView() {
         tableView.delegate = self
-        tableView.dataSource = self 
+        tableView.dataSource = self
         
         tableView.separatorColor = .clear
         
@@ -26,6 +26,7 @@ extension SearchViewController {
             $0.bottom.equalTo(findButton.snp.top)
             $0.top.equalTo(view.safeAreaLayoutGuide)
         }
+        
     }
     
     func setupFindButton() {
@@ -37,6 +38,7 @@ extension SearchViewController {
             maker.trailing.equalTo(view)
             maker.height.equalTo(78)
         }
+        
     }
     
     func setupPickerView() {
@@ -61,5 +63,8 @@ extension SearchViewController {
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
+        let backImage = UIImage(named: "back")
+        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(didTapBack))
+        navigationItem.leftBarButtonItem = backItem
     }
 }

@@ -43,7 +43,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationController()
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.backBarButtonItem?.title = ""
         
         setupFindButton()
         configureCells()
@@ -62,11 +63,22 @@ class SearchViewController: UIViewController {
         print(rangeSlider.upperValue)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     }
+    
+    @objc func didTapBack() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK:- UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+          switch cellTypes[indexPath.row] {
+          case .textField(_): return 105
+          case .video(_): return 235
+          case .textView(_): return 235
+          case .slider(_): return 67
+          }
+      }
 }
 
 // MARK:- UITableViewDataSource
