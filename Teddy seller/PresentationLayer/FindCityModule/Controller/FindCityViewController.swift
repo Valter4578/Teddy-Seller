@@ -184,6 +184,7 @@ class FindCityViewController: UIViewController {
             present(alertController, animated: true)
         } else {
             delegate.setSelectedCity(cityName: selectedCity)
+            UserDefaults.standard.set(selectedCity, forKey: "userCity")
             delegate.didDissmisBySave()
         }
     }
