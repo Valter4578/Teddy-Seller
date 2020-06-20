@@ -70,6 +70,11 @@ extension CategoryFeedViewController {
         let leftBarItem = UIBarButtonItem(customView: arrowView)
         navigationItem.leftBarButtonItem = leftBarItem
         title = currentCategory?.title
+        
+        let searchImage = UIImage(named: "search")
+        let rightBarItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(presentSearch))
+        rightBarItem.tintColor = .white
+        navigationItem.rightBarButtonItem = rightBarItem
     }
     
     func setupCategoryHeader() {

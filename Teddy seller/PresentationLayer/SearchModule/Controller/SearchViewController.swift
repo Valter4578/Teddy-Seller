@@ -10,6 +10,12 @@ import UIKit
 
 class SearchViewController: UIViewController {
     // MARK:- Properties
+    var category: Category? {
+        didSet {
+            configureCellTypes()
+        }
+    }
+    
     let sliderCellId = "SearchViewControllerSliderCell"
     let textViewCellId = "SearchViewControllerTextViewCell"
     let textFieldCellId = "SearchViewControllerTextFieldCell"

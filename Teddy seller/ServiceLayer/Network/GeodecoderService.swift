@@ -26,9 +26,7 @@ class GeodecoderService {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(arrayLiteral: value)
-                    
-                    print(value)
-                    
+                                        
                     let city = json[0]["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["Components"][4]["name"].stringValue
                     
                     completionHandler(city)

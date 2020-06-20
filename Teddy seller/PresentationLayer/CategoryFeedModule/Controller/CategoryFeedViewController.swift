@@ -139,6 +139,13 @@ class CategoryFeedViewController: UIViewController {
         present(navigationController, animated: true)
     }
     
+    @objc func presentSearch() {
+        let searchViewController = SearchViewController()
+        searchViewController.category = selectedCategory
+        
+        navigationController?.pushViewController(searchViewController, animated: true)
+    }
+    
     // MARK:- Private functions
     private func getProducts() {
         products = []
