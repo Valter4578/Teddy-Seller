@@ -102,6 +102,10 @@ class CategoryFeedViewController: UIViewController {
         
         setupNavigationBar()
         
+        if needsToPresentTopBar {
+            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
+        }
+        
         configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
         setupCollectionView()
@@ -195,18 +199,15 @@ class CategoryFeedViewController: UIViewController {
              
             leftTopBarTitle = "Мужская"
             rightTopBarTitle = "Женская"
-            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Работа":
             leftTopBarTitle = "Вакансии"
             rightTopBarTitle = "Резюме"
-            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case "Недвижимость":
             topBarServerName = "rentOrBuy"
             leftTopBarTitle = "Снять"
             rightTopBarTitle = "Купить"
-            setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
             needsToPresentTopBar = true
         case .none:
             break
