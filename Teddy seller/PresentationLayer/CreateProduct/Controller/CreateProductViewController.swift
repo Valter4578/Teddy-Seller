@@ -33,6 +33,7 @@ class CreateProductViewController: UIViewController {
     weak var delegate: CreateProductDelegate!
     
     var switcherValue: Int?
+    
     var cellTypes: [CellType] = []
     let defaultCellTypes: [CellType] = [.textField(title: "Название товара", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
     
@@ -44,13 +45,17 @@ class CreateProductViewController: UIViewController {
     
     var cells: [UITableViewCell] = []
     
+    var productId: String = ""
+    
+    // video
     var videoSelectedFrom: VideoSelectedFrom?
-
     var isVideoSelected: Bool = false
+    var videoUrl: URL?
     
     // top bar in category feed
     var switcherServerName: String?
-    var selectedIndex: Int? 
+    var selectedIndex: Int?
+    
     
     // MARK:- Views
     var arrowView: ArrowView = {
@@ -104,8 +109,8 @@ class CreateProductViewController: UIViewController {
             switch result {
             case .success(let id):
                 print(id)
-                self.delegate.didAddNewProduct()
-                self.dismiss(animated: true)
+                self.productId = id
+//                self.delegate.didAddNewProduct()
             case .failure(let error):
                 let alertBuilder = AddAdAlertBuilder(errorType: error)
                 alertBuilder.configureAlert { alert in
@@ -166,6 +171,14 @@ class CreateProductViewController: UIViewController {
         
         let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
         addProduct(json: json)
+        
+        guard let token = UserDefaults.standard.string(forKey: "token"),
+        let url = videoUrl else { return }
+        
+        let teddyService = TeddyAPIService()
+        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) { (error) in
+            print("Ебанет ?")
+        }
     }
     
     @objc func keyboardWillShow(sender: Notification) {
@@ -336,6 +349,7 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
             UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(didCaptureVideo(_:didFinishSavingWithError:contextInfo:)), nil)
             
             dismiss(animated: true) {
+                self.videoUrl = url
                 self.playerView.setPlayerURL(url: url)
                 self.playerView.alpha = 1
                 self.playerView.layer.cornerRadius = 24
@@ -344,6 +358,7 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
             }
         case .gallery:
             dismiss(animated: true) {
+                self.videoUrl = url
                 self.playerView.setPlayerURL(url: url)
                 self.playerView.alpha = 1
                 self.playerView.layer.cornerRadius = 24

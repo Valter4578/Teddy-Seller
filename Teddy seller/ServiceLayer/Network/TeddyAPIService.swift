@@ -145,7 +145,7 @@ class TeddyAPIService {
         }
     }
     
-    func addProduct(json: String, completionHandler: @escaping (Result<Int, AddAdsError>) -> Void) {
+    func addProduct(json: String, completionHandler: @escaping (Result<String, AddAdsError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "token") else { return }
 
         let parametrs: [String: String] = [
@@ -176,10 +176,45 @@ class TeddyAPIService {
                     case "Wrong file type":
                         completionHandler(.failure(.wrongFile))
                     default:
-                        let id = json[0]["id"].intValue
+                        let id = json[0]["id"].stringValue
                         print(id)
                         completionHandler(.success(id))
                     }
+                case .failure(let error):
+                    print(error)
+                    return
+                }
+        }
+    }
+    
+    func uploadVideo(token: String, id: String, videoUrl: URL, completionHandler: (Result<String, UploadError>) -> Void) {
+        
+        let parametrs = [
+            "token": token,
+            "adid": id,
+        ]
+        
+        let time = Date().timeIntervalSince1970
+        
+        AF.upload(multipartFormData: { multipartData in
+            parametrs.forEach { (key, value) in
+                multipartData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            do {
+                let data = try Data(contentsOf: videoUrl, options: .mappedIfSafe)
+                multipartData.append(data, withName: "video", fileName: "\(time).mov", mimeType: "\(time).mov")
+                
+            } catch(let error) {
+                print(error)
+                return
+            }
+            }, to: url)
+            .responseString { (response) in
+                switch response.result {
+                case .success(let value):
+                    print(value)
+                    
                 case .failure(let error):
                     print(error)
                     return
