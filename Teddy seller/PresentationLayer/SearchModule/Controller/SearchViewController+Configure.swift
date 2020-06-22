@@ -59,9 +59,9 @@ extension SearchViewController {
     }
     
     func configureCellTypes() {
-        switch category?.title {
+        switch category?.title.lowercased() {
         case "квартиры":
-            cellTypes = [.textField(title: "Населённый пункт", serverName: "city", needsOnlyNumbers: false), .slider(title: "Цена, рублей", serverName: "price", minimumValue: 0.0, maximumValue: 1000000)]
+            cellTypes = [.textField(title: "Населённый пункт", serverName: "city", needsOnlyNumbers: false), .slider(title: "Цена, рублей", serverName: "price", minimumValue: 0.0, maximumValue: 100)]
         case .none:
             cellTypes = [.textField(title: "Название", serverName: "name", needsOnlyNumbers: false), .slider(title: "Цена, рублей", serverName: "price", minimumValue: 0, maximumValue: 10000000)]
         case .some(_):
