@@ -99,7 +99,6 @@ final class MainCollectionViewController: UICollectionViewController {
         
         setupStatusBar()
         setupNavigationBar()
-        checkForToken()
     }
         
     override func viewDidLoad() {
@@ -168,7 +167,7 @@ final class MainCollectionViewController: UICollectionViewController {
         print("------------------------------------------------")
         
         let teddyService = TeddyAPIService()
-        let mockCategory = Category(imageName: "Realty", title: "Недвижимость",serverName: "Realty")
+        let mockCategory = Category(imageName: "Realty", title: "Недвижимость", serverName: "Realty")
         
         let searchJsonParametrs: [String: Any] = [
             "city": "Москва",

@@ -79,6 +79,7 @@ class TeddyAPIService {
                         completionHandler(.failure(.requestExpired))
                     default:
                         let token = json[0]["token"].stringValue
+                        print(token)
                         completionHandler(.success(token))
                     }
                     
@@ -99,7 +100,7 @@ class TeddyAPIService {
             "search": searchJson
         ]
         
-        AF.request("\(url)/getAdsForSubcategory", method: .post, parameters: parametrs)
+        AF.request("\(url)/getAdsForSubcategory", method: .get, parameters: parametrs)
             .validate()
             .responseJSON { (response) in
                 switch response.result {
@@ -136,7 +137,6 @@ class TeddyAPIService {
                         }
                         
                     }
-                    
                 case .failure(let error):
                     print(error)
                     return
