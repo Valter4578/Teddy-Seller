@@ -103,20 +103,30 @@ class CreateProductViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    private func addProduct(json: String) {
+    private func addProduct(json: String, completionHandler: @escaping () -> ()) {
         let teddyService = TeddyAPIService()
         teddyService.addProduct(json: json) { result in
             switch result {
             case .success(let id):
                 print(id)
                 self.productId = id
-//                self.delegate.didAddNewProduct()
+                completionHandler()
             case .failure(let error):
                 let alertBuilder = AddAdAlertBuilder(errorType: error)
                 alertBuilder.configureAlert { alert in
                     self.present(alert, animated: true)
                 }
             }
+        }
+    }
+    
+    private func uploadVideo() {
+        guard let token = UserDefaults.standard.string(forKey: "token"),
+        let url = videoUrl else { return }
+        
+        let teddyService = TeddyAPIService()
+        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) { (error) in
+            print("Ебанет ?")
         }
     }
     
@@ -170,15 +180,11 @@ class CreateProductViewController: UIViewController {
         }
         
         let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
-        addProduct(json: json)
-        
-        guard let token = UserDefaults.standard.string(forKey: "token"),
-        let url = videoUrl else { return }
-        
-        let teddyService = TeddyAPIService()
-        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) { (error) in
-            print("Ебанет ?")
+        addProduct(json: json) {
+            self.uploadVideo()
         }
+        
+        
     }
     
     @objc func keyboardWillShow(sender: Notification) {

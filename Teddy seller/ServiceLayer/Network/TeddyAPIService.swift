@@ -193,32 +193,23 @@ class TeddyAPIService {
             "token": token,
             "adid": id,
         ]
+
+//        let completeUrl = "\(url):802/uploadVideo?token=\"\(token)\"" + "&adid=\"\(id)\""
         
         let time = Date().timeIntervalSince1970
         
         AF.upload(multipartFormData: { multipartData in
             parametrs.forEach { (key, value) in
-                multipartData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                multipartData.append(value.data(using: .utf8)!, withName: key)
             }
             
             do {
                 let data = try Data(contentsOf: videoUrl, options: .mappedIfSafe)
                 multipartData.append(data, withName: "video", fileName: "\(time).mov", mimeType: "\(time).mov")
-                
             } catch(let error) {
                 print(error)
                 return
             }
-            }, to: url)
-            .responseString { (response) in
-                switch response.result {
-                case .success(let value):
-                    print(value)
-                    
-                case .failure(let error):
-                    print(error)
-                    return
-                }
-        }
+        }, to: "\(url):802/uploadVideo")
     }
 }
