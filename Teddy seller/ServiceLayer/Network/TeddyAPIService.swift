@@ -140,7 +140,6 @@ class TeddyAPIService {
                 case .failure(let error):
                     print(error)
                     return
-
                 }
         }
     }

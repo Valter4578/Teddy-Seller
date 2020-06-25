@@ -238,7 +238,6 @@ class CategoryFeedViewController: UIViewController {
 // MARK:- UICollectionViewDelegate
 extension CategoryFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let productDetailViewController = ProductDetailViewController()
         productDetailViewController.product = products[indexPath.item]
         navigationController?.pushViewController(productDetailViewController, animated: true)
@@ -259,7 +258,6 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         
         if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
             cell.videoContrainer.setPlayerURL(url: videoUrl)
-            cell.videoContrainer.player.play()
         }
         
         return cell

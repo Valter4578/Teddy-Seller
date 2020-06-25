@@ -29,7 +29,9 @@ extension CreateProductViewController {
                     maker.size.equalTo(videoCell.videoContainer)
                     maker.center.equalTo(videoCell.videoContainer)
                 }
-                playerView.clipsToBounds = true 
+                playerView.clipsToBounds = true
+                playerView.playPauseButton.isEnabled = false
+                playerView.playPauseButton.alpha = 0 
                 
                 tableView.register(VideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)
