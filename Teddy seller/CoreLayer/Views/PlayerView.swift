@@ -15,12 +15,13 @@ final class PlayerView: UIView {
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
         button.setImage(playImage, for: .normal)
+        button.tintColor = .white
         return button
     }()
     
     // MARK:- Private properties
-    private let playImage: UIImage = #imageLiteral(resourceName: "play")
-    private let pauseImage: UIImage = #imageLiteral(resourceName: "pause")
+    private let playImage: UIImage = #imageLiteral(resourceName: "play").withRenderingMode(.alwaysTemplate)
+    private let pauseImage: UIImage = #imageLiteral(resourceName: "pause").withRenderingMode(.alwaysTemplate)
     
     // MARK:- Properties
     var player: AVPlayer!
@@ -31,6 +32,8 @@ final class PlayerView: UIView {
             isPlaying ? pausePlayer() : playPlayer()
         }
     }
+    
+    var isButtonHidden: Bool = false  // false when alpha = 0
     
     // MARK:- Functions
     func setPlayerURL(url: URL) {
@@ -49,16 +52,38 @@ final class PlayerView: UIView {
     }
     
     // MARK:- Private functions
+    private func hideButton() {
+        self.isButtonHidden = true
+        UIView.animate(withDuration: 0.2) {
+            self.playPauseButton.alpha = 0
+        }
+    }
+    
+    private func showButton() {
+        self.isButtonHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.playPauseButton.alpha = 1
+        }
+    }
+    
     private func pausePlayer() {
         playPauseButton.alpha = 1
-        playPauseButton.setImage(pauseImage, for: .normal)
+        playPauseButton.setImage(playImage, for: .normal)
         player.pause()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.hideButton()
+        }
     }
     
     private func playPlayer() {
         playPauseButton.alpha = 1
-        playPauseButton.setImage(playImage, for: .normal)
+        playPauseButton.setImage(pauseImage, for: .normal)
         player.play()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.hideButton()
+        }
     }
     
     // MARK:- Selectors
@@ -66,10 +91,15 @@ final class PlayerView: UIView {
         isPlaying.toggle()
     }
     
+    @objc func didTapOnVideo() {
+        isButtonHidden ? showButton() : hideButton()
+    }
+    
     // MARK:- Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupGestureRecognizer()
     }
     
     required init?(coder: NSCoder) {
@@ -86,5 +116,10 @@ final class PlayerView: UIView {
         }
         
         playPauseButton.addTarget(self, action: #selector(didSelectButton), for: .touchUpInside)
+    }
+    
+    private func setupGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnVideo))
+        addGestureRecognizer(tapGestureRecognizer)
     }
 }
