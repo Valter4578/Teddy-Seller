@@ -44,6 +44,8 @@ final class PlayerView: UIView {
         
         self.layer.addSublayer(playerLayer)
         playerLayer.frame = self.bounds
+        
+        setupPlayPauseButton()
     }
     
     // MARK:- Private functions
@@ -68,7 +70,6 @@ final class PlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupPlayPauseButton()
     }
     
     required init?(coder: NSCoder) {
@@ -78,7 +79,7 @@ final class PlayerView: UIView {
     // MARK:- Setups
     private func setupPlayPauseButton() {
         addSubview(playPauseButton)
-        
+                
         playPauseButton.snp.makeConstraints { maker in
             maker.center.equalTo(self)
             maker.size.equalTo(50)
