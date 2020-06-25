@@ -53,6 +53,7 @@
 		88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */; };
 		88C9296E248BE3EE002DE387 /* AdsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9296D248BE3EE002DE387 /* AdsError.swift */; };
 		88C92971248BEB60002DE387 /* AdsAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */; };
+		88C9DFC624A4766E007BB101 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C9DFC524A4766E007BB101 /* LoaderView.swift */; };
 		88CEAC472486B19C00347CD9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC462486B19B00347CD9 /* Category.swift */; };
 		88CEAC4A2486B56400347CD9 /* CategoryFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */; };
 		88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D24CA724853D65005AED02 /* TeddyAPIService.swift */; };
@@ -120,6 +121,7 @@
 		88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		88C9296D248BE3EE002DE387 /* AdsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsError.swift; sourceTree = "<group>"; };
 		88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsAlertBuilder.swift; sourceTree = "<group>"; };
+		88C9DFC524A4766E007BB101 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		88CEAC462486B19B00347CD9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		88CEAC492486B56400347CD9 /* CategoryFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFeedViewController.swift; sourceTree = "<group>"; };
 		88D24CA724853D65005AED02 /* TeddyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeddyAPIService.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				88DB0EBB249E06F30008BB71 /* Cells */,
 				8850B7F024928F0600227B7C /* PlayerView.swift */,
 				88729F9D249D0580000FDB5E /* RangeSlider */,
+				88C9DFC524A4766E007BB101 /* LoaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				881B0203248787BD000A61B8 /* Product.swift in Sources */,
 				88C92971248BEB60002DE387 /* AdsAlertBuilder.swift in Sources */,
 				88EA9CFC2490EFEB0010A62E /* AddAdAlertBuilder.swift in Sources */,
+				88C9DFC624A4766E007BB101 /* LoaderView.swift in Sources */,
 				88062DB5248CCCC000BB47BC /* ProductDetailViewController+Setup.swift in Sources */,
 				88D24CA824853D66005AED02 /* TeddyAPIService.swift in Sources */,
 				8842D57E24864280001FC653 /* MainView+Setup.swift in Sources */,

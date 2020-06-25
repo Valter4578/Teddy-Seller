@@ -187,7 +187,7 @@ class TeddyAPIService {
         }
     }
     
-    func uploadVideo(token: String, id: String, videoUrl: URL, completionHandler: (Result<String, UploadError>) -> Void) {
+    func uploadVideo(token: String, id: String, videoUrl: URL, completionHandler: @escaping () -> Void) {
         
         let parametrs = [
             "token": token,
@@ -211,5 +211,10 @@ class TeddyAPIService {
                 return
             }
         }, to: "\(url):802/uploadVideo")
+            .responseString { response in
+                // will add error handler later
+                print(response)
+                completionHandler()
+        }
     }
 }

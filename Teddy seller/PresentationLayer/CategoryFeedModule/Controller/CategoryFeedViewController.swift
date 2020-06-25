@@ -134,10 +134,12 @@ class CategoryFeedViewController: UIViewController {
     @objc func presentCreate() {
         let createProductController = CreateProductViewController()
         createProductController.delegate = self
-        createProductController.switcherValue = switcherIndex
         createProductController.category = currentCategory
-        createProductController.switcherServerName = topBarServerName
-        createProductController.switcherValue = switcherIndex
+        
+        if let barServerName = topBarServerName {
+            createProductController.switcherServerName = barServerName
+            createProductController.switcherValue = switcherIndex
+        }
         let navigationController = UINavigationController(rootViewController: createProductController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)

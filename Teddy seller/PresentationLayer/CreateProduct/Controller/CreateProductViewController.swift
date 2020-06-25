@@ -82,6 +82,8 @@ class CreateProductViewController: UIViewController {
     
     let playerView = PlayerView()
     
+    let loaderView = LoaderView()
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,9 +127,25 @@ class CreateProductViewController: UIViewController {
         let url = videoUrl else { return }
         
         let teddyService = TeddyAPIService()
-        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) { (error) in
-            print("Ебанет ?")
+        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) {
+            self.loaderView.acitivityIndicator.stopAnimating()
+            self.delegate.didAddNewProduct()
+            self.dismiss(animated: true)
         }
+    }
+    
+    private func presentLoader() {
+        view.addSubview(loaderView)
+        
+        loaderView.layer.cornerRadius = 10
+        
+        loaderView.snp.makeConstraints { maker in
+            maker.center.equalTo(view)
+            maker.height.equalTo(60)
+            maker.width.equalTo(60)
+        }
+        
+        loaderView.acitivityIndicator.startAnimating()
     }
     
     // MARK:- Selectors
@@ -144,6 +162,8 @@ class CreateProductViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return 
         }
+        
+        presentLoader()
         
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
@@ -183,8 +203,6 @@ class CreateProductViewController: UIViewController {
         addProduct(json: json) {
             self.uploadVideo()
         }
-        
-        
     }
     
     @objc func keyboardWillShow(sender: Notification) {
