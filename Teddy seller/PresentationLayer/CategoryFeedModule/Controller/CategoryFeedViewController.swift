@@ -272,7 +272,7 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
 // MARK:- UICollectionViewDelegateFlowLayout
 extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 38, height: 320)
+        return CGSize(width: collectionView.bounds.width - 38, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

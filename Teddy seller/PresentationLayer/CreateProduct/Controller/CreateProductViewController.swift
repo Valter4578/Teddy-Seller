@@ -225,7 +225,7 @@ class CreateProductViewController: UIViewController {
     @objc func didTapOnVideoContainer() {
         let alertController = UIAlertController(title: nil, message: "Выберите опцию", preferredStyle: .actionSheet)
         
-        let galleryAction = UIAlertAction(title: "Галлерея", style: .default) { [weak self] _ in
+        let galleryAction = UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.videoSelectedFrom = .gallery
             strongSelf.isVideoSelected = true
