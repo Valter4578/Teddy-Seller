@@ -111,9 +111,9 @@ extension CreateProductViewController {
         case "Участки":
             cellTypes = [.textField(title: "Название объявления ", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"),
                          .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true),.textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
-        case "Квартира":
+        case "Квартиры", "1-комнатные", "2-комнатные", "3-комнтаные", "Многокомнатные":
             cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Кол-во комнат", serverName: "rooms", needsOnlyNumbers: false), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
-        case "Дома":
+        case "Дома", "1-этажные", "2-этажные", "3-этажные", "Многоэтажные":
             cellTypes = [.textField(title: "Название объявления", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textView(title: "Адрес", serverName: "address"), .textField(title: "Цена", serverName: "price", needsOnlyNumbers: true), .textField(title: "Этажей в доме", serverName: "floors", needsOnlyNumbers: true), .textField(title: "Год постройки", serverName: "year", needsOnlyNumbers: true), .textField(title: "Площадь, м2", serverName: "square", needsOnlyNumbers: true), .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
             // Работа
         case "Работа":
