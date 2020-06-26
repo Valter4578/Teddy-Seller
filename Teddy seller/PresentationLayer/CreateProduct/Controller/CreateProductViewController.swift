@@ -166,22 +166,19 @@ class CreateProductViewController: UIViewController {
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
             if let textViewCell = cells[i] as? TextViewTableViewCell {
-                guard !textViewCell.textView.text.isEmpty else {
-                    AlertBuilder.createAlert(message: "Обязательные поля не заполнены", for: self)
-                    return
-                }
-                
                 guard let serverName = textViewCell.serverName else { return }
                 jsonParametrs.updateValue(textViewCell.textView.text, forKey: serverName)
             }
             
             if let textFieldCell = cells[i] as? TextFieldTableViewCell {
-                guard !(textFieldCell.textField.text?.isEmpty ?? true) else {
-                    AlertBuilder.createAlert(message: "Обязательные поля не заполнены", for: self)
-                    return
+                guard let serverName = textFieldCell.serverName else { continue }
+                if serverName == "title" && category?.title != "Автомобили" || serverName == "price" || serverName == "city" {
+                    guard !(textFieldCell.textField.text?.isEmpty ?? true) else {
+                        AlertBuilder.createAlert(message: "Обязательные поля не заполнены", for: self)
+                        return
+                    }
                 }
                 
-                guard let serverName = textFieldCell.serverName else { continue }
                 jsonParametrs.updateValue(textFieldCell.textField.text, forKey: serverName)
             }
         }
@@ -207,8 +204,6 @@ class CreateProductViewController: UIViewController {
         addProduct(json: json) {
             self.uploadVideo()
         }
-        
-        
     }
     
     @objc func keyboardWillShow(sender: Notification) {
