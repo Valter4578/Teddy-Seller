@@ -48,6 +48,7 @@
 		88830D90247CF3D10034937F /* FindCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D8F247CF3D10034937F /* FindCityViewController.swift */; };
 		88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88830D91247CFE6B0034937F /* FindCityHeader.swift */; };
 		888DADB0249A2791008DC15F /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888DADAF249A2791008DC15F /* UIDevice+Extension.swift */; };
+		889AADF524A5F6A200DB3483 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889AADF424A5F6A200DB3483 /* AlertBuilder.swift */; };
 		88B0CF00248F6C580078812D /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CEFF248F6C580078812D /* CellType.swift */; };
 		88B0CF02248F71810078812D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0CF01248F71810078812D /* TextFieldTableViewCell.swift */; };
 		88C9296C248BDFF1002DE387 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */; };
@@ -116,6 +117,7 @@
 		88830D8F247CF3D10034937F /* FindCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityViewController.swift; sourceTree = "<group>"; };
 		88830D91247CFE6B0034937F /* FindCityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCityHeader.swift; sourceTree = "<group>"; };
 		888DADAF249A2791008DC15F /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		889AADF424A5F6A200DB3483 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		88B0CEFF248F6C580078812D /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		88B0CF01248F71810078812D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		88C9296B248BDFF1002DE387 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -270,6 +272,7 @@
 				88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */,
 				88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */,
 				88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */,
+				889AADF424A5F6A200DB3483 /* AlertBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				8842D58724864B1B001FC653 /* AuthError.swift in Sources */,
 				880180C824967CC400E39408 /* AddressViewController.swift in Sources */,
 				88C9296E248BE3EE002DE387 /* AdsError.swift in Sources */,
+				889AADF524A5F6A200DB3483 /* AlertBuilder.swift in Sources */,
 				88B0CF02248F71810078812D /* TextFieldTableViewCell.swift in Sources */,
 				8821FB8A248F73B200BCDE05 /* TextViewTableViewCell.swift in Sources */,
 				88830D92247CFE6B0034937F /* FindCityHeader.swift in Sources */,

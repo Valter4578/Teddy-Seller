@@ -87,7 +87,7 @@ class CreateProductViewController: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         configureCells()
         
         setupAddButton()
@@ -124,7 +124,7 @@ class CreateProductViewController: UIViewController {
     
     private func uploadVideo() {
         guard let token = UserDefaults.standard.string(forKey: "token"),
-        let url = videoUrl else { return }
+            let url = videoUrl else { return }
         
         let teddyService = TeddyAPIService()
         teddyService.uploadVideo(token: token, id: productId, videoUrl: url) {
@@ -148,6 +148,7 @@ class CreateProductViewController: UIViewController {
         loaderView.acitivityIndicator.startAnimating()
     }
     
+    
     // MARK:- Selectors
     @objc func dismissCreateProduct() {
         dismiss(animated: true)
@@ -160,25 +161,26 @@ class CreateProductViewController: UIViewController {
             let action = UIAlertAction(title: "Ok", style: .cancel)
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)
-            return 
         }
-        
-        presentLoader()
-        
+                
         var jsonParametrs: [String: Any] = [:]
         for i in 0...cells.count - 1 {
-            if let videoCell = cells[i] as? VideoTableViewCell {
-                print("\(videoCell.serverName) -- \(videoCell.label.text)")
-            }
-            
             if let textViewCell = cells[i] as? TextViewTableViewCell {
-                print("\(textViewCell.serverName) -- \(textViewCell.textView.text)")
+                guard !textViewCell.textView.text.isEmpty else {
+                    AlertBuilder.createAlert(message: "Обязательные поля не заполнены", for: self)
+                    return
+                }
+                
                 guard let serverName = textViewCell.serverName else { return }
                 jsonParametrs.updateValue(textViewCell.textView.text, forKey: serverName)
             }
             
             if let textFieldCell = cells[i] as? TextFieldTableViewCell {
-                print("\(textFieldCell.serverName) -- \(textFieldCell.textField.text)")
+                guard !(textFieldCell.textField.text?.isEmpty ?? true) else {
+                    AlertBuilder.createAlert(message: "Обязательные поля не заполнены", for: self)
+                    return
+                }
+                
                 guard let serverName = textFieldCell.serverName else { continue }
                 jsonParametrs.updateValue(textFieldCell.textField.text, forKey: serverName)
             }
@@ -199,10 +201,14 @@ class CreateProductViewController: UIViewController {
             jsonParametrs.updateValue(stringIndex, forKey: serverName)
         }
         
+        presentLoader()
+        
         let json = JSONBuilder.createJSON(parametrs: jsonParametrs)
         addProduct(json: json) {
             self.uploadVideo()
         }
+        
+        
     }
     
     @objc func keyboardWillShow(sender: Notification) {
