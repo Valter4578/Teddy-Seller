@@ -325,6 +325,10 @@ extension CreateProductViewController: UIPickerViewDelegate {
 // MARK:- UIPickerViewDataSource
 extension CreateProductViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        // set "деревянный" as default value of text field
+        if let indexOfCell = cellTypes.lastIndex(of: .textField(title: "Материал стен", serverName: "material", needsOnlyNumbers: false)), let materialCell = cells[indexOfCell] as? TextFieldTableViewCell {
+            materialCell.textField.text = materials[0]
+        }
         return 1
     }
     
