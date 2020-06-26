@@ -31,7 +31,8 @@ extension CreateProductViewController {
                 }
                 playerView.clipsToBounds = true
                 playerView.playPauseButton.isEnabled = false
-                playerView.playPauseButton.alpha = 0 
+                playerView.playPauseButton.alpha = 0
+                playerView.alpha = 0 
                 
                 tableView.register(VideoTableViewCell.self, forCellReuseIdentifier: videoCellId)
                 cells.append(videoCell)
