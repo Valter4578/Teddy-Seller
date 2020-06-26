@@ -22,7 +22,7 @@ extension CreateProductViewController {
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnVideoContainer))
                 videoCell.videoContainer.addGestureRecognizer(gestureRecognizer)
                 
-                playerView.alpha = 1
+                playerView.alpha = 0
                 videoCell.videoContainer.addSubview(playerView)
                 
                 playerView.snp.makeConstraints { maker in
