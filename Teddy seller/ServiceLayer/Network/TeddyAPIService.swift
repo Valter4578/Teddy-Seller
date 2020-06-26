@@ -186,7 +186,7 @@ class TeddyAPIService {
         }
     }
     
-    func uploadVideo(token: String, id: String, videoUrl: URL, completionHandler: @escaping () -> Void) {
+    func uploadVideo(token: String, id: String, videoUrl: URL, completionHandler: @escaping (Result<String, UploadError>) -> Void) {
         
         let parametrs = [
             "token": token,
@@ -210,10 +210,33 @@ class TeddyAPIService {
                 return
             }
         }, to: "\(url):802/uploadVideo")
-            .responseString { response in
-                // will add error handler later
+            .responseJSON { response in
                 print(response)
-                completionHandler()
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(arrayLiteral: value)
+                    let error = json[0]["error"].stringValue
+                    switch error {
+                    case "Can not connect to database":
+                        completionHandler(.failure(.database))
+                    case "Token, adid or video is not specified":
+                        completionHandler(.failure(.dataIsntSpecified))
+                    case "Wrong token":
+                        completionHandler(.failure(.wrongToken))
+                    case "Wrong ad id":
+                        completionHandler(.failure(.wrongId))
+                    case "Wrong file type":
+                        completionHandler(.failure(.wrongFile))
+                    case "DB query error":
+                        completionHandler(.failure(.dbQuery))
+                    default:
+                        let status = json[0]["status"].stringValue
+                        completionHandler(.success(status))
+                    }
+                case .failure(let error):
+                    print(error)
+                    return
+                }
         }
     }
 }

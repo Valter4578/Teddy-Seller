@@ -127,10 +127,21 @@ class CreateProductViewController: UIViewController {
             let url = videoUrl else { return }
         
         let teddyService = TeddyAPIService()
-        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) {
+        
+        teddyService.uploadVideo(token: token, id: productId, videoUrl: url) { result in
             self.loaderView.acitivityIndicator.stopAnimating()
-            self.delegate.didAddNewProduct()
-            self.dismiss(animated: true)
+            switch result {
+            case .success(let status):
+                print(status)
+                self.delegate.didAddNewProduct()
+                self.dismiss(animated: true)
+            case .failure(let error):
+                print(error)
+                let alertController = UIAlertController(title: "Ошибка", message: "Что-то пошло не так. Попробуйте еще раз", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(action)
+                self.present(alertController, animated: true)
+            }
         }
     }
     
