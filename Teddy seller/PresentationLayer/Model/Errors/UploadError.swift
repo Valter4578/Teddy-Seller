@@ -14,7 +14,8 @@ enum UploadError: Error {
     case wrongToken
     case wrongId
     case wrongFile
-    case dbQuery 
+    case dbQuery
+    case unrecognizedError
 }
  
 

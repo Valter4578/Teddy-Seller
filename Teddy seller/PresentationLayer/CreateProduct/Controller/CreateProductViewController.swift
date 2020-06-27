@@ -140,6 +140,10 @@ class CreateProductViewController: UIViewController {
                 let alertController = UIAlertController(title: "Ошибка", message: "Что-то пошло не так. Попробуйте еще раз", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alertController.addAction(action)
+                
+                if error == .unrecognizedError {
+                    alertController.message = "Видимо у вас что-то с интернетом. Попробуйте позже"
+                }
                 self.present(alertController, animated: true)
             }
         }

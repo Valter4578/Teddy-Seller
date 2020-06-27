@@ -235,6 +235,7 @@ class TeddyAPIService {
                     }
                 case .failure(let error):
                     print(error)
+                    completionHandler(.failure(.unrecognizedError))
                     return
                 }
         }
