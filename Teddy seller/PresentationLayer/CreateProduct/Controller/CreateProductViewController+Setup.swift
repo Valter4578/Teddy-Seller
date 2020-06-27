@@ -38,7 +38,7 @@ extension CreateProductViewController {
         arrowView.addGestureRecognizer(gestureRecognizer)
         
         guard let name = category?.title.lowercased() else { return }
-        title = "Добавить \(name)"
+        title = "Добавить в \(name)"
     }
     
     func setupTableView() {

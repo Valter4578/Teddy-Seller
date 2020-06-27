@@ -30,6 +30,7 @@
 		884F19732498DDEA0085F413 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884F19722498DDEA0085F413 /* VideoService.swift */; };
 		8850B7F124928F0700227B7C /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850B7F024928F0600227B7C /* PlayerView.swift */; };
 		8859AD24247D7814006B6C29 /* CityFinderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8859AD23247D7814006B6C29 /* CityFinderService.swift */; };
+		886017A024A6508900E962B0 /* CategoryTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8860179F24A6508900E962B0 /* CategoryTranslator.swift */; };
 		8867010C247B85E4002E2A8E /* GeodecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010B247B85E4002E2A8E /* GeodecoderService.swift */; };
 		8867010F247B96AF002E2A8E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867010E247B96AE002E2A8E /* AuthViewController.swift */; };
 		88729F9C249D0574000FDB5E /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88729F9B249D0574000FDB5E /* RangeSliderTrackLayer.swift */; };
@@ -97,6 +98,7 @@
 		884F19722498DDEA0085F413 /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
 		8850B7F024928F0600227B7C /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8859AD23247D7814006B6C29 /* CityFinderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderService.swift; sourceTree = "<group>"; };
+		8860179F24A6508900E962B0 /* CategoryTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTranslator.swift; sourceTree = "<group>"; };
 		8867010B247B85E4002E2A8E /* GeodecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeodecoderService.swift; sourceTree = "<group>"; };
 		8867010E247B96AE002E2A8E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		88729F9B249D0574000FDB5E /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
@@ -268,11 +270,8 @@
 		8842D581248649EA001FC653 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
-				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
-				88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */,
-				88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */,
+				8860179D24A6501100E962B0 /* Alert */,
 				88EA9CFD2490F1EC0010A62E /* JSONBuilder.swift */,
-				889AADF424A5F6A200DB3483 /* AlertBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -283,7 +282,7 @@
 				8850B7EF24928EF100227B7C /* Views */,
 				8842D581248649EA001FC653 /* Builders */,
 				887BA3D2247A4C38009DCCE3 /* Extensions */,
-				88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */,
+				8860179E24A6503400E962B0 /* Translators */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -309,6 +308,26 @@
 				88C9DFC524A4766E007BB101 /* LoaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8860179D24A6501100E962B0 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				8842D58324864A53001FC653 /* AuthAlertBuilder.swift */,
+				88C92970248BEB5F002DE387 /* AdsAlertBuilder.swift */,
+				88EA9CFB2490EFEB0010A62E /* AddAdAlertBuilder.swift */,
+				889AADF424A5F6A200DB3483 /* AlertBuilder.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		8860179E24A6503400E962B0 /* Translators */ = {
+			isa = PBXGroup;
+			children = (
+				88D6F0162493B2FB00F6D93D /* DictionaryTranslator.swift */,
+				8860179F24A6508900E962B0 /* CategoryTranslator.swift */,
+			);
+			path = Translators;
 			sourceTree = "<group>";
 		};
 		8867010A247B85B2002E2A8E /* ServiceLayer */ = {
@@ -697,6 +716,7 @@
 				887BA3D6247A4CEA009DCCE3 /* MainViewConllectionViewCell.swift in Sources */,
 				88729F9C249D0574000FDB5E /* RangeSliderTrackLayer.swift in Sources */,
 				887BA3BE247A4A22009DCCE3 /* SceneDelegate.swift in Sources */,
+				886017A024A6508900E962B0 /* CategoryTranslator.swift in Sources */,
 				887BA3D4247A4C4F009DCCE3 /* UIColor+Extension.swift in Sources */,
 				8881D57D2489391700B44D7A /* CategoryFeedHeaderCollectionViewCell.swift in Sources */,
 				88DB0EBA249E03EF0008BB71 /* SearchViewController+Setup.swift in Sources */,
