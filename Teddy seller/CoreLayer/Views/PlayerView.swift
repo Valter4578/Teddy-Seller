@@ -10,6 +10,10 @@ import AVFoundation
 import UIKit
 import SnapKit
 
+protocol PlayerViewDelegate: class {
+    func didTapOnButton(indexOfPlayer: Int)
+}
+
 final class PlayerView: UIView {
     // MARK:- Views
     lazy var playPauseButton: UIButton = {
@@ -36,6 +40,8 @@ final class PlayerView: UIView {
     }
     
     var isButtonHidden: Bool = false  // false when alpha = 0
+    
+    weak var delegate: PlayerViewDelegate?
     
     // MARK:- Functions
     func setPlayerURL(url: URL) {
@@ -70,7 +76,7 @@ final class PlayerView: UIView {
         }
     }
     
-    private func pausePlayer() {
+    func pausePlayer() {
         playPauseButton.alpha = 1
         playPauseButton.setImage(playImage, for: .normal)
         player.pause()
@@ -80,7 +86,7 @@ final class PlayerView: UIView {
         }
     }
     
-    private func playPlayer() {
+    func playPlayer() {
         playPauseButton.alpha = 1
         playPauseButton.setImage(pauseImage, for: .normal)
         player.play()
@@ -100,6 +106,10 @@ final class PlayerView: UIView {
     // MARK:- Selectors
     @objc func didSelectButton() {
         isPlaying.toggle()
+
+        if let selectedIndex = index {
+            delegate?.didTapOnButton(indexOfPlayer: selectedIndex)
+        }
     }
     
     @objc func didTapOnVideo() {
