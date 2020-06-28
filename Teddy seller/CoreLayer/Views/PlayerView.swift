@@ -49,6 +49,8 @@ final class PlayerView: UIView {
         playerLayer.frame = self.bounds
         
         setupPlayPauseButton()
+        
+        makeLooping() 
     }
     
     // MARK:- Private functions
@@ -83,6 +85,13 @@ final class PlayerView: UIView {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.hideButton()
+        }
+    }
+    
+    private func makeLooping() {
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
+            self?.player?.seek(to: CMTime.zero)
+            self?.player?.play()
         }
     }
     
