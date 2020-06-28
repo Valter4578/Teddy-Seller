@@ -13,6 +13,14 @@ class CategoryTranslator {
         switch title {
         case "квартиры":
             return "квартиру"
+        case "дома":
+            return "дом"
+        case "легковые":
+            return "легковое"
+        case "спецтехника":
+            return "спецтехнику"
+        case "мотоциклы":
+            return "мотоцикл"
         default:
             return nil
         }
