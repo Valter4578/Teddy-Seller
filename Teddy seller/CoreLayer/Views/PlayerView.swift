@@ -24,6 +24,8 @@ final class PlayerView: UIView {
     private let pauseImage: UIImage = #imageLiteral(resourceName: "pause").withRenderingMode(.alwaysTemplate)
     
     // MARK:- Properties
+    var index: Int? 
+    
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     
@@ -39,7 +41,7 @@ final class PlayerView: UIView {
     func setPlayerURL(url: URL) {
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
-        player = AVPlayer(playerItem: playerItem)
+        player.replaceCurrentItem(with: playerItem)
         player.automaticallyWaitsToMinimizeStalling = true 
         
         playerLayer = AVPlayerLayer(player: player)
@@ -50,7 +52,7 @@ final class PlayerView: UIView {
         
         setupPlayPauseButton()
         
-        makeLooping() 
+        makeLooping()
     }
     
     // MARK:- Private functions

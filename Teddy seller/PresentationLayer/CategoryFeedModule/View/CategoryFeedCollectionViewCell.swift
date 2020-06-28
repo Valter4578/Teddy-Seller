@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
 final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     // MARK:- Properties
@@ -43,7 +44,11 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var videoContrainer: PlayerView = PlayerView()
+    lazy var videoContrainer: PlayerView = {
+        let view = PlayerView()
+        view.player = AVPlayer()
+        return view
+    }()
     
     lazy var productName: UILabel = {
         let label = UILabel()

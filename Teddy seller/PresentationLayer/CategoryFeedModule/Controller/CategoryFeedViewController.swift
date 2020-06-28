@@ -242,6 +242,16 @@ extension CategoryFeedViewController: UICollectionViewDelegate {
         productDetailViewController.product = products[indexPath.item]
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
+        
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            
+            print("\(indexPath) - \(videoUrl)")
+            guard let categoryCell = cell as? CategoryFeedCollectionViewCell else { return }
+            categoryCell.videoContrainer.setPlayerURL(url: videoUrl)
+        }
+    }
+
 }
 
 // MARK: UICollectionViewDataSource
@@ -254,11 +264,7 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryFeedCollectionViewCell
         cell.layer.cornerRadius = 20
         
-        cell.product = products[indexPath.row]
-        
-        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-            cell.videoContrainer.setPlayerURL(url: videoUrl)
-        }
+        cell.product = products[indexPath.item]
         
         return cell
     }
