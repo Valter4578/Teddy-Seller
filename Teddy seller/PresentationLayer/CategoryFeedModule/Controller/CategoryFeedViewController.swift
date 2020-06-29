@@ -248,9 +248,9 @@ extension CategoryFeedViewController: UICollectionViewDelegate {
             
             print("\(indexPath) - \(videoUrl)")
             guard let categoryCell = cell as? CategoryFeedCollectionViewCell else { return }
-            categoryCell.videoContrainer.index = indexPath.item
-            categoryCell.videoContrainer.delegate = self
-            categoryCell.videoContrainer.setPlayerURL(url: videoUrl)
+            categoryCell.videoContrainer?.index = indexPath.item
+            categoryCell.videoContrainer?.delegate = self
+            categoryCell.videoContrainer?.setPlayerURL(url: videoUrl)
         }
     }
 }
@@ -327,9 +327,10 @@ extension CategoryFeedViewController: CreateProductDelegate {
 
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: Int) {
-        let cellIndexPath = IndexPath(item: indexOfPlayer, section: 0)
-        
-        let lastPlayedCell = collectionView?.visibleCells[indexOfPlayer] as? CategoryFeedCollectionViewCell
-        lastPlayedCell?.videoContrainer.pausePlayer()
+        if collectionView?.visibleCells.count ?? 0 > indexOfPlayer {
+            
+            guard let lastPlayedCell = collectionView?.visibleCells[indexOfPlayer] as? CategoryFeedCollectionViewCell else { return }
+            lastPlayedCell.videoContrainer?.pausePlayer()
+        }
     }
 }

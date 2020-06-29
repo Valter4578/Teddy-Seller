@@ -44,7 +44,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var videoContrainer: PlayerView = {
+    lazy var videoContrainer: PlayerView? = {
         let view = PlayerView()
         view.player = AVPlayer()
         return view
@@ -98,9 +98,9 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     }
     
     func setupVideoContainer() {
-        addSubview(videoContrainer)
+        addSubview(videoContrainer!)
         
-        videoContrainer.snp.makeConstraints {
+        videoContrainer!.snp.makeConstraints {
             $0.leading.equalTo(self)
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contactButton.snp.top).offset(-8)
