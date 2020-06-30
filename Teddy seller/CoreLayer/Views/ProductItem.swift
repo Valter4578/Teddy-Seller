@@ -1,5 +1,5 @@
 //
-//  CategoryFeedCollectionViewCell.swift
+//  ProductItem.swift
 //  Teddy seller
 //
 //  Created by Максим Алексеев on 02.06.2020.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import AVFoundation
 
-final class CategoryFeedCollectionViewCell: UICollectionViewCell {
+final class ProductItem: UIView  {
     // MARK:- Properties
     var product: Product? {
         didSet {
@@ -44,7 +44,7 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var videoContrainer: PlayerView? = {
+    var videoContrainer: PlayerView = {
         let view = PlayerView()
         view.player = AVPlayer()
         return view
@@ -98,9 +98,9 @@ final class CategoryFeedCollectionViewCell: UICollectionViewCell {
     }
     
     func setupVideoContainer() {
-        addSubview(videoContrainer!)
+        addSubview(videoContrainer)
         
-        videoContrainer!.snp.makeConstraints {
+        videoContrainer.snp.makeConstraints {
             $0.leading.equalTo(self)
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contactButton.snp.top).offset(-8)

@@ -10,10 +10,10 @@ import UIKit
 import SnapKit
 
 extension CategoryFeedViewController {
-    func setupCollectionViewConstraints() {
-        view.addSubview(collectionView!)
+    func setupTableViewConstraints() {
+        view.addSubview(tableView)
         
-        collectionView!.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
             if needsToPresentBottomBar {
@@ -25,18 +25,17 @@ extension CategoryFeedViewController {
     }
     
     func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
         
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
+        tableView.separatorColor = .clear
         
-        collectionView?.backgroundColor = .mainBlue
-        collectionView?.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView?.contentInset  = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0);
+        tableView.allowsSelection = false
         
-        setupCollectionViewConstraints()
+        tableView.backgroundColor = .mainBlue
+
+        setupTableViewConstraints()
     }
     
     func setupBottomBar() {
@@ -86,12 +85,14 @@ extension CategoryFeedViewController {
         header.collectionView.snp.remakeConstraints {
             $0.leading.equalTo(view)
             $0.trailing.equalTo(view)
+            
             if needsToPresentTopBar {
                 $0.top.equalTo(topBar.snp.bottom)
             } else {
                 $0.top.equalTo(view.safeAreaLayoutGuide)
             }
-            $0.bottom.equalTo(collectionView?.snp.top as! ConstraintRelatableTarget)
+            
+            $0.bottom.equalTo(tableView.snp.top)
             
             if (currentCategory?.subcategories?.count ?? 0) > 0 {
                 $0.height.equalTo(header.collectionView.collectionViewLayout.collectionViewContentSize).priority(999)
