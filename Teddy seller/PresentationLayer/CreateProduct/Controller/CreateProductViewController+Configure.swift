@@ -118,8 +118,10 @@ extension CreateProductViewController {
             // Работа
         case "Работа":
             if switcherValue == 0 {
+                title = "Добавить вакансию"
                 cellTypes = [.textField(title: "Название вакансии", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "График", serverName: "schedule", needsOnlyNumbers: true), .textField(title:"Опыт работы", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title:"Зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title:"Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
             } else {
+                title = "Добавить резюме"
                 cellTypes = [.textField(title: "Название резюме", serverName: "title", needsOnlyNumbers: false), .video(title: "Видео", serverName: "video"), .textField(title: "Желаемый график", serverName: "schedule", needsOnlyNumbers: true), .textField(title: "Опыт", serverName: "expierenceYears", needsOnlyNumbers: true), .textField(title: "Ожидаемая зарплата", serverName: "price", needsOnlyNumbers: true), .textView(title: "Описание", serverName: "description"), .textField(title: "Город", serverName: "city", needsOnlyNumbers: false)]
             }
         default:

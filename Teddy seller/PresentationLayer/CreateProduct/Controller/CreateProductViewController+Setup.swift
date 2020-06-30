@@ -37,8 +37,9 @@ extension CreateProductViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissCreateProduct))
         arrowView.addGestureRecognizer(gestureRecognizer)
         
+        if title != nil { return }
         guard let name = category?.title.lowercased() else { return }
-        if let correctName = CategoryTranslator.getCorrectName(for: name) {
+        if let correctName = CategoryTranslator.getCorrectName(for: name, switcherValue: switcherValue) {
             title = "Добавить \(correctName)"
         } else {
             title = "Добавить \(name)"

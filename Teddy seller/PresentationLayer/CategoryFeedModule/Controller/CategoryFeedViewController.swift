@@ -134,12 +134,15 @@ class CategoryFeedViewController: UIViewController {
     @objc func presentCreate() {
         let createProductController = CreateProductViewController()
         createProductController.delegate = self
-        createProductController.category = currentCategory
         
         if let barServerName = topBarServerName {
             createProductController.switcherServerName = barServerName
             createProductController.switcherValue = switcherIndex
         }
+        
+        createProductController.category = currentCategory
+        
+        
         let navigationController = UINavigationController(rootViewController: createProductController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -203,6 +206,7 @@ class CategoryFeedViewController: UIViewController {
             rightTopBarTitle = "Женская"
             needsToPresentTopBar = true
         case "Работа":
+            topBarServerName = "jobOrVacancy" // потом поменяю на актуальное название, которое лежит на сервере
             leftTopBarTitle = "Вакансии"
             rightTopBarTitle = "Резюме"
             needsToPresentTopBar = true

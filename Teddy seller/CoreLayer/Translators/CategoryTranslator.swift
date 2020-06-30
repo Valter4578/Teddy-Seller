@@ -9,7 +9,20 @@
 import Foundation
 
 class CategoryTranslator {
-    static func getCorrectName(for title: String) -> String?  {
+    static func getCorrectName(for title: String, switcherValue: Int? = nil) -> String?  {
+        if let value = switcherValue {
+            if title == "работа" {
+                switch value {
+                case 0:
+                    return "вакансию"
+                case 1:
+                    return "резюме"
+                default:
+                    return nil
+                }
+            }
+        }
+        
         switch title {
         case "квартиры":
             return "квартиру"
