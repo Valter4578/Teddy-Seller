@@ -24,8 +24,7 @@ extension CategoryFeedViewController {
         }
     }
     
-    func setupCollectionView() {
-        
+    func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -34,6 +33,8 @@ extension CategoryFeedViewController {
         tableView.allowsSelection = false
         
         tableView.backgroundColor = .mainBlue
+
+        tableView.rowHeight = 270
 
         setupTableViewConstraints()
     }

@@ -118,7 +118,7 @@ class CategoryFeedViewController: UIViewController {
         
         configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
-        setupCollectionView()
+        setupTableView()
         setupCategoryHeader()
     }
     
@@ -269,6 +269,8 @@ class CategoryFeedViewController: UIViewController {
 //    }
     
     private func configureCells()  {
+        tableView.rowHeight = 270
+
         let cell = CategoryFeedTableViewCell()
         
         products.forEach { product in
@@ -276,24 +278,23 @@ class CategoryFeedViewController: UIViewController {
         }
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
-        // only for test
-        let colorIndex = Int.random(in: 0...randomColors.count - 1)
-        cell.backgroundColor = randomColors[colorIndex]
         
         cells.append(cell)
-        
-        tableView.rowHeight = 340
+    
     }
 }
 
-// MARK:- UITableViewDelegat e
+// MARK:- UITableViewDelegate
 extension CategoryFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
         productDetailViewController.product = products[indexPath.row]
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
-            
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 270
+    }
 }
 
 // MARK: UICollectionViewDataSource

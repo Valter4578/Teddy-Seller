@@ -19,7 +19,9 @@ class CategoryFeedTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        setupProductItem()
+        backgroundColor = .mainBlue
+        
+        setupProductItem()
     }
     
     required init?(coder: NSCoder) {
@@ -31,9 +33,14 @@ class CategoryFeedTableViewCell: UITableViewCell {
         addSubview(productItem)
         
         productItem.snp.makeConstraints { maker in
-            maker.width.equalTo(self.frame.width - 40)
-            maker.height.equalTo(self.frame.height - 20)
+            maker.width.equalTo(340)
+            maker.height.equalTo(250)
             maker.center.equalTo(self)
         }
+    }
+    
+    // MARK:- Lifecycle
+    override func layoutSubviews() {
+        productItem.layer.cornerRadius = 12
     }
 }
