@@ -60,7 +60,7 @@ final class PlayerView: UIView {
         
         makeLooping()
         
-        player.isMuted = true 
+        player.isMuted = true
     }
     
     // MARK:- Private functions
@@ -92,10 +92,6 @@ final class PlayerView: UIView {
         playPauseButton.alpha = 1
         playPauseButton.setImage(pauseImage, for: .normal)
         player.play()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.hideButton()
-        }
     }
     
     private func makeLooping() {

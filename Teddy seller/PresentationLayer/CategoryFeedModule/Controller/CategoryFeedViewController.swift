@@ -244,14 +244,14 @@ extension CategoryFeedViewController: UICollectionViewDelegate {
     }
         
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-            
-            print("\(indexPath) - \(videoUrl)")
-            guard let categoryCell = cell as? CategoryFeedCollectionViewCell else { return }
-            categoryCell.videoContrainer?.index = indexPath.item
-            categoryCell.videoContrainer?.delegate = self
-            categoryCell.videoContrainer?.setPlayerURL(url: videoUrl)
-        }
+//        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+//
+//            print("\(indexPath) - \(videoUrl)")
+//            guard let categoryCell = cell as? CategoryFeedCollectionViewCell else { return }
+//            categoryCell.videoContrainer?.index = indexPath.item
+//            categoryCell.videoContrainer?.delegate = self
+//            categoryCell.videoContrainer?.setPlayerURL(url: videoUrl)
+//        }
     }
 }
 
@@ -266,6 +266,13 @@ extension CategoryFeedViewController: UICollectionViewDataSource {
         cell.layer.cornerRadius = 20
         
         cell.product = products[indexPath.item]
+        
+        if let stringUrl = products[indexPath.row].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            print("\(indexPath) - \(videoUrl)")
+            cell.videoContrainer?.index = indexPath.item
+            cell.videoContrainer?.delegate = self
+            cell.videoContrainer?.setPlayerURL(url: videoUrl)
+        }
         
         return cell
     }
