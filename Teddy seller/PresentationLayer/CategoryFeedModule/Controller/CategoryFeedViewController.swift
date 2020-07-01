@@ -25,10 +25,8 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Properties
     var switcherIndex: Int? = 0 {
         didSet {
-            getProducts {
-                self.configureCells()
-                self.tableView.reloadData()
-            }
+            getProducts()
+            
         }
     }
     var needsToPresentTopBar: Bool = false 
@@ -51,11 +49,9 @@ class CategoryFeedViewController: UIViewController {
         didSet {
             configureTopBar()
             title = currentCategory?.title
-//            getProducts(completionHandler: () -> Void)
-            getProducts {
-                self.configureCells()
-                self.tableView.reloadData()
-            }
+            
+            getProducts()
+                        
             if let subcategories = currentCategory?.subcategories {
                 header.subcategories = subcategories
                 header.collectionView.reloadData()
@@ -67,15 +63,19 @@ class CategoryFeedViewController: UIViewController {
     }
     
     
-    var products: [Product] = []
+    var products: [Product] = [] {
+        didSet {
+            self.configureCells()
+            self.tableView.reloadData()
+            loadVideos()
+        }
+    }
     
     // top bar
     var leftTopBarTitle: String?
     var rightTopBarTitle: String?
     var topBarServerName: String? // last property for search json in /addAd methods
     
-    
-    let randomColors: [UIColor] = [.mainBlue, .red, .purple, .brown, .green, .magenta]
     // MARK:- Views
     var header: CategoryFeedHeader = {
         let layout = UICollectionViewFlowLayout()
@@ -104,7 +104,7 @@ class CategoryFeedViewController: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         checkForSe() 
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
@@ -120,6 +120,12 @@ class CategoryFeedViewController: UIViewController {
         if needsToPresentBottomBar { setupBottomBar() }
         setupTableView()
         setupCategoryHeader()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadVideos()
     }
     
     // MARK:- Selectors
@@ -160,14 +166,15 @@ class CategoryFeedViewController: UIViewController {
     @objc func presentSearch() {
         let searchViewController = SearchViewController()
         searchViewController.category = currentCategory
-                
+        
         navigationController?.pushViewController(searchViewController, animated: true)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
     // MARK:- Private functions
-    private func getProducts(completionHandler: @escaping () -> Void) {
+    private func getProducts() {
         products = []
+        cells = []
         tableView.reloadData()
         
         let teddyService = TeddyAPIService()
@@ -192,7 +199,6 @@ class CategoryFeedViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 print(product.title)
                 strongSelf.products.append(product)
-                completionHandler()
             case .failure(let error):
                 if error == .wrongToken {
                     let authController = AuthViewController()
@@ -204,6 +210,7 @@ class CategoryFeedViewController: UIViewController {
                 adsAlertBuilder.configureAlert { alert in
                     self?.present(alert, animated: true)
                 }
+                return
             }
         }
     }
@@ -211,7 +218,7 @@ class CategoryFeedViewController: UIViewController {
     private func configureTopBar() {
         switch currentCategory?.title {
         case "Одежда":
-             
+            
             leftTopBarTitle = "Мужская"
             rightTopBarTitle = "Женская"
             needsToPresentTopBar = true
@@ -248,39 +255,33 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
-//    private func configureCell(product: Product) -> CategoryFeedCollectionViewCell {
-////        let cell = CategoryFeedCollectionViewCell()
-////        cell.layer.cornerRadius = 20
-////
-////        let index = (products.count - cells.count) - 1
-////
-////        cell.product = products[index]
-////
-////        if let stringUrl = products[index].dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-////            print("\(index) - \(videoUrl)")
-////            cell.videoContrainer.index = index
-////            cell.videoContrainer.delegate = self
-////            cell.videoContrainer.setPlayerURL(url: videoUrl)
-////        }
-////
-////        collectionView?.register(CategoryFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-////
-////        return cell
-//    }
-    
-    private func configureCells()  {
-        tableView.rowHeight = 270
-
-        let cell = CategoryFeedTableViewCell()
+    private func configureCells() {
+        guard !products.isEmpty else { return }
         
-        products.forEach { product in
-            cell.productItem.product = product
-        }
+        let cell = CategoryFeedTableViewCell()
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
         
+        for i in 1...products.count {
+            let product = products[i - 1]
+            
+            cell.productItem.videoContrainer.index = i
+            
+            cell.productItem.product = product
+        }
+        
         cells.append(cell)
+    }
     
+    private func loadVideos() {
+        cells.forEach { cell in
+            guard let product = cell.productItem.product else { return }
+            if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+                cell.productItem.videoContrainer.delegate = self
+                cell.productItem.videoContrainer.setPlayerURL(url: videoUrl)
+                print(cell.productItem.videoContrainer.player.currentItem)
+            }
+        }
     }
 }
 
@@ -303,9 +304,9 @@ extension CategoryFeedViewController: UITableViewDataSource {
         return cells[indexPath.row]
     }
     
-//    func t(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return products.count
-//        return cells.count
+    //    func t(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    //        return products.count
+    //        return cells.count
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -358,11 +359,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 // MARK:- CreateProductDelegate
 extension CategoryFeedViewController: CreateProductDelegate {
     func didAddNewProduct() {
-//        getProducts(completionHandler: () -> Void)
-        getProducts {
-            self.configureCells()
-            self.tableView.reloadData()
-        }
+        getProducts()
     }
 }
 
