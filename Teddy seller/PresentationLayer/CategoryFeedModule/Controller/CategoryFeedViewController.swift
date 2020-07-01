@@ -76,6 +76,8 @@ class CategoryFeedViewController: UIViewController {
     var rightTopBarTitle: String?
     var topBarServerName: String? // last property for search json in /addAd methods
     
+    private var lastPlayedCell: CategoryFeedTableViewCell?
+    
     // MARK:- Views
     var header: CategoryFeedHeader = {
         let layout = UICollectionViewFlowLayout()
@@ -262,11 +264,16 @@ class CategoryFeedViewController: UIViewController {
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
         
-        for i in 1...products.count {
-            let product = products[i - 1]
-            
-            cell.productItem.videoContrainer.index = i
-            
+//        for i in 1...products.count {
+//            let product = products[i - 1]
+//
+//            cell.productItem.videoContrainer.index = i
+//
+//            cell.productItem.product = product
+//        }
+        
+        for (index, product) in products.enumerated() {
+            cell.productItem.videoContrainer.index = index
             cell.productItem.product = product
         }
         
@@ -279,7 +286,6 @@ class CategoryFeedViewController: UIViewController {
             if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
                 cell.productItem.videoContrainer.delegate = self
                 cell.productItem.videoContrainer.setPlayerURL(url: videoUrl)
-                print(cell.productItem.videoContrainer.player.currentItem)
             }
         }
     }
@@ -303,11 +309,6 @@ extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
-    
-    //    func t(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    //        return products.count
-    //        return cells.count
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
@@ -365,10 +366,21 @@ extension CategoryFeedViewController: CreateProductDelegate {
 
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: Int) {
-//        if collectionView?.visibleCells.count ?? 0 > indexOfPlayer {
-//
-//            guard let lastPlayedCell = collectionView?.visibleCells[indexOfPlayer] as? CategoryFeedCollectionViewCell else { return }
-//            lastPlayedCell.videoContrainer.pausePlayer()
-//        }
+        let cell = cells[indexOfPlayer]
+        print(cell.productItem.product?.title)
+        
+        guard cell != lastPlayedCell else { return } // check if last played cell is current playing cell. Because user can play one video twice
+        
+        // if user played video before (last played cell is nil)
+        if let lastCell = lastPlayedCell {
+            print(cell.productItem.product?.title)
+            lastCell.productItem.videoContrainer.pausePlayer()
+            lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
+            return
+        }
+        
+        // if user play video for first time
+        lastPlayedCell = cell
+        return
     }
 }

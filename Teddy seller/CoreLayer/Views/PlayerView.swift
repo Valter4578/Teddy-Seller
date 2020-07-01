@@ -79,9 +79,9 @@ final class PlayerView: UIView {
     }
     
     func pausePlayer() {
+        player.pause()
         playPauseButton.alpha = 1
         playPauseButton.setImage(playImage, for: .normal)
-        player.pause()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.hideButton()
@@ -106,6 +106,7 @@ final class PlayerView: UIView {
         isPlaying.toggle()
 
         if let selectedIndex = index {
+            guard isPlaying else { return } 
             delegate?.didTapOnButton(indexOfPlayer: selectedIndex)
         }
     }
