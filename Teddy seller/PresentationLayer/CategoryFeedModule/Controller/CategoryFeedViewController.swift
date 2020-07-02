@@ -311,6 +311,7 @@ extension CategoryFeedViewController: UITableViewDataSource {
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let cellsCount = tableView.numberOfRows(inSection: 0)
+        if cellsCount>0{
         for index in 0...cellsCount-1{
             let indexPath = IndexPath.init(row: index, section: 0)
             let cellRect = tableView.rectForRow(at: indexPath)
@@ -321,6 +322,18 @@ extension CategoryFeedViewController: UITableViewDataSource {
                 
             }
         }
+        for index in 0...cellsCount-1{
+           let indexPath = IndexPath.init(row: index, section: 0)
+            let cellRect = tableView.rectForRow(at: indexPath)
+            let completelyVisible = tableView.bounds.contains(cellRect)
+            if(completelyVisible){
+                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+                cell?.productItem.videoContrainer.playPlayer()
+                break
+            }
+        }
+           
+      }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
