@@ -75,10 +75,13 @@ final class PlayerView: UIView {
     }
     
     func pausePlayer() {
+         
         player.pause()
         playPauseButton.alpha = 1
         playPauseButton.setImage(playImage, for: .normal)
-        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                   self.showButton()
+               }
         
     }
     
