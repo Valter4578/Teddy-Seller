@@ -33,11 +33,7 @@ final class PlayerView: UIView {
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     
-    var isPlaying: Bool = false { // when button is pause
-        didSet {
-            isPlaying ? pausePlayer() : playPlayer()
-        }
-    }
+    var isPlaying: Bool = false
     
     var isButtonHidden: Bool = false  // false when alpha = 0
     
@@ -103,8 +99,9 @@ final class PlayerView: UIView {
     
     // MARK:- Selectors
     @objc func didSelectButton() {
+        isPlaying ? pausePlayer() : playPlayer()
         isPlaying.toggle()
-
+        
         if let selectedIndex = index {
             guard isPlaying else { return } 
             delegate?.didTapOnButton(indexOfPlayer: selectedIndex)
