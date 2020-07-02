@@ -309,7 +309,19 @@ extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let cellsCount = tableView.numberOfRows(inSection: 0)
+        for index in 0...cellsCount-1{
+            let indexPath = IndexPath.init(row: index, section: 0)
+            let cellRect = tableView.rectForRow(at: indexPath)
+            let completelyVisible = tableView.bounds.contains(cellRect)
+            if(!completelyVisible){
+                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+                cell?.productItem.videoContrainer.pausePlayer()
+                
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
