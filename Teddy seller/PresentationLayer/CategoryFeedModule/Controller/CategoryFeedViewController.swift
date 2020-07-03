@@ -309,28 +309,21 @@ extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let cellsCount = tableView.numberOfRows(inSection: 0)
         if cellsCount>0{
-        for index in 0...cellsCount-1{
-            let indexPath = IndexPath.init(row: index, section: 0)
-            let cellRect = tableView.rectForRow(at: indexPath)
-            let completelyVisible = tableView.bounds.contains(cellRect)
-            if(!completelyVisible){
-                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
-                cell?.productItem.videoContrainer.pausePlayer()
-                
-            }
-        }
+        var flag = true
         for index in 0...cellsCount-1{
            let indexPath = IndexPath.init(row: index, section: 0)
             let cellRect = tableView.rectForRow(at: indexPath)
             let completelyVisible = tableView.bounds.contains(cellRect)
-            if(completelyVisible){
-                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+            cell?.productItem.videoContrainer.pausePlayer()
+            if(completelyVisible&&flag){
+                flag = false
                 cell?.productItem.videoContrainer.playPlayer()
-                break
             }
+            
         }
            
       }
@@ -391,8 +384,17 @@ extension CategoryFeedViewController: CreateProductDelegate {
 
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: Int) {
-        let cell = cells[indexOfPlayer]
-        print(cell.productItem.product?.title)
+      let currentCell = cells[indexOfPlayer]
+       let cellsCount = tableView.numberOfRows(inSection: 0)
+       if cellsCount>0{
+       for index in 0...cellsCount-1{
+            let indexPath = IndexPath.init(row: index, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+            cell?.productItem.videoContrainer.pausePlayer()
+           }
+          currentCell.productItem.videoContrainer.playPlayer()
+        }
+      /*  print(cell.productItem.product?.title)
         
         guard cell != lastPlayedCell else { return } // check if last played cell is current playing cell. Because user can play one video twice
         
@@ -406,6 +408,6 @@ extension CategoryFeedViewController: PlayerViewDelegate {
         
         // if user play video for first time
         lastPlayedCell = cell
-        return
+        return*/
     }
 }
