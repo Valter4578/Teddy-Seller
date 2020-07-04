@@ -88,13 +88,13 @@ class CreateProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureCells()
         
         setupAddButton()
         setupTableView()
         setupNavigationBar()
         setupPickerView()
         
-        configureCells()
         
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.enable = true
