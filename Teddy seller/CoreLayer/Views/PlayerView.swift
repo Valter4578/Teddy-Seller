@@ -55,8 +55,6 @@ final class PlayerView: UIView {
         setupPlayPauseButton()
         
         makeLooping()
-        
-        player.isMuted = true
     }
     
     // MARK:- Private functions

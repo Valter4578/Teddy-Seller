@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum VideoState {
+    /// video is loaded and user can see them on the screen
+    case loaded
+    /// when products added but loadVideo() didn't execute
+    case needsToLoad
+    /// when category changed
+    case prepareForLoad
+}
+
 class CategoryFeedViewController: UIViewController {
     // MARK:- Private properties
     let cellId = "CategoryFeedCollectionViewControllerCellId"
@@ -22,6 +31,22 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
+    private var lastPlayedCell: CategoryFeedTableViewCell?
+    
+    var videoState: VideoState? {
+        didSet {
+            switch videoState {
+            case .needsToLoad:
+                self.loadVideos()
+            case .loaded:
+                break
+            case .none:
+                break
+            case .prepareForLoad:
+                break
+            }
+        }
+    }
     // MARK:- Properties
     var switcherIndex: Int? = 0 {
         didSet {
@@ -67,7 +92,6 @@ class CategoryFeedViewController: UIViewController {
         didSet {
             self.configureCells()
             self.tableView.reloadData()
-            loadVideos()
         }
     }
     
@@ -75,9 +99,7 @@ class CategoryFeedViewController: UIViewController {
     var leftTopBarTitle: String?
     var rightTopBarTitle: String?
     var topBarServerName: String? // last property for search json in /addAd methods
-    
-    private var lastPlayedCell: CategoryFeedTableViewCell?
-    
+        
     // MARK:- Views
     var header: CategoryFeedHeader = {
         let layout = UICollectionViewFlowLayout()
@@ -124,12 +146,6 @@ class CategoryFeedViewController: UIViewController {
         setupCategoryHeader()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        loadVideos()
-    }
-    
     // MARK:- Selectors
     @objc func didTapBack() {
         if lastCategory == nil {
@@ -146,6 +162,8 @@ class CategoryFeedViewController: UIViewController {
             
             setupCategoryHeader()
             self.tableView.reloadData()
+            
+            videoState = .prepareForLoad
         }
     }
     
@@ -257,20 +275,13 @@ class CategoryFeedViewController: UIViewController {
         }
     }
     
+    /// void method that adds cell to array to use this array in delegate methods
     private func configureCells() {
         guard !products.isEmpty else { return }
         
         let cell = CategoryFeedTableViewCell()
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
-        
-//        for i in 1...products.count {
-//            let product = products[i - 1]
-//
-//            cell.productItem.videoContrainer.index = i
-//
-//            cell.productItem.product = product
-//        }
         
         for (index, product) in products.enumerated() {
             cell.productItem.videoContrainer.index = index
@@ -280,6 +291,7 @@ class CategoryFeedViewController: UIViewController {
         cells.append(cell)
     }
     
+    /// void method that get cell and set player item to cell's avplayer. Need call only when cells on the screen 
     private func loadVideos() {
         cells.forEach { cell in
             guard let product = cell.productItem.product else { return }
@@ -288,6 +300,8 @@ class CategoryFeedViewController: UIViewController {
                 cell.productItem.videoContrainer.setPlayerURL(url: videoUrl)
             }
         }
+        
+        videoState = .loaded
     }
 }
 
@@ -313,21 +327,18 @@ extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
     }
-}
-
-// MARK:- UICollectionViewDelegateFlowLayout
-extension CategoryFeedViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 38, height: 250)
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // check if video didn't load
+        if videoState != .loaded {
+            // check if last cell displayed => all cell appeared
+            if indexPath.row == cells.count - 1 {
+                videoState = .needsToLoad
+            }
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 19
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
-    }
 }
 
 // MARK:- TopBarDelegate
@@ -354,6 +365,8 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
             maker.trailing.equalTo(view)
             maker.bottom.equalTo(bottomBar.snp.top)
         }
+        
+        videoState = .prepareForLoad
     }
 }
 
