@@ -144,6 +144,8 @@ class CategoryFeedViewController: UIViewController {
         if needsToPresentBottomBar { setupBottomBar() }
         setupTableView()
         setupCategoryHeader()
+        
+        print(#function + "\(view.frame) - \(view.frame.width) - \(view.frame.size.width)")
     }
     
     // MARK:- Selectors
@@ -283,7 +285,7 @@ class CategoryFeedViewController: UIViewController {
     private func configureCells() {
         guard !products.isEmpty else { return }
         
-        let cell = CategoryFeedTableViewCell()
+        let cell = CategoryFeedTableViewCell(superviewFrame: view.frame)
         cell.selectionStyle = .none
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
