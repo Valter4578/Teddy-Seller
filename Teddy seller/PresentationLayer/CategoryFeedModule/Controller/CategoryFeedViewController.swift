@@ -284,6 +284,7 @@ class CategoryFeedViewController: UIViewController {
         guard !products.isEmpty else { return }
         
         let cell = CategoryFeedTableViewCell()
+        cell.selectionStyle = .none
         
         tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
         

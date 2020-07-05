@@ -28,7 +28,8 @@ final class PlayerView: UIView {
     private let pauseImage: UIImage = #imageLiteral(resourceName: "pause").withRenderingMode(.alwaysTemplate)
     
     // MARK:- Properties
-    var index: Int? 
+    /// index of player. Index value is actually index path of cell where player is.
+    var index: Int?
     
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
@@ -37,26 +38,34 @@ final class PlayerView: UIView {
     
     var isButtonHidden: Bool = false  // false when alpha = 0
     
+    var currentItem: AVPlayerItem?
+    
     weak var delegate: PlayerViewDelegate?
     
     // MARK:- Functions
     func setPlayerURL(url: URL) {
+        if player == nil {
+            player = AVPlayer()
+        }
+        
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
         player.replaceCurrentItem(with: playerItem)
-        player.automaticallyWaitsToMinimizeStalling = true 
+        currentItem = playerItem
+        
+        setupPlayer()
+    }
+    
+    func setupPlayer() {
+        player.automaticallyWaitsToMinimizeStalling = true
         
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill
         
         self.layer.addSublayer(playerLayer)
         playerLayer.frame = self.bounds
-        
         setupPlayPauseButton()
-        
         makeLooping()
-        
-        player.isMuted = false
     }
     
     // MARK:- Private functions

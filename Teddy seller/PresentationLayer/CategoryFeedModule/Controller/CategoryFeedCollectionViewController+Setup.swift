@@ -29,12 +29,7 @@ extension CategoryFeedViewController {
         tableView.dataSource = self
         
         tableView.separatorColor = .clear
-        
-        tableView.allowsSelection = false
-        
         tableView.backgroundColor = .mainBlue
-
-        tableView.rowHeight = 270
 
         setupTableViewConstraints()
     }
