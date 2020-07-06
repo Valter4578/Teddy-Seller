@@ -38,19 +38,36 @@ final class PlayerView: UIView {
     
     var isButtonHidden: Bool = false  // false when alpha = 0
     
-    var currentItem: AVPlayerItem?
+    var currentItem: AVPlayerItem? {
+        didSet {
+            player.replaceCurrentItem(with: currentItem)
+        }
+    }
     
     weak var delegate: PlayerViewDelegate?
     
     // MARK:- Functions
-    func setPlayerURL(url: URL) {
+    /// Set player item to player and setup player
+    /// - Parameter item: loaded item from category vc
+    func changePlayerItem(item: AVPlayerItem) {
+        if player == nil {
+            player = AVPlayer()
+        }
+        
+        setupPlayer()
+        
+        currentItem = item
+    }
+    
+    /// Set player video using AVPlayerItem and setup player view
+    /// - Parameter url: URL for video
+    func setPlayerItem(url: URL) {
         if player == nil {
             player = AVPlayer()
         }
         
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
-        player.replaceCurrentItem(with: playerItem)
         currentItem = playerItem
         
         setupPlayer()

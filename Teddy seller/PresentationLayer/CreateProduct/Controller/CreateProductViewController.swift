@@ -395,7 +395,7 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
             
             dismiss(animated: true) {
                 self.videoUrl = url
-                self.playerView.setPlayerURL(url: url)
+                self.playerView.setPlayerItem(url: url)
                 self.playerView.alpha = 1
                 self.playerView.layer.cornerRadius = 24
                 self.playerView.playerLayer.cornerRadius = 24
@@ -404,7 +404,7 @@ extension CreateProductViewController: UIImagePickerControllerDelegate {
         case .gallery:
             dismiss(animated: true) {
                 self.videoUrl = url
-                self.playerView.setPlayerURL(url: url)
+                self.playerView.setPlayerItem(url: url)
                 self.playerView.alpha = 1
                 self.playerView.layer.cornerRadius = 24
                 self.playerView.playerLayer.cornerRadius = 24

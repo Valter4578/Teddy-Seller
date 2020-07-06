@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 final class ProductDetailViewController: UIViewController {
     // MARK:- Views
@@ -41,6 +42,8 @@ final class ProductDetailViewController: UIViewController {
         }
     }
     
+    var playerItem: AVPlayerItem?
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,34 +57,41 @@ final class ProductDetailViewController: UIViewController {
         setupNavigationBar()
         
         configureScreen()
+        
+//        if let item = playerItem {
+//            print(#function)
+//            videoContainer.changePlayerItem(item: item)
+//        }
     }
     
     // MARK:- Private methods
     private func configureScreen() {
-        configurePlayer()
-        
         let textViewAttributedString = NSMutableAttributedString()
         product?.dictionary.forEach({ key, value in
             guard let valueString = value as? String else { return }
             
             if valueString == "subcategory" { return }
-            if valueString == "id" { return }
+            if valueString == "id" { return } // c
+            if valueString == "" { return } // check if field is empty
             
+            // get correct name in russian
             guard let keyName = DictionaryTranslator.getName(from: key) else { return }
             
+            // add ":" symbol and white space after it
             textViewAttributedString.append(NSAttributedString(string: keyName + ": ", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 20)]))
+            
             textViewAttributedString.append(NSAttributedString(string: valueString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]))
         })
         
         descriptionTextView.attributedText = textViewAttributedString
     }
-    
-    private func configurePlayer() {
-        guard let stringUrl = product?.dictionary["video"] as? String,
-            let videoUrl = URL(string: stringUrl) else { return }
-        videoContainer.setPlayerURL(url: videoUrl)
-        videoContainer.player.play()
-    }
+//
+//    private func configurePlayer() {
+//        guard let stringUrl = product?.dictionary["video"] as? String,
+//            let videoUrl = URL(string: stringUrl) else { return }
+//        videoContainer.setPlayerItem(url: videoUrl)
+////        videoContainer.player.play()
+//    }
     
     // MARK:- Selectors
     @objc func dissmisProduct() {

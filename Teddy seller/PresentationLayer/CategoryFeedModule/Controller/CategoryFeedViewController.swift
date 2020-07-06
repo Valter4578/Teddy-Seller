@@ -17,7 +17,7 @@ enum VideoState {
     case prepareForLoad
 }
 
-class CategoryFeedViewController: UIViewController {
+final class CategoryFeedViewController: UIViewController {
     // MARK:- Private properties
     let cellId = "CategoryFeedCollectionViewControllerCellId"
     let headerId = "CategoryFeedCollectionViewHeaderId"
@@ -304,7 +304,7 @@ class CategoryFeedViewController: UIViewController {
             guard let product = cell.productItem.product else { return }
             if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
                 cell.productItem.videoContrainer.delegate = self
-                cell.productItem.videoContrainer.setPlayerURL(url: videoUrl)
+                cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
             }
         }
         
@@ -317,6 +317,7 @@ extension CategoryFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
         productDetailViewController.product = products[indexPath.row]
+        productDetailViewController.playerItem = cells[indexPath.row].productItem.videoContrainer.currentItem
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     
@@ -341,6 +342,24 @@ extension CategoryFeedViewController: UITableViewDataSource {
             // check if last cell displayed => all cell appeared
             if indexPath.row == cells.count - 1 {
                 videoState = .needsToLoad
+            }
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let cellsCount = tableView.numberOfRows(inSection: 0)
+        if cellsCount > 0{
+            var flag = true
+            for index in 0...cellsCount - 1{
+                let indexPath = IndexPath.init(row: index, section: 0)
+                let cellRect = tableView.rectForRow(at: indexPath)
+                let completelyVisible = tableView.bounds.contains(cellRect)
+                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+                cell?.productItem.videoContrainer.pausePlayer()
+                if(completelyVisible && flag){
+                    flag = false
+                    cell?.productItem.videoContrainer.playPlayer()
+                }
             }
         }
     }
