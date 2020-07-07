@@ -15,6 +15,9 @@ class CategoryFeedTableViewCell: UITableViewCell {
     
     // MARK:- Properties
     
+    /// boolean flag that indicates if video loaded 
+    var isVideoLoaded: Bool = false
+    
     // MARK:- Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,10 +45,7 @@ class CategoryFeedTableViewCell: UITableViewCell {
         addSubview(productItem)
         
         productItem.snp.makeConstraints { maker in
-//            maker.width.equalTo(340
             maker.width.equalTo(width - 20)
-            print(frame.width)
-            print(frame.size.width)
             maker.height.equalTo(250)
             maker.center.equalTo(self)
         }

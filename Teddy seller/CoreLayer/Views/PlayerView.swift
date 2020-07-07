@@ -101,12 +101,10 @@ final class PlayerView: UIView {
     }
     
     func pausePlayer() {
-       isPlaying = false
+        isPlaying = false
         player.pause()
         playPauseButton.alpha = 1
         playPauseButton.setImage(playImage, for: .normal)
-        print("pausePlayer \(isPlaying)")
-        
     }
     
     func playPlayer() {
@@ -114,7 +112,6 @@ final class PlayerView: UIView {
         playPauseButton.alpha = 1
         playPauseButton.setImage(pauseImage, for: .normal)
         player.play()
-         print("playPlayer \(isPlaying)")
     /* DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                          self.hideButton()
                      }*/
