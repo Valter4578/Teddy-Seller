@@ -148,6 +148,13 @@ final class CategoryFeedViewController: UIViewController {
         print(#function + "\(view.frame) - \(view.frame.width) - \(view.frame.size.width)")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print(#function)
+        print(cells.count)
+    }
+    
     // MARK:- Selectors
     @objc func didTapBack() {
         if let lastCell = lastPlayedCell {
@@ -156,21 +163,21 @@ final class CategoryFeedViewController: UIViewController {
         
         if lastCategory == nil {
             navigationController?.popViewController(animated: true)
-        } else {
-            if currentCategory == lastCategory {
-                lastCategory = selectedCategory
-            }
-            currentCategory = lastCategory
-            if currentCategory?.isParent ?? true {
-                lastCategory = nil
-                needsToPresentBottomBar = false
-            }
-            
-            setupCategoryHeader()
-            self.tableView.reloadData()
-            
-            videoState = .prepareForLoad
-        }
+        } // else {
+//            if currentCategory == lastCategory {
+//                lastCategory = selectedCategory
+//            }
+//            currentCategory = lastCategory
+//            if currentCategory?.isParent ?? true {
+//                lastCategory = nil
+//                needsToPresentBottomBar = false
+//            }
+//
+//            setupCategoryHeader()
+//            self.tableView.reloadData()
+//
+//            videoState = .prepareForLoad
+//        }
     }
     
     @objc func presentCreate() {
@@ -301,10 +308,13 @@ final class CategoryFeedViewController: UIViewController {
     /// void method that get cell and set player item to cell's avplayer. Need call only when cells on the screen 
     private func loadVideos() {
         cells.forEach { cell in
+//            print(#function)
             guard let product = cell.productItem.product else { return }
+//            print(product.title)
             if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
                 cell.productItem.videoContrainer.delegate = self
                 cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
+                cell.isVideoLoaded = true
             }
         }
         
@@ -336,14 +346,31 @@ extension CategoryFeedViewController: UITableViewDataSource {
         return cells.count
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // check if video didn't load
-        if videoState != .loaded {
-            // check if last cell displayed => all cell appeared
-            if indexPath.row == cells.count - 1 {
-                videoState = .needsToLoad
-            }
-        }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print(cells.count)
+//        print(indexPath.row)
+//        // check if video didn't load
+//        if videoState != .loaded {
+//            // check if last cell displayed => all cell appeared
+//            if indexPath.row == cells.count {
+//                videoState = .needsToLoad
+//            }
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print(cells.count)
+//        print(indexPath.row)
+//
+//        guard let productCell = cells as? CategoryFeedTableViewCell else { return }
+//
+//        if videoState != .loaded {
+//            if indexPath.row + 1 == cells.count || indexPath.row > 7 {
+//                if !productCell.isVideoLoaded {
+//
+//                }
+//            }
+//        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -356,7 +383,7 @@ extension CategoryFeedViewController: UITableViewDataSource {
                 let completelyVisible = tableView.bounds.contains(cellRect)
                 let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
                 cell?.productItem.videoContrainer.pausePlayer()
-                if(completelyVisible && flag){
+                if (completelyVisible && flag){
                     flag = false
                     cell?.productItem.videoContrainer.playPlayer()
                 }
@@ -379,22 +406,28 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
             lastCell.productItem.videoContrainer.pausePlayer()
         }
         
-        self.lastCategory = currentCategory
+        let categoryFeedViewController = CategoryFeedViewController()
+        categoryFeedViewController.currentCategory = category
         
-        setupBottomBar()
-        needsToPresentBottomBar = true
+//        self.lastCategory = currentCategory
+//
+//        setupBottomBar()
+//        categoryFeedViewController.needsToPresentBottomBar = true
+//
+//        self.currentCategory = category
+//
+//        setupCategoryHeader()
+//
+//        categoryFeedViewController.tableView.snp.remakeConstraints { (maker) in
+//            maker.leading.equalTo(view)
+//            maker.trailing.equalTo(view)
+//            maker.bottom.equalTo(bottomBar.snp.top)
+//        }
+//
+//        videoState = .prepareForLoad
         
-        self.currentCategory = category
-       
-        setupCategoryHeader()
-        
-        tableView.snp.remakeConstraints { (maker) in
-            maker.leading.equalTo(view)
-            maker.trailing.equalTo(view)
-            maker.bottom.equalTo(bottomBar.snp.top)
-        }
-        
-        videoState = .prepareForLoad
+//        present(categoryFeedViewController, animated: true)
+        navigationController?.pushViewController(categoryFeedViewController, animated: true)
     }
 }
 
