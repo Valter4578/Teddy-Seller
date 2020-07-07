@@ -157,6 +157,7 @@ final class CategoryFeedViewController: UIViewController {
         print(#function)
         print(cells.count)
         videoState = .needsToLoad
+        scrollViewDidScroll(tableView)
     }
     
     // MARK:- Selectors
