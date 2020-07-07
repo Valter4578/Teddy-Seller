@@ -143,8 +143,8 @@ final class CategoryFeedViewController: UIViewController {
             setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
         }
         
-        configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
+        configureBottomBar()
         setupTableView()
         setupCategoryHeader()
         
