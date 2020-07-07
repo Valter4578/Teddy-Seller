@@ -404,6 +404,7 @@ extension CategoryFeedViewController: UITableViewDataSource {
                 if (completelyVisible && flag){
                     flag = false
                     cell?.productItem.videoContrainer.playPlayer()
+                    lastPlayedCell = cell 
                 }
             }
         }
