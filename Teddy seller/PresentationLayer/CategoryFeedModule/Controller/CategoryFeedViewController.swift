@@ -431,7 +431,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //
 //        setupBottomBar()
         categoryFeedViewController.needsToPresentBottomBar = true
-//
+        categoryFeedViewController.lastPlayedCell = lastPlayedCell
 //        self.currentCategory = category
 //
 //        setupCategoryHeader()
