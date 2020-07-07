@@ -430,7 +430,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //        self.lastCategory = currentCategory
 //
 //        setupBottomBar()
-//        categoryFeedViewController.needsToPresentBottomBar = true
+        categoryFeedViewController.needsToPresentBottomBar = true
 //
 //        self.currentCategory = category
 //
@@ -442,7 +442,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //            maker.bottom.equalTo(bottomBar.snp.top)
 //        }
 //
-//        videoState = .prepareForLoad
+        videoState = .prepareForLoad
         
 //        present(categoryFeedViewController, animated: true)
         navigationController?.pushViewController(categoryFeedViewController, animated: true)
