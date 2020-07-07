@@ -33,7 +33,7 @@ final class CategoryFeedViewController: UIViewController {
     
     private var lastPlayedCell: CategoryFeedTableViewCell?
     
-    var videoState: VideoState? {
+    private var videoState: VideoState? {
         didSet {
             switch videoState {
             case .needsToLoad:
@@ -123,7 +123,10 @@ final class CategoryFeedViewController: UIViewController {
         return view
     }()
     
+    /// Array of all cells
     private var cells: [CategoryFeedTableViewCell] = []
+    /// Array of appeared cells that user can see
+    private var appearedCells: [CategoryFeedTableViewCell] = []
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -153,6 +156,7 @@ final class CategoryFeedViewController: UIViewController {
         
         print(#function)
         print(cells.count)
+        videoState = .needsToLoad
     }
     
     // MARK:- Selectors
@@ -305,20 +309,36 @@ final class CategoryFeedViewController: UIViewController {
         cells.append(cell)
     }
     
-    /// void method that get cell and set player item to cell's avplayer. Need call only when cells on the screen 
-    private func loadVideos() {
-        cells.forEach { cell in
-//            print(#function)
-            guard let product = cell.productItem.product else { return }
-//            print(product.title)
+    /// void method that get cell and set player item to cell's avplayer. Must be called only when cells appeared on the screen
+    /// - Parameters:
+    ///   - needsToLoadAllVideos: boolean flag that indicates if needs to load all videos. If its true than will iterate over all cells and set player item to theirs player
+    ///   - videoForLoadIndex: Int that indicates
+    private func loadVideos(needsToLoadAllVideos: Bool = true, videoForLoadIndex: Int? = nil) {
+        if needsToLoadAllVideos {
+            cells.forEach { cell in
+                guard let product = cell.productItem.product else { return }
+                if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+                    cell.productItem.videoContrainer.delegate = self
+                    cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
+                }
+            }
+            
+            videoState = .loaded
+        } else {
+            guard let i = videoForLoadIndex,
+                  let product = cells[i].productItem.product else { return }
             if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-                cell.productItem.videoContrainer.delegate = self
-                cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
-                cell.isVideoLoaded = true
+                cells[i].productItem.videoContrainer.delegate = self
+                cells[i].productItem.videoContrainer.setPlayerItem(url: videoUrl)
+                print(#function)
+                print(tableView.indexPathsForVisibleRows)
+                print(i)
+            }
+            
+            if i == cells.count {
+                videoState = .loaded
             }
         }
-        
-        videoState = .loaded
     }
 }
 
@@ -346,9 +366,9 @@ extension CategoryFeedViewController: UITableViewDataSource {
         return cells.count
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        print(cells.count)
-//        print(indexPath.row)
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(cells.count)
+        print(indexPath.row)
 //        // check if video didn't load
 //        if videoState != .loaded {
 //            // check if last cell displayed => all cell appeared
@@ -356,7 +376,11 @@ extension CategoryFeedViewController: UITableViewDataSource {
 //                videoState = .needsToLoad
 //            }
 //        }
-//    }
+        
+        if indexPath.row > 7 {
+            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
+        }
+    }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        print(cells.count)

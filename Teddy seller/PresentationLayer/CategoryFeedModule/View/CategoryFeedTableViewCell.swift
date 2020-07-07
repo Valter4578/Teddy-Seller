@@ -30,7 +30,6 @@ class CategoryFeedTableViewCell: UITableViewCell {
     
     init(superviewFrame: CGRect) {
         super.init(style: .default, reuseIdentifier: nil)
-        print(#function)
         
         backgroundColor = .mainBlue
         setupProductItem(width: superviewFrame.width)

@@ -43,6 +43,8 @@ extension CategoryFeedViewController {
             $0.bottom.equalTo(view)
             $0.height.equalTo(78)
         }
+        
+        
     }
     
     func setupTopBar(leftTitle: String, rightTitle: String) {
