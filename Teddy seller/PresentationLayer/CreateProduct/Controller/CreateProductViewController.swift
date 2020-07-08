@@ -199,7 +199,7 @@ class CreateProductViewController: UIViewController {
             }
         }
         
-        if category?.title == "Автомобили" {
+        if category?.title == "Автомобили" || category?.title == "Легковые" || category?.title == "Спецтехника" || category?.title == "Грузовые" || category?.title == "Мотоциклы" { 
             guard let mark = jsonParametrs["mark"] as? String,
                 let model = jsonParametrs["model"] as? String
                 else { return }

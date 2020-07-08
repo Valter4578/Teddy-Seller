@@ -143,8 +143,8 @@ final class CategoryFeedViewController: UIViewController {
             setupTopBar(leftTitle: leftTopBarTitle ?? "", rightTitle: rightTopBarTitle ?? "")
         }
         
-        configureBottomBar()
         if needsToPresentBottomBar { setupBottomBar() }
+        configureBottomBar()
         setupTableView()
         setupCategoryHeader()
         
@@ -332,7 +332,14 @@ final class CategoryFeedViewController: UIViewController {
                 cells[i].productItem.videoContrainer.setPlayerItem(url: videoUrl)
                 print(#function)
                 print(tableView.indexPathsForVisibleRows)
+                print(stringUrl)
                 print(i)
+                
+                tableView.indexPathsForVisibleRows?.forEach({ indexPath in
+                    if indexPath.row == i {
+                        cells[i].isVideoLoaded = true
+                    }
+                })
             }
             
             if i == cells.count {
@@ -376,44 +383,32 @@ extension CategoryFeedViewController: UITableViewDataSource {
 //                videoState = .needsToLoad
 //            }
 //        }
+        guard let productCell = cell as? CategoryFeedTableViewCell else { return }
         
-        if indexPath.row > 7 {
+        if indexPath.row > 7 || !productCell.isVideoLoaded {
             loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
         }
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        print(cells.count)
-//        print(indexPath.row)
-//
-//        guard let productCell = cells as? CategoryFeedTableViewCell else { return }
-//
-//        if videoState != .loaded {
-//            if indexPath.row + 1 == cells.count || indexPath.row > 7 {
-//                if !productCell.isVideoLoaded {
-//
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let cellsCount = tableView.numberOfRows(inSection: 0)
+//        if cellsCount > 0 {
+//            var flag = true
+//            for index in 0...cellsCount - 1 {
+//                let indexPath = IndexPath.init(row: index, section: 0)
+//                let cellRect = tableView.rectForRow(at: indexPath)
+//                let completelyVisible = tableView.bounds.contains(cellRect)
+//                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+//                cell?.productItem.videoContrainer.pausePlayer()
+//                if (completelyVisible && flag){
+//                    flag = false
+//                    cell?.productItem.videoContrainer.playPlayer()
+//                    lastPlayedCell = cell 
 //                }
 //            }
 //        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let cellsCount = tableView.numberOfRows(inSection: 0)
-        if cellsCount > 0{
-            var flag = true
-            for index in 0...cellsCount - 1{
-                let indexPath = IndexPath.init(row: index, section: 0)
-                let cellRect = tableView.rectForRow(at: indexPath)
-                let completelyVisible = tableView.bounds.contains(cellRect)
-                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
-                cell?.productItem.videoContrainer.pausePlayer()
-                if (completelyVisible && flag){
-                    flag = false
-                    cell?.productItem.videoContrainer.playPlayer()
-                }
-            }
-        }
-    }
+//    }
 }
 
 // MARK:- TopBarDelegate
@@ -436,8 +431,8 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //        self.lastCategory = currentCategory
 //
 //        setupBottomBar()
-//        categoryFeedViewController.needsToPresentBottomBar = true
-//
+        categoryFeedViewController.needsToPresentBottomBar = true
+        categoryFeedViewController.lastPlayedCell = lastPlayedCell
 //        self.currentCategory = category
 //
 //        setupCategoryHeader()
@@ -448,7 +443,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //            maker.bottom.equalTo(bottomBar.snp.top)
 //        }
 //
-//        videoState = .prepareForLoad
+        videoState = .prepareForLoad
         
 //        present(categoryFeedViewController, animated: true)
         navigationController?.pushViewController(categoryFeedViewController, animated: true)
@@ -473,6 +468,7 @@ extension CategoryFeedViewController: PlayerViewDelegate {
         if let lastCell = lastPlayedCell {
             print(cell.productItem.product?.title)
             lastCell.productItem.videoContrainer.pausePlayer()
+            lastCell.productItem.videoContrainer.player.isMuted = true
             lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
             return
         }
