@@ -391,24 +391,24 @@ extension CategoryFeedViewController: UITableViewDataSource {
     }
     
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let cellsCount = tableView.numberOfRows(inSection: 0)
-        if cellsCount > 0 {
-            var flag = true
-            for index in 0...cellsCount - 1 {
-                let indexPath = IndexPath.init(row: index, section: 0)
-                let cellRect = tableView.rectForRow(at: indexPath)
-                let completelyVisible = tableView.bounds.contains(cellRect)
-                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
-                cell?.productItem.videoContrainer.pausePlayer()
-                if (completelyVisible && flag){
-                    flag = false
-                    cell?.productItem.videoContrainer.playPlayer()
-                    lastPlayedCell = cell 
-                }
-            }
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let cellsCount = tableView.numberOfRows(inSection: 0)
+//        if cellsCount > 0 {
+//            var flag = true
+//            for index in 0...cellsCount - 1 {
+//                let indexPath = IndexPath.init(row: index, section: 0)
+//                let cellRect = tableView.rectForRow(at: indexPath)
+//                let completelyVisible = tableView.bounds.contains(cellRect)
+//                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
+//                cell?.productItem.videoContrainer.pausePlayer()
+//                if (completelyVisible && flag){
+//                    flag = false
+//                    cell?.productItem.videoContrainer.playPlayer()
+//                    lastPlayedCell = cell 
+//                }
+//            }
+//        }
+//    }
 }
 
 // MARK:- TopBarDelegate
@@ -468,6 +468,7 @@ extension CategoryFeedViewController: PlayerViewDelegate {
         if let lastCell = lastPlayedCell {
             print(cell.productItem.product?.title)
             lastCell.productItem.videoContrainer.pausePlayer()
+            lastCell.productItem.videoContrainer.player.isMuted = true
             lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
             return
         }
