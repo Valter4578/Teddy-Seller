@@ -41,15 +41,20 @@ class CategoryFeedTableViewCell: UITableViewCell {
     
     // MARK:- Functions
     func configureCell() {
+        print(#function)
         if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            print(#function)
             productItem.videoContainer.setPlayerItem(url: videoUrl)
         }
     }
     
     // MARK:- Overriden methods
     override func prepareForReuse() {
+        print(#function)
+        print(#function)
+        print(productItem.videoContainer.player)
         self.productItem.videoContainer.pausePlayer()
-//        self.productItem.videoContrainer.player = nil
+//        self.productItem.videoContainer.player = nil
     }
     
     // MARK:- Setups
