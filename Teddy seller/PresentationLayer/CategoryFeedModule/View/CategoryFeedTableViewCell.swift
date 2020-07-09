@@ -8,8 +8,9 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
-class CategoryFeedTableViewCell: UITableViewCell {
+final class CategoryFeedTableViewCell: UITableViewCell {
     // MARK:- Views
     let productItem = ProductItem()
     
@@ -25,14 +26,11 @@ class CategoryFeedTableViewCell: UITableViewCell {
         
         backgroundColor = .mainBlue
         
-        setupProductItem(width: contentView.frame.width)
-    }
-    
-    init(superviewFrame: CGRect) {
-        super.init(style: .default, reuseIdentifier: nil)
+        if productItem.videoContrainer.player == nil {
+            productItem.videoContrainer.player = AVPlayer()
+        }
         
-        backgroundColor = .mainBlue
-        setupProductItem(width: superviewFrame.width)
+        setupProductItem(width: contentView.frame.width)
     }
     
     required init?(coder: NSCoder) {
@@ -40,9 +38,18 @@ class CategoryFeedTableViewCell: UITableViewCell {
     }
     
     // MARK:- Functions
-    func configureCell() {
+    func configureCell(shouldPlay: Bool) {
         if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
             productItem.videoContrainer.setPlayerItem(url: videoUrl)
+        }
+        
+        if shouldPlay {
+            productItem.videoContrainer.playPlayer()
+        } else {
+            if productItem.videoContrainer.player != nil {
+                productItem.videoContrainer.pausePlayer()
+                productItem.videoContrainer.player = nil
+            }
         }
     }
     

@@ -101,6 +101,10 @@ final class PlayerView: UIView {
     }
     
     func pausePlayer() {
+        if player == nil {
+            player = AVPlayer()
+        }
+        
         isPlaying = false
         player.pause()
         playPauseButton.alpha = 1
