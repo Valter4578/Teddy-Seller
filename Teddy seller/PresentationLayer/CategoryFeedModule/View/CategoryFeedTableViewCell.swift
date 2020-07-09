@@ -42,13 +42,13 @@ class CategoryFeedTableViewCell: UITableViewCell {
     // MARK:- Functions
     func configureCell() {
         if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-            productItem.videoContrainer.setPlayerItem(url: videoUrl)
+            productItem.videoContainer.setPlayerItem(url: videoUrl)
         }
     }
     
     // MARK:- Overriden methods
     override func prepareForReuse() {
-        self.productItem.videoContrainer.pausePlayer()
+        self.productItem.videoContainer.pausePlayer()
 //        self.productItem.videoContrainer.player = nil
     }
     

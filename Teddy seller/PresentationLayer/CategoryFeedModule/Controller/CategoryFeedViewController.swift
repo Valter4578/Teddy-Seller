@@ -272,8 +272,8 @@ extension CategoryFeedViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.productItem.product = products[indexPath.row]
-        cell.productItem.videoContrainer.index = indexPath.row
-        cell.productItem.videoContrainer.delegate = self
+        cell.productItem.videoContainer.index = indexPath.row
+        cell.productItem.videoContainer.delegate = self
         
         cell.configureCell()
         
