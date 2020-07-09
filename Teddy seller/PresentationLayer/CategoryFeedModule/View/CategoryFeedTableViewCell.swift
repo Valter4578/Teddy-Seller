@@ -15,7 +15,6 @@ final class CategoryFeedTableViewCell: UITableViewCell {
     let productItem = ProductItem()
     
     // MARK:- Properties
-    
     /// boolean flag that indicates if video loaded 
     var isVideoLoaded: Bool = false
     
@@ -56,7 +55,7 @@ final class CategoryFeedTableViewCell: UITableViewCell {
     // MARK:- Overriden methods
     override func prepareForReuse() {
         self.productItem.videoContrainer.pausePlayer()
-//        self.productItem.videoContrainer.player = nil
+        self.productItem.videoContrainer.player = nil
     }
     
     // MARK:- Setups
