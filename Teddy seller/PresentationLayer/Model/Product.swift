@@ -9,9 +9,11 @@
 import Foundation
 
 struct Product {
+    // MARK:- Properties
     let title: String
     let price: Int
     let phoneNumber: Int 
     let category: Category
+    /// JSON dictionary
     let dictionary: [String: Any]
 }

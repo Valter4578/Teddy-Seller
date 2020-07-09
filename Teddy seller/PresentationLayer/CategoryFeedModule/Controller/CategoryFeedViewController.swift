@@ -37,7 +37,8 @@ final class CategoryFeedViewController: UIViewController {
         didSet {
             switch videoState {
             case .needsToLoad:
-                self.loadVideos()
+//                self.loadVideos()
+                break
             case .loaded:
                 break
             case .none:
@@ -313,40 +314,40 @@ final class CategoryFeedViewController: UIViewController {
     /// - Parameters:
     ///   - needsToLoadAllVideos: boolean flag that indicates if needs to load all videos. If its true than will iterate over all cells and set player item to theirs player
     ///   - videoForLoadIndex: Int that indicates
-    private func loadVideos(needsToLoadAllVideos: Bool = true, videoForLoadIndex: Int? = nil) {
-        if needsToLoadAllVideos {
-            cells.forEach { cell in
-                guard let product = cell.productItem.product else { return }
-                if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-                    cell.productItem.videoContrainer.delegate = self
-                    cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
-                }
-            }
-            
-            videoState = .loaded
-        } else {
-            guard let i = videoForLoadIndex,
-                  let product = cells[i].productItem.product else { return }
-            if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-                cells[i].productItem.videoContrainer.delegate = self
-                cells[i].productItem.videoContrainer.setPlayerItem(url: videoUrl)
-                print(#function)
-                print(tableView.indexPathsForVisibleRows)
-                print(stringUrl)
-                print(i)
-                
-                tableView.indexPathsForVisibleRows?.forEach({ indexPath in
-                    if indexPath.row == i {
-                        cells[i].isVideoLoaded = true
-                    }
-                })
-            }
-            
-            if i == cells.count {
-                videoState = .loaded
-            }
-        }
-    }
+//    private func loadVideos(needsToLoadAllVideos: Bool = true, videoForLoadIndex: Int? = nil) {
+//        if needsToLoadAllVideos {
+//            cells.forEach { cell in
+//                guard let product = cell.productItem.product else { return }
+//                if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+//                    cell.productItem.videoContrainer.delegate = self
+//                    cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
+//                }
+//            }
+//
+//            videoState = .loaded
+//        } else {
+//            guard let i = videoForLoadIndex,
+//                  let product = cells[i].productItem.product else { return }
+//            if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+//                cells[i].productItem.videoContrainer.delegate = self
+//                cells[i].productItem.videoContrainer.setPlayerItem(url: videoUrl)
+//                print(#function)
+//                print(tableView.indexPathsForVisibleRows)
+//                print(stringUrl)
+//                print(i)
+//
+//                tableView.indexPathsForVisibleRows?.forEach({ indexPath in
+//                    if indexPath.row == i {
+//                        cells[i].isVideoLoaded = true
+//                    }
+//                })
+//            }
+//
+//            if i == cells.count {
+//                videoState = .loaded
+//            }
+//        }
+//    }
 }
 
 // MARK:- UITableViewDelegate
@@ -366,7 +367,17 @@ extension CategoryFeedViewController: UITableViewDelegate {
 // MARK: UICollectionViewDataSource
 extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cells[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryFeedTableViewCell
+        
+        cell.selectionStyle = .none
+        
+        cell.productItem.product = products[indexPath.row]
+        cell.productItem.videoContrainer.index = indexPath.row
+        
+        cell.configureCell()
+        
+        return cell 
+//        return cells[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -383,11 +394,11 @@ extension CategoryFeedViewController: UITableViewDataSource {
 //                videoState = .needsToLoad
 //            }
 //        }
-        guard let productCell = cell as? CategoryFeedTableViewCell else { return }
-        
-        if indexPath.row > 7 || !productCell.isVideoLoaded {
-            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
-        }
+//        guard let productCell = cell as? CategoryFeedTableViewCell else { return }
+//
+//        if indexPath.row > 7 || !productCell.isVideoLoaded {
+//            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
+//        }
     }
     
     

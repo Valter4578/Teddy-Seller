@@ -25,7 +25,7 @@ class CategoryFeedTableViewCell: UITableViewCell {
         
         backgroundColor = .mainBlue
         
-//        setupProductItem()
+        setupProductItem(width: contentView.frame.width)
     }
     
     init(superviewFrame: CGRect) {
@@ -37,6 +37,19 @@ class CategoryFeedTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:- Functions
+    func configureCell() {
+        if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
+            productItem.videoContrainer.setPlayerItem(url: videoUrl)
+        }
+    }
+    
+    // MARK:- Overriden methods
+    override func prepareForReuse() {
+        self.productItem.videoContrainer.pausePlayer()
+//        self.productItem.videoContrainer.player = nil
     }
     
     // MARK:- Setups
