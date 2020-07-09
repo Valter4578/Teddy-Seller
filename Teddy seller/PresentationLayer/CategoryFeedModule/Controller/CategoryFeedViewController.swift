@@ -35,33 +35,17 @@ final class CategoryFeedViewController: UIViewController {
     /// index path for last played cell
     private var lastPlayedCellIndexPath: IndexPath?
     
-    private var videoState: VideoState? {
-        didSet {
-            switch videoState {
-            case .needsToLoad:
-//                self.loadVideos()
-                break
-            case .loaded:
-                break
-            case .none:
-                break
-            case .prepareForLoad:
-                break
-            }
-        }
-    }
     // MARK:- Properties
     var switcherIndex: Int? = 0 {
         didSet {
             getProducts()
-            
         }
     }
+    
     var needsToPresentTopBar: Bool = false 
     var needsToPresentBottomBar: Bool = false {
         didSet {
             setupTableViewConstraints()
-            
         }
     }
     
@@ -125,11 +109,6 @@ final class CategoryFeedViewController: UIViewController {
         return view
     }()
     
-    /// Array of all cells
-    private var cells: [CategoryFeedTableViewCell] = []
-    /// Array of appeared cells that user can see
-    private var appearedCells: [CategoryFeedTableViewCell] = []
-    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,7 +170,6 @@ final class CategoryFeedViewController: UIViewController {
     // MARK:- Private functions
     private func getProducts() {
         products = []
-        cells = []
         tableView.reloadData()
         
         let teddyService = TeddyAPIService()
@@ -278,7 +256,6 @@ extension CategoryFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
         productDetailViewController.product = products[indexPath.row]
-        productDetailViewController.playerItem = cells[indexPath.row].productItem.videoContrainer.currentItem
         navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     
@@ -307,23 +284,6 @@ extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print(cells.count)
-        print(indexPath.row)
-//        // check if video didn't load
-//        if videoState != .loaded {
-//            // check if last cell displayed => all cell appeared
-//            if indexPath.row == cells.count {
-//                videoState = .needsToLoad
-//            }
-//        }
-//        guard let productCell = cell as? CategoryFeedTableViewCell else { return }
-//
-//        if indexPath.row > 7 || !productCell.isVideoLoaded {
-//            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
-//        }
-    }
 }
 
 // MARK:- TopBarDelegate
@@ -336,31 +296,12 @@ extension CategoryFeedViewController: TopBarDelegate {
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
-//        if let lastCell = lastPlayedCell {
-//            lastCell.productItem.videoContrainer.pausePlayer()
-//        }
+        products = [] 
         
         let categoryFeedViewController = CategoryFeedViewController()
         categoryFeedViewController.currentCategory = category
-        
-//        self.lastCategory = currentCategory
-//
-//        setupBottomBar()
         categoryFeedViewController.needsToPresentBottomBar = true
-//        categoryFeedViewController.lastPlayedCell = lastPlayedCell
-//        self.currentCategory = category
-//
-//        setupCategoryHeader()
-//
-//        categoryFeedViewController.tableView.snp.remakeConstraints { (maker) in
-//            maker.leading.equalTo(view)
-//            maker.trailing.equalTo(view)
-//            maker.bottom.equalTo(bottomBar.snp.top)
-//        }
-//
-        videoState = .prepareForLoad
-        
-//        present(categoryFeedViewController, animated: true)
+
         navigationController?.pushViewController(categoryFeedViewController, animated: true)
     }
 }
@@ -374,24 +315,6 @@ extension CategoryFeedViewController: CreateProductDelegate {
 
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: Int) {
-//        let cell = cells[indexOfPlayer]
-//        print(cell.productItem.product?.title)
-//
-//        guard cell != lastPlayedCell else { return } // check if last played cell is current playing cell. Because user can play one video twice
-//
-//        // if user played video before (last played cell is nil)
-//        if let lastCell = lastPlayedCell {
-//            print(cell.productItem.product?.title)
-//            lastCell.productItem.videoContrainer.pausePlayer()
-//            lastCell.productItem.videoContrainer.player.isMuted = true
-//            lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
-//            return
-//        }
-//
-//        // if user play video for first time
-//        lastPlayedCell = cell
-//        return
-        
         
     }
 }
