@@ -156,7 +156,7 @@ final class CategoryFeedViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        tableView.reloadData()
+        tableView.reloadData() 
     }
     
     // MARK:- Selectors
@@ -298,13 +298,31 @@ extension CategoryFeedViewController: UITableViewDataSource {
         cell.productItem.videoContrainer.index = indexPath.row
         cell.productItem.videoContrainer.delegate = self
         
-        cell.configureCell(shouldPlay: indexPath == lastPlayedCellIndexPath)
+        cell.configureCell()
         
         return cell 
+//        return cells[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(cells.count)
+        print(indexPath.row)
+//        // check if video didn't load
+//        if videoState != .loaded {
+//            // check if last cell displayed => all cell appeared
+//            if indexPath.row == cells.count {
+//                videoState = .needsToLoad
+//            }
+//        }
+//        guard let productCell = cell as? CategoryFeedTableViewCell else { return }
+//
+//        if indexPath.row > 7 || !productCell.isVideoLoaded {
+//            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
+//        }
     }
 }
 
@@ -318,14 +336,31 @@ extension CategoryFeedViewController: TopBarDelegate {
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
-        products = []
+//        if let lastCell = lastPlayedCell {
+//            lastCell.productItem.videoContrainer.pausePlayer()
+//        }
         
         let categoryFeedViewController = CategoryFeedViewController()
         categoryFeedViewController.currentCategory = category
-
+        
+//        self.lastCategory = currentCategory
+//
+//        setupBottomBar()
         categoryFeedViewController.needsToPresentBottomBar = true
+//        categoryFeedViewController.lastPlayedCell = lastPlayedCell
+//        self.currentCategory = category
+//
+//        setupCategoryHeader()
+//
+//        categoryFeedViewController.tableView.snp.remakeConstraints { (maker) in
+//            maker.leading.equalTo(view)
+//            maker.trailing.equalTo(view)
+//            maker.bottom.equalTo(bottomBar.snp.top)
+//        }
+//
         videoState = .prepareForLoad
         
+//        present(categoryFeedViewController, animated: true)
         navigationController?.pushViewController(categoryFeedViewController, animated: true)
     }
 }
@@ -356,8 +391,7 @@ extension CategoryFeedViewController: PlayerViewDelegate {
 //        // if user play video for first time
 //        lastPlayedCell = cell
 //        return
-        lastPlayedCellIndexPath = IndexPath(row: indexOfPlayer, section: 0)
-        guard let visibleIndexPaths = tableView.indexPathsForVisibleRows else { return }
-        tableView.reloadRows(at: visibleIndexPaths, with: .none)
+        
+        
     }
 }

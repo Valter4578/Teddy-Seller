@@ -8,13 +8,13 @@
 
 import UIKit
 import SnapKit
-import AVFoundation
 
-final class CategoryFeedTableViewCell: UITableViewCell {
+class CategoryFeedTableViewCell: UITableViewCell {
     // MARK:- Views
     let productItem = ProductItem()
     
     // MARK:- Properties
+    
     /// boolean flag that indicates if video loaded 
     var isVideoLoaded: Bool = false
     
@@ -25,11 +25,14 @@ final class CategoryFeedTableViewCell: UITableViewCell {
         
         backgroundColor = .mainBlue
         
-        if productItem.videoContrainer.player == nil {
-            productItem.videoContrainer.player = AVPlayer()
-        }
+        setupProductItem(width: contentView.frame.width)
+    }
+    
+    init(superviewFrame: CGRect) {
+        super.init(style: .default, reuseIdentifier: nil)
         
-        setupProductItem(width: UIScreen.main.bounds.width)
+        backgroundColor = .mainBlue
+        setupProductItem(width: superviewFrame.width)
     }
     
     required init?(coder: NSCoder) {
@@ -37,25 +40,16 @@ final class CategoryFeedTableViewCell: UITableViewCell {
     }
     
     // MARK:- Functions
-    func configureCell(shouldPlay: Bool) {
+    func configureCell() {
         if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
             productItem.videoContrainer.setPlayerItem(url: videoUrl)
-        }
-        
-        if shouldPlay {
-            productItem.videoContrainer.playPlayer()
-        } else {
-            if productItem.videoContrainer.player != nil {
-                productItem.videoContrainer.pausePlayer()
-                productItem.videoContrainer.player = nil
-            }
         }
     }
     
     // MARK:- Overriden methods
     override func prepareForReuse() {
         self.productItem.videoContrainer.pausePlayer()
-        self.productItem.videoContrainer.player = nil
+//        self.productItem.videoContrainer.player = nil
     }
     
     // MARK:- Setups
