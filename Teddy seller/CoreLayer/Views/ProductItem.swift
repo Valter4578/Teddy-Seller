@@ -44,7 +44,7 @@ final class ProductItem: UIView  {
         return label
     }()
     
-    var videoContrainer: PlayerView = {
+    var videoContainer: PlayerView = {
         let view = PlayerView()
         view.player = AVPlayer()
         return view
@@ -98,9 +98,9 @@ final class ProductItem: UIView  {
     }
     
     func setupVideoContainer() {
-        addSubview(videoContrainer)
+        addSubview(videoContainer)
         
-        videoContrainer.snp.makeConstraints {
+        videoContainer.snp.makeConstraints {
             $0.leading.equalTo(self)
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contactButton.snp.top).offset(-8)
