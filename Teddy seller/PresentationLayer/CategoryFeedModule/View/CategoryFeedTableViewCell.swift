@@ -25,7 +25,7 @@ class CategoryFeedTableViewCell: UITableViewCell {
         
         backgroundColor = .mainBlue
         
-        setupProductItem(width: contentView.frame.width)
+        setupProductItem(width: UIScreen.main.bounds.width)
     }
     
     init(superviewFrame: CGRect) {
