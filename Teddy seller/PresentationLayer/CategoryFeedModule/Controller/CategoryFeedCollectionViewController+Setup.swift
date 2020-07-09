@@ -31,6 +31,8 @@ extension CategoryFeedViewController {
         tableView.separatorColor = .clear
         tableView.backgroundColor = .mainBlue
 
+        tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
+        
         setupTableViewConstraints()
     }
     
@@ -43,8 +45,6 @@ extension CategoryFeedViewController {
             $0.bottom.equalTo(view)
             $0.height.equalTo(78)
         }
-        
-        
     }
     
     func setupTopBar(leftTitle: String, rightTitle: String) {

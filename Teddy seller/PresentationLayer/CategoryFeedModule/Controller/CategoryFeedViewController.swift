@@ -31,7 +31,9 @@ final class CategoryFeedViewController: UIViewController {
         }
     }
     
-    private var lastPlayedCell: CategoryFeedTableViewCell?
+//    private var lastPlayedCell: CategoryFeedTableViewCell?
+    /// index path for last played cell
+    private var lastPlayedCellIndexPath: IndexPath?
     
     private var videoState: VideoState? {
         didSet {
@@ -91,7 +93,6 @@ final class CategoryFeedViewController: UIViewController {
     
     var products: [Product] = [] {
         didSet {
-            self.configureCells()
             self.tableView.reloadData()
         }
     }
@@ -162,27 +163,7 @@ final class CategoryFeedViewController: UIViewController {
     
     // MARK:- Selectors
     @objc func didTapBack() {
-        if let lastCell = lastPlayedCell {
-            lastCell.productItem.videoContrainer.pausePlayer()
-        }
-        
-        if lastCategory == nil {
             navigationController?.popViewController(animated: true)
-        } // else {
-//            if currentCategory == lastCategory {
-//                lastCategory = selectedCategory
-//            }
-//            currentCategory = lastCategory
-//            if currentCategory?.isParent ?? true {
-//                lastCategory = nil
-//                needsToPresentBottomBar = false
-//            }
-//
-//            setupCategoryHeader()
-//            self.tableView.reloadData()
-//
-//            videoState = .prepareForLoad
-//        }
     }
     
     @objc func presentCreate() {
@@ -292,62 +273,6 @@ final class CategoryFeedViewController: UIViewController {
             isSe = false
         }
     }
-    
-    /// void method that adds cell to array to use this array in delegate methods
-    private func configureCells() {
-        guard !products.isEmpty else { return }
-        
-        let cell = CategoryFeedTableViewCell(superviewFrame: view.frame)
-        cell.selectionStyle = .none
-        
-        tableView.register(CategoryFeedTableViewCell.self, forCellReuseIdentifier: cellId)
-        
-        for (index, product) in products.enumerated() {
-            cell.productItem.videoContrainer.index = index
-            cell.productItem.product = product
-        }
-        
-        cells.append(cell)
-    }
-    
-    /// void method that get cell and set player item to cell's avplayer. Must be called only when cells appeared on the screen
-    /// - Parameters:
-    ///   - needsToLoadAllVideos: boolean flag that indicates if needs to load all videos. If its true than will iterate over all cells and set player item to theirs player
-    ///   - videoForLoadIndex: Int that indicates
-//    private func loadVideos(needsToLoadAllVideos: Bool = true, videoForLoadIndex: Int? = nil) {
-//        if needsToLoadAllVideos {
-//            cells.forEach { cell in
-//                guard let product = cell.productItem.product else { return }
-//                if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-//                    cell.productItem.videoContrainer.delegate = self
-//                    cell.productItem.videoContrainer.setPlayerItem(url: videoUrl)
-//                }
-//            }
-//
-//            videoState = .loaded
-//        } else {
-//            guard let i = videoForLoadIndex,
-//                  let product = cells[i].productItem.product else { return }
-//            if let stringUrl = product.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-//                cells[i].productItem.videoContrainer.delegate = self
-//                cells[i].productItem.videoContrainer.setPlayerItem(url: videoUrl)
-//                print(#function)
-//                print(tableView.indexPathsForVisibleRows)
-//                print(stringUrl)
-//                print(i)
-//
-//                tableView.indexPathsForVisibleRows?.forEach({ indexPath in
-//                    if indexPath.row == i {
-//                        cells[i].isVideoLoaded = true
-//                    }
-//                })
-//            }
-//
-//            if i == cells.count {
-//                videoState = .loaded
-//            }
-//        }
-//    }
 }
 
 // MARK:- UITableViewDelegate
@@ -373,6 +298,7 @@ extension CategoryFeedViewController: UITableViewDataSource {
         
         cell.productItem.product = products[indexPath.row]
         cell.productItem.videoContrainer.index = indexPath.row
+        cell.productItem.videoContrainer.delegate = self
         
         cell.configureCell()
         
@@ -381,7 +307,7 @@ extension CategoryFeedViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
+        return products.count
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -400,26 +326,6 @@ extension CategoryFeedViewController: UITableViewDataSource {
 //            loadVideos(needsToLoadAllVideos: false, videoForLoadIndex: indexPath.row)
 //        }
     }
-    
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let cellsCount = tableView.numberOfRows(inSection: 0)
-//        if cellsCount > 0 {
-//            var flag = true
-//            for index in 0...cellsCount - 1 {
-//                let indexPath = IndexPath.init(row: index, section: 0)
-//                let cellRect = tableView.rectForRow(at: indexPath)
-//                let completelyVisible = tableView.bounds.contains(cellRect)
-//                let cell = tableView.cellForRow(at: indexPath) as? CategoryFeedTableViewCell
-//                cell?.productItem.videoContrainer.pausePlayer()
-//                if (completelyVisible && flag){
-//                    flag = false
-//                    cell?.productItem.videoContrainer.playPlayer()
-//                    lastPlayedCell = cell 
-//                }
-//            }
-//        }
-//    }
 }
 
 // MARK:- TopBarDelegate
@@ -432,9 +338,9 @@ extension CategoryFeedViewController: TopBarDelegate {
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
     func passSelectedCategory(_ category: Category) {
-        if let lastCell = lastPlayedCell {
-            lastCell.productItem.videoContrainer.pausePlayer()
-        }
+//        if let lastCell = lastPlayedCell {
+//            lastCell.productItem.videoContrainer.pausePlayer()
+//        }
         
         let categoryFeedViewController = CategoryFeedViewController()
         categoryFeedViewController.currentCategory = category
@@ -443,7 +349,7 @@ extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
 //
 //        setupBottomBar()
         categoryFeedViewController.needsToPresentBottomBar = true
-        categoryFeedViewController.lastPlayedCell = lastPlayedCell
+//        categoryFeedViewController.lastPlayedCell = lastPlayedCell
 //        self.currentCategory = category
 //
 //        setupCategoryHeader()
@@ -470,22 +376,24 @@ extension CategoryFeedViewController: CreateProductDelegate {
 
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: Int) {
-        let cell = cells[indexOfPlayer]
-        print(cell.productItem.product?.title)
+//        let cell = cells[indexOfPlayer]
+//        print(cell.productItem.product?.title)
+//
+//        guard cell != lastPlayedCell else { return } // check if last played cell is current playing cell. Because user can play one video twice
+//
+//        // if user played video before (last played cell is nil)
+//        if let lastCell = lastPlayedCell {
+//            print(cell.productItem.product?.title)
+//            lastCell.productItem.videoContrainer.pausePlayer()
+//            lastCell.productItem.videoContrainer.player.isMuted = true
+//            lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
+//            return
+//        }
+//
+//        // if user play video for first time
+//        lastPlayedCell = cell
+//        return
         
-        guard cell != lastPlayedCell else { return } // check if last played cell is current playing cell. Because user can play one video twice
         
-        // if user played video before (last played cell is nil)
-        if let lastCell = lastPlayedCell {
-            print(cell.productItem.product?.title)
-            lastCell.productItem.videoContrainer.pausePlayer()
-            lastCell.productItem.videoContrainer.player.isMuted = true
-            lastPlayedCell = cells[indexOfPlayer] // last played cell now is current playing cell
-            return
-        }
-        
-        // if user play video for first time
-        lastPlayedCell = cell
-        return
     }
 }
