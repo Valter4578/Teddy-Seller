@@ -30,7 +30,7 @@ final class CategoryFeedTableViewCell: UITableViewCell {
             productItem.videoContrainer.player = AVPlayer()
         }
         
-        setupProductItem(width: contentView.frame.width)
+        setupProductItem(width: UIScreen.main.bounds.width)
     }
     
     required init?(coder: NSCoder) {
