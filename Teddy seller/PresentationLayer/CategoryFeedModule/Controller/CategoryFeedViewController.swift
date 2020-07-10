@@ -140,7 +140,7 @@ final class CategoryFeedViewController: UIViewController {
     
     // MARK:- Selectors
     @objc func didTapBack() {
-            navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func presentCreate() {
@@ -281,7 +281,6 @@ extension CategoryFeedViewController: UITableViewDataSource {
         
         cell.configureCell()
         
-        
         return cell 
     }
     
@@ -299,9 +298,7 @@ extension CategoryFeedViewController: TopBarDelegate {
 
 // MARK:- CategoryFeedHeaderDelegate
 extension CategoryFeedViewController: CategoryFeedHeaderDelegate {
-    func passSelectedCategory(_ category: Category) {
-        products = [] 
-        
+    func passSelectedCategory(_ category: Category) {        
         let categoryFeedViewController = CategoryFeedViewController()
         categoryFeedViewController.currentCategory = category
         categoryFeedViewController.needsToPresentBottomBar = true
