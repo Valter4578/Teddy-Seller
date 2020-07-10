@@ -41,9 +41,7 @@ class CategoryFeedTableViewCell: UITableViewCell {
     
     // MARK:- Functions
     func configureCell() {
-        print(#function)
         if let stringUrl = productItem.product?.dictionary["video"] as? String, let videoUrl = URL(string: stringUrl) {
-            print(#function)
             productItem.videoContainer.setPlayerItem(url: videoUrl)
         }
     }

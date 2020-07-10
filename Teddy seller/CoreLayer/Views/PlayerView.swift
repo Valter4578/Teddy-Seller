@@ -74,7 +74,7 @@ final class PlayerView: UIView {
     }
     
     func setupPlayer() {
-//        player.isMuted = true
+        player.isMuted = true
         
         player.automaticallyWaitsToMinimizeStalling = true
         
@@ -111,6 +111,7 @@ final class PlayerView: UIView {
     }
     
     func playPlayer() {
+        player.isMuted = false
         isPlaying = true
         playPauseButton.alpha = 1
         playPauseButton.setImage(pauseImage, for: .normal)

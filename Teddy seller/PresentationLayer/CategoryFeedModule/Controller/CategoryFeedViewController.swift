@@ -264,10 +264,14 @@ extension CategoryFeedViewController: UITableViewDelegate {
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK:- UICollectionViewDataSource
 extension CategoryFeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryFeedTableViewCell
+        
+        if let lastIndexPath = lastPlayedCellIndexPath, let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(lastIndexPath), indexPath != lastPlayedCellIndexPath {
+            cell.productItem.videoContainer.pausePlayer()
+        }
         
         cell.selectionStyle = .none
         
@@ -277,11 +281,6 @@ extension CategoryFeedViewController: UITableViewDataSource {
         
         cell.configureCell()
         
-        if let lastIndexPath = lastPlayedCellIndexPath {
-            if let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(lastIndexPath) {
-                cell.productItem.videoContainer.pausePlayer()
-            }
-        }
         
         return cell 
     }
@@ -321,11 +320,16 @@ extension CategoryFeedViewController: CreateProductDelegate {
 extension CategoryFeedViewController: PlayerViewDelegate {
     func didTapOnButton(indexOfPlayer: IndexPath) {
         if let lastIndexPath = lastPlayedCellIndexPath { // check if last played cell's path already exist
-            tableView.reloadRows(at: [lastIndexPath], with: .none)
-            lastPlayedCellIndexPath = indexOfPlayer
-        
+            if indexOfPlayer != lastIndexPath {
+            
+                tableView.reloadRows(at: [lastIndexPath], with: .none)
+                lastPlayedCellIndexPath = indexOfPlayer
+            }
         } else {
             lastPlayedCellIndexPath = indexOfPlayer
         }
     }
 }
+
+
+// , let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(lastIndexPath)
