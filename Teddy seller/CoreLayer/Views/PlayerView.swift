@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 
 protocol PlayerViewDelegate: class {
-    func didTapOnButton(indexOfPlayer: Int)
+    func didTapOnButton(indexOfPlayer: IndexPath)
 }
 
 final class PlayerView: UIView {
@@ -29,7 +29,7 @@ final class PlayerView: UIView {
     
     // MARK:- Properties
     /// index of player. Index value is actually index path of cell where player is.
-    var index: Int?
+    var indexPath: IndexPath?
     
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
@@ -74,6 +74,8 @@ final class PlayerView: UIView {
     }
     
     func setupPlayer() {
+//        player.isMuted = true
+        
         player.automaticallyWaitsToMinimizeStalling = true
         
         playerLayer = AVPlayerLayer(player: player)
@@ -81,6 +83,7 @@ final class PlayerView: UIView {
         
         self.layer.addSublayer(playerLayer)
         playerLayer.frame = self.bounds
+        
         setupPlayPauseButton()
         makeLooping()
     }
@@ -126,7 +129,7 @@ final class PlayerView: UIView {
         isPlaying ? pausePlayer() : playPlayer()
         //isPlaying.toggle()
         
-        if let selectedIndex = index {
+        if let selectedIndex = indexPath {
             guard isPlaying else { return } 
             delegate?.didTapOnButton(indexOfPlayer: selectedIndex)
         }

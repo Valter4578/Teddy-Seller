@@ -272,13 +272,18 @@ extension CategoryFeedViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.productItem.product = products[indexPath.row]
-        cell.productItem.videoContainer.index = indexPath.row
+        cell.productItem.videoContainer.indexPath = indexPath
         cell.productItem.videoContainer.delegate = self
         
         cell.configureCell()
         
+        if let lastIndexPath = lastPlayedCellIndexPath {
+            if let visibleIndexPaths = tableView.indexPathsForVisibleRows, visibleIndexPaths.contains(lastIndexPath) {
+                cell.productItem.videoContainer.pausePlayer()
+            }
+        }
+        
         return cell 
-//        return cells[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -314,7 +319,13 @@ extension CategoryFeedViewController: CreateProductDelegate {
 }
 
 extension CategoryFeedViewController: PlayerViewDelegate {
-    func didTapOnButton(indexOfPlayer: Int) {
+    func didTapOnButton(indexOfPlayer: IndexPath) {
+        if let lastIndexPath = lastPlayedCellIndexPath { // check if last played cell's path already exist
+            tableView.reloadRows(at: [lastIndexPath], with: .none)
+            lastPlayedCellIndexPath = indexOfPlayer
         
+        } else {
+            lastPlayedCellIndexPath = indexOfPlayer
+        }
     }
 }
